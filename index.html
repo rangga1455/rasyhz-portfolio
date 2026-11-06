@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>RASYHZ EDIT - AMV Showcase & Portfolio</title>
+    <meta name="description" content="Portfolio resmi RASYHZ EDIT — AMV Showcase, Presets Alight Motion & CapCut, Jasa Edit Video, dan Galeri History Free Fire.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23121212'/><text x='50%25' y='68%25' font-size='56' font-family='Arial,sans-serif' font-weight='bold' fill='%2300adb5' text-anchor='middle'>R</text></svg>">
+    <!-- Open Graph / WhatsApp / Discord Previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="RASYHZ EDIT - AMV Showcase & Portfolio">
+    <meta property="og:description" content="Portfolio video editing AMV, download preset XML & CapCut gratis, jasa edit video, dan rekap turnamen Free Fire.">
+    <meta property="og:image" content="https://p16-common-sign.tiktokcdn.com/tos-maliva-avt-0068/9d8d6c9d73bd11abb553238a0e00aa3e~tplv-tiktokx-cropcenter:1080:1080.jpeg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RASYHZ EDIT - AMV Showcase & Portfolio">
+    <meta name="twitter:description" content="Portfolio video editing AMV, preset XML & CapCut, jasa edit, dan galeri Free Fire.">
     <!-- Android / Mobile PWA Meta Tags -->
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -24,24 +36,33 @@
     <header class="navbar">
         <a href="index.html" class="logo-link"><h1 class="logo">RASYHZ EDIT</h1></a>
         <nav>
-            <a href="#feature">Featured</a>
-            <a href="#lastedit">Last Editing</a>
-            <a href="#presets">Presets & Files</a>
-            <a href="#commissions" class="nav-highlight">Jasa Edit 💼</a>
-            <a href="history-ff.html" class="nav-highlight">History FF ↗</a>
-            <a href="links.html" class="nav-highlight">Socials ↗</a>
+            <a href="#feature">Showcase</a>
+            <a href="#lastedit">Karya</a>
+            <a href="#presets">Presets</a>
+            <a href="#commissions" class="nav-highlight">Jasa Edit</a>
+            <a href="history-ff.html">History FF</a>
+            <a href="links.html">Links</a>
         </nav>
     </header>
 
     <main>
         <!-- Quick Copy Bar -->
         <section class="quick-copy-bar">
-            <span>🎮 FF UID: <strong>1234567890</strong> <button class="btn-copy"
-                    onclick="copyText('1234567890', 'FF UID disalin!')">Salin</button></span>
-            <span>💬 Discord: <strong>rasyhze</strong> <button class="btn-copy"
-                    onclick="copyText('rasyhze', 'Discord Tag disalin!')">Salin</button></span>
-            <span>✉️ Email: <strong>wjwhaha5@gmail.com</strong> <button class="btn-copy"
-                    onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')">Salin</button></span>
+            <div class="quick-copy-chip" onclick="copyText('1234567890', 'UID Free Fire disalin!')" title="Klik untuk salin UID">
+                <span class="chip-icon">🎮</span>
+                <span class="chip-text">UID: <strong>1234567890</strong></span>
+                <span class="chip-copy-icon">📋</span>
+            </div>
+            <div class="quick-copy-chip" onclick="copyText('rasyhze', 'Discord Tag disalin!')" title="Klik untuk salin Discord Tag">
+                <span class="chip-icon">💬</span>
+                <span class="chip-text">Discord: <strong>rasyhze</strong></span>
+                <span class="chip-copy-icon">📋</span>
+            </div>
+            <div class="quick-copy-chip" onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')" title="Klik untuk salin Email">
+                <span class="chip-icon">✉️</span>
+                <span class="chip-text">Email: <strong>wjwhaha5@gmail.com</strong></span>
+                <span class="chip-copy-icon">📋</span>
+            </div>
         </section>
 
         <!-- ================= 1. VIDEO FEATURED (TIKTOK) ================= -->
@@ -115,84 +136,80 @@
 
         <!-- ================= 3. PRESETS & PROJECT FILES ================= -->
         <section id="presets" class="gallery-section">
-            <h2>Presets & Project Files</h2>
-            <p class="section-desc">Download preset gratis atau dukung kreator melalui link donasi di bawah.</p>
+            <div class="section-title-wrap">
+                <h2>Presets & Project Files</h2>
+                <p class="section-desc">Download preset editing siap pakai untuk Alight Motion, CapCut, dan After Effects.</p>
+            </div>
             <div class="grid-container">
                 <div class="card preset-card">
                     <div class="preset-badges">
-                        <span class="badge badge-cyan">AM v4.0+</span>
-                        <span class="badge">Format XML</span>
-                        <span class="badge">60 FPS</span>
+                        <span class="badge badge-cyan">XML • 60 FPS</span>
                         <span class="badge badge-free">Free</span>
                     </div>
-                    <h3>Alight Motion XML - Shake & Color Grading</h3>
-                    <p>Preset efek smooth beat sync & color grading cinematic AMV siap pakai.</p>
-                    
+                    <h3>Alight Motion XML</h3>
+                    <p>Preset shake sync beat & color grading cinematic AMV siap pakai.</p>
+
                     <div class="audio-preview-box">
                         <button class="btn-audio-preview" onclick="toggleAudioPreview(1, this)">
                             <span class="audio-btn-icon">▶</span>
-                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                            <span class="audio-btn-text">Preview Beat</span>
                         </button>
                         <div class="equalizer-bars">
-                            <span></span><span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
                         </div>
                     </div>
 
                     <div class="preset-actions">
                         <a href="https://drive.google.com" target="_blank" class="btn-download">Download XML</a>
-                        <button class="btn-copy-preset" onclick="copyText('https://drive.google.com', 'Link XML Google Drive disalin!')" title="Salin Link">📋 Salin Link</button>
+                        <button class="btn-copy-preset" onclick="copyText('https://drive.google.com', 'Link XML Google Drive disalin!')" title="Salin link download">📋</button>
                     </div>
                 </div>
 
                 <div class="card preset-card">
                     <div class="preset-badges">
                         <span class="badge badge-cyan">CapCut 10+</span>
-                        <span class="badge">Velocity Sync</span>
-                        <span class="badge">9:16 Reels</span>
                         <span class="badge badge-free">Free</span>
                     </div>
-                    <h3>CapCut Template - Velocity Sync</h3>
+                    <h3>CapCut Velocity Template</h3>
                     <p>Auto velocity effect siap pakai untuk video tren TikTok & Reels.</p>
 
                     <div class="audio-preview-box">
                         <button class="btn-audio-preview" onclick="toggleAudioPreview(2, this)">
                             <span class="audio-btn-icon">▶</span>
-                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                            <span class="audio-btn-text">Preview Beat</span>
                         </button>
                         <div class="equalizer-bars">
-                            <span></span><span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
                         </div>
                     </div>
 
                     <div class="preset-actions">
                         <a href="https://www.capcut.com" target="_blank" class="btn-download">Pakai Template</a>
-                        <button class="btn-copy-preset" onclick="copyText('https://www.capcut.com', 'Link CapCut Template disalin!')" title="Salin Link">📋 Salin Link</button>
+                        <button class="btn-copy-preset" onclick="copyText('https://www.capcut.com', 'Link CapCut Template disalin!')" title="Salin link template">📋</button>
                     </div>
                 </div>
 
                 <div class="card preset-card">
                     <div class="preset-badges">
-                        <span class="badge badge-cyan">AE 2022+</span>
-                        <span class="badge">.aep File</span>
-                        <span class="badge">Sound SFX</span>
-                        <span class="badge badge-pro">Pro Project</span>
+                        <span class="badge badge-cyan">After Effects</span>
+                        <span class="badge badge-pro">Pro .AEP</span>
                     </div>
-                    <h3>After Effects Project File (.aep)</h3>
-                    <p>Project file typography 3D layer lengkap dengan sound design & motion graphics.</p>
+                    <h3>After Effects Project (.aep)</h3>
+                    <p>Project file typography 3D layer lengkap dengan sound design & SFX.</p>
 
                     <div class="audio-preview-box">
                         <button class="btn-audio-preview" onclick="toggleAudioPreview(3, this)">
                             <span class="audio-btn-icon">▶</span>
-                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                            <span class="audio-btn-text">Preview Beat</span>
                         </button>
                         <div class="equalizer-bars">
-                            <span></span><span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
                         </div>
                     </div>
 
                     <div class="preset-actions">
-                        <a href="https://saweria.co" target="_blank" class="btn-download support">Support on Saweria</a>
-                        <button class="btn-copy-preset" onclick="copyText('https://saweria.co', 'Link Saweria disalin!')" title="Salin Link">📋 Salin Link</button>
+                        <a href="https://saweria.co" target="_blank" class="btn-download support">Support Saweria</a>
+                        <button class="btn-copy-preset" onclick="copyText('https://saweria.co', 'Link Saweria disalin!')" title="Salin link saweria">📋</button>
                     </div>
                 </div>
             </div>
@@ -200,8 +217,10 @@
 
         <!-- ================= 4. JASA EDIT / OPEN COMMISSION ================= -->
         <section id="commissions" class="gallery-section">
-            <h2>Jasa Edit / Open Commission</h2>
-            <p class="section-desc">Menerima pesanan edit video TikTok, AMV anime/game, dan Montage Free Fire dengan hasil memukau.</p>
+            <div class="section-title-wrap">
+                <h2>Jasa Edit / Open Commission</h2>
+                <p class="section-desc">Menerima pesanan edit video TikTok, AMV, dan Gameplay Montage Free Fire.</p>
+            </div>
 
             <div class="pricing-grid">
                 <!-- Paket 1 -->
@@ -213,9 +232,7 @@
                     </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> Durasi 15 - 30 Detik</li>
-                        <li><span class="check">✓</span> Beat Sync & Jedag-Jedug Smooth</li>
-                        <li><span class="check">✓</span> Velocity & Shake Effect</li>
-                        <li><span class="check">✓</span> Sound Trending TikTok</li>
+                        <li><span class="check">✓</span> Beat Sync & Smooth Shake</li>
                         <li><span class="check">✓</span> Resolusi Full HD 1080p 60 FPS</li>
                         <li><span class="check">✓</span> Pengerjaan Cepat 1-2 Hari</li>
                     </ul>
@@ -236,12 +253,9 @@
                     </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> Durasi 30 - 60 Detik</li>
-                        <li><span class="check">✓</span> Typography 3D & Custom Font</li>
-                        <li><span class="check">✓</span> Smooth Transition & Flow Effect</li>
-                        <li><span class="check">✓</span> Cinematic Color Grading</li>
-                        <li><span class="check">✓</span> Sound Design & SFX Lengkap</li>
-                        <li><span class="check">✓</span> Resolusi 2K / 1080p 60 FPS</li>
-                        <li><span class="check">✓</span> Garansi Revisi 2x</li>
+                        <li><span class="check">✓</span> 3D Typography & Motion Flow</li>
+                        <li><span class="check">✓</span> Cinematic Color Grading & SFX</li>
+                        <li><span class="check">✓</span> Resolusi 2K 60 FPS + Bebas Revisi 2x</li>
                     </ul>
                     <div class="pricing-action">
                         <a href="https://wa.me/6281234567890?text=Halo%20Bang%20Rasyhz,%20saya%20mau%20order%20Jasa%20Edit%20Paket%20AMV%20Typography" target="_blank" rel="noopener noreferrer" class="btn-order btn-order-primary">
@@ -259,11 +273,9 @@
                     </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> Durasi 30 - 60 Detik</li>
-                        <li><span class="check">✓</span> Kill Beat Sync & Slowmo Flow</li>
-                        <li><span class="check">✓</span> Glow Effect & Color Filter</li>
-                        <li><span class="check">✓</span> Bonus Thumbnail Menarik</li>
-                        <li><span class="check">✓</span> Format 9:16 (TikTok) / 16:9 (YouTube)</li>
-                        <li><span class="check">✓</span> Export 60 FPS High Bitrate</li>
+                        <li><span class="check">✓</span> Kill Beat Sync & Velocity Flow</li>
+                        <li><span class="check">✓</span> Glow Outline & Hit Effect</li>
+                        <li><span class="check">✓</span> Format 9:16 / 16:9 + Bonus Thumbnail</li>
                     </ul>
                     <div class="pricing-action">
                         <a href="https://wa.me/6281234567890?text=Halo%20Bang%20Rasyhz,%20saya%20mau%20order%20Jasa%20Edit%20Paket%20Montage%20FF" target="_blank" rel="noopener noreferrer" class="btn-order">
@@ -271,6 +283,7 @@
                         </a>
                     </div>
                 </div>
+            </div>
             </div>
 
             <div class="commission-footer-note">
@@ -608,9 +621,39 @@
             }
         }
 
+        // ================= BOTTOM NAV SCROLL SPY =================
+        function initScrollSpy() {
+            const sections = [
+                { id: 'feature', el: document.getElementById('feature') },
+                { id: 'lastedit', el: document.getElementById('lastedit') },
+                { id: 'presets', el: document.getElementById('presets') }
+            ];
+            const navItems = document.querySelectorAll('.mobile-bottom-nav .nav-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = '#' + entry.target.id;
+                        navItems.forEach(item => {
+                            if (item.getAttribute('href') === targetId) {
+                                item.classList.add('active');
+                            } else if (item.getAttribute('href') && item.getAttribute('href').startsWith('#')) {
+                                item.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            sections.forEach(s => {
+                if (s.el) observer.observe(s.el);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
             handleVisitorCounter();
+            initScrollSpy();
         });
     </script>
 </body>
