@@ -1031,7 +1031,7 @@ button:active,
 @media (max-width: 768px) {
     /* Leave room at bottom for Android Navigation Bar */
     body {
-        padding-bottom: 80px;
+        padding-bottom: 68px;
     }
 
     /* Prevent mobile input auto-zoom */
@@ -1043,7 +1043,7 @@ button:active,
     .navbar {
         position: sticky;
         top: 0;
-        height: 58px;
+        height: 54px;
         padding: 0 16px;
         display: flex;
         justify-content: space-between;
@@ -1056,8 +1056,8 @@ button:active,
     }
 
     .navbar .logo {
-        font-size: 1.15rem;
-        letter-spacing: 1.5px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
     }
 
     /* Hide desktop nav links on mobile; they are moved to the Android Bottom Bar */
@@ -1069,8 +1069,8 @@ button:active,
         display: inline-flex;
         align-items: center;
         margin: 0;
-        font-size: 0.78rem;
-        padding: 5px 12px;
+        font-size: 0.76rem;
+        padding: 4px 10px;
         border-radius: 20px;
     }
 
@@ -1081,7 +1081,7 @@ button:active,
         bottom: 0;
         left: 0;
         right: 0;
-        height: 64px;
+        height: 58px;
         background: rgba(18, 18, 18, 0.96);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
@@ -1090,7 +1090,7 @@ button:active,
         align-items: center;
         z-index: 1100;
         padding-bottom: env(safe-area-inset-bottom, 0px);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
     }
 
     .mobile-bottom-nav .nav-item {
@@ -1100,15 +1100,17 @@ button:active,
         justify-content: center;
         color: #888888;
         text-decoration: none;
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         font-weight: 600;
-        gap: 3px;
+        gap: 2px;
         flex: 1;
         height: 100%;
         transition: color 0.15s ease, transform 0.15s ease;
     }
 
     .mobile-bottom-nav .nav-item svg {
+        width: 20px;
+        height: 20px;
         transition: transform 0.15s ease, fill 0.15s ease;
     }
 
@@ -1131,8 +1133,8 @@ button:active,
         flex-wrap: nowrap;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        padding: 10px 14px;
-        gap: 10px;
+        padding: 8px 12px;
+        gap: 8px;
         justify-content: flex-start;
         scrollbar-width: none;
         background-color: #161616;
@@ -1146,9 +1148,9 @@ button:active,
     .quick-copy-bar span {
         background-color: #1e1e1e;
         border: 1px solid #333333;
-        padding: 6px 12px;
+        padding: 5px 10px;
         border-radius: 20px;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         flex-shrink: 0;
         display: inline-flex;
         align-items: center;
@@ -1157,39 +1159,80 @@ button:active,
 
     /* Layout Spacing on Mobile */
     .featured-section {
-        margin: 20px auto;
+        margin: 18px auto;
         padding: 0 14px;
+    }
+
+    .tiktok-wrapper {
+        max-width: 320px;
+        margin: 0 auto 12px;
+    }
+
+    .featured-info h2 {
+        font-size: 1.15rem;
+    }
+
+    .featured-info p {
+        font-size: 0.8rem;
     }
 
     /* Kontrol ukuran widget TikTok Last Editing agar pas & compact di layar Android */
     .tiktok-feed-wrapper {
-        max-width: 320px;
+        max-width: 310px;
         margin: 0 auto;
     }
 
     .gallery-section,
     .social-section {
-        margin: 30px auto 40px;
+        margin: 24px auto 30px;
         padding: 0 14px;
+    }
+
+    .gallery-section h2,
+    .social-section h2 {
+        font-size: 1.15rem;
+        margin-bottom: 6px;
+    }
+
+    .section-desc,
+    .social-desc {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
     }
 
     .grid-container {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 14px;
     }
 
     .card {
-        border-radius: 14px;
+        border-radius: 12px;
+    }
+
+    .card img,
+    .card-thumb-wrap img {
+        height: 160px;
+    }
+
+    .card h3,
+    .ff-card-info h3 {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+    }
+
+    .card p,
+    .ff-card-info p {
+        font-size: 0.8rem;
     }
 
     /* Android Filter Chips Bar */
     .filter-bar {
         overflow-x: auto;
-        padding-bottom: 8px;
+        padding-bottom: 6px;
         flex-wrap: nowrap;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        gap: 8px;
+        gap: 6px;
     }
 
     .filter-bar::-webkit-scrollbar {
@@ -1198,8 +1241,8 @@ button:active,
 
     .filter-btn {
         flex-shrink: 0;
-        padding: 7px 15px;
-        font-size: 0.8rem;
+        padding: 6px 13px;
+        font-size: 0.76rem;
         border-radius: 20px;
     }
 
@@ -1207,12 +1250,12 @@ button:active,
     .toast {
         left: 50%;
         right: auto;
-        bottom: 78px;
+        bottom: 70px;
         transform: translate(-50%, 20px);
         width: max-content;
         max-width: 88%;
-        padding: 10px 20px;
-        font-size: 0.85rem;
+        padding: 8px 16px;
+        font-size: 0.8rem;
         border-radius: 24px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
         text-align: center;
@@ -1225,37 +1268,63 @@ button:active,
 
     /* Lightbox on Mobile */
     .lightbox-close {
-        top: 12px;
-        right: 14px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
+        top: 10px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.6rem;
     }
 
     .lightbox-content img {
-        max-height: 62vh;
+        max-height: 60vh;
     }
 
     /* Mobile Social Links */
     .social-links-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        gap: 8px;
     }
 
     .social-btn {
         justify-content: center;
-        padding: 11px 14px;
-        font-size: 0.85rem;
+        padding: 10px 12px;
+        font-size: 0.8rem;
     }
 
     .social-btn.all-links-btn {
         grid-column: 1 / -1;
     }
 
-    /* Footer Margin */
+    /* Footer di Mobile (Ringkas, Ramping, Proporsional) */
     .site-footer {
-        padding-bottom: 25px;
+        margin-top: 20px;
+        padding: 16px 14px 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-content {
+        gap: 4px;
+    }
+
+    .footer-brand {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+    }
+
+    .footer-copyright {
+        font-size: 0.72rem;
+        color: #777777;
+    }
+
+    .footer-links {
+        gap: 12px;
+        margin-top: 2px;
+    }
+
+    .footer-links a {
+        font-size: 0.75rem;
+        color: #888888;
     }
 }
 
