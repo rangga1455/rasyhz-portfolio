@@ -27,6 +27,7 @@
             <a href="#feature">Featured</a>
             <a href="#lastedit">Last Editing</a>
             <a href="#presets">Presets & Files</a>
+            <a href="#commissions" class="nav-highlight">Jasa Edit 💼</a>
             <a href="history-ff.html" class="nav-highlight">History FF ↗</a>
             <a href="links.html" class="nav-highlight">Socials ↗</a>
         </nav>
@@ -62,6 +63,44 @@
             </div>
         </section>
 
+        <!-- ================= STATS & ACHIEVEMENTS COUNTER ================= -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value-wrap">
+                        <span class="stat-number" data-target="50">0</span>
+                        <span class="stat-plus">+</span>
+                    </div>
+                    <span class="stat-label">Match Booyah & FT</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎬</div>
+                    <div class="stat-value-wrap">
+                        <span class="stat-number" data-target="100">0</span>
+                        <span class="stat-plus">+</span>
+                    </div>
+                    <span class="stat-label">Proyek AMV & Video</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-value-wrap">
+                        <span class="stat-number" data-target="60">0</span>
+                        <span class="stat-unit">FPS</span>
+                    </div>
+                    <span class="stat-label">Ultra HD Render</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value-wrap">
+                        <span class="stat-number" data-target="500">0</span>
+                        <span class="stat-plus">+</span>
+                    </div>
+                    <span class="stat-label">Member Komunitas</span>
+                </div>
+            </div>
+        </section>
+
         <!-- ================= 2. LAST EDITING WORKS ================= -->
         <section id="lastedit" class="gallery-section">
             <h2>Last Editing Works</h2>
@@ -80,28 +119,162 @@
             <p class="section-desc">Download preset gratis atau dukung kreator melalui link donasi di bawah.</p>
             <div class="grid-container">
                 <div class="card preset-card">
+                    <div class="preset-badges">
+                        <span class="badge badge-cyan">AM v4.0+</span>
+                        <span class="badge">Format XML</span>
+                        <span class="badge">60 FPS</span>
+                        <span class="badge badge-free">Free</span>
+                    </div>
                     <h3>Alight Motion XML - Shake & Color Grading</h3>
-                    <p>Preset efek smooth beat & color grading cinematic AMV.</p>
+                    <p>Preset efek smooth beat sync & color grading cinematic AMV siap pakai.</p>
+                    
+                    <div class="audio-preview-box">
+                        <button class="btn-audio-preview" onclick="toggleAudioPreview(1, this)">
+                            <span class="audio-btn-icon">▶</span>
+                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                        </button>
+                        <div class="equalizer-bars">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
                     <div class="preset-actions">
                         <a href="https://drive.google.com" target="_blank" class="btn-download">Download XML</a>
+                        <button class="btn-copy-preset" onclick="copyText('https://drive.google.com', 'Link XML Google Drive disalin!')" title="Salin Link">📋 Salin Link</button>
                     </div>
                 </div>
 
                 <div class="card preset-card">
+                    <div class="preset-badges">
+                        <span class="badge badge-cyan">CapCut 10+</span>
+                        <span class="badge">Velocity Sync</span>
+                        <span class="badge">9:16 Reels</span>
+                        <span class="badge badge-free">Free</span>
+                    </div>
                     <h3>CapCut Template - Velocity Sync</h3>
-                    <p>Auto velocity effect siap pakai untuk video TikTok & Reels.</p>
+                    <p>Auto velocity effect siap pakai untuk video tren TikTok & Reels.</p>
+
+                    <div class="audio-preview-box">
+                        <button class="btn-audio-preview" onclick="toggleAudioPreview(2, this)">
+                            <span class="audio-btn-icon">▶</span>
+                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                        </button>
+                        <div class="equalizer-bars">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
                     <div class="preset-actions">
                         <a href="https://www.capcut.com" target="_blank" class="btn-download">Pakai Template</a>
+                        <button class="btn-copy-preset" onclick="copyText('https://www.capcut.com', 'Link CapCut Template disalin!')" title="Salin Link">📋 Salin Link</button>
                     </div>
                 </div>
 
                 <div class="card preset-card">
+                    <div class="preset-badges">
+                        <span class="badge badge-cyan">AE 2022+</span>
+                        <span class="badge">.aep File</span>
+                        <span class="badge">Sound SFX</span>
+                        <span class="badge badge-pro">Pro Project</span>
+                    </div>
                     <h3>After Effects Project File (.aep)</h3>
-                    <p>Project file typography 3D layer lengkap dengan sound design.</p>
+                    <p>Project file typography 3D layer lengkap dengan sound design & motion graphics.</p>
+
+                    <div class="audio-preview-box">
+                        <button class="btn-audio-preview" onclick="toggleAudioPreview(3, this)">
+                            <span class="audio-btn-icon">▶</span>
+                            <span class="audio-btn-text">Dengar Sound Beat</span>
+                        </button>
+                        <div class="equalizer-bars">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
                     <div class="preset-actions">
                         <a href="https://saweria.co" target="_blank" class="btn-download support">Support on Saweria</a>
+                        <button class="btn-copy-preset" onclick="copyText('https://saweria.co', 'Link Saweria disalin!')" title="Salin Link">📋 Salin Link</button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ================= 4. JASA EDIT / OPEN COMMISSION ================= -->
+        <section id="commissions" class="gallery-section">
+            <h2>Jasa Edit / Open Commission</h2>
+            <p class="section-desc">Menerima pesanan edit video TikTok, AMV anime/game, dan Montage Free Fire dengan hasil memukau.</p>
+
+            <div class="pricing-grid">
+                <!-- Paket 1 -->
+                <div class="card pricing-card">
+                    <div class="pricing-header">
+                        <h3>Paket JJ / Velocity</h3>
+                        <div class="price">Rp 15.000 <span>/ video</span></div>
+                        <p class="price-subtitle">Cocok untuk konten harian TikTok, Reels & Shorts</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Durasi 15 - 30 Detik</li>
+                        <li><span class="check">✓</span> Beat Sync & Jedag-Jedug Smooth</li>
+                        <li><span class="check">✓</span> Velocity & Shake Effect</li>
+                        <li><span class="check">✓</span> Sound Trending TikTok</li>
+                        <li><span class="check">✓</span> Resolusi Full HD 1080p 60 FPS</li>
+                        <li><span class="check">✓</span> Pengerjaan Cepat 1-2 Hari</li>
+                    </ul>
+                    <div class="pricing-action">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Bang%20Rasyhz,%20saya%20mau%20order%20Jasa%20Edit%20Paket%20JJ%20TikTok" target="_blank" rel="noopener noreferrer" class="btn-order">
+                            Pesan via WhatsApp ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 2 (Populer) -->
+                <div class="card pricing-card popular">
+                    <div class="popular-badge">🔥 PALING DIMINATI</div>
+                    <div class="pricing-header">
+                        <h3>Paket AMV / Typography</h3>
+                        <div class="price">Rp 35.000 <span>/ video</span></div>
+                        <p class="price-subtitle">Kualitas sinematik untuk portofolio & showcase epic</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Durasi 30 - 60 Detik</li>
+                        <li><span class="check">✓</span> Typography 3D & Custom Font</li>
+                        <li><span class="check">✓</span> Smooth Transition & Flow Effect</li>
+                        <li><span class="check">✓</span> Cinematic Color Grading</li>
+                        <li><span class="check">✓</span> Sound Design & SFX Lengkap</li>
+                        <li><span class="check">✓</span> Resolusi 2K / 1080p 60 FPS</li>
+                        <li><span class="check">✓</span> Garansi Revisi 2x</li>
+                    </ul>
+                    <div class="pricing-action">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Bang%20Rasyhz,%20saya%20mau%20order%20Jasa%20Edit%20Paket%20AMV%20Typography" target="_blank" rel="noopener noreferrer" class="btn-order btn-order-primary">
+                            Pesan Sekarang ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 3 -->
+                <div class="card pricing-card">
+                    <div class="pricing-header">
+                        <h3>Paket Montage Free Fire</h3>
+                        <div class="price">Rp 25.000 <span>/ video</span></div>
+                        <p class="price-subtitle">Highlight gameplay kill & momen epic tournament</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Durasi 30 - 60 Detik</li>
+                        <li><span class="check">✓</span> Kill Beat Sync & Slowmo Flow</li>
+                        <li><span class="check">✓</span> Glow Effect & Color Filter</li>
+                        <li><span class="check">✓</span> Bonus Thumbnail Menarik</li>
+                        <li><span class="check">✓</span> Format 9:16 (TikTok) / 16:9 (YouTube)</li>
+                        <li><span class="check">✓</span> Export 60 FPS High Bitrate</li>
+                    </ul>
+                    <div class="pricing-action">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Bang%20Rasyhz,%20saya%20mau%20order%20Jasa%20Edit%20Paket%20Montage%20FF" target="_blank" rel="noopener noreferrer" class="btn-order">
+                            Pesan via WhatsApp ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commission-footer-note">
+                <p>💡 Ingin paket custom atau tanya-tanya konsep? Kontak via Discord <strong>rasyhze</strong> atau Email <strong>wjwhaha5@gmail.com</strong>.</p>
             </div>
         </section>
 
@@ -208,6 +381,175 @@
                 toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
             });
         }
+
+        // ================= STATS COUNTER ANIMATION =================
+        function initStatsCounter() {
+            const statsSection = document.querySelector('.stats-section');
+            if (!statsSection) return;
+
+            let animated = false;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animated) {
+                        animated = true;
+                        const numbers = document.querySelectorAll('.stat-number');
+                        numbers.forEach(el => {
+                            const target = parseInt(el.getAttribute('data-target'), 10);
+                            const duration = 1400;
+                            const stepTime = 25;
+                            const steps = duration / stepTime;
+                            const increment = target / steps;
+                            let current = 0;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    el.innerText = target;
+                                    clearInterval(timer);
+                                } else {
+                                    el.innerText = Math.floor(current);
+                                }
+                            }, stepTime);
+                        });
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observer.observe(statsSection);
+        }
+
+        // ================= AUDIO PREVIEW SYNTHESIZER =================
+        let currentAudioCtx = null;
+        let currentPreviewTrack = null;
+        let currentPreviewBtn = null;
+        let previewTimeout = null;
+
+        function stopAudioPreview() {
+            if (previewTimeout) {
+                clearTimeout(previewTimeout);
+                previewTimeout = null;
+            }
+            if (currentAudioCtx) {
+                try {
+                    currentAudioCtx.close();
+                } catch (e) {}
+                currentAudioCtx = null;
+            }
+            if (currentPreviewBtn) {
+                currentPreviewBtn.classList.remove('playing');
+                const icon = currentPreviewBtn.querySelector('.audio-btn-icon');
+                const text = currentPreviewBtn.querySelector('.audio-btn-text');
+                if (icon) icon.innerText = '▶';
+                if (text) text.innerText = 'Dengar Sound Beat';
+                const eq = currentPreviewBtn.parentElement.querySelector('.equalizer-bars');
+                if (eq) eq.classList.remove('active');
+                currentPreviewBtn = null;
+            }
+            currentPreviewTrack = null;
+        }
+
+        function toggleAudioPreview(trackId, btn) {
+            if (currentPreviewTrack === trackId) {
+                stopAudioPreview();
+                return;
+            }
+            stopAudioPreview();
+
+            currentPreviewTrack = trackId;
+            currentPreviewBtn = btn;
+            btn.classList.add('playing');
+            const icon = btn.querySelector('.audio-btn-icon');
+            const text = btn.querySelector('.audio-btn-text');
+            if (icon) icon.innerText = '⏸';
+            if (text) text.innerText = 'Berhenti';
+            const eq = btn.parentElement.querySelector('.equalizer-bars');
+            if (eq) eq.classList.add('active');
+
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                currentAudioCtx = ctx;
+
+                playSyntheticBeat(ctx, trackId);
+
+                // Auto-stop after 10 seconds
+                previewTimeout = setTimeout(() => {
+                    stopAudioPreview();
+                }, 10000);
+            } catch (e) {
+                console.warn('Audio preview error:', e);
+                stopAudioPreview();
+            }
+        }
+
+        function playSyntheticBeat(ctx, trackId) {
+            const now = ctx.currentTime + 0.05;
+            const bpm = trackId === 2 ? 140 : (trackId === 3 ? 96 : 128);
+            const step = 60 / bpm / 4;
+            const totalSteps = 32;
+
+            for (let i = 0; i < totalSteps; i++) {
+                const t = now + i * step;
+                // Kick
+                if (i % 8 === 0 || (trackId === 1 && (i === 6 || i === 14 || i === 22 || i === 30))) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(trackId === 3 ? 110 : 150, t);
+                    osc.frequency.exponentialRampToValueAtTime(32, t + 0.18);
+                    gain.gain.setValueAtTime(0.7, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.25);
+                }
+                // Snare / Clap
+                if (i % 8 === 4) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(220, t);
+                    gain.gain.setValueAtTime(0.35, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.16);
+                }
+                // Hi-hat
+                if (i % 2 === 0) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(5500, t);
+                    gain.gain.setValueAtTime(0.07, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.05);
+                }
+                // Bass synth
+                if (trackId === 1 && (i === 0 || i === 6 || i === 12 || i === 16 || i === 22 || i === 28)) {
+                    const bass = ctx.createOscillator();
+                    const bassGain = ctx.createGain();
+                    bass.type = 'sawtooth';
+                    const freq = i < 16 ? 55 : 65.4;
+                    bass.frequency.setValueAtTime(freq, t);
+                    bassGain.gain.setValueAtTime(0.2, t);
+                    bassGain.gain.exponentialRampToValueAtTime(0.001, t + step * 3);
+                    bass.connect(bassGain);
+                    bassGain.connect(ctx.destination);
+                    bass.start(t);
+                    bass.stop(t + step * 3.5);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initStatsCounter();
+        });
     </script>
 </body>
 
