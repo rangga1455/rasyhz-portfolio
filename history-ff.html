@@ -24,13 +24,12 @@
             <p class="section-desc">Galeri publik rekap match, turnamen, scrim, dan dokumentasi kemenangan tim Free
                 Fire.</p>
 
-            <!-- ================= POPUP MODAL LOGIN ADMIN ================= -->
+            <!-- ================= MODAL LOGIN ADMIN ================= -->
             <div id="login-modal" class="modal hidden">
                 <div class="modal-content">
                     <h3>Login Khusus Admin</h3>
                     <input type="email" id="admin-email" placeholder="Email Admin">
 
-                    <!-- Input Password dengan Tombol Ikon Mata -->
                     <div class="password-box">
                         <input type="password" id="admin-password" placeholder="Password Admin">
                         <button type="button" id="toggle-password-btn" class="eye-toggle-btn"
@@ -94,7 +93,6 @@
 
         let isAdmin = false;
 
-        // Referensi elemen DOM
         const authBtn = document.getElementById('auth-btn');
         const loginModal = document.getElementById('login-modal');
         const closeLoginBtn = document.getElementById('close-login-btn');
@@ -104,12 +102,9 @@
         const savePhotoBtn = document.getElementById('save-photo-btn');
         const fileInput = document.getElementById('match-file-input');
         const fileNameLabel = document.getElementById('selected-file-name');
-
-        // Elemen toggle intip sandi
         const passwordInput = document.getElementById('admin-password');
         const togglePasswordBtn = document.getElementById('toggle-password-btn');
 
-        // Fitur Intip/Sembunyikan Sandi (Tombol Mata)
         togglePasswordBtn.addEventListener('click', () => {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -128,7 +123,6 @@
             }
         });
 
-        // 1. Status Login Realtime
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 isAdmin = true;
@@ -152,12 +146,10 @@
 
         closeLoginBtn.addEventListener('click', () => {
             loginModal.classList.add('hidden');
-            // Reset tipe password saat modal ditutup
             passwordInput.type = 'password';
             togglePasswordBtn.innerText = '👁️';
         });
 
-        // 2. Eksekusi Login
         doLoginBtn.addEventListener('click', async () => {
             const email = document.getElementById('admin-email').value;
             const pass = passwordInput.value;
@@ -169,7 +161,6 @@
             }
         });
 
-        // 3. Upload File ke ImgBB & Firestore
         savePhotoBtn.addEventListener('click', async () => {
             const title = document.getElementById('match-title').value;
             const desc = document.getElementById('match-desc').value;
@@ -219,7 +210,6 @@
             }
         });
 
-        // 4. Muat Galeri Publik
         async function loadPublicGallery() {
             galleryGrid.innerHTML = '';
             try {
@@ -236,9 +226,8 @@
                     const card = document.createElement('div');
                     card.classList.add('card', 'ff-card');
 
-                    // Tombol Hapus hanya disisipkan jika status isAdmin bernilai true
                     let deleteBtnHtml = isAdmin
-                        ? `<button class="delete-btn" onclick="window.deleteMatch('${docItem.id}')">🗑️ Hapus Foto</button>`
+                        ? `<button class="delete-btn" data-doc-id="${docItem.id}">🗑️ Hapus Foto</button>`
                         : '';
 
                     card.innerHTML = `
@@ -251,12 +240,20 @@
                     `;
                     galleryGrid.appendChild(card);
                 });
+
+                if (isAdmin) {
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const id = e.target.getAttribute('data-doc-id');
+                            window.deleteMatch(id);
+                        });
+                    });
+                }
             } catch (error) {
                 galleryGrid.innerHTML = '<p class="section-desc">Gagal memuat galeri: ' + error.message + '</p>';
             }
         }
 
-        // 5. Fungsi Hapus Data Khusus Admin
         window.deleteMatch = async (id) => {
             if (confirm("Apakah kamu yakin ingin menghapus foto riwayat match ini dari galeri publik?")) {
                 try {
