@@ -194,6 +194,18 @@ button:active,
     color: #aaaaaa;
 }
 
+/* ================= TIKTOK FEED WIDGET ================= */
+.tiktok-feed-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.tiktok-feed-wrapper > div {
+    width: 100% !important;
+}
+
 /* ================= GALERI & GRID ================= */
 .gallery-section {
     max-width: 1000px;
@@ -1149,6 +1161,12 @@ button:active,
         padding: 0 14px;
     }
 
+    /* Kontrol ukuran widget TikTok Last Editing agar pas & compact di layar Android */
+    .tiktok-feed-wrapper {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
     .gallery-section,
     .social-section {
         margin: 30px auto 40px;
@@ -1249,5 +1267,9 @@ button:active,
     .modal-content {
         padding: 24px 18px;
         border-radius: 16px;
+    }
+
+    .tiktok-feed-wrapper {
+        max-width: 285px;
     }
 }
