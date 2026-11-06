@@ -1,412 +1,117 @@
-/* ================= CSS RESET & DASAR ================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: #121212;
-    color: #e0e0e0;
-    line-height: 1.6;
-}
-
-/* ================= NAVBAR ================= */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #1a1a1a;
-    border-bottom: 1px solid #2a2a2a;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar .logo {
-    font-size: 1.5rem;
-    color: #ffffff;
-    letter-spacing: 2px;
-}
-
-.navbar nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar nav a {
-    color: #a0a0a0;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: color 0.2s ease;
-}
-
-.navbar nav a:hover {
-    color: #00adb5;
-}
-
-.navbar nav a.nav-highlight {
-    color: #00adb5;
-    font-weight: 600;
-}
-
-/* ================= FEATURED SECTION (TIKTOK) ================= */
-.featured-section {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.tiktok-wrapper {
+/* ================= HALAMAN GAYA LYNK.ID ================= */
+.lynkid-body {
+    background: radial-gradient(circle at top, #1f2833 0%, #0b0c10 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
+    padding: 40px 15px;
+}
+
+.lynkid-container {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
 }
 
-.featured-info {
+.lynkid-profile {
     text-align: center;
-}
-
-.featured-info h2 {
-    color: #00adb5;
-    margin-bottom: 8px;
-}
-
-.featured-info p {
-    color: #aaaaaa;
-}
-
-/* ================= GALERI & GRID ================= */
-.gallery-section {
-    max-width: 1000px;
-    margin: 50px auto 70px;
-    padding: 0 20px;
-}
-
-.gallery-section h2 {
-    margin-bottom: 10px;
-    border-left: 4px solid #00adb5;
-    padding-left: 12px;
-}
-
-.section-desc {
-    color: #888888;
     margin-bottom: 25px;
-    font-size: 0.95rem;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+.lynkid-avatar-wrapper {
+    width: 104px;
+    height: 104px;
+    margin: 0 auto 15px;
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00adb5, #393e46);
 }
 
-.card {
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 173, 181, 0.25);
-}
-
-.card img {
+.lynkid-avatar {
     width: 100%;
-    height: 180px;
+    height: 100%;
+    border-radius: 50%;
     object-fit: cover;
     display: block;
 }
 
-.card h3 {
-    margin: 12px 15px 4px;
-    font-size: 1.05rem;
+.lynkid-name {
+    font-size: 1.4rem;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
 }
 
-.card p {
-    margin: 0 15px 15px;
+.lynkid-bio {
     font-size: 0.9rem;
-    color: #888888;
+    color: #a0a0a0;
+    line-height: 1.4;
+    padding: 0 10px;
 }
 
-/* ================= INFORMASI KARTU FF ================= */
-.ff-card-info {
-    padding: 12px 15px 15px;
-}
-
-.ff-card-info h3 {
-    margin: 0 0 4px 0;
-    font-size: 1rem;
-    color: #ffffff;
-}
-
-.ff-card-info p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: #aaaaaa;
-}
-
-/* ================= SOCIAL & COMMUNITY SECTION ================= */
-.social-section {
-    max-width: 800px;
-    margin: 60px auto 100px;
-    padding: 0 20px;
-    text-align: center;
-}
-
-.social-section h2 {
-    color: #ffffff;
-    margin-bottom: 10px;
-}
-
-.social-links-container {
+.lynkid-links {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.social-btn {
+.lynkid-card {
+    display: flex;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.85);
+    border: 1px solid #2f3640;
+    backdrop-filter: blur(8px);
+    padding: 14px 18px;
+    border-radius: 12px;
     text-decoration: none;
     color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 30px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lynkid-card:hover {
+    transform: translateY(-3px);
+    border-color: #00adb5;
+    box-shadow: 0 6px 18px rgba(0, 173, 181, 0.2);
+}
+
+.lynkid-card.highlight-card {
+    border: 1px solid #00adb5;
+    background-color: rgba(0, 173, 181, 0.1);
+}
+
+.lynkid-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lynkid-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.lynkid-title {
     font-weight: 600;
     font-size: 0.95rem;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-}
-
-.social-btn:hover {
-    transform: translateY(-3px);
-    opacity: 0.9;
-}
-
-.tiktok-btn {
-    background-color: #000000;
-    border: 1px solid #333333;
-}
-
-.instagram-btn {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-}
-
-.youtube-btn {
-    background-color: #ff0000;
-}
-
-.discord-btn {
-    background-color: #5865f2;
-}
-
-.wa-btn {
-    background-color: #25d366;
-}
-
-/* ================= FITUR ADMIN & MODAL ================= */
-.hidden {
-    display: none !important;
-}
-
-.admin-login-btn {
-    background: transparent;
-    border: 1px solid #00adb5;
-    color: #00adb5;
-    padding: 6px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin-left: 20px;
-    transition: all 0.2s ease;
-}
-
-.admin-login-btn:hover {
-    background-color: #00adb5;
     color: #ffffff;
 }
 
-.admin-badge {
-    display: inline-block;
-    background-color: #00adb5;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border-radius: 4px;
-    margin-bottom: 12px;
-}
-
-.upload-box {
-    margin-bottom: 30px;
-}
-
-.file-picker-btn {
-    display: inline-block;
-    padding: 10px 18px;
-    cursor: pointer;
-    background-color: #282828;
-    color: #00adb5;
-    border: 1px dashed #00adb5;
-    font-weight: 600;
-    border-radius: 6px;
-    text-align: center;
-    transition: background-color 0.2s ease;
-}
-
-.file-picker-btn:hover {
-    background-color: #333;
-}
-
-.file-status-text {
-    font-size: 0.85rem;
-    color: #aaaaaa;
-}
-
-.custom-file-upload {
-    display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #00adb5;
-    color: #ffffff;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-}
-
-.custom-file-upload:hover {
-    background-color: #008990;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 500px;
-}
-
-.input-group input {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    padding: 10px 14px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 0.9rem;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: #00adb5;
-}
-
-/* Modal Popup */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #1e1e1e;
-    padding: 30px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border: 1px solid #333;
-}
-
-.modal-content h3 {
-    color: #00adb5;
-    margin-bottom: 5px;
-}
-
-.modal-content input {
-    background-color: #121212;
-    border: 1px solid #333;
-    padding: 10px;
-    border-radius: 4px;
-    color: #fff;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.cancel-btn {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.delete-btn {
-    margin-top: 10px;
-    background-color: #d9534f;
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
+.lynkid-subtitle {
     font-size: 0.8rem;
+    color: #888888;
+    margin-top: 2px;
 }
 
-.delete-btn:hover {
-    background-color: #c9302c;
-}
-
-/* Input Password dengan Tombol Mata */
-.password-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.password-box input {
-    width: 100%;
-    padding-right: 42px;
-}
-
-.eye-toggle-btn {
-    position: absolute;
-    right: 10px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-}
-
-.eye-toggle-btn:focus {
-    outline: none;
+.lynkid-footer {
+    margin-top: 35px;
+    text-align: center;
+    color: #666666;
+    font-size: 0.8rem;
 }
