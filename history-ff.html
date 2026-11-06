@@ -136,11 +136,48 @@
             measurementId: "G-QL8NDHBEN9"
         };
 
-        const IMGBB_API_KEY = "2f116b49e631b800433c21aadeb95ff4";
+        const FALLBACK_SCOREBOARD = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='225' viewBox='0 0 400 225'><rect width='400' height='225' fill='%231e1e1e'/><text x='50%25' y='46%25' font-family='sans-serif' font-size='36' text-anchor='middle' dominant-baseline='middle' fill='%2300adb5'>🏆</text><text x='50%25' y='68%25' font-family='sans-serif' font-size='13' text-anchor='middle' fill='%23888888'>Foto Scoreboard</text></svg>";
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        // Helper Kompresi Gambar ke Base64 (Aman, Cepat, Kebal Blokir Internet Positif / Telkomsel)
+        function compressImage(file, maxWidth = 900, maxHeight = 900, quality = 0.78) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth || height > maxHeight) {
+                            if (width / height > maxWidth / maxHeight) {
+                                height = Math.round((height * maxWidth) / width);
+                                width = maxWidth;
+                            } else {
+                                width = Math.round((width * maxHeight) / height);
+                                height = maxHeight;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(dataUrl);
+                    };
+                    img.onerror = () => reject(new Error("File gambar tidak dapat diproses"));
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => reject(new Error("Gagal membaca file gambar dari perangkat"));
+                reader.readAsDataURL(file);
+            });
+        }
 
         let isAdmin = false;
         let allMatches = [];
@@ -307,28 +344,18 @@
                 return;
             }
 
-            savePhotoBtn.innerText = "Mengunggah scoreboard...";
+            savePhotoBtn.innerText = "Memproses & mengunggah...";
             savePhotoBtn.disabled = true;
 
             try {
-                const formData = new FormData();
-                formData.append("image", file);
-
-                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
-                    method: "POST",
-                    body: formData
-                });
-
-                const result = await response.json();
-                if (!result.success) throw new Error("Gagal mengunggah foto ke ImgBB.");
-
-                const uploadedUrl = result.data.url;
+                // Kompres gambar ke Base64 JPEG ringan (~50KB) - bebas blokir ISP / Kominfo
+                const compressedImageUrl = await compressImage(file);
 
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
                     desc: desc || "Dokumentasi Match",
                     category: category || "Tournament",
-                    imageUrl: uploadedUrl,
+                    imageUrl: compressedImageUrl,
                     createdAt: new Date().getTime()
                 });
 
@@ -390,10 +417,10 @@
                 });
 
                 const img = document.createElement('img');
-                img.src = data.imageUrl || 'https://picsum.photos/400/225';
+                img.src = data.imageUrl || FALLBACK_SCOREBOARD;
                 img.alt = data.title || 'Scoreboard Match';
                 img.loading = 'lazy';
-                img.onerror = () => { img.src = 'https://picsum.photos/400/225'; };
+                img.onerror = () => { img.src = FALLBACK_SCOREBOARD; };
 
                 const tag = document.createElement('span');
                 tag.classList.add('match-tag');
