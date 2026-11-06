@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History FT Free Fire - RASYHZ TEAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <h1 class="logo">RASYHZ FF TEAM</h1>
+        <nav>
+            <a href="index.html">← Kembali ke Portfolio</a>
+            <button id="auth-btn" class="admin-login-btn">Login Admin</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="gallery-section">
+            <h2>History FT & Tournament Match</h2>
+            <p class="section-desc">Galeri publik rekap match, turnamen, scrim, dan dokumentasi kemenangan tim Free
+                Fire.</p>
+
+            <!-- ================= POPUP MODAL LOGIN ADMIN ================= -->
+            <div id="login-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Login Khusus Admin</h3>
+                    <input type="email" id="admin-email" placeholder="Email Admin">
+
+                    <!-- Input Password dengan Tombol Ikon Mata -->
+                    <div class="password-box">
+                        <input type="password" id="admin-password" placeholder="Password Admin">
+                        <button type="button" id="toggle-password-btn" class="eye-toggle-btn"
+                            title="Lihat/Sembunyikan Sandi">👁️</button>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button id="do-login-btn" class="custom-file-upload">Masuk</button>
+                        <button id="close-login-btn" class="cancel-btn">Batal</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PANEL UPLOAD KHUSUS ADMIN ================= -->
+            <div id="admin-upload-panel" class="upload-box hidden">
+                <div class="admin-badge">Mode Admin Aktif</div>
+                <div class="input-group">
+                    <input type="text" id="match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
+                    <input type="text" id="match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
+
+                    <label for="match-file-input" class="file-picker-btn">
+                        📁 Pilih File Gambar dari Perangkat
+                    </label>
+                    <input type="file" id="match-file-input" accept="image/*" style="display: none;">
+                    <span id="selected-file-name" class="file-status-text">Belum ada file dipilih</span>
+
+                    <button id="save-photo-btn" class="custom-file-upload">
+                        + Publikasikan Foto ke Galeri
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= WADAH GALERI PUBLIK ================= -->
+            <div class="grid-container" id="ff-gallery-grid">
+                <p id="loading-text">Memuat dokumentasi match...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FIREBASE CLOUD & IMGBB SCRIPT ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCT2JQgsl7APNAqRGz_J5kxlZ73UBJBmts",
+            authDomain: "ff-ft-1c86d.firebaseapp.com",
+            projectId: "ff-ft-1c86d",
+            storageBucket: "ff-ft-1c86d.firebasestorage.app",
+            messagingSenderId: "79295926648",
+            appId: "1:79295926648:web:10e02eb1efa666a15bb88d",
+            measurementId: "G-QL8NDHBEN9"
+        };
+
+        const IMGBB_API_KEY = "2f116b49e631b800433c21aadeb95ff4";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let isAdmin = false;
+
+        // Referensi elemen DOM
+        const authBtn = document.getElementById('auth-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeLoginBtn = document.getElementById('close-login-btn');
+        const doLoginBtn = document.getElementById('do-login-btn');
+        const adminUploadPanel = document.getElementById('admin-upload-panel');
+        const galleryGrid = document.getElementById('ff-gallery-grid');
+        const savePhotoBtn = document.getElementById('save-photo-btn');
+        const fileInput = document.getElementById('match-file-input');
+        const fileNameLabel = document.getElementById('selected-file-name');
+
+        // Elemen toggle intip sandi
+        const passwordInput = document.getElementById('admin-password');
+        const togglePasswordBtn = document.getElementById('toggle-password-btn');
+
+        // Fitur Intip/Sembunyikan Sandi (Tombol Mata)
+        togglePasswordBtn.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordBtn.innerText = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordBtn.innerText = '👁️';
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameLabel.innerText = "File terpilih: " + fileInput.files[0].name;
+            } else {
+                fileNameLabel.innerText = "Belum ada file dipilih";
+            }
+        });
+
+        // 1. Status Login Realtime
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                isAdmin = true;
+                authBtn.innerText = "Logout (" + user.email.split('@')[0] + ")";
+                adminUploadPanel.classList.remove('hidden');
+            } else {
+                isAdmin = false;
+                authBtn.innerText = "Login Admin";
+                adminUploadPanel.classList.add('hidden');
+            }
+            loadPublicGallery();
+        });
+
+        authBtn.addEventListener('click', () => {
+            if (isAdmin) {
+                signOut(auth);
+            } else {
+                loginModal.classList.remove('hidden');
+            }
+        });
+
+        closeLoginBtn.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+            // Reset tipe password saat modal ditutup
+            passwordInput.type = 'password';
+            togglePasswordBtn.innerText = '👁️';
+        });
+
+        // 2. Eksekusi Login
+        doLoginBtn.addEventListener('click', async () => {
+            const email = document.getElementById('admin-email').value;
+            const pass = passwordInput.value;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                loginModal.classList.add('hidden');
+            } catch (err) {
+                alert("Login gagal: " + err.message);
+            }
+        });
+
+        // 3. Upload File ke ImgBB & Firestore
+        savePhotoBtn.addEventListener('click', async () => {
+            const title = document.getElementById('match-title').value;
+            const desc = document.getElementById('match-desc').value;
+            const file = fileInput.files[0];
+
+            if (!title || !file) {
+                alert("Harap isi judul dan pilih file gambar!");
+                return;
+            }
+
+            savePhotoBtn.innerText = "Sedang mengunggah file gambar...";
+            savePhotoBtn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append("image", file);
+
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (!result.success) throw new Error("Gagal mengunggah file ke ImgBB.");
+
+                const uploadedUrl = result.data.url;
+
+                await addDoc(collection(db, "ff_matches"), {
+                    title: title,
+                    desc: desc || "Dokumentasi Match",
+                    imageUrl: uploadedUrl,
+                    createdAt: new Date().getTime()
+                });
+
+                document.getElementById('match-title').value = '';
+                document.getElementById('match-desc').value = '';
+                fileInput.value = '';
+                fileNameLabel.innerText = 'Belum ada file dipilih';
+
+                alert("Foto dokumentasi berhasil dipublikasikan!");
+                loadPublicGallery();
+            } catch (e) {
+                alert("Error: " + e.message);
+            } finally {
+                savePhotoBtn.innerText = "+ Publikasikan Foto ke Galeri";
+                savePhotoBtn.disabled = false;
+            }
+        });
+
+        // 4. Muat Galeri Publik
+        async function loadPublicGallery() {
+            galleryGrid.innerHTML = '';
+            try {
+                const q = query(collection(db, "ff_matches"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    galleryGrid.innerHTML = '<p class="section-desc">Belum ada dokumentasi foto match yang dipublikasikan.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((docItem) => {
+                    const data = docItem.data();
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'ff-card');
+
+                    // Tombol Hapus hanya disisipkan jika status isAdmin bernilai true
+                    let deleteBtnHtml = isAdmin
+                        ? `<button class="delete-btn" onclick="window.deleteMatch('${docItem.id}')">🗑️ Hapus Foto</button>`
+                        : '';
+
+                    card.innerHTML = `
+                        <img src="${data.imageUrl}" alt="${data.title}" onerror="this.src='https://picsum.photos/400/225'">
+                        <div class="ff-card-info">
+                            <h3>${data.title}</h3>
+                            <p>${data.desc}</p>
+                            ${deleteBtnHtml}
+                        </div>
+                    `;
+                    galleryGrid.appendChild(card);
+                });
+            } catch (error) {
+                galleryGrid.innerHTML = '<p class="section-desc">Gagal memuat galeri: ' + error.message + '</p>';
+            }
+        }
+
+        // 5. Fungsi Hapus Data Khusus Admin
+        window.deleteMatch = async (id) => {
+            if (confirm("Apakah kamu yakin ingin menghapus foto riwayat match ini dari galeri publik?")) {
+                try {
+                    await deleteDoc(doc(db, "ff_matches", id));
+                    alert("Foto berhasil dihapus!");
+                    loadPublicGallery();
+                } catch (err) {
+                    alert("Gagal menghapus foto: " + err.message);
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
