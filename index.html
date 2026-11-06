@@ -59,7 +59,17 @@
         <!-- ================= 2. LAST EDITING WORKS ================= -->
         <section id="lastedit" class="gallery-section">
             <h2>Last Editing Works</h2>
-            <div class="grid-container">
+            <p class="section-desc">Video editing terbaru yang otomatis tersinkronisasi dari TikTok @rasyhze.</p>
+
+            <!-- ================= WIDGET FEED TIKTOK OTOMATIS (ELFSIGHT) ================= -->
+            <!-- Script platform Elfsight -->
+            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            
+            <!-- Ganti 'MASUKKAN_WIDGET_ID_DISINI' dengan ID widget dari akun Elfsight kamu -->
+            <div class="elfsight-app-MASUKKAN_WIDGET_ID_DISINI" data-elfsight-app-lazy></div>
+
+            <!-- Tampilan Galeri Card (Aktif sebagai preview saat widget belum dipasang) -->
+            <div class="grid-container" id="fallback-works">
                 <div class="card">
                     <img src="https://picsum.photos/400/225?random=1" alt="Thumbnail Project 1">
                     <h3>Anime Edit #01</h3>
