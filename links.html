@@ -30,6 +30,9 @@
             <div class="quick-id-pill" onclick="copyText('rasyhze', 'Discord Tag disalin!')">
                 💬 Discord: <strong>rasyhze</strong> 📋
             </div>
+            <div class="quick-id-pill" onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')">
+                ✉️ Email: <strong>wjwhaha5@gmail.com</strong> 📋
+            </div>
         </div>
 
         <!-- Daftar Tautan Tumpuk Bergaya Lynk.id -->
@@ -153,12 +156,14 @@
     </main>
 
     <script>
+        let toastTimer;
         function copyText(text, message) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toast');
+                clearTimeout(toastTimer);
                 toast.innerText = message || 'Disalin ke clipboard!';
                 toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2500);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
             });
         }
     </script>

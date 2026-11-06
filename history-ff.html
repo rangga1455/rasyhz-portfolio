@@ -14,9 +14,10 @@
 
     <!-- ================= NAVBAR ================= -->
     <header class="navbar">
-        <h1 class="logo">RASYHZ FF TEAM</h1>
+        <a href="index.html" class="logo-link"><h1 class="logo">RASYHZ FF TEAM</h1></a>
         <nav>
             <a href="index.html">← Kembali ke Portfolio</a>
+            <a href="links.html" class="nav-highlight">Socials ↗</a>
             <button id="auth-btn" class="admin-login-btn">Login Admin</button>
         </nav>
     </header>
@@ -89,16 +90,29 @@
 
     <!-- ================= LIGHTBOX MODAL (PREVIEW GAMBAR BESAR) ================= -->
     <div id="lightbox-modal" class="lightbox-modal hidden" onclick="closeLightbox(event)">
-        <span class="lightbox-close">&times;</span>
-        <div class="lightbox-content">
+        <button type="button" class="lightbox-close" title="Tutup preview">&times;</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
             <img id="lightbox-img" src="" alt="Fullscreen Preview">
             <div class="lightbox-caption">
+                <span id="lightbox-tag" class="match-tag lightbox-tag-badge"></span>
                 <h3 id="lightbox-title"></h3>
                 <p id="lightbox-desc"></p>
-                <span id="lightbox-tag" class="match-tag"></span>
             </div>
         </div>
     </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-brand">RASYHZ FF TEAM</p>
+            <p class="footer-copyright">© 2026 RASYHZ. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Portfolio</a>
+                <a href="history-ff.html">History FF</a>
+                <a href="links.html">Socials & Links</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- ================= FIREBASE & APP SCRIPT ================= -->
     <script type="module">
@@ -125,6 +139,7 @@
         let isAdmin = false;
         let allMatches = [];
         let currentFilter = 'all';
+        let toastTimeout;
 
         const authBtn = document.getElementById('auth-btn');
         const loginModal = document.getElementById('login-modal');
@@ -135,9 +150,28 @@
         const savePhotoBtn = document.getElementById('save-photo-btn');
         const fileInput = document.getElementById('match-file-input');
         const fileNameLabel = document.getElementById('selected-file-name');
+        const emailInput = document.getElementById('admin-email');
         const passwordInput = document.getElementById('admin-password');
         const togglePasswordBtn = document.getElementById('toggle-password-btn');
 
+        // Toast Helper
+        function showToast(message, isError = false) {
+            const toastEl = document.getElementById('toast');
+            if (!toastEl) return;
+            clearTimeout(toastTimeout);
+            toastEl.innerText = message;
+            if (isError) {
+                toastEl.classList.add('error');
+            } else {
+                toastEl.classList.remove('error');
+            }
+            toastEl.classList.add('show');
+            toastTimeout = setTimeout(() => {
+                toastEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // Toggle Password Visibility
         togglePasswordBtn.addEventListener('click', () => {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -148,6 +182,7 @@
             }
         });
 
+        // File Input Change
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
                 fileNameLabel.innerText = "File: " + fileInput.files[0].name;
@@ -156,6 +191,51 @@
             }
         });
 
+        // Modal Helpers
+        function openLoginModal() {
+            loginModal.classList.remove('hidden');
+            emailInput.focus();
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.add('hidden');
+            passwordInput.type = 'password';
+            togglePasswordBtn.innerText = '👁️';
+        }
+
+        closeLoginBtn.addEventListener('click', closeLoginModal);
+
+        // Click outside modal to close
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                closeLoginModal();
+            }
+        });
+
+        // Submit login on Enter key
+        [emailInput, passwordInput].forEach(input => {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doLoginBtn.click();
+                }
+            });
+        });
+
+        // Global Escape key handler
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (!loginModal.classList.contains('hidden')) {
+                    closeLoginModal();
+                }
+                const lightbox = document.getElementById('lightbox-modal');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    lightbox.classList.add('hidden');
+                }
+            }
+        });
+
+        // Auth State Listener
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 isAdmin = true;
@@ -171,26 +251,27 @@
 
         authBtn.addEventListener('click', () => {
             if (isAdmin) {
-                signOut(auth);
+                signOut(auth).then(() => {
+                    showToast("Berhasil logout.");
+                });
             } else {
-                loginModal.classList.remove('hidden');
+                openLoginModal();
             }
         });
 
-        closeLoginBtn.addEventListener('click', () => {
-            loginModal.classList.add('hidden');
-            passwordInput.type = 'password';
-            togglePasswordBtn.innerText = '👁️';
-        });
-
         doLoginBtn.addEventListener('click', async () => {
-            const email = document.getElementById('admin-email').value;
+            const email = emailInput.value.trim();
             const pass = passwordInput.value;
+            if (!email || !pass) {
+                showToast("Harap isi email dan password!", true);
+                return;
+            }
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
-                loginModal.classList.add('hidden');
+                closeLoginModal();
+                showToast("Login berhasil! Mode admin aktif.");
             } catch (err) {
-                alert("Login gagal: " + err.message);
+                showToast("Login gagal: " + (err.code || err.message), true);
             }
         });
 
@@ -206,13 +287,17 @@
 
         // Upload match baru
         savePhotoBtn.addEventListener('click', async () => {
-            const title = document.getElementById('match-title').value;
-            const desc = document.getElementById('match-desc').value;
-            const category = document.getElementById('match-category').value;
+            const titleInput = document.getElementById('match-title');
+            const descInput = document.getElementById('match-desc');
+            const categoryInput = document.getElementById('match-category');
+
+            const title = titleInput.value.trim();
+            const desc = descInput.value.trim();
+            const category = categoryInput.value;
             const file = fileInput.files[0];
 
             if (!title || !file) {
-                alert("Harap isi judul dan pilih foto match!");
+                showToast("Harap isi judul dan pilih foto scoreboard!", true);
                 return;
             }
 
@@ -241,15 +326,15 @@
                     createdAt: new Date().getTime()
                 });
 
-                document.getElementById('match-title').value = '';
-                document.getElementById('match-desc').value = '';
+                titleInput.value = '';
+                descInput.value = '';
                 fileInput.value = '';
                 fileNameLabel.innerText = 'Belum ada file dipilih';
 
-                alert("Match baru berhasil dipublikasikan!");
+                showToast("Match baru berhasil dipublikasikan!");
                 loadPublicGallery();
             } catch (e) {
-                alert("Error: " + e.message);
+                showToast("Error: " + e.message, true);
             } finally {
                 savePhotoBtn.innerText = "+ Publikasikan Foto ke Galeri";
                 savePhotoBtn.disabled = false;
@@ -279,7 +364,10 @@
                 : allMatches.filter(m => (m.category || 'Tournament') === currentFilter);
 
             if (filtered.length === 0) {
-                galleryGrid.innerHTML = '<p class="section-desc">Belum ada dokumentasi untuk kategori ini.</p>';
+                const emptyNotice = document.createElement('p');
+                emptyNotice.className = 'section-desc';
+                emptyNotice.textContent = 'Belum ada dokumentasi untuk kategori ini.';
+                galleryGrid.appendChild(emptyNotice);
                 return;
             }
 
@@ -287,55 +375,89 @@
                 const card = document.createElement('div');
                 card.classList.add('card', 'ff-card');
 
-                let deleteBtnHtml = isAdmin
-                    ? `<button class="delete-btn" data-doc-id="${data.id}">🗑️ Hapus Foto</button>`
-                    : '';
+                // Thumbnail Container
+                const thumbWrap = document.createElement('div');
+                thumbWrap.classList.add('card-thumb-wrap');
+                thumbWrap.title = 'Klik untuk perbesar preview';
+                thumbWrap.addEventListener('click', () => {
+                    openLightbox(data.imageUrl, data.title, data.desc, data.category || 'Tournament');
+                });
 
-                card.innerHTML = `
-                    <div class="card-thumb-wrap" onclick="openLightbox('${data.imageUrl}', '${data.title}', '${data.desc}', '${data.category || 'Match'}')">
-                        <img src="${data.imageUrl}" alt="${data.title}" onerror="this.src='https://picsum.photos/400/225'">
-                        <span class="match-tag">${data.category || 'Tournament'}</span>
-                    </div>
-                    <div class="ff-card-info">
-                        <h3>${data.title}</h3>
-                        <p>${data.desc}</p>
-                        ${deleteBtnHtml}
-                    </div>
-                `;
-                galleryGrid.appendChild(card);
-            });
+                const img = document.createElement('img');
+                img.src = data.imageUrl || 'https://picsum.photos/400/225';
+                img.alt = data.title || 'Scoreboard Match';
+                img.loading = 'lazy';
+                img.onerror = () => { img.src = 'https://picsum.photos/400/225'; };
 
-            if (isAdmin) {
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', async (e) => {
-                        const id = e.target.getAttribute('data-doc-id');
-                        if (confirm("Hapus foto riwayat match ini?")) {
+                const tag = document.createElement('span');
+                tag.classList.add('match-tag');
+                tag.textContent = data.category || 'Tournament';
+
+                thumbWrap.appendChild(img);
+                thumbWrap.appendChild(tag);
+
+                // Info Container
+                const info = document.createElement('div');
+                info.classList.add('ff-card-info');
+
+                const titleEl = document.createElement('h3');
+                titleEl.textContent = data.title || 'Match Documentation';
+
+                const descEl = document.createElement('p');
+                descEl.textContent = data.desc || '';
+
+                info.appendChild(titleEl);
+                info.appendChild(descEl);
+
+                if (isAdmin) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.classList.add('delete-btn');
+                    deleteBtn.textContent = '🗑️ Hapus Foto';
+                    deleteBtn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        if (confirm(`Hapus foto dokumentasi "${data.title}"?`)) {
                             try {
-                                await deleteDoc(doc(db, "ff_matches", id));
+                                await deleteDoc(doc(db, "ff_matches", data.id));
+                                showToast("Foto match berhasil dihapus!");
                                 loadPublicGallery();
                             } catch (err) {
-                                alert("Gagal menghapus: " + err.message);
+                                showToast("Gagal menghapus: " + err.message, true);
                             }
                         }
                     });
-                });
-            }
+                    info.appendChild(deleteBtn);
+                }
+
+                card.appendChild(thumbWrap);
+                card.appendChild(info);
+                galleryGrid.appendChild(card);
+            });
         }
 
         // Lightbox Functions
         window.openLightbox = (url, title, desc, tag) => {
-            document.getElementById('lightbox-img').src = url;
-            document.getElementById('lightbox-title').innerText = title;
-            document.getElementById('lightbox-desc').innerText = desc;
-            document.getElementById('lightbox-tag').innerText = tag;
+            const imgEl = document.getElementById('lightbox-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const descEl = document.getElementById('lightbox-desc');
+            const tagEl = document.getElementById('lightbox-tag');
+
+            imgEl.src = url || '';
+            titleEl.textContent = title || '';
+            descEl.textContent = desc || '';
+            tagEl.textContent = tag || 'Match';
+
             document.getElementById('lightbox-modal').classList.remove('hidden');
         };
 
         window.closeLightbox = (e) => {
-            if (e.target.id === 'lightbox-modal' || e.target.classList.contains('lightbox-close')) {
+            if (!e || e.target.id === 'lightbox-modal' || e.target.classList.contains('lightbox-close')) {
                 document.getElementById('lightbox-modal').classList.add('hidden');
             }
         };
+
+        document.querySelector('.lightbox-close')?.addEventListener('click', () => {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        });
 
         loadPublicGallery();
     </script>

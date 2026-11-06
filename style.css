@@ -16,6 +16,25 @@ body {
     line-height: 1.6;
 }
 
+/* ================= CUSTOM SCROLLBAR ================= */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #282828;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00adb5;
+}
+
 /* ================= TOAST NOTIFICATION ================= */
 .toast {
     position: fixed;
@@ -37,6 +56,10 @@ body {
 .toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+.toast.error {
+    background-color: #e74c3c;
 }
 
 /* ================= QUICK COPY BAR ================= */
@@ -83,6 +106,13 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
 }
 
 .navbar .logo {
@@ -270,44 +300,67 @@ body {
 .card-thumb-wrap {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 }
 
-.card-thumb-wrap:hover::after {
+.card-thumb-wrap img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.card-thumb-wrap:hover img {
+    transform: scale(1.04);
+}
+
+.card-thumb-wrap::after {
     content: "🔍 Klik untuk Perbesar";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.65);
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.85rem;
     font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.card-thumb-wrap:hover::after {
+    opacity: 1;
 }
 
 .match-tag {
     position: absolute;
     top: 8px;
     left: 8px;
-    background-color: rgba(0, 173, 181, 0.85);
+    background-color: rgba(0, 173, 181, 0.9);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: bold;
     padding: 3px 8px;
     border-radius: 4px;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .ff-card-info {
-    padding: 12px 15px 15px;
+    padding: 14px 16px 16px;
 }
 
 .ff-card-info h3 {
-    margin: 0 0 4px 0;
-    font-size: 1rem;
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
     color: #ffffff;
+    line-height: 1.3;
 }
 
 .ff-card-info p {
@@ -323,16 +376,18 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    padding: 20px;
 }
 
 .lightbox-content {
     max-width: 900px;
-    width: 90%;
+    width: 100%;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
@@ -344,29 +399,57 @@ body {
     max-height: 70vh;
     object-fit: contain;
     border-radius: 8px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
 }
 
 .lightbox-caption {
     margin-top: 15px;
     text-align: center;
+    max-width: 800px;
 }
 
 .lightbox-caption h3 {
     color: #00adb5;
+    margin: 8px 0 4px;
+    font-size: 1.2rem;
 }
 
 .lightbox-caption p {
-    color: #aaa;
-    font-size: 0.9rem;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.lightbox-tag-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 6px;
 }
 
 .lightbox-close {
     position: absolute;
     top: 20px;
-    right: 30px;
-    font-size: 2.5rem;
-    color: #fff;
+    right: 25px;
+    font-size: 2rem;
+    line-height: 1;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2001;
+}
+
+.lightbox-close:hover {
+    background: #00adb5;
+    border-color: #00adb5;
+    color: #ffffff;
+    transform: rotate(90deg);
 }
 
 /* ================= ADMIN UPLOAD & SELECT ================= */
@@ -418,7 +501,11 @@ body {
 }
 
 .upload-box {
-    margin-bottom: 30px;
+    background-color: #1a1a1a;
+    border: 1px solid #2d2d2d;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 35px;
 }
 
 .file-picker-btn {
@@ -759,4 +846,226 @@ body {
 .lynkid-card:hover .brand-icon svg {
     transform: scale(1.15);
     transition: transform 0.2s ease;
+}
+
+/* ================= SOCIAL SECTION (INDEX) ================= */
+.social-section {
+    max-width: 1000px;
+    margin: 50px auto 70px;
+    padding: 0 20px;
+}
+
+.social-section h2 {
+    margin-bottom: 10px;
+    border-left: 4px solid #00adb5;
+    padding-left: 12px;
+}
+
+.social-desc {
+    color: #888888;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.social-links-container {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.social-btn svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.social-btn.discord-btn:hover {
+    background-color: #5865F2;
+    border-color: #5865F2;
+    color: #ffffff;
+}
+
+.social-btn.instagram-btn:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-color: #bc1888;
+    color: #ffffff;
+}
+
+.social-btn.all-links-btn {
+    background-color: #00adb5;
+    border-color: #00adb5;
+    color: #ffffff;
+}
+
+.social-btn.all-links-btn:hover {
+    background-color: #008990;
+    border-color: #008990;
+    box-shadow: 0 6px 18px rgba(0, 173, 181, 0.35);
+}
+
+/* ================= SITE FOOTER ================= */
+.site-footer {
+    background-color: #161616;
+    border-top: 1px solid #282828;
+    padding: 35px 20px 25px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-brand {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #00adb5;
+    letter-spacing: 2px;
+}
+
+.footer-copyright {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #00adb5;
+}
+
+/* ================= RESPONSIVE / MEDIA QUERIES ================= */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navbar nav a {
+        margin-left: 0;
+        font-size: 0.9rem;
+    }
+
+    .admin-login-btn {
+        margin-left: 0;
+    }
+
+    .quick-copy-bar {
+        gap: 12px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+
+    .featured-section {
+        margin: 25px auto;
+    }
+
+    .gallery-section,
+    .social-section {
+        margin: 35px auto 45px;
+        padding: 0 15px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-bar {
+        overflow-x: auto;
+        padding-bottom: 8px;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-btn {
+        flex-shrink: 0;
+    }
+
+    .toast {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        text-align: center;
+        transform: translateY(20px);
+    }
+
+    .toast.show {
+        transform: translateY(0);
+    }
+
+    .lightbox-close {
+        top: 12px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
+        font-size: 1.8rem;
+    }
+
+    .lightbox-content img {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .logo {
+        font-size: 1.25rem;
+    }
+
+    .modal-content {
+        padding: 22px 18px;
+    }
+
+    .social-links-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .social-btn {
+        justify-content: center;
+    }
 }
