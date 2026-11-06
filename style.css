@@ -716,3 +716,47 @@ body {
     color: #666666;
     font-size: 0.8rem;
 }
+
+/* ================= WARNA BRAND & SVG ICONS ================= */
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.brand-icon svg {
+    display: block;
+}
+
+.icon-discord {
+    color: #5865F2;
+}
+
+.icon-instagram {
+    color: #E1306C;
+}
+
+.icon-tiktok {
+    color: #25F4EE;
+    filter: drop-shadow(1px 1px 0px #FE2C55);
+}
+
+.icon-youtube {
+    color: #FF0000;
+}
+
+.icon-whatsapp {
+    color: #25D366;
+}
+
+.icon-saweria {
+    color: #FA8231;
+}
+
+/* Hover efek pada kartu links */
+.lynkid-card:hover .brand-icon svg {
+    transform: scale(1.15);
+    transition: transform 0.2s ease;
+}
