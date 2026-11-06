@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -14,6 +15,29 @@ body {
     background-color: #121212;
     color: #e0e0e0;
     line-height: 1.6;
+}
+
+/* Touch feedback for buttons & interactive elements (Android Feel) */
+button, 
+.btn-copy, 
+.btn-download, 
+.social-btn, 
+.filter-btn, 
+.quick-id-pill, 
+.nav-item,
+.card {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+button:active, 
+.btn-copy:active, 
+.btn-download:active, 
+.social-btn:active, 
+.filter-btn:active, 
+.quick-id-pill:active {
+    transform: scale(0.96);
+    transition: transform 0.1s ease;
 }
 
 /* ================= CUSTOM SCROLLBAR ================= */
@@ -986,100 +1010,244 @@ body {
     color: #00adb5;
 }
 
-/* ================= RESPONSIVE / MEDIA QUERIES ================= */
+/* ================= MOBILE BOTTOM NAVIGATION (DESKTOP HIDDEN) ================= */
+.mobile-bottom-nav {
+    display: none;
+}
+
+/* ================= ANDROID & MOBILE RESPONSIVE ================= */
 @media (max-width: 768px) {
+    /* Leave room at bottom for Android Navigation Bar */
+    body {
+        padding-bottom: 80px;
+    }
+
+    /* Prevent mobile input auto-zoom */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+
+    /* Android Top App Bar */
     .navbar {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 12px;
+        position: sticky;
+        top: 0;
+        height: 58px;
+        padding: 0 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(22, 22, 22, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 900;
     }
 
-    .navbar nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+    .navbar .logo {
+        font-size: 1.15rem;
+        letter-spacing: 1.5px;
     }
 
+    /* Hide desktop nav links on mobile; they are moved to the Android Bottom Bar */
     .navbar nav a {
-        margin-left: 0;
-        font-size: 0.9rem;
+        display: none;
     }
 
-    .admin-login-btn {
-        margin-left: 0;
+    .navbar nav .admin-login-btn {
+        display: inline-flex;
+        align-items: center;
+        margin: 0;
+        font-size: 0.78rem;
+        padding: 5px 12px;
+        border-radius: 20px;
     }
 
+    /* Android Bottom Navigation Bar */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: rgba(18, 18, 18, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1100;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .mobile-bottom-nav .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #888888;
+        text-decoration: none;
+        font-size: 0.68rem;
+        font-weight: 600;
+        gap: 3px;
+        flex: 1;
+        height: 100%;
+        transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .mobile-bottom-nav .nav-item svg {
+        transition: transform 0.15s ease, fill 0.15s ease;
+    }
+
+    .mobile-bottom-nav .nav-item:active {
+        transform: scale(0.9);
+    }
+
+    .mobile-bottom-nav .nav-item:hover,
+    .mobile-bottom-nav .nav-item.active {
+        color: #00adb5;
+    }
+
+    .mobile-bottom-nav .nav-item.active svg {
+        filter: drop-shadow(0 2px 6px rgba(0, 173, 181, 0.6));
+    }
+
+    /* Android Material Chips for Quick Copy Bar */
     .quick-copy-bar {
-        gap: 12px;
-        padding: 10px 15px;
-        font-size: 0.8rem;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px 14px;
+        gap: 10px;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        background-color: #161616;
+        border-bottom: 1px solid #242424;
     }
 
+    .quick-copy-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .quick-copy-bar span {
+        background-color: #1e1e1e;
+        border: 1px solid #333333;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Layout Spacing on Mobile */
     .featured-section {
-        margin: 25px auto;
+        margin: 20px auto;
+        padding: 0 14px;
     }
 
     .gallery-section,
     .social-section {
-        margin: 35px auto 45px;
-        padding: 0 15px;
+        margin: 30px auto 40px;
+        padding: 0 14px;
     }
 
     .grid-container {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
+    .card {
+        border-radius: 14px;
+    }
+
+    /* Android Filter Chips Bar */
     .filter-bar {
         overflow-x: auto;
         padding-bottom: 8px;
         flex-wrap: nowrap;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 8px;
+    }
+
+    .filter-bar::-webkit-scrollbar {
+        display: none;
     }
 
     .filter-btn {
         flex-shrink: 0;
+        padding: 7px 15px;
+        font-size: 0.8rem;
+        border-radius: 20px;
     }
 
+    /* Android Toast / Floating Snackbar */
     .toast {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
+        left: 50%;
+        right: auto;
+        bottom: 78px;
+        transform: translate(-50%, 20px);
+        width: max-content;
+        max-width: 88%;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        border-radius: 24px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
         text-align: center;
-        transform: translateY(20px);
+        pointer-events: none;
     }
 
     .toast.show {
-        transform: translateY(0);
+        transform: translate(-50%, 0);
     }
 
+    /* Lightbox on Mobile */
     .lightbox-close {
         top: 12px;
-        right: 15px;
-        width: 38px;
-        height: 38px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
         font-size: 1.8rem;
     }
 
     .lightbox-content img {
-        max-height: 60vh;
+        max-height: 62vh;
+    }
+
+    /* Mobile Social Links */
+    .social-links-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .social-btn {
+        justify-content: center;
+        padding: 11px 14px;
+        font-size: 0.85rem;
+    }
+
+    .social-btn.all-links-btn {
+        grid-column: 1 / -1;
+    }
+
+    /* Footer Margin */
+    .site-footer {
+        padding-bottom: 25px;
     }
 }
 
 @media (max-width: 480px) {
     .navbar .logo {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
     }
 
     .modal-content {
-        padding: 22px 18px;
-    }
-
-    .social-links-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .social-btn {
-        justify-content: center;
+        padding: 24px 18px;
+        border-radius: 16px;
     }
 }
