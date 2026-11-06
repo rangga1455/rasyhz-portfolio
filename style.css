@@ -911,6 +911,20 @@ body {
     color: #ffffff;
 }
 
+.social-btn.tiktok-btn:hover {
+    background-color: #010101;
+    border-color: #25F4EE;
+    color: #25F4EE;
+    box-shadow: 0 6px 18px rgba(37, 244, 238, 0.25);
+}
+
+.social-btn.youtube-btn:hover {
+    background-color: #CC0000;
+    border-color: #CC0000;
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(255, 0, 0, 0.3);
+}
+
 .social-btn.all-links-btn {
     background-color: #00adb5;
     border-color: #00adb5;
