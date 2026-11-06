@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History FT Free Fire - RASYHZ TEAM</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
+    <div id="toast" class="toast">Data berhasil diperbarui!</div>
+
     <!-- ================= NAVBAR ================= -->
     <header class="navbar">
         <h1 class="logo">RASYHZ FF TEAM</h1>
@@ -23,6 +26,14 @@
             <h2>History FT & Tournament Match</h2>
             <p class="section-desc">Galeri publik rekap match, turnamen, scrim, dan dokumentasi kemenangan tim Free
                 Fire.</p>
+
+            <!-- Kategori / Filter Tag Buttons -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="Champion">Champion / Booyah</button>
+                <button class="filter-btn" data-filter="Tournament">Fast Tournament</button>
+                <button class="filter-btn" data-filter="Scrim">Scrim / War</button>
+            </div>
 
             <!-- ================= MODAL LOGIN ADMIN ================= -->
             <div id="login-modal" class="modal hidden">
@@ -50,8 +61,15 @@
                     <input type="text" id="match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
                     <input type="text" id="match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
 
+                    <!-- Kategori Dropdown -->
+                    <select id="match-category" class="custom-select">
+                        <option value="Champion">🏆 Champion / Booyah</option>
+                        <option value="Tournament">⚔️ Fast Tournament</option>
+                        <option value="Scrim">🛡️ Scrim / Guild War</option>
+                    </select>
+
                     <label for="match-file-input" class="file-picker-btn">
-                        📁 Pilih File Gambar dari Perangkat
+                        📁 Pilih File Gambar Scoreboard dari Perangkat
                     </label>
                     <input type="file" id="match-file-input" accept="image/*" style="display: none;">
                     <span id="selected-file-name" class="file-status-text">Belum ada file dipilih</span>
@@ -69,7 +87,20 @@
         </section>
     </main>
 
-    <!-- ================= FIREBASE CLOUD & IMGBB SCRIPT ================= -->
+    <!-- ================= LIGHTBOX MODAL (PREVIEW GAMBAR BESAR) ================= -->
+    <div id="lightbox-modal" class="lightbox-modal hidden" onclick="closeLightbox(event)">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Fullscreen Preview">
+            <div class="lightbox-caption">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-desc"></p>
+                <span id="lightbox-tag" class="match-tag"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FIREBASE & APP SCRIPT ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
@@ -92,6 +123,8 @@
         const db = getFirestore(app);
 
         let isAdmin = false;
+        let allMatches = [];
+        let currentFilter = 'all';
 
         const authBtn = document.getElementById('auth-btn');
         const loginModal = document.getElementById('login-modal');
@@ -117,7 +150,7 @@
 
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
-                fileNameLabel.innerText = "File terpilih: " + fileInput.files[0].name;
+                fileNameLabel.innerText = "File: " + fileInput.files[0].name;
             } else {
                 fileNameLabel.innerText = "Belum ada file dipilih";
             }
@@ -161,17 +194,29 @@
             }
         });
 
+        // Filter button click handler
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                renderGallery();
+            });
+        });
+
+        // Upload match baru
         savePhotoBtn.addEventListener('click', async () => {
             const title = document.getElementById('match-title').value;
             const desc = document.getElementById('match-desc').value;
+            const category = document.getElementById('match-category').value;
             const file = fileInput.files[0];
 
             if (!title || !file) {
-                alert("Harap isi judul dan pilih file gambar!");
+                alert("Harap isi judul dan pilih foto match!");
                 return;
             }
 
-            savePhotoBtn.innerText = "Sedang mengunggah file gambar...";
+            savePhotoBtn.innerText = "Mengunggah scoreboard...";
             savePhotoBtn.disabled = true;
 
             try {
@@ -184,13 +229,14 @@
                 });
 
                 const result = await response.json();
-                if (!result.success) throw new Error("Gagal mengunggah file ke ImgBB.");
+                if (!result.success) throw new Error("Gagal mengunggah foto ke ImgBB.");
 
                 const uploadedUrl = result.data.url;
 
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
                     desc: desc || "Dokumentasi Match",
+                    category: category || "Tournament",
                     imageUrl: uploadedUrl,
                     createdAt: new Date().getTime()
                 });
@@ -200,7 +246,7 @@
                 fileInput.value = '';
                 fileNameLabel.innerText = 'Belum ada file dipilih';
 
-                alert("Foto dokumentasi berhasil dipublikasikan!");
+                alert("Match baru berhasil dipublikasikan!");
                 loadPublicGallery();
             } catch (e) {
                 alert("Error: " + e.message);
@@ -210,61 +256,88 @@
             }
         });
 
+        // Ambil data Firestore
         async function loadPublicGallery() {
-            galleryGrid.innerHTML = '';
             try {
                 const q = query(collection(db, "ff_matches"), orderBy("createdAt", "desc"));
                 const querySnapshot = await getDocs(q);
-
-                if (querySnapshot.empty) {
-                    galleryGrid.innerHTML = '<p class="section-desc">Belum ada dokumentasi foto match yang dipublikasikan.</p>';
-                    return;
-                }
-
-                querySnapshot.forEach((docItem) => {
-                    const data = docItem.data();
-                    const card = document.createElement('div');
-                    card.classList.add('card', 'ff-card');
-
-                    let deleteBtnHtml = isAdmin
-                        ? `<button class="delete-btn" data-doc-id="${docItem.id}">🗑️ Hapus Foto</button>`
-                        : '';
-
-                    card.innerHTML = `
-                        <img src="${data.imageUrl}" alt="${data.title}" onerror="this.src='https://picsum.photos/400/225'">
-                        <div class="ff-card-info">
-                            <h3>${data.title}</h3>
-                            <p>${data.desc}</p>
-                            ${deleteBtnHtml}
-                        </div>
-                    `;
-                    galleryGrid.appendChild(card);
+                allMatches = [];
+                querySnapshot.forEach(docSnap => {
+                    allMatches.push({ id: docSnap.id, ...docSnap.data() });
                 });
-
-                if (isAdmin) {
-                    document.querySelectorAll('.delete-btn').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            const id = e.target.getAttribute('data-doc-id');
-                            window.deleteMatch(id);
-                        });
-                    });
-                }
+                renderGallery();
             } catch (error) {
                 galleryGrid.innerHTML = '<p class="section-desc">Gagal memuat galeri: ' + error.message + '</p>';
             }
         }
 
-        window.deleteMatch = async (id) => {
-            if (confirm("Apakah kamu yakin ingin menghapus foto riwayat match ini dari galeri publik?")) {
-                try {
-                    await deleteDoc(doc(db, "ff_matches", id));
-                    alert("Foto berhasil dihapus!");
-                    loadPublicGallery();
-                } catch (err) {
-                    alert("Gagal menghapus foto: " + err.message);
-                }
+        // Render data sesuai filter
+        function renderGallery() {
+            galleryGrid.innerHTML = '';
+            const filtered = currentFilter === 'all'
+                ? allMatches
+                : allMatches.filter(m => (m.category || 'Tournament') === currentFilter);
+
+            if (filtered.length === 0) {
+                galleryGrid.innerHTML = '<p class="section-desc">Belum ada dokumentasi untuk kategori ini.</p>';
+                return;
+            }
+
+            filtered.forEach(data => {
+                const card = document.createElement('div');
+                card.classList.add('card', 'ff-card');
+
+                let deleteBtnHtml = isAdmin
+                    ? `<button class="delete-btn" data-doc-id="${data.id}">🗑️ Hapus Foto</button>`
+                    : '';
+
+                card.innerHTML = `
+                    <div class="card-thumb-wrap" onclick="openLightbox('${data.imageUrl}', '${data.title}', '${data.desc}', '${data.category || 'Match'}')">
+                        <img src="${data.imageUrl}" alt="${data.title}" onerror="this.src='https://picsum.photos/400/225'">
+                        <span class="match-tag">${data.category || 'Tournament'}</span>
+                    </div>
+                    <div class="ff-card-info">
+                        <h3>${data.title}</h3>
+                        <p>${data.desc}</p>
+                        ${deleteBtnHtml}
+                    </div>
+                `;
+                galleryGrid.appendChild(card);
+            });
+
+            if (isAdmin) {
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const id = e.target.getAttribute('data-doc-id');
+                        if (confirm("Hapus foto riwayat match ini?")) {
+                            try {
+                                await deleteDoc(doc(db, "ff_matches", id));
+                                loadPublicGallery();
+                            } catch (err) {
+                                alert("Gagal menghapus: " + err.message);
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        // Lightbox Functions
+        window.openLightbox = (url, title, desc, tag) => {
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox-title').innerText = title;
+            document.getElementById('lightbox-desc').innerText = desc;
+            document.getElementById('lightbox-tag').innerText = tag;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        };
+
+        window.closeLightbox = (e) => {
+            if (e.target.id === 'lightbox-modal' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox-modal').classList.add('hidden');
             }
         };
+
+        loadPublicGallery();
     </script>
 </body>
 

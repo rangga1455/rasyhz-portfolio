@@ -1,4 +1,576 @@
-/* ================= HALAMAN GAYA LYNK.ID ================= */
+/* ================= CSS RESET & DASAR ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* ================= TOAST NOTIFICATION ================= */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #00adb5;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= QUICK COPY BAR ================= */
+.quick-copy-bar {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #282828;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.quick-copy-bar strong {
+    color: #00adb5;
+}
+
+.btn-copy {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #eee;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-copy:hover {
+    background-color: #00adb5;
+    color: #fff;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar nav a {
+    color: #a0a0a0;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.2s ease;
+}
+
+.navbar nav a:hover {
+    color: #00adb5;
+}
+
+.navbar nav a.nav-highlight {
+    color: #00adb5;
+    font-weight: 600;
+}
+
+/* ================= FEATURED SECTION ================= */
+.featured-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.tiktok-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.featured-info {
+    text-align: center;
+}
+
+.featured-info h2 {
+    color: #00adb5;
+    margin-bottom: 8px;
+}
+
+.featured-info p {
+    color: #aaaaaa;
+}
+
+/* ================= GALERI & GRID ================= */
+.gallery-section {
+    max-width: 1000px;
+    margin: 50px auto 70px;
+    padding: 0 20px;
+}
+
+.gallery-section h2 {
+    margin-bottom: 10px;
+    border-left: 4px solid #00adb5;
+    padding-left: 12px;
+}
+
+.section-desc {
+    color: #888888;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 173, 181, 0.25);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.card h3 {
+    margin: 12px 15px 4px;
+    font-size: 1.05rem;
+}
+
+.card p {
+    margin: 0 15px 15px;
+    font-size: 0.9rem;
+    color: #888888;
+}
+
+/* ================= PRESET CARDS ================= */
+.preset-card {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.preset-card h3 {
+    margin: 0 0 8px 0;
+    color: #00adb5;
+}
+
+.preset-card p {
+    margin: 0 0 15px 0;
+}
+
+.btn-download {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #282828;
+    color: #00adb5;
+    border: 1px solid #00adb5;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: #00adb5;
+    color: #fff;
+}
+
+.btn-download.support {
+    background-color: #fa8231;
+    color: #fff;
+    border-color: #fa8231;
+}
+
+.btn-download.support:hover {
+    background-color: #e67e22;
+}
+
+/* ================= FILTER BAR ================= */
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: #1e1e1e;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #00adb5;
+    color: #fff;
+    border-color: #00adb5;
+}
+
+/* ================= THUMB & TAG FF CARD ================= */
+.card-thumb-wrap {
+    position: relative;
+    cursor: pointer;
+}
+
+.card-thumb-wrap:hover::after {
+    content: "🔍 Klik untuk Perbesar";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.match-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: rgba(0, 173, 181, 0.85);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.ff-card-info {
+    padding: 12px 15px 15px;
+}
+
+.ff-card-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.ff-card-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #aaaaaa;
+}
+
+/* ================= LIGHTBOX MODAL ================= */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.lightbox-content {
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-caption {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.lightbox-caption h3 {
+    color: #00adb5;
+}
+
+.lightbox-caption p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ================= ADMIN UPLOAD & SELECT ================= */
+.custom-select {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.custom-select:focus {
+    outline: none;
+    border-color: #00adb5;
+}
+
+/* ================= FITUR ADMIN & MODAL ================= */
+.hidden {
+    display: none !important;
+}
+
+.admin-login-btn {
+    background: transparent;
+    border: 1px solid #00adb5;
+    color: #00adb5;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: 20px;
+    transition: all 0.2s ease;
+}
+
+.admin-login-btn:hover {
+    background-color: #00adb5;
+    color: #ffffff;
+}
+
+.admin-badge {
+    display: inline-block;
+    background-color: #00adb5;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.upload-box {
+    margin-bottom: 30px;
+}
+
+.file-picker-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    cursor: pointer;
+    background-color: #282828;
+    color: #00adb5;
+    border: 1px dashed #00adb5;
+    font-weight: 600;
+    border-radius: 6px;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.file-picker-btn:hover {
+    background-color: #333;
+}
+
+.file-status-text {
+    font-size: 0.85rem;
+    color: #aaaaaa;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #00adb5;
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #008990;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+}
+
+.input-group input {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #00adb5;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid #333;
+}
+
+.modal-content h3 {
+    color: #00adb5;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    background-color: #121212;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancel-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.password-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-box input {
+    width: 100%;
+    padding-right: 42px;
+}
+
+.eye-toggle-btn {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+}
+
+/* ================= LYNK.ID STYLES ================= */
 .lynkid-body {
     background: radial-gradient(circle at top, #1f2833 0%, #0b0c10 100%);
     min-height: 100vh;
@@ -17,7 +589,7 @@
 
 .lynkid-profile {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .lynkid-avatar-wrapper {
@@ -52,6 +624,30 @@
     padding: 0 10px;
 }
 
+.quick-id-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.quick-id-pill {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-id-pill:hover {
+    border-color: #00adb5;
+    color: #00adb5;
+}
+
 .lynkid-links {
     width: 100%;
     display: flex;
@@ -81,6 +677,11 @@
 .lynkid-card.highlight-card {
     border: 1px solid #00adb5;
     background-color: rgba(0, 173, 181, 0.1);
+}
+
+.lynkid-card.donation-card {
+    border: 1px solid #fa8231;
+    background-color: rgba(250, 130, 49, 0.1);
 }
 
 .lynkid-icon {

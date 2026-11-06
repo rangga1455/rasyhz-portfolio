@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Links & Socials - RASYHZ</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body class="lynkid-body">
+    <div id="toast" class="toast">Disalin ke clipboard!</div>
+
     <main class="lynkid-container">
         <!-- Profil Header -->
         <header class="lynkid-profile">
@@ -19,13 +22,23 @@
             <p class="lynkid-bio">Content Creator • AMV / Typography Editor • Free Fire Player</p>
         </header>
 
-        <!-- Daftar Tautan Tumpuk (Gaya Lynk.id) -->
+        <!-- Quick Copy ID Bar -->
+        <div class="quick-id-container">
+            <div class="quick-id-pill" onclick="copyText('1234567890', 'UID Free Fire disalin!')">
+                🎮 UID FF: <strong>1234567890</strong> 📋
+            </div>
+            <div class="quick-id-pill" onclick="copyText('rasyhze', 'Discord Tag disalin!')">
+                💬 Discord: <strong>rasyhze</strong> 📋
+            </div>
+        </div>
+
+        <!-- Daftar Tautan Tumpuk -->
         <section class="lynkid-links">
             <a href="index.html" class="lynkid-card highlight-card">
                 <span class="lynkid-icon">🌐</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">Web Portfolio Utama</span>
-                    <span class="lynkid-subtitle">Lihat showcase editan video & project</span>
+                    <span class="lynkid-subtitle">Video showcase, presets, dan proyek AMV</span>
                 </div>
             </a>
 
@@ -33,7 +46,7 @@
                 <span class="lynkid-icon">🏆</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">History Match Free Fire</span>
-                    <span class="lynkid-subtitle">Dokumentasi match scrim & fast tournament</span>
+                    <span class="lynkid-subtitle">Galeri match turnamen, scrim & scoreboard</span>
                 </div>
             </a>
 
@@ -41,7 +54,7 @@
                 <span class="lynkid-icon">🎵</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">TikTok</span>
-                    <span class="lynkid-subtitle">@rasyhze — Tonton video AMV terbaru</span>
+                    <span class="lynkid-subtitle">@rasyhze — Tonton video AMV & tren TikTok</span>
                 </div>
             </a>
 
@@ -49,7 +62,7 @@
                 <span class="lynkid-icon">📸</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">Instagram</span>
-                    <span class="lynkid-subtitle">@rasyhze — Update harian & cuplikan karya</span>
+                    <span class="lynkid-subtitle">@rasyhze — Story harian & cuplikan karya</span>
                 </div>
             </a>
 
@@ -57,7 +70,15 @@
                 <span class="lynkid-icon">▶️</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">YouTube</span>
-                    <span class="lynkid-subtitle">Full duration video & high-quality edits</span>
+                    <span class="lynkid-subtitle">Full resolution AMV & editing tutorial</span>
+                </div>
+            </a>
+
+            <a href="https://saweria.co" target="_blank" rel="noopener noreferrer" class="lynkid-card donation-card">
+                <span class="lynkid-icon">☕</span>
+                <div class="lynkid-text">
+                    <span class="lynkid-title">Support Creator (Saweria / Trakteer)</span>
+                    <span class="lynkid-subtitle">Dukung karya & bantu beli aset editing</span>
                 </div>
             </a>
 
@@ -65,7 +86,7 @@
                 <span class="lynkid-icon">💬</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">Discord Community</span>
-                    <span class="lynkid-subtitle">Ngobrol & sharing preset bareng editor lain</span>
+                    <span class="lynkid-subtitle">Diskusi editing & nongkrong santai</span>
                 </div>
             </a>
 
@@ -73,7 +94,7 @@
                 <span class="lynkid-icon">📱</span>
                 <div class="lynkid-text">
                     <span class="lynkid-title">Grup WhatsApp</span>
-                    <span class="lynkid-subtitle">Komunitas Free Fire & info turnamen</span>
+                    <span class="lynkid-subtitle">Info turnamen & jadwal scrim</span>
                 </div>
             </a>
         </section>
@@ -83,6 +104,17 @@
             <p>© 2026 RASYHZ. All rights reserved.</p>
         </footer>
     </main>
+
+    <script>
+        function copyText(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.innerText = message || 'Disalin ke clipboard!';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            });
+        }
+    </script>
 </body>
 
 </html>

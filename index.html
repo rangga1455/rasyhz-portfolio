@@ -6,22 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RASYHZ INFORMATION</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Vercel Web Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Teks disalin ke clipboard!</div>
+
     <!-- ================= NAVBAR ================= -->
     <header class="navbar">
         <h1 class="logo">RASYHZ EDIT</h1>
         <nav>
             <a href="#feature">Featured</a>
             <a href="#lastedit">Last Editing</a>
+            <a href="#presets">Presets & Files</a>
             <a href="history-ff.html" class="nav-highlight">History FF ↗</a>
-            <!-- Tautan ke Halaman Lynk.id -->
-            <a href="links.html" class="nav-highlight">Socials (Lynk.id) ↗</a>
+            <a href="links.html" class="nav-highlight">Socials ↗</a>
         </nav>
     </header>
 
     <main>
+        <!-- Quick Copy Bar -->
+        <section class="quick-copy-bar">
+            <span>🎮 FF UID: <strong>1234567890</strong> <button class="btn-copy"
+                    onclick="copyText('1234567890', 'FF UID disalin!')">Copy</button></span>
+            <span>💬 Discord: <strong>rasyhze</strong> <button class="btn-copy"
+                    onclick="copyText('rasyhze', 'Discord Tag disalin!')">Copy</button></span>
+            <span>✉️ Email: <strong>wjwhaha5@gmail.com</strong> <button class="btn-copy"
+                    onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')">Copy</button></span>
+        </section>
+
         <!-- ================= 1. VIDEO FEATURED (TIKTOK) ================= -->
         <section id="feature" class="featured-section">
             <div class="tiktok-wrapper">
@@ -65,11 +80,41 @@
             </div>
         </section>
 
-        <!-- ================= 3. BANNER AJAKAN SOSIAL MEDIA ================= -->
+        <!-- ================= 3. PRESETS & PROJECT FILES ================= -->
+        <section id="presets" class="gallery-section">
+            <h2>Presets & Project Files</h2>
+            <p class="section-desc">Download preset gratis atau dukung kreator melalui link donasi di bawah.</p>
+            <div class="grid-container">
+                <div class="card preset-card">
+                    <h3>Alight Motion XML - Shake & Color Grading</h3>
+                    <p>Preset efek smooth beat & color grading cinematic AMV.</p>
+                    <div class="preset-actions">
+                        <a href="https://drive.google.com" target="_blank" class="btn-download">Download XML</a>
+                    </div>
+                </div>
+
+                <div class="card preset-card">
+                    <h3>CapCut Template - Velocity Sync</h3>
+                    <p>Auto velocity effect siap pakai untuk video TikTok & Reels.</p>
+                    <div class="preset-actions">
+                        <a href="https://www.capcut.com" target="_blank" class="btn-download">Pakai Template</a>
+                    </div>
+                </div>
+
+                <div class="card preset-card">
+                    <h3>After Effects Project File (.aep)</h3>
+                    <p>Project file typography 3D layer lengkap dengan sound design.</p>
+                    <div class="preset-actions">
+                        <a href="https://saweria.co" target="_blank" class="btn-download support">Support on Saweria</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 4. SOCIALS BANNER ================= -->
         <section class="social-section">
             <h2>Connect & Community</h2>
-            <p class="social-desc">Semua link TikTok, Instagram, YouTube, dan komunitas Free Fire tersedia di satu
-                tempat.</p>
+            <p class="social-desc">Semua tautan komunitas dan media sosial lengkap tersedia di halaman link bio.</p>
             <div class="social-links-container">
                 <a href="links.html" class="custom-file-upload"
                     style="text-decoration: none; padding: 14px 28px; font-size: 1rem;">
@@ -78,6 +123,17 @@
             </div>
         </section>
     </main>
+
+    <script>
+        function copyText(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.innerText = message || 'Disalin ke clipboard!';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            });
+        }
+    </script>
 </body>
 
 </html>
