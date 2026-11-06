@@ -67,12 +67,12 @@
         <section class="stats-section">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
+                    <div class="stat-icon">👁️</div>
                     <div class="stat-value-wrap">
-                        <span class="stat-number" data-target="50">0</span>
+                        <span class="stat-number visitor-stat-number" data-target="1281">1.281</span>
                         <span class="stat-plus">+</span>
                     </div>
-                    <span class="stat-label">Match Booyah & FT</span>
+                    <span class="stat-label">Total Kunjungan</span>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🎬</div>
@@ -83,20 +83,20 @@
                     <span class="stat-label">Proyek AMV & Video</span>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value-wrap">
+                        <span class="stat-number" data-target="50">0</span>
+                        <span class="stat-plus">+</span>
+                    </div>
+                    <span class="stat-label">Match Booyah & FT</span>
+                </div>
+                <div class="stat-card">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-value-wrap">
                         <span class="stat-number" data-target="60">0</span>
                         <span class="stat-unit">FPS</span>
                     </div>
                     <span class="stat-label">Ultra HD Render</span>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-value-wrap">
-                        <span class="stat-number" data-target="500">0</span>
-                        <span class="stat-plus">+</span>
-                    </div>
-                    <span class="stat-label">Member Komunitas</span>
                 </div>
             </div>
         </section>
@@ -328,6 +328,10 @@
         <div class="footer-content">
             <p class="footer-brand">RASYHZ EDIT</p>
             <p class="footer-copyright">© 2026 RASYHZ. All rights reserved.</p>
+            <div class="visitor-counter-badge">
+                <span class="visitor-dot"></span>
+                <span>Total Kunjungan: <strong class="visitor-count-text">1.281</strong> kali</span>
+            </div>
             <div class="footer-links">
                 <a href="index.html">Portfolio</a>
                 <a href="history-ff.html">History FF</a>
@@ -394,7 +398,7 @@
                         animated = true;
                         const numbers = document.querySelectorAll('.stat-number');
                         numbers.forEach(el => {
-                            const target = parseInt(el.getAttribute('data-target'), 10);
+                            const target = parseInt(el.getAttribute('data-target'), 10) || 0;
                             const duration = 1400;
                             const stepTime = 25;
                             const steps = duration / stepTime;
@@ -403,10 +407,10 @@
                             const timer = setInterval(() => {
                                 current += increment;
                                 if (current >= target) {
-                                    el.innerText = target;
+                                    el.innerText = Number(target).toLocaleString('id-ID');
                                     clearInterval(timer);
                                 } else {
-                                    el.innerText = Math.floor(current);
+                                    el.innerText = Number(Math.floor(current)).toLocaleString('id-ID');
                                 }
                             }, stepTime);
                         });
@@ -415,6 +419,63 @@
             }, { threshold: 0.2 });
 
             observer.observe(statsSection);
+        }
+
+        // ================= VISITOR COUNTER (FIREBASE) =================
+        async function handleVisitorCounter() {
+            const projectId = 'ff-ft-1c86d';
+            const baseUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
+            const docPath = `projects/${projectId}/databases/(default)/documents/site_stats/visitors`;
+            const sessionKey = 'rasyhz_visited_session';
+            const hasVisited = sessionStorage.getItem(sessionKey);
+            let count = 1281;
+
+            try {
+                if (!hasVisited) {
+                    const res = await fetch(`${baseUrl}:commit`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            writes: [{
+                                transform: {
+                                    document: docPath,
+                                    fieldTransforms: [{
+                                        fieldPath: 'count',
+                                        increment: { integerValue: '1' }
+                                    }]
+                                }
+                            }]
+                        })
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const val = data.writeResults?.[0]?.transformResults?.[0]?.integerValue;
+                        if (val) {
+                            count = parseInt(val, 10);
+                            sessionStorage.setItem(sessionKey, 'true');
+                        }
+                    }
+                } else {
+                    const res = await fetch(`${baseUrl}/site_stats/visitors`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const val = data.fields?.count?.integerValue;
+                        if (val) count = parseInt(val, 10);
+                    }
+                }
+            } catch (err) {
+                console.warn('Visitor counter offline fallback:', err);
+            }
+
+            const formatted = Number(count).toLocaleString('id-ID');
+            document.querySelectorAll('.visitor-count-text').forEach(el => {
+                el.textContent = formatted;
+            });
+            const statEl = document.querySelector('.visitor-stat-number');
+            if (statEl) {
+                statEl.setAttribute('data-target', count);
+                statEl.textContent = formatted;
+            }
         }
 
         // ================= AUDIO PREVIEW SYNTHESIZER =================
@@ -549,6 +610,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
+            handleVisitorCounter();
         });
     </script>
 </body>

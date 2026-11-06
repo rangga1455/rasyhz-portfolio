@@ -172,6 +172,10 @@
         <!-- Footer -->
         <footer class="lynkid-footer">
             <p>© 2026 RASYHZ. All rights reserved.</p>
+            <div class="visitor-counter-badge">
+                <span class="visitor-dot"></span>
+                <span>Total Kunjungan: <strong class="visitor-count-text">1.281</strong> kali</span>
+            </div>
         </footer>
     </main>
 
@@ -186,6 +190,62 @@
                 toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
             });
         }
+
+        // ================= VISITOR COUNTER (FIREBASE) =================
+        async function handleVisitorCounter() {
+            const projectId = 'ff-ft-1c86d';
+            const baseUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
+            const docPath = `projects/${projectId}/databases/(default)/documents/site_stats/visitors`;
+            const sessionKey = 'rasyhz_visited_session';
+            const hasVisited = sessionStorage.getItem(sessionKey);
+            let count = 1281;
+
+            try {
+                if (!hasVisited) {
+                    const res = await fetch(`${baseUrl}:commit`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            writes: [{
+                                transform: {
+                                    document: docPath,
+                                    fieldTransforms: [{
+                                        fieldPath: 'count',
+                                        increment: { integerValue: '1' }
+                                    }]
+                                }
+                            }]
+                        })
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const val = data.writeResults?.[0]?.transformResults?.[0]?.integerValue;
+                        if (val) {
+                            count = parseInt(val, 10);
+                            sessionStorage.setItem(sessionKey, 'true');
+                        }
+                    }
+                } else {
+                    const res = await fetch(`${baseUrl}/site_stats/visitors`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const val = data.fields?.count?.integerValue;
+                        if (val) count = parseInt(val, 10);
+                    }
+                }
+            } catch (err) {
+                console.warn('Visitor counter offline fallback:', err);
+            }
+
+            const formatted = Number(count).toLocaleString('id-ID');
+            document.querySelectorAll('.visitor-count-text').forEach(el => {
+                el.textContent = formatted;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            handleVisitorCounter();
+        });
     </script>
 </body>
 
