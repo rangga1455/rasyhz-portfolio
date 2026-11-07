@@ -98,7 +98,7 @@
             <!-- ================= KATALOG REGION TEYVAT (TAMPILAN GAMBAR PER REGION) ================= -->
             <div class="section-subtitle-bar">
                 <h3>🗺️ 1. Pilih Region Map yang Ingin Dijoki:</h3>
-                <span class="region-count-badge">9 Region & Layanan Tersedia</span>
+                <span class="region-count-badge">10 Region & Mode Tantangan</span>
             </div>
 
             <div class="region-card-grid" id="region-cards-container">
@@ -113,42 +113,67 @@
                     </div>
                     <div class="region-card-info">
                         <div class="region-card-header">
-                            <h3>Snezhnaya (Negeri Cryo & Salju Abadi)</h3>
-                            <span class="area-count-pill">7 Daerah</span>
+                            <h3>Snezhnaya (Negeri Cryo)</h3>
+                            <span class="area-count-pill">7 Areas</span>
                         </div>
-                        <p class="region-tagline">Istana Tsaritsa Zapolyarny Palace, Snezhnograd, Pelabuhan Morepesok, dan Pabrik Fatui.</p>
+                        <p class="region-tagline">Everfrozen Earth, Fellfrost Peak, Flamefeather Valley, Novokitezhgrad, Volkodlak Tundra, White Birch Snowgrave, Wingspan Peak.</p>
                         <div class="region-meta-tags">
                             <span>Cryoculus x180+</span>
                             <span>Tsaritsa & Harbingers</span>
                             <span>v7.0 - v7.2</span>
                         </div>
                         <button class="btn-open-region">
-                            <span>Pilih Daerah di Snezhnaya</span>
+                            <span>Pilih Area di Snezhnaya</span>
                             <span class="arrow-icon">▾</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- 2. NOD-KRAI (Versi 6.6) -->
+                <!-- 2. FROST MOON (Three Moons Realm) -->
+                <div class="region-overview-card" data-region-id="frostmoon" onclick="selectRegion('frostmoon')">
+                    <div class="region-card-media">
+                        <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&fit=crop&w=800&q=80"
+                             alt="Region Frost Moon" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=12'">
+                        <span class="region-element-badge frostmoon">🌙 FROST MOON • LUNAR CRYO</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Frost Moon (Three Moons Realm)</h3>
+                            <span class="area-count-pill">3 Areas</span>
+                        </div>
+                        <p class="region-tagline">Dark Side of the Moon, Lunar Highlands, dan Samudra Pasang Moontide Sea.</p>
+                        <div class="region-meta-tags">
+                            <span>Three Moons Lore</span>
+                            <span>Lunar Highlands</span>
+                            <span>Moontide Sea</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Area di Frost Moon</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. NOD-KRAI (Borderlands) -->
                 <div class="region-overview-card" data-region-id="nodkrai" onclick="selectRegion('nodkrai')">
                     <div class="region-card-media">
                         <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
                              alt="Region Nod-Krai" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=11'">
-                        <span class="region-element-badge nodkrai">🌙 NOD-KRAI • MOON & KUUVAHKI • v6.6</span>
+                        <span class="region-element-badge nodkrai">✨ NOD-KRAI • KUUVAHKI & BORDERLANDS</span>
                     </div>
                     <div class="region-card-info">
                         <div class="region-card-header">
-                            <h3>Nod-Krai (Wilayah Tiga Rembulan)</h3>
-                            <span class="area-count-pill">7 Daerah</span>
+                            <h3>Nod-Krai (Autonomous Region)</h3>
+                            <span class="area-count-pill">7 Areas</span>
                         </div>
-                        <p class="region-tagline">Gerbang Perbatasan Snezhnaya, Misteri Tiga Rembulan (Moon Sisters), dan Energi Kuuvahki.</p>
+                        <p class="region-tagline">Ashveil Peak, Dunanna Pit, Hiisi Island, Lempo Isle, Paha Isle, Voidsea Outlook, Wavechaser Plain.</p>
                         <div class="region-meta-tags">
                             <span>Kuuvahki Energy</span>
-                            <span>Moon Sisters Lore</span>
+                            <span>7 Frontier Areas</span>
                             <span>v6.0 - v6.6</span>
                         </div>
                         <button class="btn-open-region">
-                            <span>Pilih Daerah di Nod-Krai</span>
+                            <span>Pilih Area di Nod-Krai</span>
                             <span class="arrow-icon">▾</span>
                         </button>
                     </div>
@@ -304,26 +329,26 @@
                     </div>
                 </div>
 
-                <!-- 7. ENDGAME & KHUSUS -->
+                <!-- 10. ENDGAME & COMBAT TRIALS -->
                 <div class="region-overview-card" data-region-id="endgame" onclick="selectRegion('endgame')">
                     <div class="region-card-media">
-                        <img src="https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011"
-                             alt="Endgame Spiral Abyss" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=7'">
-                        <span class="region-element-badge special">⚔️ ENDGAME & RAWAT AKUN HARIAN</span>
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80"
+                             alt="Endgame Combat Trials" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=7'">
+                        <span class="region-element-badge special">⚔️ ENDGAME & COMBAT TRIALS</span>
                     </div>
                     <div class="region-card-info">
                         <div class="region-card-header">
-                            <h3>Endgame & Layanan Akun Khusus</h3>
-                            <span class="area-count-pill">3 Paket</span>
+                            <h3>Endgame & Combat Trials</h3>
+                            <span class="area-count-pill">5 Modes</span>
                         </div>
-                        <p class="region-tagline">Spiral Abyss Floor 9-12 (Full 36★), Imaginarium Theater, dan Rawat Harian Daily + Resin.</p>
+                        <p class="region-tagline">Spiral Abyss 36★, Imaginarium Theater, Stygian Onslaught, dan Edge of Survival.</p>
                         <div class="region-meta-tags">
-                            <span>Abyss 36★ Garansi</span>
-                            <span>Daily + 160 Resin</span>
-                            <span>Primogems Ready</span>
+                            <span>Spiral Abyss 36★</span>
+                            <span>Stygian Onslaught</span>
+                            <span>Edge of Survival</span>
                         </div>
                         <button class="btn-open-region">
-                            <span>Pilih Paket Endgame</span>
+                            <span>Pilih Mode Endgame</span>
                             <span class="arrow-icon">▾</span>
                         </button>
                     </div>
@@ -507,127 +532,139 @@
             });
         }
 
-        // ================= MASTER DATA REGION & DAERAH (LENGKAP SAMPAI VERSI 7.2 SNEZHNAYA & NOD-KRAI) =================
+        // ================= MASTER DATA REGION & DAERAH (ORIGINAL ENGLISH AREA NAMES) =================
         const regionDatabase = {
             'snezhnaya': {
                 name: 'Snezhnaya (Negeri Cryo & Salju Abadi)',
-                badge: '❄️ SNEZHNAYA • CRYO • VERSI 7.2 TERBARU',
-                desc: 'Negeri utara berselimut salju abadi, pusat kekuatan militer Fatui Harbingers dan takhta agung Sang Cryo Archon Tsaritsa.',
+                badge: '❄️ SNEZHNAYA • CRYO • v7.0 - v7.2',
+                desc: 'Everfrozen northern empire ruled by Tsaritsa, fortified by the 11 Fatui Harbingers and industrial foundry cities.',
                 areas: [
-                    { id: 'snezhnaya_1', name: 'Zapolyarny Palace & Snezhnograd', desc: 'Pusat Takhta Cryo Archon Tsaritsa & Markas 11 Fatui Harbingers', price: 35000, img: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_2', name: 'Pelabuhan Morepesok & Pesisir Beku', desc: 'Kampung Halaman Tartaglia / Childe & Pesisir Nelayan Es', price: 30000, img: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_3', name: 'Distrik Industri Glupov & Train Terminal', desc: 'Stasiun Kereta Api Magis Snezhnaya & Pusat Manufaktur Fatui', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_4', name: 'Tundra Volkodlak & Padang Salju Kuno', desc: 'Tundra Serigala Salju Abadi & Area Hunting Binatang Purba', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_5', name: 'Puncak Fellfrost Peak (Subzero Cold)', desc: 'Puncak Es Terjal, Cuaca Beku Ekstrem, & Menara Pengawas', price: 30000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_6', name: 'Markas Divisi Druzhna & Birch Snowgrave', desc: 'Pusat Pelatihan Tentara Fatui & Pemakaman Salju Pohon Birch', price: 30000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'snezhnaya_7', name: 'Hyperborea & Blue Crystal Nail Ruins', desc: 'Paku Langit Kristal Biru & Labirin Reruntuhan Bawah Es Kuno', price: 35000, img: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=800&q=80' }
+                    { id: 'snezhnaya_1', name: 'Everfrozen Earth', desc: 'Permafrost Wilderness, Cryo Leyline Outcrops, & Ancient Glaciers', price: 30000, img: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_2', name: 'Fellfrost Peak', desc: 'Subzero Summit, Blizzard Ridge, & Fatui Fortress Watchtowers', price: 30000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_3', name: 'Flamefeather Valley', desc: 'Thermal Geothermal Springs, Smoldering Caverns, & Volcanic Fissures', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_4', name: 'Novokitezhgrad', desc: 'Imperial Metropolis, Mechanical Tramway Terminals, & Ironworks', price: 35000, img: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_5', name: 'Volkodlak Tundra', desc: 'Ancient Beast Icefields, Lupine Hunting Grounds, & Cryo Boss Dens', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_6', name: 'White Birch Snowgrave', desc: 'Haunting Birch Forests, Druzhna Division Memorial, & Hidden Relics', price: 30000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_7', name: 'Wingspan Peak', desc: 'High Altitude Gliding Cliffs, Blue Crystal Spire, & Ancient Eyrie', price: 35000, img: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=800&q=80' }
+                ]
+            },
+            'frostmoon': {
+                name: 'Frost Moon (Three Moons Realm)',
+                badge: '🌙 FROST MOON • LUNAR CRYO',
+                desc: 'Mystical celestial realm formed from remnants of the Three Moons (Aria, Sonnet, and Canon), enveloped in pale moonlight.',
+                areas: [
+                    { id: 'frostmoon_1', name: 'Dark Side of the Moon', desc: 'Abyssal Lunar Shadowscape, Zero-Light Domains, & Moonfall Crater', price: 35000, img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'frostmoon_2', name: 'Lunar Highlands', desc: 'Floating Moonlight Crags, Three Moons Shrines, & Celestial Waypoints', price: 30000, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'frostmoon_3', name: 'Moontide Sea', desc: 'Luminescent Liquid Tides, Submerged Pale Coral, & Tidecaller Altars', price: 30000, img: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80' }
                 ]
             },
             'nodkrai': {
-                name: 'Nod-Krai (Wilayah Otonom Tiga Rembulan)',
-                badge: '🌙 NOD-KRAI • MOON & KUUVAHKI • VERSI 6.6',
-                desc: 'Wilayah perbatasan otonom di selatan Snezhnaya yang sarat sejarah Tiga Rembulan (Moon Sisters) dan energi magis purba Kuuvahki.',
+                name: 'Nod-Krai (Autonomous Region)',
+                badge: '✨ NOD-KRAI • KUUVAHKI & BORDERLANDS',
+                desc: 'Autonomous southern borderland connected to Snezhnaya, enriched with Kuuvahki energy and ancient factions.',
                 areas: [
-                    { id: 'nodkrai_1', name: 'Lempo Isle & Gerbang Perintis Nod-Krai', desc: 'Pulau Masuk Utama, Tebing Es Melayang, & Pusat Pengembara', price: 30000, img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_2', name: 'Pemukiman Nasha Town', desc: 'Ibu Kota & Pemukiman Perintis Pengembara, Albedo, & Alice', price: 25000, img: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_3', name: 'Hiisi Island & Kuil Tiga Rembulan', desc: 'Pulau Bersejarah Moon Sisters & Sumber Aliran Kuuvahki', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_4', name: 'Paha Isle & Benteng Garis Depan Fatui', desc: 'Pulau Garis Depan Militer & Fasilitas Khusus Riset Fatui', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_5', name: 'Danau Biru Kaca (Blue Amber Lake)', desc: 'Danau Kristal Bunga Mistis Raksasa & Labirin Bawah Tanah', price: 30000, img: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_6', name: 'Celah Tebing Nothing Passage', desc: 'Jalur Sempit Tebing Bercahaya & Uji Coba Lightblade Kuuvahki', price: 25000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
-                    { id: 'nodkrai_7', name: 'Padang Barrowmoss Barrens & Eyes of Kratti', desc: 'Dataran Liar Berlumut Salju & Teka-teki Kuno Mata Kratti', price: 30000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' }
+                    { id: 'nodkrai_1', name: 'Ashveil Peak', desc: 'Volcanic Ash Cloud Summit, Mystic Thermal Caldera, & High Cliffs', price: 30000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_2', name: 'Dunanna Pit', desc: 'Deep Underground Quarry, Subterranean Caverns, & Kuuvahki Mines', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_3', name: 'Hiisi Island', desc: 'Sacred Moon Sister Groves, Ancient Ritual Altars, & Spirit Shrines', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_4', name: 'Lempo Isle', desc: 'Primary Coastal Gateway, Merchant Settler Docks, & Central Base', price: 25000, img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_5', name: 'Paha Isle', desc: 'Fortified Military Bastion, Defensive Artillery, & Fatui Frontline Outpost', price: 30000, img: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_6', name: 'Voidsea Outlook', desc: 'Clifftop Edge Overlooking The Dark Sea, Cosmic Rifts, & Ancient Telescopes', price: 30000, img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_7', name: 'Wavechaser Plain', desc: 'Rolling Wind-Swept Steppes, Swift Terrestrial Traversal, & Relic Chests', price: 25000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' }
                 ]
             },
             'natlan': {
-                name: 'Natlan (Negeri Perang & Api)',
-                badge: '🔥 NATLAN • PYRO • VERSI 5.3 TERBARU',
-                desc: 'Wilayah Teyvat terbaru yang penuh petualangan Saurian, kuil api kuno, dan reruntuhan misterius naga purba.',
+                name: 'Natlan (Pyro Nation)',
+                badge: '🔥 NATLAN • PYRO • v5.0 - v5.3',
+                desc: 'Land of War and Primal Saurians, ancient Dragonlord ruins, and the sacred Stadium of the Sacred Flame.',
                 areas: [
-                    { id: 'natlan_1', name: 'Stadion Api Suci (Stadium of Sacred Flame)', desc: 'Pusat Ibu Kota, Arena Turnamen, & Tablet Api Tona', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7c/Stadium_of_the_Sacred_Flame.png/revision/latest?cb=20240818002134' },
-                    { id: 'natlan_2', name: 'Lembah Tequemecan & Children of Echoes', desc: 'Suku Tambang Permata, Tambang Sulfuric, & Tepetlisaur Bor', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/3/3a/Tequemecan_Valley.png/revision/latest?cb=20250823152326' },
-                    { id: 'natlan_3', name: 'Pegunungan Coatepec & Scions of Canopy', desc: 'Desa Pohon Kanopi, Tebing Melayang, & Yumkasaur Tarzan', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/43/Coatepec_Mountain.png/revision/latest?cb=20250823152114' },
-                    { id: 'natlan_4', name: 'Mata Air Toyac & People of the Springs', desc: 'Resor Pantai Air Panas, Lautan Ameyalco, & Koholasaur Surfing', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/57/Toyac_Springs.png/revision/latest?cb=20250823152506' },
-                    { id: 'natlan_5', name: 'Reruntuhan Kuno Ochkanatlan', desc: 'Kota Kuno Raksasa Terlarang & Segel Naga Purba', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e8/Ochkanatlan.png/revision/latest?cb=20250823152212' },
-                    { id: 'natlan_6', name: 'Tebing Quahuacan & Masters of Night-Wind (v5.2)', desc: 'Suku Ahli Angin Malam (Citlali), Lembah Misteri & Iktomisaur', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4b/Natlan.png/revision/latest?cb=20250329040142' },
-                    { id: 'natlan_7', name: 'Pegunungan Tezcatepetonco & Flower-Feather Clan (v5.2/5.3)', desc: 'Suku Sayap Bulu Bunga (Chasca), Jalur Ketinggian & Qucusaur', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7c/Stadium_of_the_Sacred_Flame.png/revision/latest?cb=20240818002134' }
+                    { id: 'natlan_1', name: 'Stadium of the Sacred Flame', desc: 'Capital Arena, Tournament Grounds, & Tablet of Tona Max', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7c/Stadium_of_the_Sacred_Flame.png/revision/latest?cb=20240818002134' },
+                    { id: 'natlan_2', name: 'Tequemecan Valley', desc: 'Children of Echoes, Sulfuric Crystal Mines, & Tepetlisaur Drilling', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/3/3a/Tequemecan_Valley.png/revision/latest?cb=20250823152326' },
+                    { id: 'natlan_3', name: 'Coatepec Mountain', desc: 'Scions of the Canopy, High Tree Villages, & Yumkasaur Aerial Traversal', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/43/Coatepec_Mountain.png/revision/latest?cb=20250823152114' },
+                    { id: 'natlan_4', name: 'Toyac Springs', desc: 'People of the Springs, Ameyalco Waters, & Koholasaur Surfing Reefs', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/57/Toyac_Springs.png/revision/latest?cb=20250823152506' },
+                    { id: 'natlan_5', name: 'Ochkanatlan Ruins', desc: 'Forbidden Colossal City Ruins, Ancient Dragon Seals, & Hidden Trials', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e8/Ochkanatlan.png/revision/latest?cb=20250823152212' },
+                    { id: 'natlan_6', name: 'Quahuacan Cliff', desc: 'Masters of the Night-Wind, Nightward Veil Trials, & Iktomisaur Spirits', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4b/Natlan.png/revision/latest?cb=20250329040142' },
+                    { id: 'natlan_7', name: 'Tezcatepetonco Mountain', desc: 'Flower-Feather Clan, High Wind Gliding Ranges, & Qucusaur Roosts', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7c/Stadium_of_the_Sacred_Flame.png/revision/latest?cb=20240818002134' }
                 ]
             },
             'fontaine': {
-                name: 'Fontaine (Negeri Keadilan & Perairan)',
-                badge: '💧 FONTAINE • HYDRO • VERSI 4.0 - 4.6',
-                desc: 'Kota teknologi jam megah, perairan selam luas Salacia Plain, dan kerajaan kuno tenggelam Remuria.',
+                name: 'Fontaine (Hydro Nation)',
+                badge: '💧 FONTAINE • HYDRO • v4.0 - v4.6',
+                desc: 'Nation of Justice, clockwork elegance, vast underwater diving expanses, and the sunken musical kingdom of Remuria.',
                 areas: [
-                    { id: 'fontaine_1', name: 'Court of Fontaine & Salacia Plain', desc: 'Ibu Kota Pengadilan, Air Mancur Lucine, & Bawah Air Salacia', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' },
-                    { id: 'fontaine_2', name: 'Pelabuhan Romaritime & Pesisir Belleau', desc: 'Pintu Gerbang Air Terjun & Jalur Aquabus Clementine', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1b/Romaritime_Harbor.png/revision/latest?cb=20230818082031' },
-                    { id: 'fontaine_3', name: 'Wilayah Beryl & Jantung Elynas', desc: 'Desa Bawah Tanah Melusine Merusea & Raksasa Elynas', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1a/Erinnyes_Forest.png/revision/latest?cb=20231108175129' },
-                    { id: 'fontaine_4', name: 'Benteng Bawah Air Meropide', desc: 'Penjara Laut Dalam Meropide & Jalur Rahasia Pipa Air', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' },
-                    { id: 'fontaine_5', name: 'Wilayah Liffey & Institut Riset Fontaine', desc: 'Reruntuhan Lab Terapung Gravity & Kinetik Eksperimen', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/2/25/Opera_Epiclese.png/revision/latest?cb=20240428170211' },
-                    { id: 'fontaine_6', name: 'Hutan Erinnyes & Danau Urania', desc: 'Gedung Opera Epiclese, Pohon Willow Kuno, & Danau Urania', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1a/Erinnyes_Forest.png/revision/latest?cb=20231108175129' },
-                    { id: 'fontaine_7', name: 'Lautan Kuno Remuria & Nostoi (v4.6)', desc: 'Istana Musik Tenggelam Remuria & Kota Kuno Bawah Laut', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' }
+                    { id: 'fontaine_1', name: 'Court of Fontaine & Salacia Plain', desc: 'Palais Mermonia, Fountain of Lucine, & Salacia Plain Diving Expanses', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' },
+                    { id: 'fontaine_2', name: 'Belleau Region & Romaritime Harbor', desc: 'Elevated Waterfall Docks & Clementine Aquabus Route', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1b/Romaritime_Harbor.png/revision/latest?cb=20230818082031' },
+                    { id: 'fontaine_3', name: 'Beryl Region & Merusea Village', desc: 'Subterranean Melusine Settlements, Elynas Flesh, & Hidden Quests', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1a/Erinnyes_Forest.png/revision/latest?cb=20231108175129' },
+                    { id: 'fontaine_4', name: 'Fortress of Meropide', desc: 'Deep Ocean Prison Citadel, Pankration Ring, & Submerged Valves', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' },
+                    { id: 'fontaine_5', name: 'Liffey Region & Fontaine Research Institute', desc: 'Floating Gravitational Water Blocks & Kinetic Laboratory Puzzles', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/2/25/Opera_Epiclese.png/revision/latest?cb=20240428170211' },
+                    { id: 'fontaine_6', name: 'Erinnyes Forest & Loch Urania', desc: 'Opera Epiclese, Weeping Willow of the Lake, & Wild Pahsiv Shrines', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/1a/Erinnyes_Forest.png/revision/latest?cb=20231108175129' },
+                    { id: 'fontaine_7', name: 'Sea of Bygone Eras (Remuria & Nostoi)', desc: 'Sunken Remurian Symphony Palaces & Ancient Submerged Civilization', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727' }
                 ]
             },
             'sumeru': {
-                name: 'Sumeru (Negeri Kebijaksanaan & Hutan Tropis)',
-                badge: '🌿 SUMERU • DENDRO • VERSI 3.0 - 3.6',
-                desc: 'Hutan lebat bangsa tanaman peri Aranara membentang hingga padang gurun tak bertepi Raja Deshret.',
+                name: 'Sumeru (Dendro Nation)',
+                badge: '🌿 SUMERU • DENDRO • v3.0 - v3.6',
+                desc: 'Nation of Wisdom, lush rainforests protected by the Aranara, stretching across the infinite desert of King Deshret.',
                 areas: [
-                    { id: 'sumeru_1', name: 'Kota Sumeru & Hutan Avidya', desc: 'Pohon Akademi Suci, Gandharva Ville, & Tree of Dreams', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest?cb=20220815102704' },
-                    { id: 'sumeru_2', name: 'Lembah Sungai Ardravi & Port Ormos', desc: 'Dermaga Perdagangan Ormos & Robot Raksasa Ruin Golem', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/6e/Port_Ormos.png/revision/latest?cb=20220828232554' },
-                    { id: 'sumeru_3', name: 'Hutan Rimba Lokapala & Wilayah Ashavan', desc: 'Istana Megah Alcazarzaray & Hutan Gelap Apam Woods', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest?cb=20220815102704' },
-                    { id: 'sumeru_4', name: 'Desa Vanarana & Dunia Impian Aranara', desc: 'Quest Panjang Aranyaka, 76 Aranara Tersembunyi, & Silapna', price: 45000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Vanarana.png/revision/latest?cb=20240308190015' },
-                    { id: 'sumeru_5', name: 'Desa Aaru & Gurun Rendah/Tinggi Setekh', desc: 'Perbatasan Gurun Pasir, Eye of Sands, & Golden Slumber Quest', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Aaru_Village.png/revision/latest?cb=20221106020956' },
-                    { id: 'sumeru_6', name: 'Piramida Makam Raja Deshret (Hypostyle)', desc: 'Labirin Kamar Rahasia Bawah Tanah & Scarlet Sand Slate Max', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/b/b6/The_Mausoleum_of_King_Deshret.png/revision/latest?cb=20220930031204' },
-                    { id: 'sumeru_7', name: 'Gurun Badai Pasir Hadramaveth', desc: 'Gunung Damavand, Jinni Bottle Lvl Max, & Puing-Puing Gurun', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/b/b6/The_Mausoleum_of_King_Deshret.png/revision/latest?cb=20220930031204' },
-                    { id: 'sumeru_8', name: 'Sabuk Gurun Gavireh Lajavard (v3.6)', desc: 'Pari Sorush, Pohon Suci Harvisptokhm, & Gerbang Khaenri\'ah', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Aaru_Village.png/revision/latest?cb=20221106020956' }
+                    { id: 'sumeru_1', name: 'Sumeru City & Avidya Forest', desc: 'Divine Tree of the Akademiya, Gandharva Ville, & Tree of Dreams', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest?cb=20220815102704' },
+                    { id: 'sumeru_2', name: 'Ardravi Valley & Port Ormos', desc: 'International Trading Port & Colossal Ancient Ruin Golem Chambers', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/6e/Port_Ormos.png/revision/latest?cb=20220828232554' },
+                    { id: 'sumeru_3', name: 'Lokapala Jungle & Ashavan Realm', desc: 'The Palace of Alcazarzaray & Rain-Drenched Apam Woods Shrines', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest?cb=20220815102704' },
+                    { id: 'sumeru_4', name: 'Vanarana & Dream World (Aranyaka)', desc: 'Full Aranyaka Quest Chain, 76 Hidden Aranara, & Silapna Melodies', price: 45000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Vanarana.png/revision/latest?cb=20240308190015' },
+                    { id: 'sumeru_5', name: 'Land of Lower & Upper Setekh', desc: 'Aaru Village Oasis, Eye of the Sands, & Golden Slumber Expedition', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Aaru_Village.png/revision/latest?cb=20221106020956' },
+                    { id: 'sumeru_6', name: 'The Mausoleum of King Deshret', desc: 'Underground Pyramid Chambers, Scarlet Sand Slate Max Clearance', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/b/b6/The_Mausoleum_of_King_Deshret.png/revision/latest?cb=20220930031204' },
+                    { id: 'sumeru_7', name: 'Desert of Hadramaveth', desc: 'Mount Damavand Eternal Sandstorm, Jinni in the Bottle Max Lvl', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/b/b6/The_Mausoleum_of_King_Deshret.png/revision/latest?cb=20220930031204' },
+                    { id: 'sumeru_8', name: 'Gavireh Lajavard & Realm of Farakhkert', desc: 'Pari Sorush Flight, Harvisptokhm Tree, & Gate to Khaenri\'ah', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Aaru_Village.png/revision/latest?cb=20221106020956' }
                 ]
             },
             'inazuma': {
-                name: 'Inazuma (Negeri Petir & Kepulauan)',
-                badge: '⚡ INAZUMA • ELECTRO • VERSI 2.0 - 2.4',
-                desc: 'Kepulauan samudra yang dipenuhi misteri badai petir Raiden Shogun, pulau kabut kuno, dan dunia bawah laut.',
+                name: 'Inazuma (Electro Nation)',
+                badge: '⚡ INAZUMA • ELECTRO • v2.0 - v2.4',
+                desc: 'Isolated archipelago nation ruled by the Raiden Shogun, veiled by perpetual thunderstorms and ancient island curses.',
                 areas: [
-                    { id: 'inazuma_1', name: 'Pulau Narukami & Kota Inazuma', desc: 'Kuil Agung Narukami, Istana Tenshukaku, & Sacred Sakura Tree', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/43/Inazuma_City.png/revision/latest?cb=20240428150342' },
-                    { id: 'inazuma_2', name: 'Kannazuka & Tatarasuna', desc: 'Tungku Pembakaran Mikage, Meriam Kamuijima, & Tatara Tales', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/08/Tatarasuna.png/revision/latest?cb=20220626170239' },
-                    { id: 'inazuma_3', name: 'Pulau Yashiori', desc: 'Rangka Ular Raksasa Orobashi & Quest Hilangkan Hujan Abadi', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/08/Tatarasuna.png/revision/latest?cb=20220626170239' },
-                    { id: 'inazuma_4', name: 'Pulau Watatsumi & Sangonomiya', desc: 'Kuil Karang Sangonomiya & Quest Rahasia Hati Watatsumi', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e1/Watatsumi_Island.png/revision/latest?cb=20220629032726' },
-                    { id: 'inazuma_5', name: 'Pulau Badai Petir Seirai', desc: 'Amakumo Peak, Kapal Karam Seiraimaru, & Seirai Stormchasers', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/2/29/Seirai_Island.png/revision/latest?cb=20210820155804' },
-                    { id: 'inazuma_6', name: 'Pulau Berkabut Tsurumi', desc: 'Hilangkan Seluruh Kabut Tebal Tsurumi & Remarkable Chest', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e0/Tsurumi_Island.png/revision/latest?cb=20230910105754' },
-                    { id: 'inazuma_7', name: 'Dunia Bawah Laut Enkanomiya (v2.4)', desc: 'Menara Dainichi Mikoshi, Mekanik Siang/Malam, & Sigil Kunci', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7d/Enkanomiya.png/revision/latest?cb=20221210182425' }
+                    { id: 'inazuma_1', name: 'Narukami Island & Inazuma City', desc: 'Grand Narukami Shrine, Tenshukaku Palace, & Sacred Sakura Tree', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/43/Inazuma_City.png/revision/latest?cb=20240428150342' },
+                    { id: 'inazuma_2', name: 'Kannazuka & Tatarasuna', desc: 'Mikage Furnace Disaster, Kamuijima Cannons, & Tatara Tales Quest', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/08/Tatarasuna.png/revision/latest?cb=20220626170239' },
+                    { id: 'inazuma_3', name: 'Yashiori Island', desc: 'Colossal Serpent Skeleton Orobashi & Rainstorm Calming Puzzles', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/08/Tatarasuna.png/revision/latest?cb=20220626170239' },
+                    { id: 'inazuma_4', name: 'Watatsumi Island & Sangonomiya', desc: 'Coral Shrine of Sangonomiya, Moonfin Waters, & Watatsumi Heart Quest', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e1/Watatsumi_Island.png/revision/latest?cb=20220629032726' },
+                    { id: 'inazuma_5', name: 'Seirai Island & Amakumo Peak', desc: 'Eternal Thunderstorms, Seiraimaru Shipwreck, & Electro Anomalies', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/2/29/Seirai_Island.png/revision/latest?cb=20210820155804' },
+                    { id: 'inazuma_6', name: 'Tsurumi Island', desc: 'Dense Fog Clearance Quests, Ruin Murals, & Remarkable Chests', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e0/Tsurumi_Island.png/revision/latest?cb=20230910105754' },
+                    { id: 'inazuma_7', name: 'Enkanomiya (Dainichi Mikoshi)', desc: 'Sunken Byakuyakoku, Whitenight / Evernight Mechanism, & Key Sigils', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/7/7d/Enkanomiya.png/revision/latest?cb=20221210182425' }
                 ]
             },
             'liyue': {
-                name: 'Liyue (Negeri Kontrak & Pegunungan Batu)',
-                badge: '🪨 LIYUE • GEO • VERSI 1.0 - 4.4',
-                desc: 'Kota pelabuhan terkaya Teyvat dengan puncak tebing Adeptus yang tinggi, jurang tambang, dan lembah teh Chenyu.',
+                name: 'Liyue (Geo Nation)',
+                badge: '🪨 LIYUE • GEO • v1.0 - v4.4',
+                desc: 'Prosperous merchant harbor backed by towering karst spires of the Adepti, deep chasms, and tea-mist valleys.',
                 areas: [
-                    { id: 'liyue_1', name: 'Pelabuhan Liyue & Lautan Awan (Sea of Clouds)', desc: 'Kota Liyue Harbor, Mt. Tianheng, & Guyun Stone Forest', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest?cb=20240428132749' },
-                    { id: 'liyue_2', name: 'Dataran Bishui & Penginapan Wangshu', desc: 'Dihua Marsh, Penginapan Pohon Wangshu Inn, & Sal Terrae', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Wangshu_Inn.png/revision/latest?cb=20220629031240' },
-                    { id: 'liyue_3', name: 'Muara Qiongji & Dataran Guili', desc: 'Reruntuhan Guili Assembly & Buka Istana Rahasia Luhua Pool', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest?cb=20240428132749' },
-                    { id: 'liyue_4', name: 'Puncak Minlin & Jueyun Karst', desc: 'Desa Qingce, Teka-teki 3 Burung Emas, & Puncak Adeptus', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/15/Jueyun_Karst.png/revision/latest?cb=20220612164923' },
-                    { id: 'liyue_5', name: 'Wilayah Lisha & Reruntuhan Dunyu', desc: 'Danau Qingxu Pool, Lingju Pass, & Makam Kuno Dunyu Ruins', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/15/Jueyun_Karst.png/revision/latest?cb=20220612164923' },
-                    { id: 'liyue_6', name: 'Tambang Bawah Tanah The Chasm (v2.6)', desc: 'Labirin Jurang Bawah Tanah, Lumenspar, & Adjuvant Lvl 10', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4c/The_Chasm.png/revision/latest?cb=20230302190334' },
-                    { id: 'liyue_7', name: 'Lembah Teh Chenyu / Chenyu Vale (v4.4)', desc: 'Pelabuhan Yilong, Desa Qiaoying, Spirit Carp & Rainjade Max', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/60/Chenyu_Vale.png/revision/latest?cb=20240428235139' }
+                    { id: 'liyue_1', name: 'Liyue Harbor & Sea of Clouds', desc: 'Liyue Harbor, Mt. Tianheng, Yujing Terrace, & Guyun Stone Forest', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest?cb=20240428132749' },
+                    { id: 'liyue_2', name: 'Bishui Plain & Wangshu Inn', desc: 'Dihua Marsh Reeds, Wangshu Inn Tree Terrace, & Sal Terrae Seal', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/9/9d/Wangshu_Inn.png/revision/latest?cb=20220629031240' },
+                    { id: 'liyue_3', name: 'Qiongji Estuary & Guili Plains', desc: 'Guili Assembly Ruins, Treasure Lost Quest, & Luhua Pool Palace', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest?cb=20240428132749' },
+                    { id: 'liyue_4', name: 'Minlin & Jueyun Karst', desc: 'Qingce Village Terraces, Mt. Hulao, & Three Golden Crane Altars', price: 25000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/15/Jueyun_Karst.png/revision/latest?cb=20220612164923' },
+                    { id: 'liyue_5', name: 'Lisha & Dunyu Ruins', desc: 'Qingxu Pool Tower Seals, Lingju Pass, & Dunyu Ruins Treasury', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/1/15/Jueyun_Karst.png/revision/latest?cb=20220612164923' },
+                    { id: 'liyue_6', name: 'The Chasm: Underground Mines', desc: 'Deep Underground Cave System, Lumenspar Collection, & Adjuvant Max', price: 35000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4c/The_Chasm.png/revision/latest?cb=20230302190334' },
+                    { id: 'liyue_7', name: 'Chenyu Vale', desc: 'Yilong Port, Qiaoying Tea Village, Spirit Carp & Rainjade Vow Max', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/6/60/Chenyu_Vale.png/revision/latest?cb=20240428235139' }
                 ]
             },
             'mondstadt': {
-                name: 'Mondstadt (Negeri Angin & Kebebasan)',
-                badge: '🍃 MONDSTADT • ANEMO • VERSI 1.0 - 1.2',
-                desc: 'Kota kincir angin dan danau segar di bawah lindungan Barbatos serta puncak gunung salju abadi Dragonspine.',
+                name: 'Mondstadt (Anemo Nation)',
+                badge: '🍃 MONDSTADT • ANEMO • v1.0 - v1.2',
+                desc: 'City of Wind and Song, pastoral lake shores, Barbatos statues, and the frozen heights of Dragonspine.',
                 areas: [
-                    { id: 'mondstadt_1', name: 'Ibu Kota Mondstadt & Lembah Starfell', desc: 'Cider Lake, Whispering Woods, & Puncak Starsnatch Cliff', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest?cb=20240428102244' },
-                    { id: 'mondstadt_2', name: 'Windwail Highland & Dawn Winery', desc: 'Perkebunan Anggur Dawn Winery, Springvale, & Wolvendom', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a6/Dawn_Winery.png/revision/latest?cb=20220628003249' },
-                    { id: 'mondstadt_3', name: 'Pegunungan Brightcrown & Sarang Stormterror', desc: 'Menara Angin Kuno Dvalin & Buka Semua Segel Menara', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e0/Stormterror%27s_Lair.png/revision/latest?cb=20260827231037' },
-                    { id: 'mondstadt_4', name: 'Bukit Galesong & Cape Oath', desc: 'Tanjung Sumpah, Dadaupa Gorge Sword Cemetery, & Musk Reef', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011' },
-                    { id: 'mondstadt_5', name: 'Gunung Salju Dragonspine (v1.2)', desc: 'Skyfrost Nail, Crimson Agate, & Frostbearing Tree Max Lvl 12', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4c/Dragonspine.png/revision/latest?cb=20260505094748' }
+                    { id: 'mondstadt_1', name: 'City of Mondstadt & Starfell Valley', desc: 'Cider Lake Island, Whispering Woods, & Starsnatch Cliff Summit', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest?cb=20240428102244' },
+                    { id: 'mondstadt_2', name: 'Windwail Highland & Dawn Winery', desc: 'Dawn Winery Vineyards, Springvale Village, & Wolvendom Trails', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/a/a6/Dawn_Winery.png/revision/latest?cb=20220628003249' },
+                    { id: 'mondstadt_3', name: 'Brightcrown Mountains & Stormterror\'s Lair', desc: 'Old Mondstadt Tower, Decarabian Ruins, & Wind Barrier Light Seals', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/e/e0/Stormterror%27s_Lair.png/revision/latest?cb=20260827231037' },
+                    { id: 'mondstadt_4', name: 'Galesong Hill & Cape Oath', desc: 'Cape Oath Cliff, Dadaupa Gorge Sword Cemetery, & Musk Reef Portal', price: 15000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011' },
+                    { id: 'mondstadt_5', name: 'Dragonspine', desc: 'Extreme Subzero Sheer Cold, Crimson Agates, & Frostbearing Tree Max', price: 30000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/4/4c/Dragonspine.png/revision/latest?cb=20260505094748' }
                 ]
             },
             'endgame': {
-                name: 'Endgame & Layanan Akun Khusus',
-                badge: '⚔️ ENDGAME & RAWAT AKUN HARIAN',
-                desc: 'Penyelesaian tantangan pertempuran paling sulit di Teyvat serta perawatan akun harian rutin tanpa buang Resin.',
+                name: 'Endgame & Combat Trials',
+                badge: '⚔️ ENDGAME & COMBAT CHALLENGES',
+                desc: 'Endgame combat gauntlets, highest difficulty boss rushes, Spiral Abyss 36★, and daily account maintenance.',
                 areas: [
-                    { id: 'endgame_1', name: 'Spiral Abyss Floor 9 - 12 (Full 36 Stars)', desc: 'Garansi Full 36 Bintang Abyss & Panen 600-800 Primogems', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011' },
-                    { id: 'endgame_2', name: 'Imaginarium Theater (Mastery Mode)', desc: 'Selesaikan Act 8 - 10 Teater & Klaim Hadiah Kostum/Prismo', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011' },
-                    { id: 'endgame_3', name: 'Paket Rawat Akun Mingguan (Daily + 160 Resin)', desc: 'Daily Commission 4/4 Setiap Hari + Bakar Resin Domain', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest?cb=20240428102244' }
+                    { id: 'endgame_1', name: 'Spiral Abyss', desc: 'Floor 9 - 12 (Full 36 Stars Guaranteed) • Panen 600 - 800 Primogems', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/5/5e/Cape_Oath.png/revision/latest?cb=20221123020011' },
+                    { id: 'endgame_2', name: 'Imaginarium Theater', desc: 'Mastery Mode (Act 8 - 10 Clear) • Klaim Hadiah Primogems & Special Cast Poses', price: 25000, img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'endgame_3', name: 'Stygian Onslaught', desc: 'High-Difficulty Boss Rush, Wave Elimination, & Maximum Tier Rewards', price: 25000, img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'endgame_4', name: 'Edge of Survival', desc: 'Endless Survival Trial, Hardcore Elite Gauntlet, & Solo Mastery Clearance', price: 25000, img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'endgame_5', name: 'Daily Maintenance & 160 Resin (Weekly)', desc: 'Daily Commissions 4/4 Setiap Hari + Bakar 160 Resin Domain/Boss Rutin 7 Hari', price: 20000, img: 'https://static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest?cb=20240428102244' }
                 ]
             }
         };

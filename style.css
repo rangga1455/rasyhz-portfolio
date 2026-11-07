@@ -2387,6 +2387,12 @@ button:active,
     color: #dfbfff;
 }
 
+.region-element-badge.frostmoon {
+    background: rgba(20, 25, 45, 0.92);
+    border-color: rgba(147, 197, 253, 0.6);
+    color: #bfdbfe;
+}
+
 .region-element-badge.pyro {
     background: rgba(45, 18, 14, 0.9);
     border-color: rgba(255, 107, 107, 0.5);
