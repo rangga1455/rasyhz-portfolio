@@ -48,6 +48,11 @@
                 <span class="chip-text">Genshin UID: <strong>812345678</strong></span>
                 <span class="chip-copy-icon">📋</span>
             </div>
+            <div class="quick-copy-chip" onclick="copyText('085397460252', 'Nomor WhatsApp disalin!')" title="Klik untuk salin WhatsApp">
+                <span class="chip-icon">📱</span>
+                <span class="chip-text">WA: <strong>0853-9746-0252</strong></span>
+                <span class="chip-copy-icon">📋</span>
+            </div>
             <div class="quick-copy-chip" onclick="copyText('rasyhze', 'Discord Tag disalin!')" title="Klik untuk salin Discord Tag">
                 <span class="chip-icon">💬</span>
                 <span class="chip-text">Discord: <strong>rasyhze</strong></span>
@@ -462,7 +467,7 @@
             </div>
 
             <div class="commission-footer-note">
-                <p>💡 Mau custom request seperti 1 Akun Full Map Teyvat dari awal sampai Snezhnaya v7.2, build tim Spiral Abyss, atau farming artifact? Langsung chat via WhatsApp atau Discord <strong>rasyhze</strong>.</p>
+                <p>💡 Mau custom request seperti 1 Akun Full Map Teyvat dari awal sampai Snezhnaya v7.2, build tim Spiral Abyss, atau farming artifact? Langsung chat via WhatsApp (<a href="https://wa.me/6285397460252" target="_blank" rel="noopener noreferrer" style="color: #00adb5; text-decoration: underline;">0853-9746-0252</a>) atau Discord <strong>rasyhze</strong>.</p>
             </div>
         </section>
     </main>
@@ -851,7 +856,7 @@
 
             let areaListText = areas.map((a, i) => `${i + 1}. ${a.name}`).join('\n');
 
-            const waNumber = '6281234567890';
+            const waNumber = '6285397460252';
             const message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📍 Region: ${region.name}\n⚡ Layanan: ${service}\n\n🗺️ Daerah yang Dipilih (${count} daerah):\n${areaListText}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
 
             const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
