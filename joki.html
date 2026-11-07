@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Joki Genshin Impact - Pilih Region & Daerah Map Teyvat - RASYHZ</title>
-    <meta name="description" content="Layanan jasa joki Genshin Impact terlengkap sampai versi terbaru (Mondstadt, Liyue, Inazuma, Sumeru, Fontaine, Natlan v5.3). Pilih region dan tentukan daerah map yang ingin dijoki. 100% manual tanpa bot.">
+    <meta name="description" content="Layanan jasa joki Genshin Impact terlengkap sampai versi terbaru (Snezhnaya v7.2, Nod-Krai, Natlan, Fontaine, Sumeru, Inazuma, Liyue, Mondstadt). Pilih region dan tentukan daerah map yang ingin dijoki. 100% manual tanpa bot.">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23121212'/><text x='50%25' y='68%25' font-size='56' font-family='Arial,sans-serif' font-weight='bold' fill='%2300adb5' text-anchor='middle'>R</text></svg>">
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Joki Genshin Impact - Pilih Region & Daerah Map - RASYHZ">
-    <meta property="og:description" content="Pilih region Teyvat: Mondstadt, Liyue, Inazuma, Sumeru, Fontaine, hingga Natlan v5.3. Tentukan daerah yang ingin dijoki 100% Explore, Oculus, & Quest.">
-    <meta property="og:image" content="https://static.wikia.nocookie.net/gensin-impact/images/4/4b/Natlan.png/revision/latest?cb=20250329040142">
+    <meta property="og:description" content="Pilih region Teyvat: Snezhnaya v7.2, Nod-Krai v6.6, Natlan, Fontaine, Sumeru, Inazuma, Liyue, Mondstadt. Tentukan daerah yang ingin dijoki 100% Explore, Oculus, & Quest.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80">
     <!-- Android / Mobile PWA Meta Tags -->
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -64,7 +64,7 @@
         <section class="gallery-section joki-hero-section">
             <div class="section-title-wrap">
                 <div class="status-badge-live">
-                    <span class="pulse-dot"></span> OPEN JOKI • UPDATE 5.X NATLAN LENGKAP
+                    <span class="pulse-dot"></span> OPEN JOKI • UPDATE v7.2 SNEZHNAYA & NOD-KRAI LENGKAP
                 </div>
                 <h2>Joki Genshin Impact</h2>
                 <p class="section-desc">Pilih kartu region Teyvat di bawah. Klik region yang kamu inginkan untuk membuka menu pilihan daerah yang mau dijoki secara fleksibel dan transparan.</p>
@@ -98,18 +98,68 @@
             <!-- ================= KATALOG REGION TEYVAT (TAMPILAN GAMBAR PER REGION) ================= -->
             <div class="section-subtitle-bar">
                 <h3>🗺️ 1. Pilih Region Map yang Ingin Dijoki:</h3>
-                <span class="region-count-badge">7 Region Tersedia</span>
+                <span class="region-count-badge">9 Region & Layanan Tersedia</span>
             </div>
 
             <div class="region-card-grid" id="region-cards-container">
 
-                <!-- 1. NATLAN (Versi Terbaru) -->
-                <div class="region-overview-card active" data-region-id="natlan" onclick="selectRegion('natlan')">
+                <!-- 1. SNEZHNAYA (Versi 7.2 Terbaru) -->
+                <div class="region-overview-card active" data-region-id="snezhnaya" onclick="selectRegion('snezhnaya')">
+                    <div class="region-card-media">
+                        <img src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80"
+                             alt="Region Snezhnaya" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=10'">
+                        <span class="region-element-badge cryo">❄️ SNEZHNAYA • CRYO • v7.0 - v7.2</span>
+                        <div class="region-card-badge-latest">NEW v7.2 REGION</div>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Snezhnaya (Negeri Cryo & Salju Abadi)</h3>
+                            <span class="area-count-pill">7 Daerah</span>
+                        </div>
+                        <p class="region-tagline">Istana Tsaritsa Zapolyarny Palace, Snezhnograd, Pelabuhan Morepesok, dan Pabrik Fatui.</p>
+                        <div class="region-meta-tags">
+                            <span>Cryoculus x180+</span>
+                            <span>Tsaritsa & Harbingers</span>
+                            <span>v7.0 - v7.2</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Daerah di Snezhnaya</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. NOD-KRAI (Versi 6.6) -->
+                <div class="region-overview-card" data-region-id="nodkrai" onclick="selectRegion('nodkrai')">
+                    <div class="region-card-media">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
+                             alt="Region Nod-Krai" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=11'">
+                        <span class="region-element-badge nodkrai">🌙 NOD-KRAI • MOON & KUUVAHKI • v6.6</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Nod-Krai (Wilayah Tiga Rembulan)</h3>
+                            <span class="area-count-pill">7 Daerah</span>
+                        </div>
+                        <p class="region-tagline">Gerbang Perbatasan Snezhnaya, Misteri Tiga Rembulan (Moon Sisters), dan Energi Kuuvahki.</p>
+                        <div class="region-meta-tags">
+                            <span>Kuuvahki Energy</span>
+                            <span>Moon Sisters Lore</span>
+                            <span>v6.0 - v6.6</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Daerah di Nod-Krai</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. NATLAN -->
+                <div class="region-overview-card" data-region-id="natlan" onclick="selectRegion('natlan')">
                     <div class="region-card-media">
                         <img src="https://static.wikia.nocookie.net/gensin-impact/images/4/4b/Natlan.png/revision/latest?cb=20250329040142"
                              alt="Region Natlan" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/600/350?random=1'">
-                        <span class="region-element-badge pyro">🔥 NATLAN • PYRO • VERSI 5.3 TERBARU</span>
-                        <div class="region-card-badge-latest">NEW REGION</div>
+                        <span class="region-element-badge pyro">🔥 NATLAN • PYRO • v5.0 - v5.3</span>
                     </div>
                     <div class="region-card-info">
                         <div class="region-card-header">
@@ -129,7 +179,7 @@
                     </div>
                 </div>
 
-                <!-- 2. FONTAINE -->
+                <!-- 4. FONTAINE -->
                 <div class="region-overview-card" data-region-id="fontaine" onclick="selectRegion('fontaine')">
                     <div class="region-card-media">
                         <img src="https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727"
@@ -285,8 +335,8 @@
             <div class="region-area-drawer" id="region-area-drawer">
                 <div class="drawer-header-bar">
                     <div class="drawer-header-left">
-                        <span class="drawer-active-badge" id="drawer-region-badge">🔥 NATLAN • PYRO</span>
-                        <h3 class="drawer-region-title" id="drawer-region-title">Pilih Daerah di Natlan yang Ingin Dijoki</h3>
+                        <span class="drawer-active-badge" id="drawer-region-badge">❄️ SNEZHNAYA • CRYO</span>
+                        <h3 class="drawer-region-title" id="drawer-region-title">Pilih Daerah di Snezhnaya yang Ingin Dijoki</h3>
                         <p class="drawer-region-subtitle" id="drawer-region-desc">Centang satu atau beberapa daerah di bawah. Harga estimasi dan rincian pesanan WhatsApp otomatis dihitung.</p>
                     </div>
                     <div class="drawer-header-actions">
@@ -387,7 +437,7 @@
             </div>
 
             <div class="commission-footer-note">
-                <p>💡 Mau custom request seperti 1 Akun Full Map Teyvat dari awal sampai Natlan, build tim Spiral Abyss, atau farming artifact? Langsung chat via WhatsApp atau Discord <strong>rasyhze</strong>.</p>
+                <p>💡 Mau custom request seperti 1 Akun Full Map Teyvat dari awal sampai Snezhnaya v7.2, build tim Spiral Abyss, atau farming artifact? Langsung chat via WhatsApp atau Discord <strong>rasyhze</strong>.</p>
             </div>
         </section>
     </main>
@@ -457,8 +507,36 @@
             });
         }
 
-        // ================= MASTER DATA REGION & DAERAH (LENGKAP SAMPAI VERSI TERAKHIR 5.3) =================
+        // ================= MASTER DATA REGION & DAERAH (LENGKAP SAMPAI VERSI 7.2 SNEZHNAYA & NOD-KRAI) =================
         const regionDatabase = {
+            'snezhnaya': {
+                name: 'Snezhnaya (Negeri Cryo & Salju Abadi)',
+                badge: '❄️ SNEZHNAYA • CRYO • VERSI 7.2 TERBARU',
+                desc: 'Negeri utara berselimut salju abadi, pusat kekuatan militer Fatui Harbingers dan takhta agung Sang Cryo Archon Tsaritsa.',
+                areas: [
+                    { id: 'snezhnaya_1', name: 'Zapolyarny Palace & Snezhnograd', desc: 'Pusat Takhta Cryo Archon Tsaritsa & Markas 11 Fatui Harbingers', price: 35000, img: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_2', name: 'Pelabuhan Morepesok & Pesisir Beku', desc: 'Kampung Halaman Tartaglia / Childe & Pesisir Nelayan Es', price: 30000, img: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_3', name: 'Distrik Industri Glupov & Train Terminal', desc: 'Stasiun Kereta Api Magis Snezhnaya & Pusat Manufaktur Fatui', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_4', name: 'Tundra Volkodlak & Padang Salju Kuno', desc: 'Tundra Serigala Salju Abadi & Area Hunting Binatang Purba', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_5', name: 'Puncak Fellfrost Peak (Subzero Cold)', desc: 'Puncak Es Terjal, Cuaca Beku Ekstrem, & Menara Pengawas', price: 30000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_6', name: 'Markas Divisi Druzhna & Birch Snowgrave', desc: 'Pusat Pelatihan Tentara Fatui & Pemakaman Salju Pohon Birch', price: 30000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'snezhnaya_7', name: 'Hyperborea & Blue Crystal Nail Ruins', desc: 'Paku Langit Kristal Biru & Labirin Reruntuhan Bawah Es Kuno', price: 35000, img: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=800&q=80' }
+                ]
+            },
+            'nodkrai': {
+                name: 'Nod-Krai (Wilayah Otonom Tiga Rembulan)',
+                badge: '🌙 NOD-KRAI • MOON & KUUVAHKI • VERSI 6.6',
+                desc: 'Wilayah perbatasan otonom di selatan Snezhnaya yang sarat sejarah Tiga Rembulan (Moon Sisters) dan energi magis purba Kuuvahki.',
+                areas: [
+                    { id: 'nodkrai_1', name: 'Lempo Isle & Gerbang Perintis Nod-Krai', desc: 'Pulau Masuk Utama, Tebing Es Melayang, & Pusat Pengembara', price: 30000, img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_2', name: 'Pemukiman Nasha Town', desc: 'Ibu Kota & Pemukiman Perintis Pengembara, Albedo, & Alice', price: 25000, img: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_3', name: 'Hiisi Island & Kuil Tiga Rembulan', desc: 'Pulau Bersejarah Moon Sisters & Sumber Aliran Kuuvahki', price: 30000, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_4', name: 'Paha Isle & Benteng Garis Depan Fatui', desc: 'Pulau Garis Depan Militer & Fasilitas Khusus Riset Fatui', price: 30000, img: 'https://images.unsplash.com/photo-1516431883659-655d41c09bf9?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_5', name: 'Danau Biru Kaca (Blue Amber Lake)', desc: 'Danau Kristal Bunga Mistis Raksasa & Labirin Bawah Tanah', price: 30000, img: 'https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_6', name: 'Celah Tebing Nothing Passage', desc: 'Jalur Sempit Tebing Bercahaya & Uji Coba Lightblade Kuuvahki', price: 25000, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' },
+                    { id: 'nodkrai_7', name: 'Padang Barrowmoss Barrens & Eyes of Kratti', desc: 'Dataran Liar Berlumut Salju & Teka-teki Kuno Mata Kratti', price: 30000, img: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80' }
+                ]
+            },
             'natlan': {
                 name: 'Natlan (Negeri Perang & Api)',
                 badge: '🔥 NATLAN • PYRO • VERSI 5.3 TERBARU',
@@ -555,7 +633,7 @@
         };
 
         // State Saat Ini
-        let currentSelectedRegion = 'natlan';
+        let currentSelectedRegion = 'snezhnaya';
         let currentServiceType = 'explore_100';
         let selectedAreaIds = new Set();
 
@@ -765,7 +843,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            selectRegion('natlan'); // Default terbuka di Natlan versi terbaru
+            selectRegion('snezhnaya'); // Default terbuka di Snezhnaya versi 7.2 terbaru
             handleVisitorCounter();
         });
     </script>

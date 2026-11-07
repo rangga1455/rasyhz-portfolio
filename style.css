@@ -2349,14 +2349,84 @@ button:active,
     position: absolute;
     top: 10px;
     right: 10px;
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    color: #121212;
+    background: linear-gradient(135deg, #00adb5, #00757a);
+    color: #ffffff;
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 0.65rem;
     font-weight: 900;
     letter-spacing: 0.6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.region-element-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: rgba(14, 15, 20, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e0e0f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.region-element-badge.cryo {
+    background: rgba(15, 28, 48, 0.9);
+    border-color: rgba(94, 200, 255, 0.5);
+    color: #7fd6ff;
+}
+
+.region-element-badge.nodkrai {
+    background: rgba(30, 20, 48, 0.9);
+    border-color: rgba(195, 137, 255, 0.5);
+    color: #dfbfff;
+}
+
+.region-element-badge.pyro {
+    background: rgba(45, 18, 14, 0.9);
+    border-color: rgba(255, 107, 107, 0.5);
+    color: #ff8b7b;
+}
+
+.region-element-badge.hydro {
+    background: rgba(14, 30, 45, 0.9);
+    border-color: rgba(56, 189, 248, 0.5);
+    color: #38bdf8;
+}
+
+.region-element-badge.dendro {
+    background: rgba(16, 38, 22, 0.9);
+    border-color: rgba(74, 222, 128, 0.5);
+    color: #4ade80;
+}
+
+.region-element-badge.electro {
+    background: rgba(36, 18, 48, 0.9);
+    border-color: rgba(192, 132, 252, 0.5);
+    color: #c084fc;
+}
+
+.region-element-badge.geo {
+    background: rgba(40, 32, 16, 0.9);
+    border-color: rgba(251, 191, 36, 0.5);
+    color: #fbbf24;
+}
+
+.region-element-badge.anemo {
+    background: rgba(14, 36, 34, 0.9);
+    border-color: rgba(45, 212, 191, 0.5);
+    color: #2dd4bf;
+}
+
+.region-element-badge.special {
+    background: rgba(30, 25, 45, 0.9);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #c084fc;
 }
 
 .region-card-info {
