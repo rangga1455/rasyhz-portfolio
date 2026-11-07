@@ -2219,3 +2219,469 @@ button:active,
     line-height: 1.45;
     margin: 0;
 }
+
+/* ================= JOKI GENSHIN IMPACT STYLES ================= */
+.joki-hero-section {
+    padding-top: 10px;
+}
+
+/* Trust Guarantee Badges */
+.joki-trust-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 24px 0 28px;
+}
+
+.trust-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #151518;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.trust-badge-item:hover {
+    border-color: rgba(0, 173, 181, 0.4);
+    transform: translateY(-2px);
+}
+
+.trust-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.trust-info strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.trust-info small {
+    display: block;
+    font-size: 0.75rem;
+    color: #8c8c99;
+    line-height: 1.35;
+    margin-top: 2px;
+}
+
+/* Region Selector Filter Bar */
+.region-selector-wrapper {
+    margin-bottom: 24px;
+}
+
+.region-selector-title {
+    font-size: 0.95rem;
+    color: #c0c0ca;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.region-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 4px;
+}
+
+.region-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 24px;
+    background: #17181c;
+    color: #b0b0bd;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.region-pill:hover {
+    background: #1e2026;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.region-pill.active {
+    background: rgba(0, 173, 181, 0.16);
+    color: #00adb5;
+    border-color: #00adb5;
+    box-shadow: 0 0 14px rgba(0, 173, 181, 0.25);
+}
+
+.region-icon {
+    font-size: 1rem;
+}
+
+/* Joki Cards Grid */
+.joki-map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 20px;
+}
+
+.joki-card {
+    background: #151518;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.joki-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 173, 181, 0.45);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 173, 181, 0.12);
+}
+
+.joki-card-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0d0e12;
+}
+
+.joki-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.joki-card:hover .joki-card-img-wrap img {
+    transform: scale(1.05);
+}
+
+/* Element Badges */
+.region-element-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.4px;
+}
+
+.region-element-badge.anemo {
+    background: rgba(72, 211, 168, 0.25);
+    color: #48d3a8;
+    border: 1px solid rgba(72, 211, 168, 0.5);
+}
+
+.region-element-badge.geo {
+    background: rgba(244, 175, 56, 0.25);
+    color: #f4af38;
+    border: 1px solid rgba(244, 175, 56, 0.5);
+}
+
+.region-element-badge.electro {
+    background: rgba(183, 119, 247, 0.25);
+    color: #b777f7;
+    border: 1px solid rgba(183, 119, 247, 0.5);
+}
+
+.region-element-badge.dendro {
+    background: rgba(126, 206, 43, 0.25);
+    color: #7ece2b;
+    border: 1px solid rgba(126, 206, 43, 0.5);
+}
+
+.region-element-badge.hydro {
+    background: rgba(49, 179, 255, 0.25);
+    color: #31b3ff;
+    border: 1px solid rgba(49, 179, 255, 0.5);
+}
+
+.region-element-badge.pyro {
+    background: rgba(255, 90, 67, 0.25);
+    color: #ff5a43;
+    border: 1px solid rgba(255, 90, 67, 0.5);
+}
+
+.region-element-badge.special {
+    background: rgba(157, 78, 221, 0.25);
+    color: #d8b4fe;
+    border: 1px solid rgba(157, 78, 221, 0.5);
+}
+
+.joki-card-body {
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.joki-card-body h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.joki-subdesc {
+    font-size: 0.8rem;
+    color: #8c8c9e;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.joki-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.joki-features-list li {
+    font-size: 0.78rem;
+    color: #b0b0c0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.joki-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: auto;
+}
+
+.joki-price {
+    font-size: 0.78rem;
+    color: #8c8c9e;
+}
+
+.joki-price span {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #00adb5;
+}
+
+.btn-joki-order {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #00adb5;
+    color: #121212;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-joki-order:hover {
+    background: #00c4ce;
+    transform: translateY(-2px);
+}
+
+/* ================= JOKI CALCULATOR STYLES ================= */
+.joki-calculator-box {
+    background: linear-gradient(145deg, #16181d 0%, #1a1c24 100%);
+    border: 1px solid rgba(0, 173, 181, 0.35);
+    border-radius: 16px;
+    padding: 26px 24px;
+    margin-top: 40px;
+}
+
+.calc-header h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.calc-header p {
+    font-size: 0.84rem;
+    color: #9a9ab0;
+    margin-bottom: 20px;
+}
+
+.calc-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.calc-field {
+    margin-bottom: 16px;
+}
+
+.calc-field label {
+    display: block;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #c0c0ca;
+    margin-bottom: 6px;
+}
+
+.calc-select, 
+.calc-input {
+    width: 100%;
+    background: #111215;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 0.86rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.calc-select:focus,
+.calc-input:focus {
+    border-color: #00adb5;
+}
+
+.calc-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.calc-service-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calc-service-item input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.service-label-box {
+    width: 100%;
+    background: #111215;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: all 0.2s ease;
+}
+
+.calc-service-item input[type="radio"]:checked + .service-label-box {
+    background: rgba(0, 173, 181, 0.12);
+    border-color: #00adb5;
+    box-shadow: 0 0 12px rgba(0, 173, 181, 0.2);
+}
+
+.service-label-box strong {
+    font-size: 0.84rem;
+    color: #ffffff;
+}
+
+.service-label-box small {
+    font-size: 0.72rem;
+    color: #8c8c9e;
+    line-height: 1.3;
+}
+
+.calc-summary-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111215;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 10px;
+}
+
+.summary-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-label {
+    font-size: 0.78rem;
+    color: #8c8c9e;
+}
+
+.summary-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #00adb5;
+}
+
+.btn-calc-submit {
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: #00adb5;
+    color: #121212;
+    font-size: 0.88rem;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-calc-submit:hover {
+    background: #00c4ce;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .region-filter-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .region-filter-bar::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .region-filter-bar::-webkit-scrollbar-thumb {
+        background: #333338;
+        border-radius: 2px;
+    }
+
+    .calc-form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .calc-summary-box {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .btn-calc-submit {
+        width: 100%;
+    }
+}
