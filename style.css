@@ -2763,6 +2763,7 @@ button:active,
     align-items: center;
     justify-content: space-between;
     gap: 6px;
+    min-width: 0;
 }
 
 .area-service-tag {
@@ -2771,13 +2772,16 @@ button:active,
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
+    flex: 1;
 }
 
 .area-price-tag {
     font-size: 0.85rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #00adb5;
     flex-shrink: 0;
+    margin-left: auto;
 }
 
 /* Sticky Drawer Checkout Summary Bar */
@@ -2862,55 +2866,326 @@ button:active,
     transform: translateY(-2px);
 }
 
-/* ================= RESPONSIVE STYLES ================= */
+/* ================= RESPONSIVE STYLES (MOBILE & ANDROID) ================= */
 @media (max-width: 768px) {
+    /* Prevent any horizontal screen sliding/overflow */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .gallery-section.joki-hero-section {
+        padding: 0 12px;
+        margin: 16px auto 30px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .section-title-wrap {
+        margin-bottom: 16px;
+    }
+
+    .section-title-wrap h2 {
+        font-size: 1.45rem;
+    }
+
+    .status-badge-live {
+        font-size: 0.68rem;
+        padding: 4px 10px;
+    }
+
+    /* Trust Guarantee Badges on Android */
+    .joki-trust-badges {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 16px 0 20px;
+    }
+
+    .trust-badge-item {
+        padding: 8px 10px;
+        border-radius: 10px;
+        gap: 8px;
+    }
+
+    .trust-icon {
+        font-size: 1.3rem;
+    }
+
+    .trust-info strong {
+        font-size: 0.76rem;
+    }
+
+    .trust-info small {
+        display: none;
+    }
+
     .section-subtitle-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
+        gap: 8px;
+        margin-bottom: 14px;
     }
 
+    /* Region Overview Cards Grid on Android */
     .region-card-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    .region-overview-card {
+        border-radius: 14px;
+    }
+
+    .region-card-media {
+        aspect-ratio: 16 / 9;
+    }
+
+    .region-card-info {
+        padding: 14px 14px 16px;
+    }
+
+    .region-card-header h3 {
+        font-size: 1.05rem;
+    }
+
+    .region-tagline {
+        font-size: 0.78rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        margin-bottom: 12px;
+    }
+
+    .region-meta-tags {
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    .region-meta-tags span {
+        font-size: 0.68rem;
+        padding: 3px 8px;
+    }
+
+    .btn-open-region {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        border-radius: 10px;
+    }
+
+    /* ================= REGION AREA DRAWER (ANDROID ADAPTIVE) ================= */
+    .region-area-drawer {
+        padding: 14px 12px;
+        border-radius: 14px;
+        margin-top: 6px;
+        margin-bottom: 24px;
+        box-sizing: border-box;
+        width: 100%;
+        border-color: rgba(0, 173, 181, 0.45);
     }
 
     .drawer-header-bar {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+    }
+
+    .drawer-active-badge {
+        font-size: 0.68rem;
+        padding: 3px 8px;
+    }
+
+    .drawer-region-title {
+        font-size: 1.05rem;
+        line-height: 1.35;
+    }
+
+    .drawer-region-subtitle {
+        font-size: 0.76rem;
+        line-height: 1.35;
     }
 
     .drawer-header-actions {
         width: 100%;
         display: flex;
+        gap: 8px;
     }
 
     .btn-drawer-action {
         flex: 1;
         text-align: center;
+        padding: 8px 10px;
+        font-size: 0.74rem;
+        border-radius: 8px;
+    }
+
+    /* Service Type Selector on Android */
+    .service-type-bar {
+        padding: 10px 12px;
+        margin-bottom: 14px;
+        border-radius: 10px;
+    }
+
+    .service-type-label {
+        font-size: 0.74rem;
+        margin-bottom: 8px;
     }
 
     .service-type-options {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .area-checkbox-grid {
         grid-template-columns: 1fr;
+        gap: 6px;
     }
 
+    .service-pill-option span {
+        padding: 9px 12px;
+        font-size: 0.76rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 8px;
+    }
+
+    /* Area Checkbox Cards Grid on Android */
+    .area-checkbox-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .area-checkbox-card {
+        padding: 10px 10px 10px 8px;
+        border-radius: 10px;
+        gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .area-card-checkbox-col {
+        flex-shrink: 0;
+    }
+
+    .area-card-checkbox-col input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        margin: 0;
+    }
+
+    .area-card-thumb {
+        width: 66px;
+        height: 48px;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .area-card-detail {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .area-card-detail h4 {
+        font-size: 0.85rem;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .area-card-detail p {
+        font-size: 0.71rem;
+        line-height: 1.3;
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .area-card-submeta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .area-service-tag {
+        font-size: 0.65rem;
+        min-width: 0;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .area-price-tag {
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #00adb5;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+
+    /* Sticky Drawer Checkout Summary Bar above Android Bottom Navigation */
     .drawer-checkout-summary {
         flex-direction: column;
         align-items: stretch;
-        gap: 14px;
-        text-align: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        position: sticky;
+        bottom: 64px;
+        z-index: 1050;
+        background: rgba(17, 18, 23, 0.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(0, 173, 181, 0.5);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        box-sizing: border-box;
+        width: 100%;
     }
 
     .checkout-summary-left {
-        justify-content: space-around;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
+    .stat-count {
+        font-size: 0.95rem;
+    }
+
+    .stat-price {
+        font-size: 1.18rem;
     }
 
     .btn-checkout-wa {
         width: 100%;
+        padding: 12px 16px;
+        font-size: 0.88rem;
+        border-radius: 10px;
         justify-content: center;
+    }
+
+    .commission-footer-note {
+        padding: 14px;
+        margin: 20px 0 30px;
+    }
+
+    .commission-footer-note p {
+        font-size: 0.8rem;
+        line-height: 1.45;
     }
 }
