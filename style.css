@@ -1957,6 +1957,22 @@ button:active,
         font-size: 0.75rem;
         color: #888888;
     }
+
+    /* Mobile Explore Feature Preview Grid */
+    .feature-preview-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .workflow-steps {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .guide-box {
+        padding: 18px 16px;
+        margin-top: 24px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1972,4 +1988,234 @@ button:active,
     .tiktok-feed-wrapper {
         max-width: 285px;
     }
+}
+
+/* ================= EXPLORE SECTION & FEATURE PREVIEW CARDS ================= */
+.explore-section {
+    padding-top: 10px;
+}
+
+.feature-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.feature-preview-card {
+    position: relative;
+    background: #151518;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+.feature-preview-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 173, 181, 0.45);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 173, 181, 0.15);
+}
+
+.feature-preview-card.popular-preview {
+    background: linear-gradient(145deg, #16181d 0%, #1a1b22 100%);
+    border-color: rgba(0, 173, 181, 0.35);
+}
+
+.feature-preview-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #a0a0a8;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+
+.feature-preview-card.popular-preview .feature-preview-badge {
+    background: rgba(0, 173, 181, 0.16);
+    color: #00adb5;
+    border: 1px solid rgba(0, 173, 181, 0.3);
+}
+
+.feature-preview-content {
+    flex: 1;
+}
+
+.feature-preview-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.feature-preview-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.feature-preview-card p {
+    font-size: 0.88rem;
+    color: #9a9ab0;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.feature-preview-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.feature-preview-tags span {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    color: #c0c0ca;
+}
+
+.feature-preview-action {
+    margin-top: auto;
+}
+
+.btn-preview-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-size: 0.86rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.feature-preview-card:hover .btn-preview-link {
+    background: rgba(0, 173, 181, 0.15);
+    border-color: rgba(0, 173, 181, 0.4);
+    color: #00adb5;
+}
+
+.btn-preview-link.btn-preview-primary {
+    background: #00adb5;
+    color: #121212;
+    font-weight: 700;
+    border: none;
+}
+
+.feature-preview-card:hover .btn-preview-link.btn-preview-primary {
+    background: #00c4ce;
+    color: #000000;
+}
+
+/* ================= STATUS LIVE BADGE ================= */
+.status-badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(0, 173, 181, 0.12);
+    border: 1px solid rgba(0, 173, 181, 0.35);
+    color: #00adb5;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    margin-bottom: 12px;
+}
+
+/* ================= GUIDE BOX & ORDER WORKFLOW ================= */
+.guide-box {
+    margin-top: 36px;
+    background: #151518;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: left;
+}
+
+.guide-box h3 {
+    font-size: 1.05rem;
+    color: #ffffff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-box ol {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.guide-box ol li {
+    font-size: 0.86rem;
+    color: #a0a0b0;
+    line-height: 1.5;
+}
+
+.guide-box ol li strong {
+    color: #e0e0e0;
+}
+
+.workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.workflow-step-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #00adb5;
+    color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.step-content strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.step-content p {
+    font-size: 0.78rem;
+    color: #9a9ab0;
+    line-height: 1.45;
+    margin: 0;
 }
