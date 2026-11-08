@@ -103,14 +103,22 @@
 
             <!-- ================= KATALOG REGION TEYVAT (TAMPILAN GAMBAR PER REGION) ================= -->
             <div class="section-subtitle-bar">
-                <h3>🗺️ 1. Pilih Region Map yang Ingin Dijoki:</h3>
-                <span class="region-count-badge">10 Region & Mode Tantangan</span>
+                <h3>🗺️ 1. Pilih Region Map & Kategori Joki:</h3>
+                <span class="region-count-badge">15 Layanan Joki Lengkap</span>
+            </div>
+
+            <div class="catalog-filter-bar">
+                <button type="button" class="catalog-filter-pill active" data-category="all" onclick="filterCatalog('all')">Semua Layanan (15)</button>
+                <button type="button" class="catalog-filter-pill" data-category="region" onclick="filterCatalog('region')">🗺️ Region Map (9)</button>
+                <button type="button" class="catalog-filter-pill" data-category="worldquest" onclick="filterCatalog('worldquest')">📜 World Quest (1)</button>
+                <button type="button" class="catalog-filter-pill" data-category="endgame" onclick="filterCatalog('endgame')">⚔️ Endgame & Combat (1)</button>
+                <button type="button" class="catalog-filter-pill" data-category="special" onclick="filterCatalog('special')">⚡ Fate, Build & Rawat (4)</button>
             </div>
 
             <div class="region-card-grid" id="region-cards-container">
 
                 <!-- 1. SNEZHNAYA (Versi 7.2 Terbaru) -->
-                <div class="region-overview-card active" data-region-id="snezhnaya" onclick="selectRegion('snezhnaya')">
+                <div class="region-overview-card active" data-region-id="snezhnaya" data-category="region" onclick="selectRegion('snezhnaya')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/5/59/Snezhnaya.png/revision/latest/scale-to-width-down/800&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Snezhnaya" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -136,7 +144,7 @@
                 </div>
 
                 <!-- 2. FROST MOON (Three Moons Realm) -->
-                <div class="region-overview-card" data-region-id="frostmoon" onclick="selectRegion('frostmoon')">
+                <div class="region-overview-card" data-region-id="frostmoon" data-category="region" onclick="selectRegion('frostmoon')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/6/66/Frost_Moon.png/revision/latest/scale-to-width-down/800&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Frost Moon" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -161,7 +169,7 @@
                 </div>
 
                 <!-- 3. NOD-KRAI (Borderlands) -->
-                <div class="region-overview-card" data-region-id="nodkrai" onclick="selectRegion('nodkrai')">
+                <div class="region-overview-card" data-region-id="nodkrai" data-category="region" onclick="selectRegion('nodkrai')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/ae/Nod-Krai.png/revision/latest/scale-to-width-down/800&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Nod-Krai" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -186,7 +194,7 @@
                 </div>
 
                 <!-- 3. NATLAN -->
-                <div class="region-overview-card" data-region-id="natlan" onclick="selectRegion('natlan')">
+                <div class="region-overview-card" data-region-id="natlan" data-category="region" onclick="selectRegion('natlan')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/4b/Natlan.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Natlan" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -211,7 +219,7 @@
                 </div>
 
                 <!-- 4. FONTAINE -->
-                <div class="region-overview-card" data-region-id="fontaine" onclick="selectRegion('fontaine')">
+                <div class="region-overview-card" data-region-id="fontaine" data-category="region" onclick="selectRegion('fontaine')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Fontaine" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -236,7 +244,7 @@
                 </div>
 
                 <!-- 3. SUMERU -->
-                <div class="region-overview-card" data-region-id="sumeru" onclick="selectRegion('sumeru')">
+                <div class="region-overview-card" data-region-id="sumeru" data-category="region" onclick="selectRegion('sumeru')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Sumeru" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -261,7 +269,7 @@
                 </div>
 
                 <!-- 4. INAZUMA -->
-                <div class="region-overview-card" data-region-id="inazuma" onclick="selectRegion('inazuma')">
+                <div class="region-overview-card" data-region-id="inazuma" data-category="region" onclick="selectRegion('inazuma')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/43/Inazuma_City.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Inazuma" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -286,7 +294,7 @@
                 </div>
 
                 <!-- 5. LIYUE -->
-                <div class="region-overview-card" data-region-id="liyue" onclick="selectRegion('liyue')">
+                <div class="region-overview-card" data-region-id="liyue" data-category="region" onclick="selectRegion('liyue')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Liyue" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -311,7 +319,7 @@
                 </div>
 
                 <!-- 6. MONDSTADT -->
-                <div class="region-overview-card" data-region-id="mondstadt" onclick="selectRegion('mondstadt')">
+                <div class="region-overview-card" data-region-id="mondstadt" data-category="region" onclick="selectRegion('mondstadt')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Region Mondstadt" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -335,8 +343,34 @@
                     </div>
                 </div>
 
-                <!-- 10. ENDGAME & COMBAT TRIALS -->
-                <div class="region-overview-card" data-region-id="endgame" onclick="selectRegion('endgame')">
+                <!-- 10. WORLD QUEST PEMBUKA AREA -->
+                <div class="region-overview-card" data-region-id="worldquest" data-category="worldquest" onclick="selectRegion('worldquest')">
+                    <div class="region-card-media">
+                        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/d/d3/Vanarana.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
+                             alt="World Quest Pembuka Area" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Ctext%20x%3D%2260%22%20y%3D%2245%22%20fill%3D%22%23fbbf24%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%3E%F0%9F%93%9C%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        <span class="region-element-badge quest">📜 WORLD QUEST • PEMBUKA AREA</span>
+                        <div class="region-card-badge-special">KHUSUS QUEST MAP</div>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>World Quest Pembuka Area</h3>
+                            <span class="area-count-pill">12 Quest Akbar</span>
+                        </div>
+                        <p class="region-tagline">Aranyaka, Deshret, Chasm, Narzissenkreuz, Tatara Tales, Chenyu Vale, dan Ochkanatlan.</p>
+                        <div class="region-meta-tags">
+                            <span>Buka Seluruh Map</span>
+                            <span>Bawah Tanah & Gua</span>
+                            <span>100% Selesai</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Quest Pembuka Area</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 11. ENDGAME & COMBAT TRIALS -->
+                <div class="region-overview-card" data-region-id="endgame" data-category="endgame" onclick="selectRegion('endgame')">
                     <div class="region-card-media">
                         <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/e/e4/Spiral_Abyss_Domain_Entrance_Unlocked.png/revision/latest/scale-to-width-down/800&w=800&output=webp&q=80" referrerpolicy="no-referrer"
                              alt="Endgame Combat Trials" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Cpath%20d%3D%22M60%2022l14%2026H46z%22%20fill%3D%22%2300adb5%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2252%22%20r%3D%223.5%22%20fill%3D%22%2300adb5%22%2F%3E%3C%2Fsvg%3E'">
@@ -355,6 +389,106 @@
                         </div>
                         <button class="btn-open-region">
                             <span>Pilih Mode Endgame</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 12. JOKI FARM INTERTWINED FATE -->
+                <div class="region-overview-card" data-region-id="fate_farm" data-category="special" onclick="selectRegion('fate_farm')">
+                    <div class="region-card-media">
+                        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/ac/Item_Intertwined_Fate.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
+                             alt="Joki Intertwined Fate" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Ctext%20x%3D%2260%22%20y%3D%2245%22%20fill%3D%22%23f472b6%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%3E%F0%9F%92%8E%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        <span class="region-element-badge fate">💎 TABUNGAN GACHA • FATE & WISH</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Joki Intertwined Fate (Wish)</h3>
+                            <span class="area-count-pill">Hitungan Per Fate</span>
+                        </div>
+                        <p class="region-tagline">Kumpulkan Fate per biji atau paket garansi pity untuk gacha karakter impianmu.</p>
+                        <div class="region-meta-tags">
+                            <span>1 Fate = 160 Primo</span>
+                            <span>Mulai Rp 3.500/Fate</span>
+                            <span>Garansi Pity 90/180</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Atur Jumlah Fate</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 13. JOKI BUILD KARAKTER -->
+                <div class="region-overview-card" data-region-id="build_karakter" data-category="special" onclick="selectRegion('build_karakter')">
+                    <div class="region-card-media">
+                        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/43/Inazuma_City.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
+                             alt="Joki Build Karakter" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Ctext%20x%3D%2260%22%20y%3D%2245%22%20fill%3D%22%23f87171%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%3E%E2%9A%94%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        <span class="region-element-badge build">⚔️ CHARACTER BUILD • ASCEND & TALENT</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Joki Build Karakter</h3>
+                            <span class="area-count-pill">Bebas Pilih Karakter</span>
+                        </div>
+                        <p class="region-tagline">Level 90, Talent Max, Weapon Ascension, dan farming Artifact Set terbaik siap Abyss.</p>
+                        <div class="region-meta-tags">
+                            <span>Ketik Karakter Incaran</span>
+                            <span>Starter s/d God-Tier</span>
+                            <span>Full Artifact 4-pc</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Paket Build</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 14. JOKI LOOT MATERIAL (CUSTOM TEKS) -->
+                <div class="region-overview-card" data-region-id="loot_material" data-category="special" onclick="selectRegion('loot_material')">
+                    <div class="region-card-media">
+                        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
+                             alt="Joki Loot Material" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Ctext%20x%3D%2260%22%20y%3D%2245%22%20fill%3D%22%2334d399%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%3E%F0%9F%8C%BF%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        <span class="region-element-badge loot">🌿 LOOT & FARMING • CUSTOM MATERIAL</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Joki Loot Material</h3>
+                            <span class="area-count-pill">Ketik Material Apa Saja</span>
+                        </div>
+                        <p class="region-tagline">Ketik nama material yang kamu butuhkan: Bunga regional, Handguard, Ore, atau Ikan The Catch.</p>
+                        <div class="region-meta-tags">
+                            <span>Ketik Nama Material</span>
+                            <span>Paket 168 Full Ascend</span>
+                            <span>Mulai Rp 250/biji</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Ketik & Atur Jumlah</span>
+                            <span class="arrow-icon">▾</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 15. JOKI RAWAT AKUN -->
+                <div class="region-overview-card" data-region-id="rawat_akun" data-category="special" onclick="selectRegion('rawat_akun')">
+                    <div class="region-card-media">
+                        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/0/0c/Liyue_Harbor.png/revision/latest&w=800&output=webp&q=80" referrerpolicy="no-referrer"
+                             alt="Joki Rawat Akun" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%2080%22%3E%3Crect%20fill%3D%22%23151518%22%20width%3D%22120%22%20height%3D%2280%22%2F%3E%3Ctext%20x%3D%2260%22%20y%3D%2245%22%20fill%3D%22%2338bdf8%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%3E%F0%9F%9B%A1%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        <span class="region-element-badge rawat">🛡️ MAINTENANCE • DAILY & RESIN</span>
+                    </div>
+                    <div class="region-card-info">
+                        <div class="region-card-header">
+                            <h3>Joki Rawat Akun</h3>
+                            <span class="area-count-pill">Harian / Mingguan / Bulanan</span>
+                        </div>
+                        <p class="region-tagline">Daily Commissions 4/4, bakar 160-200 Resin rutin, Weekly Boss, Event, & Battle Pass aman.</p>
+                        <div class="region-meta-tags">
+                            <span>Daily 4/4 + 200 Resin</span>
+                            <span>Mulai Rp 5.000/hari</span>
+                            <span>Laporan Rutin WA</span>
+                        </div>
+                        <button class="btn-open-region">
+                            <span>Pilih Paket Durasi</span>
                             <span class="arrow-icon">▾</span>
                         </button>
                     </div>
@@ -400,6 +534,26 @@
 
                 <!-- Container Kalkulator Teleport Waypoint (Khusus saat Waypoint dipilih) -->
                 <div class="teleport-configurator-box hidden" id="teleport-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
+                </div>
+
+                <!-- Container Kalkulator Intertwined Fate -->
+                <div class="fate-configurator-box hidden" id="fate-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
+                </div>
+
+                <!-- Container Konfigurator Build Karakter -->
+                <div class="build-configurator-box hidden" id="build-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
+                </div>
+
+                <!-- Container Konfigurator Loot Material (Ketik Nama Material) -->
+                <div class="loot-configurator-box hidden" id="loot-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
+                </div>
+
+                <!-- Container Konfigurator Rawat Akun -->
+                <div class="rawat-configurator-box hidden" id="rawat-configurator-box">
                     <!-- Diisi lewat JavaScript -->
                 </div>
 
@@ -656,16 +810,35 @@
                     { id: 'mondstadt_5', name: 'Dragonspine', desc: 'Extreme Subzero Sheer Cold, Crimson Agates, & Frostbearing Tree Max', price: 30000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/4c/Dragonspine.png/revision/latest&w=800&output=webp&q=80' }
                 ]
             },
+            'worldquest': {
+                name: 'World Quest Pembuka Area (Teyvat Complete)',
+                badge: '📜 WORLD QUEST • PEMBUKA AREA TERSEMBUNYI',
+                desc: 'Rangkaian World Quest panjang pembuka peta, area bawah tanah, dan pembersih anomali cuaca. Centang quest yang ingin dijoki.',
+                areas: [
+                    { id: 'wq_aranyaka', name: 'Sumeru - Seri Aranyaka (Vanarana & 76 Aranara)', desc: 'Bab 1 - 4 Lengkap: Buka Dunia Impian Vanarana, Old Vanarana, Pohon Impian, dan petualangan Aranara', price: 45000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/d/d3/Vanarana.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_deshret', name: 'Sumeru - Golden Slumber & The Dirge of Bilqis', desc: 'Ekspedisi Gurun Pasir: Buka izin Slate Raja Deshret clearance max, Piramida, Badai Pasir & Oasis Abadi', price: 40000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/b/b6/The_Mausoleum_of_King_Deshret.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_khvarena', name: 'Sumeru - Khvarena of Good and Evil (Pari Sorush)', desc: 'Pari Sorush Flight: Buka Gavireh Lajavard, Farakhkert, Pohon Suci Amrita Pool, & Gerbang Khaenri\'ah', price: 35000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/9d/Aaru_Village.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_narukami', name: 'Inazuma - Sacred Sakura Cleansing & Tatara Tales', desc: 'Buka penghalang Mikage Furnace Tatarasuna, pembersihan 5 akar Sakura Suci, & teka-teki Konda', price: 30000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/43/Inazuma_City.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_enkanomiya', name: 'Inazuma - The Moon-Bathed Deep & Pembuka Enkanomiya', desc: 'Buka segel Watatsumi, Heart of Watatsumi, dan pintu pusaran laut menuju dunia kuno Enkanomiya', price: 30000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/7/7d/Enkanomiya.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_tsurumi_seirai', name: 'Inazuma - Seirai Stormchasers & Through the Mists (Tsurumi)', desc: 'Hentikan petir abadi Seirai & hilangkan kabut pekat misterius Pulau Tsurumi (4 hari siklus quest)', price: 35000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/e/e0/Tsurumi_Island.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_chasm', name: 'Liyue - The Chasm Delvers (Underground Mines)', desc: 'Hancurkan segel Bedrock Keys & buka seluruh akses tambang bawah tanah The Chasm + Lumenspar', price: 35000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/4c/The_Chasm.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_chenyu', name: 'Liyue - Chenyu\'s Blessings of Sunken Jade', desc: 'Buka gerbang air dan gua suci Lembah Teh Chenyu bersama Fujin & Lingyuan + Rainjade Vow', price: 30000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/6/60/Chenyu_Vale.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_narzissenkreuz', name: 'Fontaine - Narzissenkreuz Series (Ann, Merusea, Meropide)', desc: 'Rangkaian quest akbar Fontaine: Buka Annapausis, Desa Merusea, Menara Gestalt, & Pedang Suci', price: 45000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_remuria', name: 'Fontaine - Canticles of Harmony (Laut Kuno Remuria)', desc: 'Buka area bawah air Petrichor dan kerajaan musik tenggelam Sea of Bygone Eras (Remuria)', price: 35000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/2/25/Opera_Epiclese.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_ochkanatlan', name: 'Natlan - Shadows of the Mountain & Tale of Dreams', desc: 'Buka segel reruntuhan raksasa Ochkanatlan, tebing malam Night-Wind, dan rahasia naga purba', price: 35000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/e/e8/Ochkanatlan.png/revision/latest&w=800&output=webp&q=80' },
+                    { id: 'wq_dragonspine', name: 'Mondstadt - In the Mountains (Gunung Es Dragonspine)', desc: 'Cairkan 3 pecahan es purba dan buka badai es menuju puncak Skyfrost Nail di Dragonspine', price: 25000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/4c/Dragonspine.png/revision/latest&w=800&output=webp&q=80' }
+                ]
+            },
             'endgame': {
                 name: 'Endgame & Combat Trials',
                 badge: '⚔️ ENDGAME & COMBAT CHALLENGES',
-                desc: 'Endgame combat gauntlets, highest difficulty boss rushes, Spiral Abyss 36★, and daily account maintenance.',
+                desc: 'Endgame combat gauntlets, highest difficulty boss rushes, Spiral Abyss 36★, and maximum tier rewards.',
                 areas: [
                     { id: 'endgame_1', name: 'Spiral Abyss', desc: 'Floor 9 - 12 (Full 36 Stars Guaranteed) • Panen 600 - 800 Primogems', price: 20000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/e/e4/Spiral_Abyss_Domain_Entrance_Unlocked.png/revision/latest/scale-to-width-down/800&w=800&output=webp&q=80' },
                     { id: 'endgame_2', name: 'Imaginarium Theater', desc: 'Mastery Mode (Act 8 - 10 Clear) • Klaim Hadiah Primogems & Special Cast Poses', price: 25000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/8/81/Domain_Mysterious_Room.png/revision/latest&w=800&output=webp&q=80' },
                     { id: 'endgame_3', name: 'Stygian Onslaught', desc: 'High-Difficulty Boss Rush, Wave Elimination, & Maximum Tier Rewards', price: 25000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/4/41/Stygian_Onslaught.png/revision/latest&w=800&output=webp&q=80' },
                     { id: 'endgame_4', name: 'Edge of Survival', desc: 'Endless Survival Trial, Hardcore Elite Gauntlet, & Solo Mastery Clearance', price: 25000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/5/5c/System_Edge_of_Survival.png/revision/latest&w=800&output=webp&q=80' },
-                    { id: 'endgame_5', name: 'Daily Maintenance & 160 Resin (Weekly)', desc: 'Daily Commissions 4/4 Setiap Hari + Bakar 160 Resin Domain/Boss Rutin 7 Hari', price: 20000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/d/d6/Mondstadt_City.png/revision/latest&w=800&output=webp&q=80' }
+                    { id: 'endgame_5', name: 'Local Legends & Sovereign Dragon Trials', desc: 'Taklukkan seluruh Local Legends Fontaine & Natlan + Sovereign Dragon Boss Gauntlet', price: 25000, img: 'https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/3/3a/Tequemecan_Valley.png/revision/latest&w=800&output=webp&q=80' }
                 ]
             }
         };
@@ -795,20 +968,204 @@
         let selectedOculusQty = 180;
         let selectedTeleportQty = 3;
 
+        // State & Logic Intertwined Fate
+        let selectedFateQty = 10;
+        function calculateFatePrice(qty) {
+            if (qty === 180) return 570000;
+            if (qty === 90) return 290000;
+            if (qty === 50) return 165000;
+            if (qty === 20) return 68000;
+            if (qty >= 100) return Math.round(qty * 3200);
+            if (qty >= 40) return Math.round(qty * 3350);
+            return qty * 3500;
+        }
+
+        // State & Logic Build Karakter
+        let selectedBuildCharName = '';
+        let selectedBuildPackageId = 'build_ready';
+        let selectedBuildNotes = '';
+        const buildPackages = [
+            {
+                id: 'build_starter',
+                name: 'Paket Starter Ascend',
+                level: 'Lv. 1 - 80',
+                talent: 'Talent 6/6/6',
+                weapon: 'Weapon Lv. 80',
+                artifact: 'Artifact Starter',
+                desc: 'Cocok untuk karakter yang baru digacha agar cepat bisa dimainkan di open world.',
+                price: 30000
+            },
+            {
+                id: 'build_ready',
+                name: 'Paket Ready for Battle',
+                level: 'Lv. 90 Max',
+                talent: 'Talent 8/8/8',
+                weapon: 'Weapon Lv. 90',
+                artifact: 'Artifact 4-pc Main Stat',
+                desc: 'Farming boss ascension Lv. 90, domain talent level 8, weapon max, dan 4-pc set artifact tepat.',
+                price: 50000,
+                badge: '🔥 Populer'
+            },
+            {
+                id: 'build_endgame',
+                name: 'Paket End-Game DPS / Support',
+                level: 'Lv. 90 Max',
+                talent: 'Talent 9/9/9 (1 Crown)',
+                weapon: 'Weapon Lv. 90',
+                artifact: 'Artifact 4-pc Main Stat Mantap',
+                desc: 'Optimasi damage maksimal dengan 1 Mahkota Crown of Insight, siap tempur Abyss Floor 12.',
+                price: 80000
+            },
+            {
+                id: 'build_godtier',
+                name: 'Paket God-Tier Complete Build',
+                level: 'Lv. 90 Max',
+                talent: 'Talent Triple 9 / Crowned',
+                weapon: 'Weapon Lv. 90 Max',
+                artifact: 'High Crit Ratio Set (Optimal)',
+                desc: 'Build karakter dewa dengan rasio Crit Rate & Crit DMG optimal, ER% stabil, dan rotasi mulus.',
+                price: 120000,
+                badge: '👑 Best Quality'
+            },
+            {
+                id: 'build_artifact_only',
+                name: 'Farming Artifact Domain Saja',
+                level: 'Custom Domain',
+                talent: '25 Condensed Resin',
+                weapon: 'Bintang 5 Disimpan',
+                artifact: 'Fokus Set Domain Pilihan',
+                desc: 'Khusus joki bakar resin di domain artifact incaran (bakar s/d 25 Condensed Resin / 1.000 Resin).',
+                price: 35000
+            }
+        ];
+
+        // State & Logic Loot Material (Ketik Nama Material)
+        let selectedLootMaterialName = '';
+        let selectedLootCategory = 'Local Specialty (Bunga / Tanaman)';
+        let selectedLootQty = 168;
+        function calculateLootPrice(qty) {
+            if (qty === 168) return 38000; // Special sweet spot paket full ascend karakter Lv 90
+            if (qty <= 50) return Math.max(12000, Math.round(qty * 300));
+            if (qty <= 100) return Math.round(15000 + (qty - 50) * 200);
+            if (qty <= 200) return Math.round(25000 + (qty - 100) * 160);
+            return Math.round(41000 + (qty - 200) * 140);
+        }
+
+        // State & Logic Rawat Akun
+        let selectedRawatPackageId = 'rawat_mingguan';
+        let selectedRawatResinFocus = '';
+        const rawatPackages = [
+            {
+                id: 'rawat_harian',
+                name: 'Paket Harian (1 Hari)',
+                duration: '1 Hari',
+                pricePerDay: 'Rp 5.000 / hari',
+                desc: '4/4 Daily Commissions + Habiskan 160-200 Original Resin + Ekspedisi harian + Klaim Welkin Moon.',
+                price: 5000
+            },
+            {
+                id: 'rawat_mingguan',
+                name: 'Paket Mingguan (7 Hari)',
+                duration: '7 Hari Rutin',
+                pricePerDay: 'Hanya ~Rp 3.500 / hari',
+                desc: 'Daily 7 hari + Bakar 200 Resin/hari + 3 Weekly Boss (diskon 30) + Reputasi Kota Bounties/Requests + Event Harian.',
+                price: 25000,
+                badge: '🔥 Paling Populer'
+            },
+            {
+                id: 'rawat_2minggu',
+                name: 'Paket 2 Minggu (14 Hari)',
+                duration: '14 Hari Rutin',
+                pricePerDay: 'Hanya ~Rp 3.200 / hari',
+                desc: 'Daily 14 hari + 200 Resin/hari + 2x siklus Weekly Boss & Reputasi + Seluruh Event Berjalan + Battle Pass Level Up.',
+                price: 45000
+            },
+            {
+                id: 'rawat_bulanan',
+                name: 'Paket Bulanan (30 Hari / 1 Versi)',
+                duration: '30 Hari (1 Siklus Versi)',
+                pricePerDay: 'Super Hemat ~Rp 2.800 / hari',
+                desc: 'Daily 30 hari non-stop + Resin rutin + Weekly Boss & Reputasi + Battle Pass Garansi Max Lv 50 + All Event 100% Clear.',
+                price: 85000,
+                badge: '👑 Best Value'
+            }
+        ];
+
         // Multiplier harga per tipe layanan sub-daerah
         const serviceMultipliers = {
             'explore_100': { mult: 1.0, label: 'Full Explore 100% (All Chest + Quest)' },
             'oculus_only': { mult: 1.0, label: 'Kumpul Oculus Saja' },
             'waypoint_only': { mult: 1.0, label: 'Buka Teleport Waypoint (Min. 3 TP)' },
             'quest_only': { mult: 0.75, label: 'World Quest Pembuka Area' },
-            'endgame_clear': { mult: 1.0, label: 'Clear Endgame Trials' }
+            'endgame_clear': { mult: 1.0, label: 'Clear Endgame Trials' },
+            'worldquest_clear': { mult: 1.0, label: 'World Quest Pembuka Area' }
         };
 
-        // Render Opsi Tipe Layanan Sesuai Region / Endgame yang Aktif
+        // Helper Escape HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        // Filter Katalog Berdasarkan Kategori
+        function filterCatalog(category) {
+            document.querySelectorAll('.catalog-filter-pill').forEach(pill => {
+                if (pill.dataset.category === category) {
+                    pill.classList.add('active');
+                } else {
+                    pill.classList.remove('active');
+                }
+            });
+
+            const cards = document.querySelectorAll('.region-overview-card');
+            cards.forEach(card => {
+                const cardCat = card.dataset.category || 'region';
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Helper Sembunyikan Seluruh Konfigurator Drawer
+        function hideAllConfigurators() {
+            const ids = [
+                'area-checkbox-grid',
+                'oculus-configurator-box',
+                'teleport-configurator-box',
+                'fate-configurator-box',
+                'build-configurator-box',
+                'loot-configurator-box',
+                'rawat-configurator-box'
+            ];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+        }
+
+        // Render Opsi Tipe Layanan Sesuai Region / Mode yang Aktif
         function renderServiceTypeOptions() {
             const container = document.getElementById('service-type-options');
             const labelEl = document.getElementById('service-type-label');
             if (!container) return;
+
+            if (currentSelectedRegion === 'worldquest') {
+                if (labelEl) labelEl.textContent = 'Mode World Quest Pembuka Area:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge quest-service-badge">
+                        <span>📜</span>
+                        <span>Mode Khusus: World Quest Pembuka Area (Full Clear • Buka Seluruh Akses Map, Area Bawah Tanah & Mekanisme Kunci)</span>
+                    </div>
+                `;
+                return;
+            }
 
             if (currentSelectedRegion === 'endgame') {
                 if (labelEl) labelEl.textContent = 'Mode Layanan Tantangan Endgame:';
@@ -821,6 +1178,51 @@
                 return;
             }
 
+            if (currentSelectedRegion === 'fate_farm') {
+                if (labelEl) labelEl.textContent = 'Mode Tabungan Wish & Gacha:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge fate-service-badge">
+                        <span>💎</span>
+                        <span>Mode Khusus: Joki Farm Intertwined Fate (1 Fate = 160 Primogems • 100% Manual Handplay)</span>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentSelectedRegion === 'build_karakter') {
+                if (labelEl) labelEl.textContent = 'Mode Build Karakter & Artifact:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge build-service-badge">
+                        <span>⚔️</span>
+                        <span>Mode Khusus: Joki Build Karakter (Level 90, Talent Max, Weapon, & 4-pc Artifact Set Optimal)</span>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentSelectedRegion === 'loot_material') {
+                if (labelEl) labelEl.textContent = 'Mode Farming & Loot Material:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge loot-service-badge">
+                        <span>🌿</span>
+                        <span>Mode Khusus: Joki Loot Material (Ketik material apa saja • Local Specialty, Monster Drops, atau Ore)</span>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentSelectedRegion === 'rawat_akun') {
+                if (labelEl) labelEl.textContent = 'Mode Perawatan & Pemeliharaan Akun:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge rawat-service-badge">
+                        <span>🛡️</span>
+                        <span>Mode Khusus: Joki Rawat Akun (Daily Commissions 4/4 + Habiskan 200 Resin Rutin Setiap Hari)</span>
+                    </div>
+                `;
+                return;
+            }
+
+            // Normal Region Map
             if (labelEl) labelEl.textContent = 'Tipe Layanan untuk Daerah Terpilih:';
             const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
 
@@ -844,7 +1246,7 @@
             `;
         }
 
-        // Fungsi Pilih Region dari Kartu Utama
+        // Fungsi Pilih Region / Menu dari Kartu Utama
         function selectRegion(regionId) {
             currentSelectedRegion = regionId;
             selectedAreaIds.clear();
@@ -858,65 +1260,125 @@
                 }
             });
 
-            // Update Header Drawer
-            const data = regionDatabase[regionId];
-            if (!data) return;
+            hideAllConfigurators();
 
-            document.getElementById('drawer-region-badge').textContent = data.badge;
-
-            const areaGrid = document.getElementById('area-checkbox-grid');
-            const oculusBox = document.getElementById('oculus-configurator-box');
-            const teleportBox = document.getElementById('teleport-configurator-box');
+            const drawerBadge = document.getElementById('drawer-region-badge');
+            const drawerTitle = document.getElementById('drawer-region-title');
+            const drawerDesc = document.getElementById('drawer-region-desc');
             const drawerActions = document.getElementById('drawer-header-actions');
+            const areaGrid = document.getElementById('area-checkbox-grid');
 
-            if (regionId === 'endgame') {
+            if (regionId === 'worldquest') {
+                currentServiceType = 'worldquest_clear';
+                renderServiceTypeOptions();
+
+                const data = regionDatabase['worldquest'];
+                if (drawerBadge) drawerBadge.textContent = data.badge;
+                if (drawerTitle) drawerTitle.textContent = 'Pilih World Quest Pembuka Area yang Ingin Dijoki';
+                if (drawerDesc) drawerDesc.textContent = data.desc;
+
+                if (drawerActions) drawerActions.classList.remove('hidden');
+                if (areaGrid) areaGrid.classList.remove('hidden');
+                renderAreaList(data.areas);
+            } else if (regionId === 'endgame') {
                 currentServiceType = 'endgame_clear';
                 renderServiceTypeOptions();
 
-                if (areaGrid) areaGrid.classList.remove('hidden');
-                if (oculusBox) oculusBox.classList.add('hidden');
-                if (teleportBox) teleportBox.classList.add('hidden');
-                if (drawerActions) drawerActions.classList.remove('hidden');
+                const data = regionDatabase['endgame'];
+                if (drawerBadge) drawerBadge.textContent = data.badge;
+                if (drawerTitle) drawerTitle.textContent = 'Pilih Mode Endgame & Combat Trials';
+                if (drawerDesc) drawerDesc.textContent = data.desc;
 
-                document.getElementById('drawer-region-title').textContent = 'Pilih Mode Endgame & Combat Trials';
-                document.getElementById('drawer-region-desc').textContent = 'Centang mode endgame atau tantangan tempur yang ingin dijoki. Garansi Bintang 36★ & Full Clearance.';
+                if (drawerActions) drawerActions.classList.remove('hidden');
+                if (areaGrid) areaGrid.classList.remove('hidden');
                 renderAreaList(data.areas);
+            } else if (regionId === 'fate_farm') {
+                currentServiceType = 'fate_farm';
+                renderServiceTypeOptions();
+
+                if (drawerBadge) drawerBadge.textContent = '💎 TABUNGAN GACHA • FATE & WISH';
+                if (drawerTitle) drawerTitle.textContent = 'Joki Farm Intertwined Fate (Wish)';
+                if (drawerDesc) drawerDesc.textContent = 'Tentukan jumlah Intertwined Fate yang ingin dikumpulkan untuk gacha karakter impianmu.';
+
+                if (drawerActions) drawerActions.classList.add('hidden');
+                const fateBox = document.getElementById('fate-configurator-box');
+                if (fateBox) fateBox.classList.remove('hidden');
+                renderFateConfigurator();
+            } else if (regionId === 'build_karakter') {
+                currentServiceType = 'build_karakter';
+                renderServiceTypeOptions();
+
+                if (drawerBadge) drawerBadge.textContent = '⚔️ CHARACTER BUILD • ASCEND & TALENT';
+                if (drawerTitle) drawerTitle.textContent = 'Joki Build Karakter Genshin Impact';
+                if (drawerDesc) drawerDesc.textContent = 'Ketik nama karakter yang ingin kamu build dan tentukan tingkatan paket build impianmu.';
+
+                if (drawerActions) drawerActions.classList.add('hidden');
+                const buildBox = document.getElementById('build-configurator-box');
+                if (buildBox) buildBox.classList.remove('hidden');
+                renderBuildConfigurator();
+            } else if (regionId === 'loot_material') {
+                currentServiceType = 'loot_material';
+                renderServiceTypeOptions();
+
+                if (drawerBadge) drawerBadge.textContent = '🌿 LOOT & FARMING • CUSTOM MATERIAL';
+                if (drawerTitle) drawerTitle.textContent = 'Joki Loot & Farming Material Karakter / Senjata';
+                if (drawerDesc) drawerDesc.textContent = 'Ketik material apapun yang ingin kamu kumpulkan (Local Specialty, Monster Drops, Ore) dan tentukan jumlahnya.';
+
+                if (drawerActions) drawerActions.classList.add('hidden');
+                const lootBox = document.getElementById('loot-configurator-box');
+                if (lootBox) lootBox.classList.remove('hidden');
+                renderLootConfigurator();
+            } else if (regionId === 'rawat_akun') {
+                currentServiceType = 'rawat_akun';
+                renderServiceTypeOptions();
+
+                if (drawerBadge) drawerBadge.textContent = '🛡️ MAINTENANCE • DAILY & RESIN';
+                if (drawerTitle) drawerTitle.textContent = 'Joki Rawat Akun Genshin Impact';
+                if (drawerDesc) drawerDesc.textContent = 'Pilih paket durasi rawat akun: Harian, Mingguan, 2 Minggu, atau Bulanan (Daily 4/4 + 200 Resin rutin).';
+
+                if (drawerActions) drawerActions.classList.add('hidden');
+                const rawatBox = document.getElementById('rawat-configurator-box');
+                if (rawatBox) rawatBox.classList.remove('hidden');
+                renderRawatConfigurator();
             } else {
-                if (currentServiceType === 'endgame_clear') {
+                // Normal Region Map
+                if (currentServiceType === 'endgame_clear' || currentServiceType === 'worldquest_clear' ||
+                    currentServiceType === 'fate_farm' || currentServiceType === 'build_karakter' ||
+                    currentServiceType === 'loot_material' || currentServiceType === 'rawat_akun') {
                     currentServiceType = 'explore_100';
                 }
                 renderServiceTypeOptions();
 
+                const data = regionDatabase[regionId];
+                if (data) {
+                    if (drawerBadge) drawerBadge.textContent = data.badge;
+                    if (drawerTitle) drawerTitle.textContent = `Pilih Daerah di ${data.name}`;
+                    if (drawerDesc) drawerDesc.textContent = data.desc;
+                }
+
                 if (currentServiceType === 'oculus_only') {
-                    if (areaGrid) areaGrid.classList.add('hidden');
+                    const oculusBox = document.getElementById('oculus-configurator-box');
                     if (oculusBox) oculusBox.classList.remove('hidden');
-                    if (teleportBox) teleportBox.classList.add('hidden');
                     if (drawerActions) drawerActions.classList.add('hidden');
 
                     const oculus = oculusDatabase[regionId] || oculusDatabase['snezhnaya'];
                     selectedOculusQty = oculus.max;
-                    document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${data.name}`;
-                    document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji khusus region ini), atau ambil paket borongan full region.`;
+                    if (drawerTitle) drawerTitle.textContent = `Kumpul ${oculus.name} - ${data.name}`;
+                    if (drawerDesc) drawerDesc.textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji khusus region ini), atau ambil paket borongan full region.`;
                     renderOculusConfigurator();
                 } else if (currentServiceType === 'waypoint_only') {
-                    if (areaGrid) areaGrid.classList.add('hidden');
-                    if (oculusBox) oculusBox.classList.add('hidden');
+                    const teleportBox = document.getElementById('teleport-configurator-box');
                     if (teleportBox) teleportBox.classList.remove('hidden');
                     if (drawerActions) drawerActions.classList.add('hidden');
 
                     const tpData = teleportDatabase[regionId] || { totalTP: 50 };
                     selectedTeleportQty = Math.max(TP_MIN_ORDER, selectedTeleportQty || TP_MIN_ORDER);
-                    document.getElementById('drawer-region-title').textContent = `Buka Teleport Waypoint - ${data.name}`;
-                    document.getElementById('drawer-region-desc').textContent = `Atur jumlah Teleport Waypoint yang ingin dibuka (Minimal 3 TP • Maksimal ${tpData.totalTP} TP di region ini).`;
+                    if (drawerTitle) drawerTitle.textContent = `Buka Teleport Waypoint - ${data.name}`;
+                    if (drawerDesc) drawerDesc.textContent = `Atur jumlah Teleport Waypoint yang ingin dibuka (Minimal 3 TP • Maksimal ${tpData.totalTP} TP di region ini).`;
                     renderTeleportConfigurator();
                 } else {
                     if (areaGrid) areaGrid.classList.remove('hidden');
-                    if (oculusBox) oculusBox.classList.add('hidden');
-                    if (teleportBox) teleportBox.classList.add('hidden');
                     if (drawerActions) drawerActions.classList.remove('hidden');
-
-                    document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
-                    document.getElementById('drawer-region-desc').textContent = data.desc;
                     renderAreaList(data.areas);
                 }
             }
@@ -925,10 +1387,10 @@
 
             // Scroll mulus ke drawer
             const drawer = document.getElementById('region-area-drawer');
-            drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (drawer) drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Render List Daerah (Explore / Endgame / Quest)
+        // Render List Daerah (Explore / Endgame / World Quest)
         function renderAreaList(areas) {
             const container = document.getElementById('area-checkbox-grid');
             if (!container) return;
@@ -967,7 +1429,7 @@
             });
         }
 
-        // Render Kalkulator Oculus (Khusus untuk Region yang sedang dipilih)
+        // Render Kalkulator Oculus
         function renderOculusConfigurator() {
             const container = document.getElementById('oculus-configurator-box');
             if (!container) return;
@@ -1062,7 +1524,6 @@
             updateCheckoutSummary();
         }
 
-        // Set Jumlah Oculus
         function setOculusQty(val) {
             const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
             let num = parseInt(val, 10);
@@ -1182,7 +1643,6 @@
             updateCheckoutSummary();
         }
 
-        // Set Jumlah Teleport (Enforce Minimum 3 TP)
         function setTeleportQty(val) {
             const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50 };
             let num = parseInt(val, 10);
@@ -1206,7 +1666,464 @@
             setTeleportQty(val);
         }
 
-        // Toggle Centang Daerah
+        // ================= 1. KONFIGURATOR INTERTWINED FATE =================
+        function renderFateConfigurator() {
+            const container = document.getElementById('fate-configurator-box');
+            if (!container) return;
+
+            if (selectedFateQty < 1) selectedFateQty = 1;
+            if (selectedFateQty > 180) selectedFateQty = 180;
+
+            const finalPrice = calculateFatePrice(selectedFateQty);
+            const primoEquiv = selectedFateQty * 160;
+            const singleRefPrice = selectedFateQty * 3500;
+            const savings = Math.max(0, singleRefPrice - finalPrice);
+
+            container.innerHTML = `
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb" style="border-color: #f472b6; background: rgba(236,72,153,0.15); box-shadow: 0 0 14px rgba(236,72,153,0.3);">💎</div>
+                            <div class="oculus-hero-text">
+                                <h4>Joki Farm Intertwined Fate (Wish Tabungan)</h4>
+                                <p>Kumpulkan tabungan Fate untuk gacha karakter & weapon impianmu. 100% manual via eksplorasi chest, quest sisa, event & achievement.</p>
+                            </div>
+                        </div>
+                        <div class="oculus-rate-badges">
+                            <div class="oculus-rate-badge">
+                                <span>Tarif Dasar:</span> <strong>Rp 3.500 / Fate</strong>
+                            </div>
+                            <div class="oculus-rate-badge">
+                                <span>Konversi:</span> <strong>1 Fate = 160 Primogems</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oculus-controls-section">
+                        <label class="oculus-controls-label" for="fate-qty-input">
+                            Tentukan Jumlah Intertwined Fate yang Ingin Dikumpulkan (1 s/d 180 Fate):
+                        </label>
+                        
+                        <div class="oculus-stepper-row">
+                            <button type="button" class="btn-oculus-step" onclick="stepFateQty(-5)">-5</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepFateQty(-1)">-</button>
+                            
+                            <div class="oculus-display-box" style="border-color: #f472b6;">
+                                <input type="number" id="fate-qty-input" class="oculus-number-input" 
+                                       min="1" max="180" value="${selectedFateQty}"
+                                       style="color: #f472b6;"
+                                       oninput="onFateQtyChange(this.value)">
+                                <span class="oculus-max-label">/ 180 Fate Max</span>
+                            </div>
+
+                            <button type="button" class="btn-oculus-step" onclick="stepFateQty(1)">+</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepFateQty(5)">+5</button>
+                        </div>
+
+                        <input type="range" id="fate-qty-slider" class="oculus-range-slider"
+                               min="1" max="180" value="${selectedFateQty}"
+                               style="accent-color: #f472b6;"
+                               oninput="onFateQtyChange(this.value)">
+
+                        <div class="oculus-presets-row">
+                            <button type="button" class="btn-oculus-preset" onclick="setFateQty(5)">5 Fate (800 Primo)</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setFateQty(10)">10 Fate (1.600 Primo)</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setFateQty(20)">20 Fate (3.200 Primo)</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setFateQty(50)">50 Fate (8.000 Primo)</button>
+                            <button type="button" class="btn-oculus-preset max-preset" onclick="setFateQty(90)" style="border-color: #f472b6; color: #f472b6;">
+                                🎯 90 Fate (1x Pity Garansi 5★)
+                            </button>
+                            <button type="button" class="btn-oculus-preset max-preset" onclick="setFateQty(180)" style="border-color: #f472b6; color: #f472b6;">
+                                👑 180 Fate (100% Rate-up Garansi)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                Setara: <strong>${primoEquiv.toLocaleString('id-ID')} Primogems</strong> (${selectedFateQty}x Wish Intertwined)
+                            </span>
+                            <span class="oculus-calc-hint">
+                                ${savings > 0 
+                                    ? `🎁 Paket Borongan Hemat! Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif normal.` 
+                                    : 'Farming manual aman anti-banned tanpa aplikasi ketiga.'}
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price" style="color: #f472b6;">
+                            Rp ${finalPrice.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        function setFateQty(val) {
+            let num = parseInt(val, 10);
+            if (isNaN(num)) num = 1;
+            if (num < 1) num = 1;
+            if (num > 180) num = 180;
+            selectedFateQty = num;
+            renderFateConfigurator();
+        }
+
+        function stepFateQty(delta) {
+            setFateQty(selectedFateQty + delta);
+        }
+
+        function onFateQtyChange(val) {
+            setFateQty(val);
+        }
+
+        // ================= 2. KONFIGURATOR BUILD KARAKTER =================
+        function renderBuildConfigurator() {
+            const container = document.getElementById('build-configurator-box');
+            if (!container) return;
+
+            const currentPkg = buildPackages.find(p => p.id === selectedBuildPackageId) || buildPackages[1];
+
+            const pkgCardsHtml = buildPackages.map(pkg => `
+                <div class="build-pkg-card ${pkg.id === selectedBuildPackageId ? 'active' : ''}" onclick="selectBuildPackage('${pkg.id}')">
+                    ${pkg.badge ? `<span class="pkg-tag-badge">${pkg.badge}</span>` : ''}
+                    <div>
+                        <div class="pkg-header">
+                            <h4 class="pkg-title">${pkg.name}</h4>
+                            <span class="pkg-price-badge">Rp ${pkg.price.toLocaleString('id-ID')}</span>
+                        </div>
+                        <div class="pkg-meta-tags" style="margin: 8px 0;">
+                            <span class="pkg-meta-tag">${pkg.level}</span>
+                            <span class="pkg-meta-tag">${pkg.talent}</span>
+                            <span class="pkg-meta-tag">${pkg.weapon}</span>
+                        </div>
+                        <p class="pkg-desc">${pkg.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb" style="border-color: #f87171; background: rgba(239,68,68,0.15); box-shadow: 0 0 14px rgba(239,68,68,0.3);">⚔️</div>
+                            <div class="oculus-hero-text">
+                                <h4>Joki Build Karakter Genshin Impact</h4>
+                                <p>Naikkan level karakter ke Lv. 90, maksimalkan talent domain, ascension senjata, serta optimasi set 4-pc artifact terbaik siap tempur di Spiral Abyss & Imaginarium Theater.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-input-card-group highlight-input">
+                        <label class="custom-form-label" for="build-char-name">
+                            🎭 Nama Karakter yang Ingin Dibuild (Wajib Diisi):
+                        </label>
+                        <input type="text" id="build-char-name" class="custom-text-input" 
+                               placeholder="Ketik di sini (contoh: Arlecchino / Furina / Raiden Shogun / Neuvillette / Mavuika)"
+                               value="${escapeHtml(selectedBuildCharName)}"
+                               oninput="onBuildCharNameChange(this.value)">
+                        <span class="input-helper-text">💡 Wajib diisi! Ketik nama karakter bintang 4 atau 5 yang ingin kamu maksimalkan.</span>
+                    </div>
+
+                    <div class="custom-input-card-group">
+                        <label class="custom-form-label">
+                            📦 Pilih Paket Tingkatan Build:
+                        </label>
+                        <div class="build-packages-grid">
+                            ${pkgCardsHtml}
+                        </div>
+                    </div>
+
+                    <div class="custom-input-card-group">
+                        <label class="custom-form-label" for="build-notes">
+                            📝 Catatan Khusus Build (Opsional):
+                        </label>
+                        <input type="text" id="build-notes" class="custom-text-input" 
+                               placeholder="Contoh: Fokus set Emblem of Severed Fate, Crit Rate minimal 65%, atau fokus ER%"
+                               value="${escapeHtml(selectedBuildNotes)}"
+                               oninput="onBuildNotesChange(this.value)">
+                        <span class="input-helper-text">💡 Berikan catatan tambahan bila ada preferensi senjata atau artifact tertentu.</span>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                Paket Terpilih: <strong>${currentPkg.name} (${currentPkg.level})</strong>
+                            </span>
+                            <span class="oculus-calc-hint">
+                                Karakter: ${selectedBuildCharName.trim() ? `<strong>${escapeHtml(selectedBuildCharName)}</strong>` : '(Belum diketik)'} • Pengerjaan manual & aman.
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price" style="color: #f87171;">
+                            Rp ${currentPkg.price.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        function selectBuildPackage(pkgId) {
+            selectedBuildPackageId = pkgId;
+            renderBuildConfigurator();
+        }
+
+        function onBuildCharNameChange(val) {
+            selectedBuildCharName = val;
+            updateCheckoutSummary();
+        }
+
+        function onBuildNotesChange(val) {
+            selectedBuildNotes = val;
+        }
+
+        // ================= 3. KONFIGURATOR LOOT MATERIAL (CUSTOM TEKS) =================
+        function renderLootConfigurator() {
+            const container = document.getElementById('loot-configurator-box');
+            if (!container) return;
+
+            if (selectedLootQty < 10) selectedLootQty = 10;
+            if (selectedLootQty > 300) selectedLootQty = 300;
+
+            const finalPrice = calculateLootPrice(selectedLootQty);
+            const categories = [
+                'Local Specialty (Bunga / Tanaman)',
+                'Monster & Elite Drops (Handguard, Fatui, dll)',
+                'Ore & Batu Tambang (Crystal, Cor Lapis)',
+                'Mancing Ikan (The Catch / Fleuve Cendre)'
+            ];
+
+            const catChipsHtml = categories.map(cat => `
+                <button type="button" class="mat-chip ${selectedLootCategory === cat ? 'active' : ''}" 
+                        onclick="selectMaterialCategory('${cat}')">
+                    ${cat}
+                </button>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb" style="border-color: #34d399; background: rgba(16,185,129,0.15); box-shadow: 0 0 14px rgba(16,185,129,0.3);">🌿</div>
+                            <div class="oculus-hero-text">
+                                <h4>Joki Loot & Farming Material Karakter / Senjata</h4>
+                                <p>Malas keliling Teyvat cari tanaman atau monster drops? Ketik nama material yang kamu perlukan dan tentukan target jumlahnya, kami kumpulkan sampai beres!</p>
+                            </div>
+                        </div>
+                        <div class="oculus-rate-badges">
+                            <div class="oculus-rate-badge">
+                                <span>Tarif:</span> <strong>Mulai Rp 200 - Rp 300 / biji</strong>
+                            </div>
+                            <div class="oculus-rate-badge">
+                                <span>Paket 168 Biji:</span> <strong>Rp 38.000 (Full Ascend)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-input-card-group highlight-input">
+                        <label class="custom-form-label" for="loot-material-name">
+                            ✍️ Ketik Nama Material yang Mau Di-loot (Wajib Diisi):
+                        </label>
+                        <input type="text" id="loot-material-name" class="custom-text-input" 
+                               placeholder="Ketik di sini (contoh: Handguard / Cor Lapis / Lakelight Lily / Specter Drops / Saurian Claws)"
+                               value="${escapeHtml(selectedLootMaterialName)}"
+                               oninput="onLootMaterialNameChange(this.value)">
+                        <span class="input-helper-text">💡 Wajib diisi! Kamu bisa mengetik nama tanaman, bunga regional, drop musuh elit, atau batu tambang.</span>
+                    </div>
+
+                    <div class="custom-input-card-group">
+                        <label class="custom-form-label">
+                            🏷️ Kategori Jenis Material:
+                        </label>
+                        <div class="material-category-chips">
+                            ${catChipsHtml}
+                        </div>
+                    </div>
+
+                    <div class="oculus-controls-section">
+                        <label class="oculus-controls-label" for="loot-qty-input">
+                            Tentukan Jumlah Material yang Mau Dikumpulkan (10 s/d 300 Buah):
+                        </label>
+                        
+                        <div class="oculus-stepper-row">
+                            <button type="button" class="btn-oculus-step" onclick="stepLootQty(-10)">-10</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepLootQty(-1)">-</button>
+                            
+                            <div class="oculus-display-box" style="border-color: #34d399;">
+                                <input type="number" id="loot-qty-input" class="oculus-number-input" 
+                                       min="10" max="300" value="${selectedLootQty}"
+                                       style="color: #34d399;"
+                                       oninput="onLootQtyChange(this.value)">
+                                <span class="oculus-max-label">/ 300 Buah</span>
+                            </div>
+
+                            <button type="button" class="btn-oculus-step" onclick="stepLootQty(1)">+</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepLootQty(10)">+10</button>
+                        </div>
+
+                        <input type="range" id="loot-qty-slider" class="oculus-range-slider"
+                               min="10" max="300" value="${selectedLootQty}"
+                               style="accent-color: #34d399;"
+                               oninput="onLootQtyChange(this.value)">
+
+                        <div class="oculus-presets-row">
+                            <button type="button" class="btn-oculus-preset" onclick="setLootQty(50)">50 Buah (Rp 15.000)</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setLootQty(100)">100 Buah (Rp 25.000)</button>
+                            <button type="button" class="btn-oculus-preset max-preset" onclick="setLootQty(168)" style="border-color: #34d399; color: #34d399;">
+                                🎁 168 Buah (Standar Full Ascend Lv 90 - Rp 38.000)
+                            </button>
+                            <button type="button" class="btn-oculus-preset" onclick="setLootQty(250)">250 Buah (Rp 55.000)</button>
+                        </div>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                Material: ${selectedLootMaterialName.trim() ? `<strong>${escapeHtml(selectedLootMaterialName)}</strong>` : '(Belum diketik)'} • <strong>${selectedLootQty} Buah</strong>
+                            </span>
+                            <span class="oculus-calc-hint">
+                                ${selectedLootQty === 168 
+                                    ? '🎁 Paket Manis: Pas untuk kenaikan karakter dari Level 1 sampai Level 90.' 
+                                    : 'Farming manual di world akun kamu atau open co-op resmi.'}
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price" style="color: #34d399;">
+                            Rp ${finalPrice.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        function onLootMaterialNameChange(val) {
+            selectedLootMaterialName = val;
+            updateCheckoutSummary();
+        }
+
+        function selectMaterialCategory(cat) {
+            selectedLootCategory = cat;
+            renderLootConfigurator();
+        }
+
+        function setLootQty(val) {
+            let num = parseInt(val, 10);
+            if (isNaN(num)) num = 10;
+            if (num < 10) num = 10;
+            if (num > 300) num = 300;
+            selectedLootQty = num;
+            renderLootConfigurator();
+        }
+
+        function stepLootQty(delta) {
+            setLootQty(selectedLootQty + delta);
+        }
+
+        function onLootQtyChange(val) {
+            setLootQty(val);
+        }
+
+        // ================= 4. KONFIGURATOR RAWAT AKUN =================
+        function renderRawatConfigurator() {
+            const container = document.getElementById('rawat-configurator-box');
+            if (!container) return;
+
+            const currentPkg = rawatPackages.find(p => p.id === selectedRawatPackageId) || rawatPackages[1];
+
+            const pkgCardsHtml = rawatPackages.map(pkg => `
+                <div class="rawat-pkg-card ${pkg.id === selectedRawatPackageId ? 'active' : ''}" onclick="selectRawatPackage('${pkg.id}')">
+                    ${pkg.badge ? `<span class="pkg-tag-badge">${pkg.badge}</span>` : ''}
+                    <div>
+                        <div class="pkg-header">
+                            <h4 class="pkg-title">${pkg.name}</h4>
+                            <span class="pkg-price-badge">Rp ${pkg.price.toLocaleString('id-ID')}</span>
+                        </div>
+                        <div class="pkg-meta-tags" style="margin: 8px 0;">
+                            <span class="pkg-meta-tag">${pkg.duration}</span>
+                            <span class="pkg-meta-tag">${pkg.pricePerDay}</span>
+                        </div>
+                        <p class="pkg-desc">${pkg.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb" style="border-color: #38bdf8; background: rgba(14,165,233,0.15); box-shadow: 0 0 14px rgba(14,165,233,0.3);">🛡️</div>
+                            <div class="oculus-hero-text">
+                                <h4>Joki Rawat Akun Genshin Impact</h4>
+                                <p>Tidak sempat login setiap hari? Serahkan perawatan akunmu pada kami. Daily Commissions 4/4 selesai, Resin habis tidak pernah mentok, event beres, dan Battle Pass level 50 aman!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-input-card-group">
+                        <label class="custom-form-label">
+                            📅 Pilih Paket Durasi Rawat Akun:
+                        </label>
+                        <div class="rawat-packages-grid">
+                            ${pkgCardsHtml}
+                        </div>
+                    </div>
+
+                    <div class="custom-input-card-group">
+                        <label class="custom-form-label" for="rawat-resin-focus">
+                            🎯 Fokus Penggunaan Resin Harian (Opsional):
+                        </label>
+                        <input type="text" id="rawat-resin-focus" class="custom-text-input" 
+                               placeholder="Contoh: Habiskan Resin ke Domain Artifact Golden Troupe / Boss Dendro / Bebas"
+                               value="${escapeHtml(selectedRawatResinFocus)}"
+                               oninput="onRawatResinFocusChange(this.value)">
+                        <span class="input-helper-text">💡 Tulis domain artifact, bos material, atau buku bakat yang ingin diprioritaskan.</span>
+                    </div>
+
+                    <div class="rawat-features-included">
+                        <h5>Fitur Rutin yang Dikerjakan Setiap Hari:</h5>
+                        <div class="feature-tags-wrap">
+                            <span class="ft-tag">✓ 4/4 Daily Commission</span>
+                            <span class="ft-tag">✓ Habiskan 160-200 Original Resin</span>
+                            <span class="ft-tag">✓ Klaim Hadiah Katheryne</span>
+                            <span class="ft-tag">✓ Ekspedisi Harian</span>
+                            <span class="ft-tag">✓ Klaim Welkin Moon</span>
+                            <span class="ft-tag">✓ 3x Weekly Boss (Khusus Mingguan/Bulanan)</span>
+                            <span class="ft-tag">✓ Reputasi Bounties & Requests (Mingguan/Bulanan)</span>
+                            <span class="ft-tag">✓ Event Harian / Versi (Mingguan/Bulanan)</span>
+                        </div>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                Paket Terpilih: <strong>${currentPkg.name} (${currentPkg.duration})</strong>
+                            </span>
+                            <span class="oculus-calc-hint">
+                                Laporan screenshot progress dikirimkan secara berkala via WhatsApp.
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price" style="color: #38bdf8;">
+                            Rp ${currentPkg.price.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        function selectRawatPackage(pkgId) {
+            selectedRawatPackageId = pkgId;
+            renderRawatConfigurator();
+        }
+
+        function onRawatResinFocusChange(val) {
+            selectedRawatResinFocus = val;
+        }
+
+        // Toggle Centang Daerah / Quest / Endgame
         function toggleAreaSelection(areaId) {
             if (selectedAreaIds.has(areaId)) {
                 selectedAreaIds.delete(areaId);
@@ -1230,7 +2147,7 @@
             updateCheckoutSummary();
         }
 
-        // Pilih Semua Daerah dalam Region Ini
+        // Pilih Semua Daerah / Quest
         function toggleSelectAllAreas() {
             const areas = regionDatabase[currentSelectedRegion]?.areas || [];
             areas.forEach(a => selectedAreaIds.add(a.id));
@@ -1246,10 +2163,12 @@
             updateCheckoutSummary();
         }
 
-        // Ubah Tipe Layanan
+        // Ubah Tipe Layanan (Untuk Region Map)
         function changeServiceType(newType) {
             currentServiceType = newType;
             renderServiceTypeOptions();
+
+            hideAllConfigurators();
 
             const areaGrid = document.getElementById('area-checkbox-grid');
             const oculusBox = document.getElementById('oculus-configurator-box');
@@ -1257,9 +2176,7 @@
             const drawerActions = document.getElementById('drawer-header-actions');
 
             if (newType === 'oculus_only') {
-                if (areaGrid) areaGrid.classList.add('hidden');
                 if (oculusBox) oculusBox.classList.remove('hidden');
-                if (teleportBox) teleportBox.classList.add('hidden');
                 if (drawerActions) drawerActions.classList.add('hidden');
 
                 const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
@@ -1270,8 +2187,6 @@
 
                 renderOculusConfigurator();
             } else if (newType === 'waypoint_only') {
-                if (areaGrid) areaGrid.classList.add('hidden');
-                if (oculusBox) oculusBox.classList.add('hidden');
                 if (teleportBox) teleportBox.classList.remove('hidden');
                 if (drawerActions) drawerActions.classList.add('hidden');
 
@@ -1285,8 +2200,6 @@
                 renderTeleportConfigurator();
             } else {
                 if (areaGrid) areaGrid.classList.remove('hidden');
-                if (oculusBox) oculusBox.classList.add('hidden');
-                if (teleportBox) teleportBox.classList.add('hidden');
                 if (drawerActions) drawerActions.classList.remove('hidden');
 
                 const data = regionDatabase[currentSelectedRegion];
@@ -1305,6 +2218,41 @@
         function updateCheckoutSummary() {
             const countEl = document.getElementById('summary-selected-count');
             const priceEl = document.getElementById('summary-total-price');
+            if (!countEl || !priceEl) return;
+
+            if (currentSelectedRegion === 'fate_farm') {
+                const finalPrice = calculateFatePrice(selectedFateQty);
+                countEl.innerHTML = `${selectedFateQty} Fate <small style="color:#f472b6;">(${selectedFateQty * 160} Primo)</small>`;
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = finalPrice;
+                return;
+            }
+
+            if (currentSelectedRegion === 'build_karakter') {
+                const pkg = buildPackages.find(p => p.id === selectedBuildPackageId) || buildPackages[1];
+                const charNameText = selectedBuildCharName.trim() ? selectedBuildCharName.trim() : 'Karakter';
+                countEl.innerHTML = `Build ${escapeHtml(charNameText)} <span class="bundle-badge" style="background:rgba(239,68,68,0.2);color:#f87171;border-color:rgba(239,68,68,0.4);">${pkg.level}</span>`;
+                priceEl.textContent = `Rp ${pkg.price.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = pkg.price;
+                return;
+            }
+
+            if (currentSelectedRegion === 'loot_material') {
+                const finalPrice = calculateLootPrice(selectedLootQty);
+                const matText = selectedLootMaterialName.trim() ? selectedLootMaterialName.trim() : 'Material';
+                countEl.innerHTML = `${selectedLootQty} Biji <small style="color:#34d399;">(${escapeHtml(matText)})</small>`;
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = finalPrice;
+                return;
+            }
+
+            if (currentSelectedRegion === 'rawat_akun') {
+                const pkg = rawatPackages.find(p => p.id === selectedRawatPackageId) || rawatPackages[1];
+                countEl.innerHTML = `Rawat Akun <span class="bundle-badge" style="background:rgba(14,165,233,0.2);color:#38bdf8;border-color:rgba(14,165,233,0.4);">${pkg.duration}</span>`;
+                priceEl.textContent = `Rp ${pkg.price.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = pkg.price;
+                return;
+            }
 
             if (currentServiceType === 'oculus_only') {
                 const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
@@ -1340,7 +2288,7 @@
                 return;
             }
 
-            // Normal area or endgame
+            // Normal area, Endgame, atau World Quest
             const areas = regionDatabase[currentSelectedRegion]?.areas || [];
             let total = 0;
             let count = 0;
@@ -1353,7 +2301,14 @@
                 }
             });
 
-            if (currentSelectedRegion === 'endgame') {
+            if (currentSelectedRegion === 'worldquest') {
+                if (count >= 4 && count === areas.length) {
+                    total = Math.round(total * 0.85); // Diskon 15% bundle full all world quest
+                    countEl.innerHTML = `${count} World Quest <span class="bundle-badge">🎁 Paket All Quest 15%</span>`;
+                } else {
+                    countEl.textContent = `${count} World Quest`;
+                }
+            } else if (currentSelectedRegion === 'endgame') {
                 countEl.textContent = `${count} Mode Endgame`;
             } else if (count >= 4 && count === areas.length) {
                 total = Math.round(total * 0.85); // Diskon 15% bundle full region
@@ -1372,7 +2327,52 @@
             const total = document.getElementById('summary-total-price').textContent;
             let message = '';
 
-            if (currentServiceType === 'oculus_only') {
+            if (currentSelectedRegion === 'fate_farm') {
+                const primoEquiv = selectedFateQty * 160;
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n💎 Layanan: Joki Farm Intertwined Fate (Wish)\n🔢 Target Tabungan: ${selectedFateQty} Intertwined Fate\n✨ Setara Primogems: ${primoEquiv.toLocaleString('id-ID')} Primogems\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & nomor rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentSelectedRegion === 'build_karakter') {
+                if (!selectedBuildCharName.trim()) {
+                    alert('Silakan ketik nama karakter yang ingin kamu build terlebih dahulu!');
+                    const inputEl = document.getElementById('build-char-name');
+                    if (inputEl) {
+                        inputEl.focus();
+                        inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+                const pkg = buildPackages.find(p => p.id === selectedBuildPackageId) || buildPackages[1];
+                const notesText = selectedBuildNotes.trim() ? `\n📌 Catatan Khusus: ${selectedBuildNotes.trim()}` : '';
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n⚔️ Layanan: Joki Build Karakter\n🎭 Karakter: ${selectedBuildCharName.trim()}\n📦 Paket Build: ${pkg.name} (${pkg.level} • ${pkg.talent})\n📋 Spesifikasi: ${pkg.desc}${notesText}\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & nomor rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentSelectedRegion === 'loot_material') {
+                if (!selectedLootMaterialName.trim()) {
+                    alert('Silakan ketik nama material yang ingin kamu loot terlebih dahulu (misal: Handguard, Cor Lapis, Lakelight Lily, dll)!');
+                    const inputEl = document.getElementById('loot-material-name');
+                    if (inputEl) {
+                        inputEl.focus();
+                        inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n🌿 Layanan: Joki Loot & Farming Material\n✍️ Nama Material: ${selectedLootMaterialName.trim()}\n🏷️ Kategori: ${selectedLootCategory}\n🔢 Target Jumlah: ${selectedLootQty} Buah / Biji\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & nomor rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentSelectedRegion === 'rawat_akun') {
+                const pkg = rawatPackages.find(p => p.id === selectedRawatPackageId) || rawatPackages[1];
+                const resinText = selectedRawatResinFocus.trim() ? `\n🎯 Fokus Resin: ${selectedRawatResinFocus.trim()}` : '';
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n🛡️ Layanan: Joki Rawat Akun\n📅 Paket Durasi: ${pkg.name} (${pkg.duration})\n📋 Rincian Harian: ${pkg.desc}${resinText}\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & nomor rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentSelectedRegion === 'worldquest') {
+                const count = selectedAreaIds.size;
+                if (count === 0) {
+                    alert('Silakan centang minimal 1 World Quest Pembuka Area yang ingin Anda joki.');
+                    return;
+                }
+                const region = regionDatabase['worldquest'];
+                const areas = region.areas.filter(a => selectedAreaIds.has(a.id));
+                const questListText = areas.map((a, i) => `${i + 1}. ${a.name} (Rp ${a.price.toLocaleString('id-ID')})`).join('\n');
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📜 Layanan: World Quest Pembuka Area\n🗺️ Quest yang Dipilih (${count} quest):\n${questListText}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentServiceType === 'oculus_only') {
                 const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
                 const isMax = selectedOculusQty === oculus.max;
                 const packageNote = isMax ? ' (Paket Borongan Full Region - Diskon Hemat)' : '';

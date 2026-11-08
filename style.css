@@ -2681,6 +2681,49 @@ button:active,
     font-weight: 700;
 }
 
+/* Catalog Filter Bar */
+.catalog-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 2px 14px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.catalog-filter-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.catalog-filter-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #a0a0b2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.catalog-filter-pill:hover {
+    border-color: #00adb5;
+    color: #ffffff;
+    background: rgba(0, 173, 181, 0.12);
+}
+
+.catalog-filter-pill.active {
+    background: rgba(0, 173, 181, 0.22);
+    border-color: #00adb5;
+    color: #00adb5;
+    box-shadow: 0 0 14px rgba(0, 173, 181, 0.3);
+}
+
 /* ================= 1. REGION OVERVIEW CARDS ================= */
 .region-card-grid {
     display: grid;
@@ -2820,6 +2863,51 @@ button:active,
     background: rgba(30, 25, 45, 0.9);
     border-color: rgba(168, 85, 247, 0.5);
     color: #c084fc;
+}
+
+.region-element-badge.quest {
+    background: rgba(45, 30, 10, 0.92);
+    border-color: rgba(245, 158, 11, 0.6);
+    color: #fbbf24;
+}
+
+.region-element-badge.fate {
+    background: linear-gradient(135deg, rgba(45, 15, 35, 0.92), rgba(15, 35, 45, 0.92));
+    border-color: rgba(236, 72, 153, 0.55);
+    color: #f472b6;
+}
+
+.region-element-badge.build {
+    background: rgba(45, 15, 15, 0.92);
+    border-color: rgba(239, 68, 68, 0.55);
+    color: #f87171;
+}
+
+.region-element-badge.loot {
+    background: rgba(12, 38, 25, 0.92);
+    border-color: rgba(16, 185, 129, 0.55);
+    color: #34d399;
+}
+
+.region-element-badge.rawat {
+    background: rgba(12, 30, 48, 0.92);
+    border-color: rgba(14, 165, 233, 0.55);
+    color: #38bdf8;
+}
+
+.region-card-badge-special {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #00adb5, #00757a);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 2;
 }
 
 .region-card-info {
@@ -3253,9 +3341,13 @@ button:active,
     transform: translateY(-2px);
 }
 
-/* ================= OCULUS & TELEPORT CONFIGURATOR (PER REGION) ================= */
+/* ================= OCULUS, TELEPORT, FATE, BUILD, LOOT & RAWAT CONFIGURATORS ================= */
 .oculus-configurator-box,
-.teleport-configurator-box {
+.teleport-configurator-box,
+.fate-configurator-box,
+.build-configurator-box,
+.loot-configurator-box,
+.rawat-configurator-box {
     background: #111216;
     border: 1px solid rgba(0, 173, 181, 0.3);
     border-radius: 14px;
@@ -3292,6 +3384,246 @@ button:active,
     align-items: center;
     gap: 8px;
     width: 100%;
+}
+
+.quest-service-badge {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+    color: #fbbf24 !important;
+}
+
+.fate-service-badge {
+    background: rgba(236, 72, 153, 0.12) !important;
+    border-color: rgba(236, 72, 153, 0.4) !important;
+    color: #f472b6 !important;
+}
+
+.build-service-badge {
+    background: rgba(239, 68, 68, 0.12) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #f87171 !important;
+}
+
+.loot-service-badge {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+    color: #34d399 !important;
+}
+
+.rawat-service-badge {
+    background: rgba(14, 165, 233, 0.12) !important;
+    border-color: rgba(14, 165, 233, 0.4) !important;
+    color: #38bdf8 !important;
+}
+
+/* Custom Input Groups for Build, Loot & Rawat */
+.custom-input-card-group {
+    margin: 16px 0;
+}
+
+.custom-input-card-group.highlight-input {
+    background: rgba(0, 173, 181, 0.05);
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.custom-form-label {
+    display: block;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.custom-text-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #0b0c10;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.custom-text-input:focus {
+    border-color: #00adb5;
+    outline: none;
+    box-shadow: 0 0 14px rgba(0, 173, 181, 0.35);
+    background: #0f1015;
+}
+
+.input-helper-text {
+    display: block;
+    font-size: 0.72rem;
+    color: #8c8c9e;
+    margin-top: 6px;
+    line-height: 1.35;
+}
+
+/* Material Chips */
+.material-category-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.mat-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b0b0be;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.mat-chip:hover {
+    border-color: #00adb5;
+    color: #ffffff;
+    background: rgba(0, 173, 181, 0.1);
+}
+
+.mat-chip.active {
+    background: rgba(0, 173, 181, 0.22);
+    border-color: #00adb5;
+    color: #00adb5;
+    box-shadow: 0 0 12px rgba(0, 173, 181, 0.25);
+}
+
+/* Build & Rawat Packages Grid */
+.build-packages-grid,
+.rawat-packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.build-pkg-card,
+.rawat-pkg-card {
+    background: #0b0c10;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+    user-select: none;
+}
+
+.build-pkg-card:hover,
+.rawat-pkg-card:hover {
+    border-color: rgba(0, 173, 181, 0.5);
+    transform: translateY(-2px);
+    background: #0e0f14;
+}
+
+.build-pkg-card.active,
+.rawat-pkg-card.active {
+    border-color: #00adb5;
+    background: rgba(0, 173, 181, 0.08);
+    box-shadow: 0 0 16px rgba(0, 173, 181, 0.25);
+}
+
+.pkg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.pkg-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+}
+
+.pkg-price-badge {
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: #00adb5;
+    white-space: nowrap;
+}
+
+.pkg-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.pkg-meta-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #00adb5;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+
+.pkg-desc {
+    font-size: 0.76rem;
+    color: #8c8c9e;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.pkg-tag-badge {
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    background: #f59e0b;
+    color: #121212;
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* Rawat Features */
+.rawat-features-included {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 16px 0;
+}
+
+.rawat-features-included h5 {
+    margin: 0 0 8px 0;
+    font-size: 0.78rem;
+    color: #a0a0b2;
+    font-weight: 700;
+}
+
+.feature-tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ft-tag {
+    background: rgba(0, 173, 181, 0.1);
+    border: 1px solid rgba(0, 173, 181, 0.25);
+    color: #00adb5;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
 }
 
 .oculus-region-chips-wrapper {
@@ -3889,10 +4221,19 @@ button:active,
         justify-content: center;
     }
 
-    /* Mobile Oculus & Teleport Configurator */
+    /* Mobile Oculus, Teleport, Fate, Build, Loot & Rawat Configurator */
     .oculus-configurator-box,
-    .teleport-configurator-box {
+    .teleport-configurator-box,
+    .fate-configurator-box,
+    .build-configurator-box,
+    .loot-configurator-box,
+    .rawat-configurator-box {
         padding: 14px 12px;
+    }
+
+    .build-packages-grid,
+    .rawat-packages-grid {
+        grid-template-columns: 1fr;
     }
 
     .oculus-hero-top {
