@@ -7,12 +7,12 @@
     <title>History FT Free Fire - TEAM LXVOID</title>
     <meta name="description" content="Dokumentasi rekap match, turnamen, scrim, dan kemenangan tim Free Fire TEAM LXVOID.">
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23121212'/><text x='50%25' y='68%25' font-size='56' font-family='Arial,sans-serif' font-weight='bold' fill='%2300adb5' text-anchor='middle'>R</text></svg>">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <!-- Open Graph / WhatsApp / Discord Previews -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="History FT Free Fire - TEAM LXVOID">
     <meta property="og:description" content="Galeri dokumentasi match, turnamen, scrim, dan rekap scoreboard tim Free Fire TEAM LXVOID.">
-    <meta property="og:image" content="https://p16-common-sign.tiktokcdn.com/tos-maliva-avt-0068/9d8d6c9d73bd11abb553238a0e00aa3e~tplv-tiktokx-cropcenter:1080:1080.jpeg">
+    <meta property="og:image" content="assets/logo.png">
     <!-- Android / Mobile PWA Meta Tags -->
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -28,7 +28,10 @@
 
     <!-- ================= NAVBAR ================= -->
     <header class="navbar">
-        <a href="index.html" class="logo-link"><h1 class="logo">TEAM LXVOID</h1></a>
+        <a href="index.html" class="logo-link">
+            <img src="assets/logo.png" alt="TEAM LXVOID Logo" class="nav-logo-badge">
+            <h1 class="logo">TEAM LXVOID</h1>
+        </a>
         <nav>
             <a href="index.html">Home</a>
             <a href="presets.html">Presets</a>
@@ -75,12 +78,18 @@
                 </div>
             </div>
 
+            <!-- Kolom Pencarian Cepat -->
+            <div class="ff-search-row">
+                <input type="text" id="ff-search-input" class="ff-search-input" placeholder="🔍 Cari judul match, uploader, kategori, atau MVP...">
+            </div>
+
             <!-- Kategori / Filter Tag Buttons -->
             <div class="filter-bar">
                 <button class="filter-btn active" data-filter="all">Semua</button>
                 <button class="filter-btn" data-filter="Champion">Champion / Booyah</button>
                 <button class="filter-btn" data-filter="Tournament">Fast Tournament</button>
                 <button class="filter-btn" data-filter="Scrim">Scrim / War</button>
+                <button class="filter-btn hidden" id="filter-btn-mine" data-filter="mine">👤 Postingan Saya</button>
             </div>
 
             <!-- ================= MODAL LOGIN ADMIN ================= -->
@@ -150,9 +159,12 @@
                         </div>
                     </div>
 
-                    <div class="modal-actions profile-modal-actions">
-                        <button type="button" id="save-profile-btn" class="custom-file-upload">💾 Simpan Profil</button>
-                        <button type="button" id="profile-logout-btn" class="btn-danger-outline">🚪 Logout</button>
+                    <div class="modal-actions profile-modal-actions" style="flex-direction:column; gap:8px;">
+                        <a href="owner.html" id="open-owner-center-btn" class="btn-owner-gold hidden" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px;">👑 Buka Owner Control Center</a>
+                        <div style="display:flex; gap:8px; width:100%;">
+                            <button type="button" id="save-profile-btn" class="custom-file-upload" style="flex:1;">💾 Simpan Profil</button>
+                            <button type="button" id="profile-logout-btn" class="btn-danger-outline" style="flex:1;">🚪 Logout</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,6 +188,17 @@
                         <div class="field-group">
                             <label for="edit-match-desc">Keterangan:</label>
                             <input type="text" id="edit-match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
+                        </div>
+
+                        <div class="field-group" style="display:flex; gap:10px;">
+                            <div style="flex:1;">
+                                <label for="edit-match-mvp">Player MVP (Opsional):</label>
+                                <input type="text" id="edit-match-mvp" placeholder="cth: Rangga">
+                            </div>
+                            <div style="flex:1;">
+                                <label for="edit-match-kills">Total Kills (Opsional):</label>
+                                <input type="text" id="edit-match-kills" placeholder="cth: 18 Kills">
+                            </div>
                         </div>
 
                         <div class="field-group">
@@ -276,6 +299,18 @@
                         <option value="Tournament">⚔️ Fast Tournament</option>
                         <option value="Scrim">🛡️ Scrim / Guild War</option>
                     </select>
+
+                    <!-- Input Opsional MVP & Total Kill Tim -->
+                    <div style="display:flex; gap:10px; margin-bottom:8px;">
+                        <input type="text" id="match-mvp" placeholder="👑 Player MVP (cth: Rangga)" style="flex:1;">
+                        <input type="text" id="match-kills" placeholder="🎯 Total Kill Tim (cth: 18 Kills)" style="flex:1;">
+                    </div>
+
+                    <!-- Watermark TEAM LXVOID Checkbox -->
+                    <label class="watermark-check-wrap">
+                        <input type="checkbox" id="match-watermark-checkbox" checked>
+                        <span>🛡️ Pasang Watermark "TEAM LXVOID" otomatis pada foto</span>
+                    </label>
 
                     <label for="match-file-input" class="file-picker-btn">
                         📁 Pilih File Gambar Scoreboard dari Perangkat
@@ -465,6 +500,16 @@
         const editMatchFileInput = document.getElementById('edit-match-file-input');
         const editRecropBtn = document.getElementById('edit-recrop-btn');
         const editFileStatus = document.getElementById('edit-file-status');
+        const editMatchMvpInput = document.getElementById('edit-match-mvp');
+        const editMatchKillsInput = document.getElementById('edit-match-kills');
+
+        // Element Search & Filter & New Upload Features
+        const ffSearchInput = document.getElementById('ff-search-input');
+        const filterBtnMine = document.getElementById('filter-btn-mine');
+        const matchMvpInput = document.getElementById('match-mvp');
+        const matchKillsInput = document.getElementById('match-kills');
+        const matchWatermarkCheckbox = document.getElementById('match-watermark-checkbox');
+        let currentSearchTerm = '';
 
         // Element WhatsApp / Instagram Style Crop Modal
         const cropModal = document.getElementById('image-crop-modal');
@@ -765,6 +810,14 @@
 
             const isOwner = isCurrentUserOwner();
             const roleBadgeEl = document.getElementById('profile-role-badge');
+            const ownerCenterBtn = document.getElementById('open-owner-center-btn');
+            if (ownerCenterBtn) {
+                if (isOwner) {
+                    ownerCenterBtn.classList.remove('hidden');
+                } else {
+                    ownerCenterBtn.classList.add('hidden');
+                }
+            }
             if (roleBadgeEl) {
                 if (isOwner) {
                     roleBadgeEl.className = 'profile-role-pill role-owner';
@@ -1334,6 +1387,8 @@
             editMatchIdInput.value = matchData.id || '';
             editMatchTitleInput.value = matchData.title || '';
             editMatchDescInput.value = matchData.desc || '';
+            if (editMatchMvpInput) editMatchMvpInput.value = matchData.mvp || '';
+            if (editMatchKillsInput) editMatchKillsInput.value = matchData.kills || '';
             editMatchCategorySelect.value = matchData.category || 'Tournament';
 
             editMatchImgPreview.src = matchData.imageUrl || FALLBACK_SCOREBOARD;
@@ -1442,6 +1497,8 @@
                     title: title,
                     desc: desc || "Dokumentasi Match",
                     category: category || "Tournament",
+                    mvp: editMatchMvpInput ? editMatchMvpInput.value.trim() : "",
+                    kills: editMatchKillsInput ? editMatchKillsInput.value.trim() : "",
                     updatedAt: Date.now()
                 };
 
@@ -1537,10 +1594,19 @@
             if (user) {
                 isAdmin = true;
                 adminUploadPanel.classList.remove('hidden');
+                if (filterBtnMine) filterBtnMine.classList.remove('hidden');
                 await loadAdminProfile(user);
             } else {
                 isAdmin = false;
                 adminUploadPanel.classList.add('hidden');
+                if (filterBtnMine) filterBtnMine.classList.add('hidden');
+                if (currentFilter === 'mine') {
+                    currentFilter = 'all';
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        if (b.getAttribute('data-filter') === 'all') b.classList.add('active');
+                        else b.classList.remove('active');
+                    });
+                }
                 currentAdminProfile = { username: 'Admin', photoURL: '' };
                 syncProfileUI(null);
             }
@@ -1556,6 +1622,61 @@
                 renderGallery();
             });
         });
+
+        // Search input handler
+        if (ffSearchInput) {
+            ffSearchInput.addEventListener('input', () => {
+                currentSearchTerm = ffSearchInput.value.trim();
+                renderGallery();
+            });
+        }
+
+        // Helper Watermark TEAM LXVOID
+        function applyWatermarkToImage(base64Image) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    // Watermark styling at bottom-right
+                    const margin = Math.round(canvas.width * 0.025);
+                    const badgeH = Math.round(canvas.height * 0.07);
+                    const fontSize = Math.max(14, Math.round(badgeH * 0.48));
+
+                    ctx.font = `800 ${fontSize}px sans-serif`;
+                    const text = '🛡️ TEAM LXVOID';
+                    const textMetrics = ctx.measureText(text);
+                    const badgeW = textMetrics.width + 24;
+
+                    const x = canvas.width - badgeW - margin;
+                    const y = canvas.height - badgeH - margin;
+
+                    // Semi-transparent pill background
+                    ctx.fillStyle = 'rgba(18, 18, 24, 0.75)';
+                    ctx.beginPath();
+                    if (ctx.roundRect) ctx.roundRect(x, y, badgeW, badgeH, 6);
+                    else ctx.rect(x, y, badgeW, badgeH);
+                    ctx.fill();
+
+                    ctx.strokeStyle = 'rgba(0, 173, 181, 0.6)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    // Text
+                    ctx.fillStyle = '#ffffff';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(text, x + 12, y + badgeH / 2);
+
+                    resolve(canvas.toDataURL('image/jpeg', 0.9));
+                };
+                img.onerror = () => resolve(base64Image);
+                img.src = base64Image;
+            });
+        }
 
         // Upload match baru
         savePhotoBtn.addEventListener('click', async () => {
@@ -1587,15 +1708,28 @@
             savePhotoBtn.disabled = true;
 
             try {
+                if (matchWatermarkCheckbox && matchWatermarkCheckbox.checked && finalImageUrl) {
+                    try {
+                        finalImageUrl = await applyWatermarkToImage(finalImageUrl);
+                    } catch (wmErr) {
+                        console.warn("Watermark skip:", wmErr);
+                    }
+                }
+
                 const uploaderName = currentAdminProfile.username || 'Admin';
                 const uploaderAvatar = currentAdminProfile.photoURL || '';
                 const uploaderEmail = auth.currentUser && auth.currentUser.email ? auth.currentUser.email.toLowerCase().trim() : '';
                 const isOwner = isCurrentUserOwner();
+                const mvp = matchMvpInput ? matchMvpInput.value.trim() : "";
+                const kills = matchKillsInput ? matchKillsInput.value.trim() : "";
 
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
                     desc: desc || "Dokumentasi Match",
                     category: category || "Tournament",
+                    mvp: mvp,
+                    kills: kills,
+                    likes: 0,
                     imageUrl: finalImageUrl,
                     uploadedBy: uploaderName,
                     uploaderAvatar: uploaderAvatar,
@@ -1607,6 +1741,8 @@
 
                 titleInput.value = '';
                 descInput.value = '';
+                if (matchMvpInput) matchMvpInput.value = '';
+                if (matchKillsInput) matchKillsInput.value = '';
                 fileInput.value = '';
                 pendingMatchImageBase64 = null;
                 currentMatchRawSrc = null;
@@ -1641,17 +1777,39 @@
             }
         }
 
-        // Render data sesuai filter
+        // Render data sesuai filter & search
         function renderGallery() {
             galleryGrid.innerHTML = '';
-            const filtered = currentFilter === 'all'
-                ? allMatches
-                : allMatches.filter(m => (m.category || 'Tournament') === currentFilter);
+            const filtered = allMatches.filter(m => {
+                // 1. Kategori / Postingan Saya filter
+                if (currentFilter === 'mine') {
+                    if (!canManagePost(m)) return false;
+                } else if (currentFilter !== 'all') {
+                    if ((m.category || 'Tournament') !== currentFilter) return false;
+                }
+
+                // 2. Search term
+                if (currentSearchTerm) {
+                    const term = currentSearchTerm.toLowerCase();
+                    const title = (m.title || '').toLowerCase();
+                    const desc = (m.desc || '').toLowerCase();
+                    const uploader = (m.uploadedBy || '').toLowerCase();
+                    const mvp = (m.mvp || '').toLowerCase();
+                    const kills = (m.kills || '').toLowerCase();
+                    const cat = (m.category || '').toLowerCase();
+                    if (!title.includes(term) && !desc.includes(term) && !uploader.includes(term) && !mvp.includes(term) && !kills.includes(term) && !cat.includes(term)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
 
             if (filtered.length === 0) {
                 const emptyNotice = document.createElement('p');
                 emptyNotice.className = 'section-desc';
-                emptyNotice.textContent = 'Belum ada dokumentasi untuk kategori ini.';
+                emptyNotice.textContent = currentSearchTerm
+                    ? `Tidak ditemukan match dengan kata kunci "${currentSearchTerm}".`
+                    : 'Belum ada dokumentasi untuk kategori ini.';
                 galleryGrid.appendChild(emptyNotice);
                 return;
             }
@@ -1687,11 +1845,29 @@
 
                 const titleEl = document.createElement('h3');
                 titleEl.textContent = data.title || 'Match Documentation';
+                info.appendChild(titleEl);
+
+                // MVP & Total Kills Badges
+                if (data.mvp || data.kills) {
+                    const badgesRow = document.createElement('div');
+                    badgesRow.className = 'match-meta-badges';
+                    if (data.mvp) {
+                        const mvpEl = document.createElement('span');
+                        mvpEl.className = 'badge-mvp';
+                        mvpEl.innerHTML = `👑 MVP: ${escapeHtml(data.mvp)}`;
+                        badgesRow.appendChild(mvpEl);
+                    }
+                    if (data.kills) {
+                        const killsEl = document.createElement('span');
+                        killsEl.className = 'badge-kills';
+                        killsEl.innerHTML = `🎯 ${escapeHtml(data.kills)}`;
+                        badgesRow.appendChild(killsEl);
+                    }
+                    info.appendChild(badgesRow);
+                }
 
                 const descEl = document.createElement('p');
                 descEl.textContent = data.desc || '';
-
-                info.appendChild(titleEl);
                 info.appendChild(descEl);
 
                 // Info Pengunggah (Uploader) & Tanggal
@@ -1739,8 +1915,36 @@
                     dateEl.textContent = 'Dokumentasi FF';
                 }
 
+                // Tombol Like Publik
+                const likeBtn = document.createElement('button');
+                likeBtn.type = 'button';
+                likeBtn.className = 'btn-like-match';
+                const hasLiked = localStorage.getItem('liked_ff_' + data.id);
+                if (hasLiked) likeBtn.classList.add('liked');
+                likeBtn.innerHTML = `❤️ <span class="like-count">${data.likes || 0}</span>`;
+                likeBtn.title = 'Beri like pada match ini';
+                likeBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    if (localStorage.getItem('liked_ff_' + data.id)) {
+                        showToast("Anda sudah menyukai match ini!");
+                        return;
+                    }
+                    try {
+                        localStorage.setItem('liked_ff_' + data.id, '1');
+                        const newLikes = (data.likes || 0) + 1;
+                        data.likes = newLikes;
+                        likeBtn.classList.add('liked');
+                        likeBtn.querySelector('.like-count').textContent = newLikes;
+                        await updateDoc(doc(db, "ff_matches", data.id), { likes: newLikes });
+                        showToast("Terima kasih atas apresiasinya! ❤️");
+                    } catch (err) {
+                        console.warn("Gagal like match:", err);
+                    }
+                });
+
                 metaRow.appendChild(uploaderBox);
                 metaRow.appendChild(dateEl);
+                metaRow.appendChild(likeBtn);
                 info.appendChild(metaRow);
 
                 if (isAdmin) {
@@ -1940,6 +2144,7 @@
             <span>Socials</span>
         </a>
     </nav>
+    <script defer src="site-features.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Owner Control Center - LXVOID COMMUNITY</title>
+    <meta name="description" content="Dashboard kontrol eksklusif Owner LXVOID COMMUNITY — Atur pengumuman website, kelola kode promo joki, dan publikasikan testimoni pelanggan.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <meta name="theme-color" content="#121218">
+    <meta name="color-scheme" content="dark">
+    <link rel="stylesheet" href="style.css?v=20261109c">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <style>
+        .owner-view-wrap {
+            max-width: 1080px;
+            margin: 30px auto;
+            padding: 0 20px;
+            min-height: 70vh;
+        }
+
+        .auth-guard-card {
+            background: #15151c;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            max-width: 440px;
+            margin: 60px auto;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.12);
+        }
+
+        .auth-guard-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .auth-guard-card h2 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .auth-guard-card p {
+            color: #9f9fb0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .auth-input-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .auth-input-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #d0d0e0;
+            margin-bottom: 6px;
+        }
+
+        .auth-input-group input {
+            width: 100%;
+            background: #0f1014;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 0.88rem;
+            box-sizing: border-box;
+        }
+
+        .auth-input-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-owner-gold {
+            background: linear-gradient(135deg, #ffd700, #ff9100);
+            color: #121212;
+            border: none;
+            border-radius: 8px;
+            padding: 11px 22px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .btn-owner-gold:hover {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .btn-owner-gold:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .switch-toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+
+        .switch-toggle-wrap input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #ffd700;
+            cursor: pointer;
+        }
+
+        .switch-label-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .switch-label-desc {
+            font-size: 0.76rem;
+            color: #8f90a6;
+        }
+
+        .preview-box-outer {
+            background: #0f1014;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 16px;
+        }
+
+        .preview-box-label {
+            font-size: 0.72rem;
+            color: #8f90a6;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .btn-action-sm {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-del-sm {
+            background: #d9534f;
+            color: #fff;
+        }
+
+        .btn-del-sm:hover {
+            background: #c9302c;
+        }
+
+        .btn-toggle-sm {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            margin-right: 6px;
+        }
+
+        .btn-toggle-sm:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Data berhasil diperbarui!</div>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge">
+            <h1 class="logo">LXVOID COMMUNITY</h1>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="presets.html">Presets</a>
+            <a href="joki.html">Joki Genshin</a>
+            <a href="history-ff.html">History FF</a>
+            <a href="owner.html" class="nav-highlight">👑 Owner Control</a>
+            <a href="links.html">Links</a>
+        </nav>
+    </header>
+
+    <main class="owner-view-wrap">
+        <!-- ================= GUARD 1: LOGIN OWNER REQUIRED ================= -->
+        <div id="owner-login-view" class="auth-guard-card">
+            <div class="auth-guard-icon">👑</div>
+            <h2>Owner Control Center</h2>
+            <p>Silakan masuk menggunakan akun khusus <strong>Owner</strong> (email berawalan <code>owner</code>, cth: <em>owner@rasyhz.com</em>).</p>
+
+            <form id="owner-login-form" onsubmit="return false;">
+                <div class="auth-input-group">
+                    <label for="owner-email-input">Username atau Email Owner:</label>
+                    <input type="text" id="owner-email-input" placeholder="owner@rasyhz.com" autocomplete="username" required>
+                </div>
+                <div class="auth-input-group">
+                    <label for="owner-pass-input">Password Akun:</label>
+                    <input type="password" id="owner-pass-input" placeholder="Password Owner" autocomplete="current-password" required>
+                </div>
+                <button type="submit" id="btn-do-owner-login" class="btn-owner-gold">Masuk sebagai Owner 👑</button>
+            </form>
+        </div>
+
+        <!-- ================= GUARD 2: ACCESS DENIED (NON-OWNER) ================= -->
+        <div id="owner-denied-view" class="auth-guard-card hidden" style="border-color: #d9534f;">
+            <div class="auth-guard-icon">⛔</div>
+            <h2>Akses Ditolak</h2>
+            <p>Akun Anda (<strong id="denied-user-email">user@...</strong>) bukan merupakan akun <strong>Owner</strong>. Halaman ini memiliki hak akses level tertinggi dan hanya diperuntukkan bagi email yang berawalan <code>owner</code>.</p>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button type="button" id="btn-owner-logout-denied" class="btn-del-sm" style="flex:1; padding: 10px;">Ganti Akun / Logout</button>
+                <a href="index.html" class="btn-toggle-sm" style="flex:1; padding: 10px; text-decoration:none; text-align:center; display:inline-block; border-radius:6px;">Ke Beranda</a>
+            </div>
+        </div>
+
+        <!-- ================= MAIN DASHBOARD (OWNER ONLY) ================= -->
+        <div id="owner-dashboard-content" class="hidden">
+            <!-- Header Bar -->
+            <div class="owner-header-bar" style="border-radius: 12px; margin-bottom: 20px;">
+                <div class="owner-title-wrap">
+                    <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge" style="width:40px;height:40px;">
+                    <div>
+                        <h2>Owner Control Center</h2>
+                        <span class="owner-crown-badge">👑 OWNER LEVEL ACCESS</span>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap: 12px;">
+                    <span style="font-size: 0.85rem; color: #a0a0b2;" id="owner-user-display">owner@...</span>
+                    <button type="button" id="btn-owner-logout" class="btn-del-sm" style="padding: 7px 14px;">Logout</button>
+                </div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="owner-nav-tabs">
+                <button type="button" class="owner-tab-btn active" data-tab="tab-announcement">
+                    📢 Pengumuman Website
+                </button>
+                <button type="button" class="owner-tab-btn" data-tab="tab-promo">
+                    🎟️ Kode Promo Joki
+                </button>
+                <button type="button" class="owner-tab-btn" data-tab="tab-testimonials">
+                    ⭐ Testimoni Joki Genshin
+                </button>
+            </div>
+
+            <!-- ================= TAB 1: PENGUMUMAN WEBSITE ================= -->
+            <div id="tab-announcement" class="owner-tab-content">
+                <div class="owner-card-panel">
+                    <h3>📢 Kelola Pengumuman Banner Website</h3>
+                    <p class="section-desc" style="margin-bottom: 16px;">Teks pengumuman ini akan otomatis tampil di bagian atas seluruh halaman website jika diaktifkan.</p>
+
+                    <div class="switch-toggle-wrap">
+                        <input type="checkbox" id="announcement-active-toggle">
+                        <div>
+                            <div class="switch-label-title">Status Banner Pengumuman</div>
+                            <div class="switch-label-desc">Centang untuk menampilkan banner pengumuman kepada pengunjung di seluruh web.</div>
+                        </div>
+                    </div>
+
+                    <div class="owner-form-grid">
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tag / Kategori:</label>
+                            <input type="text" id="announcement-tag-input" placeholder="cth: INFO RESMI, PROMO, EVENT" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Link Tombol / Tujuan (Opsional):</label>
+                            <input type="text" id="announcement-url-input" placeholder="cth: https://discord.gg/... atau joki.html" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                        <div class="form-col-full">
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Isi Teks Pengumuman:</label>
+                            <textarea id="announcement-text-input" rows="3" placeholder="Tulis pengumuman resmi di sini... (cth: Open Member TEAM LXVOID Free Fire & Diskon Joki Genshin 20% Minggu Ini!)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; resize:vertical;"></textarea>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" id="btn-save-announcement" class="btn-owner-gold" style="width:auto; padding:10px 24px;">💾 Simpan Pengumuman</button>
+                    </div>
+
+                    <div class="preview-box-outer">
+                        <div class="preview-box-label">Pratinjau Banner Langsung (Live Preview):</div>
+                        <div id="announcement-preview-bar" class="announcement-bar" style="border-radius: 8px;">
+                            <div class="announcement-main">
+                                <span class="announcement-tag" id="prev-tag">INFO RESMI</span>
+                                <span class="announcement-text" id="prev-text">Pratinjau isi pengumuman akan muncul di sini...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 2: KODE PROMO JOKI ================= -->
+            <div id="tab-promo" class="owner-tab-content hidden">
+                <div class="owner-card-panel">
+                    <h3>🎟️ Tambah Kode Promo Baru</h3>
+                    <p class="section-desc" style="margin-bottom: 16px;">Kode promo ini dapat digunakan pelanggan saat menghitung pesanan di kalkulator Joki Genshin.</p>
+
+                    <div class="owner-form-grid">
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Kode Kupon (Huruf Besar):</label>
+                            <input type="text" id="promo-code-input" placeholder="misal: LXVOID20" style="text-transform:uppercase; width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; font-weight:700; letter-spacing:1px;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tipe Diskon:</label>
+                            <select id="promo-type-select" class="custom-select" style="width:100%; height:42px;">
+                                <option value="percent">Persentase (%)</option>
+                                <option value="fixed">Potongan Tetap (Rp)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nilai Diskon:</label>
+                            <input type="number" id="promo-value-input" placeholder="cth: 20 (untuk 20%) atau 15000" min="1" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Minimal Belanja (Rp):</label>
+                            <input type="number" id="promo-min-input" placeholder="0 jika tanpa batas" value="0" min="0" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 18px;">
+                        <button type="button" id="btn-save-promo" class="btn-owner-gold" style="width:auto; padding:10px 24px;">+ Simpan Kode Promo</button>
+                    </div>
+                </div>
+
+                <div class="owner-card-panel">
+                    <h3>Daftar Kode Promo Aktif</h3>
+                    <div class="owner-table-wrap">
+                        <table class="owner-table">
+                            <thead>
+                                <tr>
+                                    <th>Kode Kupon</th>
+                                    <th>Tipe & Nilai</th>
+                                    <th>Min. Belanja</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="promo-list-body">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; color:#8f90a6; padding:20px;">Memuat daftar kode promo...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 3: TESTIMONI JOKI ================= -->
+            <div id="tab-testimonials" class="owner-tab-content hidden">
+                <div class="owner-card-panel">
+                    <h3>⭐ Tambah Testimoni Pelanggan Baru</h3>
+                    <p class="section-desc" style="margin-bottom: 16px;">Testimoni ini akan langsung tampil di seksi ulasan pelanggan pada halaman Joki Genshin Impact.</p>
+
+                    <div class="owner-form-grid">
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama Pelanggan (In-Game / Panggilan):</label>
+                            <input type="text" id="testi-author-input" placeholder="cth: Arya (AR 58)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Layanan yang Dipesan:</label>
+                            <input type="text" id="testi-service-input" placeholder="cth: 100% Explore Natlan + All Pyroculus" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Rating Bintang:</label>
+                            <select id="testi-stars-select" class="custom-select" style="width:100%; height:42px;">
+                                <option value="5">⭐⭐⭐⭐⭐ (5 / 5 Sangat Puas)</option>
+                                <option value="4">⭐⭐⭐⭐ (4 / 5 Puas)</option>
+                                <option value="3">⭐⭐⭐ (3 / 5 Cukup)</option>
+                            </select>
+                        </div>
+                        <div class="form-col-full">
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Ulasan / Review Pelanggan:</label>
+                            <textarea id="testi-body-input" rows="3" placeholder="cth: Pengerjaan super cepat, akun aman sentosa tanpa kendala, seller ramah & fast respond. Recomended banget joki di LXVOID!" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; resize:vertical;"></textarea>
+                        </div>
+                        <div class="form-col-full">
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Foto Screenshot Bukti Chat / Hasil (Opsional):</label>
+                            <input type="file" id="testi-proof-file" accept="image/*" style="display:block; color:#a0a0b0; font-size:0.82rem;">
+                            <div id="testi-preview-wrap" class="hidden" style="margin-top:10px; max-width:180px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.2);">
+                                <img id="testi-preview-img" src="" alt="Bukti" style="width:100%; display:block;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 18px;">
+                        <button type="button" id="btn-save-testi" class="btn-owner-gold" style="width:auto; padding:10px 24px;">+ Publikasikan Testimoni</button>
+                    </div>
+                </div>
+
+                <div class="owner-card-panel">
+                    <h3>Daftar Testimoni yang Telah Dipublikasikan</h3>
+                    <div id="testi-list-grid" class="testimonials-grid" style="margin-top:16px;">
+                        <p style="color:#8f90a6; grid-column:1/-1;">Memuat testimoni...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-brand">LXVOID COMMUNITY</p>
+            <p class="footer-copyright">© 2026 LXVOID COMMUNITY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================= FIREBASE & OWNER SCRIPT ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCT2JQgsl7APNAqRGz_J5kxlZ73UBJBmts",
+            authDomain: "ff-ft-1c86d.firebaseapp.com",
+            projectId: "ff-ft-1c86d",
+            storageBucket: "ff-ft-1c86d.firebasestorage.app",
+            messagingSenderId: "79295926648",
+            appId: "1:79295926648:web:10e02eb1efa666a15bb88d",
+            measurementId: "G-QL8NDHBEN9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Elements
+        const ownerLoginView = document.getElementById('owner-login-view');
+        const ownerDeniedView = document.getElementById('owner-denied-view');
+        const ownerDashboardContent = document.getElementById('owner-dashboard-content');
+        const deniedUserEmail = document.getElementById('denied-user-email');
+        const ownerUserDisplay = document.getElementById('owner-user-display');
+        const btnDoOwnerLogin = document.getElementById('btn-do-owner-login');
+        const btnOwnerLogout = document.getElementById('btn-owner-logout');
+        const btnOwnerLogoutDenied = document.getElementById('btn-owner-logout-denied');
+        const ownerEmailInput = document.getElementById('owner-email-input');
+        const ownerPassInput = document.getElementById('owner-pass-input');
+
+        // Announcement Elements
+        const announcementActiveToggle = document.getElementById('announcement-active-toggle');
+        const announcementTagInput = document.getElementById('announcement-tag-input');
+        const announcementUrlInput = document.getElementById('announcement-url-input');
+        const announcementTextInput = document.getElementById('announcement-text-input');
+        const btnSaveAnnouncement = document.getElementById('btn-save-announcement');
+        const prevTag = document.getElementById('prev-tag');
+        const prevText = document.getElementById('prev-text');
+
+        // Promo Elements
+        const promoCodeInput = document.getElementById('promo-code-input');
+        const promoTypeSelect = document.getElementById('promo-type-select');
+        const promoValueInput = document.getElementById('promo-value-input');
+        const promoMinInput = document.getElementById('promo-min-input');
+        const btnSavePromo = document.getElementById('btn-save-promo');
+        const promoListBody = document.getElementById('promo-list-body');
+
+        // Testi Elements
+        const testiAuthorInput = document.getElementById('testi-author-input');
+        const testiServiceInput = document.getElementById('testi-service-input');
+        const testiStarsSelect = document.getElementById('testi-stars-select');
+        const testiBodyInput = document.getElementById('testi-body-input');
+        const testiProofFile = document.getElementById('testi-proof-file');
+        const testiPreviewWrap = document.getElementById('testi-preview-wrap');
+        const testiPreviewImg = document.getElementById('testi-preview-img');
+        const btnSaveTesti = document.getElementById('btn-save-testi');
+        const testiListGrid = document.getElementById('testi-list-grid');
+
+        let pendingTestiImageBase64 = null;
+        let toastTimeout = null;
+
+        function showToast(message, isError = false) {
+            const toastEl = document.getElementById('toast');
+            if (!toastEl) return;
+            clearTimeout(toastTimeout);
+            toastEl.innerText = message;
+            if (isError) toastEl.classList.add('error');
+            else toastEl.classList.remove('error');
+            toastEl.classList.add('show');
+            toastTimeout = setTimeout(() => toastEl.classList.remove('show'), 3000);
+        }
+
+        function isOwnerEmail(email) {
+            return email && email.toLowerCase().trim().startsWith('owner');
+        }
+
+        // ================= AUTH GUARD =================
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                ownerLoginView.classList.remove('hidden');
+                ownerDeniedView.classList.add('hidden');
+                ownerDashboardContent.classList.add('hidden');
+            } else {
+                const email = user.email || '';
+                if (isOwnerEmail(email)) {
+                    ownerLoginView.classList.add('hidden');
+                    ownerDeniedView.classList.add('hidden');
+                    ownerDashboardContent.classList.remove('hidden');
+                    ownerUserDisplay.textContent = email;
+                    loadAnnouncementData();
+                    loadPromoCodes();
+                    loadTestimonials();
+                } else {
+                    ownerLoginView.classList.add('hidden');
+                    ownerDeniedView.classList.remove('hidden');
+                    ownerDashboardContent.classList.add('hidden');
+                    deniedUserEmail.textContent = email;
+                }
+            }
+        });
+
+        // Login Handler
+        btnDoOwnerLogin.addEventListener('click', async () => {
+            const identifier = ownerEmailInput.value.trim();
+            const pass = ownerPassInput.value;
+            if (!identifier || !pass) {
+                showToast("Harap isi username/email dan password Owner!", true);
+                return;
+            }
+
+            btnDoOwnerLogin.innerText = "Memeriksa...";
+            btnDoOwnerLogin.disabled = true;
+
+            try {
+                let targetEmail = identifier;
+                if (!identifier.includes('@')) {
+                    targetEmail = `${identifier.toLowerCase()}@rasyhz.com`;
+                }
+
+                if (!isOwnerEmail(targetEmail)) {
+                    showToast("Hanya akun dengan awalan 'owner' (cth: owner@rasyhz.com) yang dapat masuk ke halaman ini!", true);
+                    btnDoOwnerLogin.innerText = "Masuk sebagai Owner 👑";
+                    btnDoOwnerLogin.disabled = false;
+                    return;
+                }
+
+                await signInWithEmailAndPassword(auth, targetEmail, pass);
+                showToast("Selamat datang di Owner Control Center 👑!");
+            } catch (err) {
+                showToast("Login gagal: " + (err.message || "Email atau sandi salah"), true);
+            } finally {
+                btnDoOwnerLogin.innerText = "Masuk sebagai Owner 👑";
+                btnDoOwnerLogin.disabled = false;
+            }
+        });
+
+        // Logout Handlers
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                showToast("Berhasil logout dari mode Owner.");
+            } catch (e) {
+                showToast("Gagal logout: " + e.message, true);
+            }
+        }
+        btnOwnerLogout.addEventListener('click', handleLogout);
+        btnOwnerLogoutDenied.addEventListener('click', handleLogout);
+
+        // ================= TABS NAVIGATION =================
+        document.querySelectorAll('.owner-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.owner-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const targetTab = btn.getAttribute('data-tab');
+                document.querySelectorAll('.owner-tab-content').forEach(p => p.classList.add('hidden'));
+                const panel = document.getElementById(targetTab);
+                if (panel) panel.classList.remove('hidden');
+            });
+        });
+
+        // ================= TAB 1: PENGUMUMAN =================
+        function updateAnnouncementPreview() {
+            const tag = announcementTagInput.value.trim() || 'INFO RESMI';
+            const text = announcementTextInput.value.trim() || 'Pratinjau isi pengumuman akan muncul di sini...';
+            prevTag.textContent = tag;
+            prevText.textContent = text;
+        }
+        announcementTagInput.addEventListener('input', updateAnnouncementPreview);
+        announcementTextInput.addEventListener('input', updateAnnouncementPreview);
+
+        async function loadAnnouncementData() {
+            try {
+                const docRef = doc(db, "site_settings", "announcement");
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    announcementActiveToggle.checked = !!data.active;
+                    announcementTagInput.value = data.tag || 'INFO RESMI';
+                    announcementUrlInput.value = data.url || '';
+                    announcementTextInput.value = data.text || '';
+                    updateAnnouncementPreview();
+                }
+            } catch (err) {
+                console.warn("Gagal memuat pengumuman:", err);
+            }
+        }
+
+        btnSaveAnnouncement.addEventListener('click', async () => {
+            btnSaveAnnouncement.innerText = "Menyimpan...";
+            btnSaveAnnouncement.disabled = true;
+            try {
+                const docRef = doc(db, "site_settings", "announcement");
+                await setDoc(docRef, {
+                    active: announcementActiveToggle.checked,
+                    tag: announcementTagInput.value.trim() || 'INFO RESMI',
+                    url: announcementUrlInput.value.trim(),
+                    text: announcementTextInput.value.trim(),
+                    updatedAt: Date.now(),
+                    updatedBy: auth.currentUser?.email || 'owner'
+                }, { merge: true });
+                showToast("Pengumuman website berhasil disimpan & disinkronkan!");
+            } catch (err) {
+                showToast("Gagal menyimpan pengumuman: " + err.message, true);
+            } finally {
+                btnSaveAnnouncement.innerText = "💾 Simpan Pengumuman";
+                btnSaveAnnouncement.disabled = false;
+            }
+        });
+
+        // ================= TAB 2: KODE PROMO =================
+        async function loadPromoCodes() {
+            try {
+                const snap = await getDocs(collection(db, "joki_promos"));
+                promoListBody.innerHTML = '';
+                if (snap.empty) {
+                    promoListBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#8f90a6; padding:20px;">Belum ada kode promo dibuat. Tambahkan kode kupon di atas!</td></tr>';
+                    return;
+                }
+
+                snap.forEach(docSnap => {
+                    const p = docSnap.data();
+                    const tr = document.createElement('tr');
+                    const valStr = p.type === 'percent' ? `${p.value}%` : `Rp ${Number(p.value).toLocaleString('id-ID')}`;
+                    const minStr = p.minOrder > 0 ? `Rp ${Number(p.minOrder).toLocaleString('id-ID')}` : 'Tanpa Min.';
+                    const statusClass = p.active ? 'active' : 'inactive';
+                    const statusText = p.active ? 'Aktif' : 'Nonaktif';
+
+                    tr.innerHTML = `
+                        <td><strong style="color:#00adb5; letter-spacing:1px;">${p.code}</strong></td>
+                        <td>${valStr}</td>
+                        <td>${minStr}</td>
+                        <td><span class="owner-status-pill ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <button type="button" class="btn-action-sm btn-toggle-sm" data-id="${docSnap.id}" data-active="${p.active}">${p.active ? 'Nonaktifkan' : 'Aktifkan'}</button>
+                            <button type="button" class="btn-action-sm btn-del-sm" data-id="${docSnap.id}" data-code="${p.code}">Hapus</button>
+                        </td>
+                    `;
+
+                    // Toggle status
+                    tr.querySelector('.btn-toggle-sm').addEventListener('click', async () => {
+                        try {
+                            await updateDoc(doc(db, "joki_promos", docSnap.id), {
+                                active: !p.active,
+                                updatedAt: Date.now()
+                            });
+                            showToast(`Status promo ${p.code} diubah!`);
+                            loadPromoCodes();
+                        } catch (e) {
+                            showToast("Gagal update status: " + e.message, true);
+                        }
+                    });
+
+                    // Delete promo
+                    tr.querySelector('.btn-del-sm').addEventListener('click', async () => {
+                        if (confirm(`Hapus kode kupon promo "${p.code}"?`)) {
+                            try {
+                                await deleteDoc(doc(db, "joki_promos", docSnap.id));
+                                showToast(`Kode promo ${p.code} berhasil dihapus!`);
+                                loadPromoCodes();
+                            } catch (e) {
+                                showToast("Gagal menghapus: " + e.message, true);
+                            }
+                        }
+                    });
+
+                    promoListBody.appendChild(tr);
+                });
+            } catch (err) {
+                promoListBody.innerHTML = `<tr><td colspan="5" style="color:#ff5252; padding:15px;">Gagal memuat kode promo: ${err.message}</td></tr>`;
+            }
+        }
+
+        btnSavePromo.addEventListener('click', async () => {
+            const code = promoCodeInput.value.trim().toUpperCase();
+            const type = promoTypeSelect.value;
+            const val = parseFloat(promoValueInput.value);
+            const min = parseFloat(promoMinInput.value) || 0;
+
+            if (!code || isNaN(val) || val <= 0) {
+                showToast("Harap isi kode kupon dan nilai diskon yang valid!", true);
+                return;
+            }
+
+            btnSavePromo.innerText = "Menyimpan...";
+            btnSavePromo.disabled = true;
+
+            try {
+                await addDoc(collection(db, "joki_promos"), {
+                    code: code,
+                    type: type, // 'percent' | 'fixed'
+                    value: val,
+                    minOrder: min,
+                    active: true,
+                    createdAt: Date.now(),
+                    createdBy: auth.currentUser?.email || 'owner'
+                });
+
+                promoCodeInput.value = '';
+                promoValueInput.value = '';
+                promoMinInput.value = '0';
+                showToast(`Kode promo ${code} berhasil dibuat!`);
+                loadPromoCodes();
+            } catch (err) {
+                showToast("Gagal membuat promo: " + err.message, true);
+            } finally {
+                btnSavePromo.innerText = "+ Simpan Kode Promo";
+                btnSavePromo.disabled = false;
+            }
+        });
+
+        // ================= TAB 3: TESTIMONI =================
+        testiProofFile.addEventListener('change', () => {
+            const file = testiProofFile.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                pendingTestiImageBase64 = e.target.result;
+                testiPreviewImg.src = e.target.result;
+                testiPreviewWrap.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        async function loadTestimonials() {
+            try {
+                const q = query(collection(db, "joki_testimonials"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                testiListGrid.innerHTML = '';
+
+                if (snap.empty) {
+                    testiListGrid.innerHTML = '<p style="color:#8f90a6; grid-column:1/-1;">Belum ada testimoni. Buat testimoni pelanggan pertama Anda di atas!</p>';
+                    return;
+                }
+
+                snap.forEach(docSnap => {
+                    const t = docSnap.data();
+                    const card = document.createElement('div');
+                    card.className = 'testi-card';
+
+                    let starsHtml = '⭐'.repeat(t.stars || 5);
+                    let imgHtml = t.imageUrl
+                        ? `<div class="testi-thumb-wrap" style="margin-top:10px;"><img src="${t.imageUrl}" alt="Bukti Testimoni"></div>`
+                        : '';
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="testi-header">
+                                <div>
+                                    <div class="testi-author">${t.author || 'Pelanggan'}</div>
+                                    <span class="testi-service">${t.service || 'Joki Genshin'}</span>
+                                </div>
+                                <span class="testi-stars">${starsHtml}</span>
+                            </div>
+                            <p class="testi-body">"${t.body || ''}"</p>
+                            ${imgHtml}
+                        </div>
+                        <div style="margin-top:12px; padding-top:10px; border-top:1px dashed rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
+                            <small style="color:#777; font-size:0.7rem;">${new Date(t.createdAt).toLocaleDateString('id-ID')}</small>
+                            <button type="button" class="btn-action-sm btn-del-sm" data-id="${docSnap.id}">Hapus</button>
+                        </div>
+                    `;
+
+                    card.querySelector('.btn-del-sm').addEventListener('click', async () => {
+                        if (confirm(`Hapus testimoni dari "${t.author}"?`)) {
+                            try {
+                                await deleteDoc(doc(db, "joki_testimonials", docSnap.id));
+                                showToast("Testimoni berhasil dihapus!");
+                                loadTestimonials();
+                            } catch (e) {
+                                showToast("Gagal menghapus: " + e.message, true);
+                            }
+                        }
+                    });
+
+                    testiListGrid.appendChild(card);
+                });
+            } catch (err) {
+                testiListGrid.innerHTML = `<p style="color:#ff5252; grid-column:1/-1;">Gagal memuat testimoni: ${err.message}</p>`;
+            }
+        }
+
+        btnSaveTesti.addEventListener('click', async () => {
+            const author = testiAuthorInput.value.trim();
+            const service = testiServiceInput.value.trim();
+            const stars = parseInt(testiStarsSelect.value, 10) || 5;
+            const body = testiBodyInput.value.trim();
+
+            if (!author || !body) {
+                showToast("Harap isi nama pelanggan dan ulasan testimoni!", true);
+                return;
+            }
+
+            btnSaveTesti.innerText = "Menyimpan...";
+            btnSaveTesti.disabled = true;
+
+            try {
+                await addDoc(collection(db, "joki_testimonials"), {
+                    author: author,
+                    service: service || "Joki Genshin Impact",
+                    stars: stars,
+                    body: body,
+                    imageUrl: pendingTestiImageBase64 || "",
+                    createdAt: Date.now(),
+                    createdBy: auth.currentUser?.email || 'owner'
+                });
+
+                testiAuthorInput.value = '';
+                testiServiceInput.value = '';
+                testiBodyInput.value = '';
+                testiProofFile.value = '';
+                pendingTestiImageBase64 = null;
+                testiPreviewWrap.classList.add('hidden');
+
+                showToast("Testimoni baru berhasil dipublikasikan!");
+                loadTestimonials();
+            } catch (err) {
+                showToast("Gagal menyimpan testimoni: " + err.message, true);
+            } finally {
+                btnSaveTesti.innerText = "+ Publikasikan Testimoni";
+                btnSaveTesti.disabled = false;
+            }
+        });
+    </script>
+    <script defer src="site-features.js"></script>
+</body>
+
+</html>

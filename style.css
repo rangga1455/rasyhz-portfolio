@@ -160,6 +160,23 @@ button:active,
     color: inherit;
     display: inline-flex;
     align-items: center;
+    gap: 10px;
+}
+
+.nav-logo-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 12px rgba(0, 173, 181, 0.45);
+    border: 1.5px solid rgba(0, 173, 181, 0.7);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.logo-link:hover .nav-logo-badge {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 173, 181, 0.85);
 }
 
 .navbar .logo {
@@ -4721,4 +4738,716 @@ button:active,
         font-size: 0.8rem;
         line-height: 1.45;
     }
+}
+
+/* ==========================================================
+   ANNOUNCEMENT TICKER / BANNER
+   ========================================================== */
+.announcement-bar {
+    background: linear-gradient(90deg, rgba(0, 173, 181, 0.18), rgba(114, 9, 183, 0.22));
+    border-bottom: 1px solid rgba(0, 173, 181, 0.35);
+    color: #f0f0f8;
+    padding: 7px 16px;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+    z-index: 105;
+    transition: all 0.3s ease;
+}
+
+.announcement-bar.hidden {
+    display: none !important;
+}
+
+.announcement-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.announcement-tag {
+    background: #00adb5;
+    color: #121212;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.announcement-text {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.announcement-text a {
+    color: #00adb5;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.announcement-close-btn {
+    background: transparent;
+    border: none;
+    color: #a0a0b0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.announcement-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================
+   COMING SOON SECTION (PRESETS)
+   ========================================================== */
+.coming-soon-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.coming-soon-card {
+    background: radial-gradient(circle at 50% 0%, rgba(0, 173, 181, 0.15), rgba(18, 18, 24, 0.85) 70%);
+    border: 1px solid rgba(0, 173, 181, 0.35);
+    border-radius: 20px;
+    max-width: 680px;
+    width: 100%;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 173, 181, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.coming-soon-logo-wrap {
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.coming-soon-logo-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px solid #00adb5;
+    box-shadow: 0 0 30px rgba(0, 173, 181, 0.55);
+    animation: floatLogo 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatLogo {
+    0% { transform: translateY(0) scale(1); box-shadow: 0 0 25px rgba(0, 173, 181, 0.4); }
+    100% { transform: translateY(-8px) scale(1.03); box-shadow: 0 0 45px rgba(0, 173, 181, 0.8); }
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    background: rgba(0, 173, 181, 0.15);
+    color: #00adb5;
+    border: 1px solid rgba(0, 173, 181, 0.45);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.coming-soon-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 14px;
+    line-height: 1.25;
+}
+
+.coming-soon-desc {
+    color: #b0b0c2;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 28px;
+}
+
+.coming-soon-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-cs-primary {
+    background: #00adb5;
+    color: #121212;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-cs-primary:hover {
+    background: #00c4ce;
+    box-shadow: 0 0 15px rgba(0, 173, 181, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-cs-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-cs-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   MINI FLOATING MUSIC PLAYER
+   ========================================================== */
+.floating-music-player {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    background: rgba(18, 18, 24, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 173, 181, 0.4);
+    border-radius: 30px;
+    padding: 5px 12px 5px 6px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 173, 181, 0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.floating-music-player:hover {
+    border-color: #00adb5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 173, 181, 0.45);
+    transform: translateY(-2px);
+}
+
+.music-play-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #00adb5;
+    color: #121212;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.music-meta {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.music-title {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.music-sub {
+    font-size: 0.65rem;
+    color: #8f90a6;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.music-bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 10px;
+    margin-left: 6px;
+}
+
+.music-bars span {
+    width: 2px;
+    background: #00adb5;
+    border-radius: 1px;
+    height: 3px;
+    transition: height 0.2s ease;
+}
+
+.floating-music-player.playing .music-bars span:nth-child(1) {
+    animation: barBounce 0.8s infinite ease-in-out alternate;
+}
+.floating-music-player.playing .music-bars span:nth-child(2) {
+    animation: barBounce 1s infinite ease-in-out 0.2s alternate;
+}
+.floating-music-player.playing .music-bars span:nth-child(3) {
+    animation: barBounce 0.7s infinite ease-in-out 0.4s alternate;
+}
+
+@keyframes barBounce {
+    0% { height: 2px; }
+    100% { height: 10px; }
+}
+
+@media (max-width: 768px) {
+    .floating-music-player {
+        bottom: 75px; /* Above mobile bottom nav */
+        left: 14px;
+        padding: 4px 10px 4px 5px;
+    }
+}
+
+/* ==========================================================
+   PROMO CODE BOX IN JOKI CALC
+   ========================================================== */
+.promo-code-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 14px 0 10px;
+}
+
+.promo-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.promo-input-row input {
+    flex: 1;
+    background: #0f1014;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #ffffff;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.promo-input-row input:focus {
+    outline: none;
+    border-color: #00adb5;
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.3);
+}
+
+.btn-apply-promo {
+    background: #00adb5;
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-apply-promo:hover {
+    background: #00c4ce;
+}
+
+.promo-status-msg {
+    font-size: 0.75rem;
+    margin-top: 6px;
+    font-weight: 600;
+    display: block;
+}
+
+.promo-status-msg.success { color: #00e676; }
+.promo-status-msg.error { color: #ff5252; }
+
+.discount-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 230, 118, 0.15);
+    color: #00e676;
+    border: 1px solid rgba(0, 230, 118, 0.4);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+/* ==========================================================
+   TESTIMONIALS SECTION (JOKI)
+   ========================================================== */
+.testimonials-section {
+    margin-top: 45px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.testi-card {
+    background: #14151a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.testi-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 173, 181, 0.4);
+}
+
+.testi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.testi-author {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.testi-service {
+    font-size: 0.72rem;
+    color: #00adb5;
+    background: rgba(0, 173, 181, 0.1);
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.testi-stars {
+    color: #ffd700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.testi-body {
+    color: #b0b0c0;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin: 8px 0 12px;
+    font-style: italic;
+}
+
+.testi-thumb-wrap {
+    margin-top: auto;
+    border-radius: 6px;
+    overflow: hidden;
+    max-height: 120px;
+    cursor: pointer;
+}
+
+.testi-thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.testi-thumb-wrap:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================
+   HISTORY FF ENHANCEMENTS: SEARCH, LIKE, WATERMARK, MVP
+   ========================================================== */
+.ff-search-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.ff-search-input {
+    flex: 1;
+    background: #14151a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 9px 14px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    transition: border-color 0.2s ease;
+}
+
+.ff-search-input:focus {
+    outline: none;
+    border-color: #00adb5;
+}
+
+.btn-like-match {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e0e0e0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.btn-like-match:hover {
+    background: rgba(255, 64, 129, 0.15);
+    border-color: #ff4081;
+    color: #ff4081;
+    transform: scale(1.04);
+}
+
+.btn-like-match.liked {
+    background: rgba(255, 64, 129, 0.2);
+    border-color: #ff4081;
+    color: #ff4081;
+}
+
+.match-meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 6px 0;
+}
+
+.badge-mvp {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 170, 0, 0.2));
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #ffd700;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.badge-kills {
+    background: rgba(239, 83, 80, 0.15);
+    border: 1px solid rgba(239, 83, 80, 0.4);
+    color: #ef5350;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.watermark-check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    padding: 8px 12px;
+    background: rgba(0, 173, 181, 0.06);
+    border: 1px solid rgba(0, 173, 181, 0.2);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #d0d0e0;
+    cursor: pointer;
+}
+
+.watermark-check-wrap input[type="checkbox"] {
+    accent-color: #00adb5;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* ==========================================================
+   OWNER DASHBOARD (owner.html)
+   ========================================================== */
+.owner-header-bar {
+    background: linear-gradient(90deg, #121218, #181922);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.owner-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.owner-title-wrap h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+}
+
+.owner-crown-badge {
+    background: linear-gradient(135deg, #ffd700, #ff9100);
+    color: #121212;
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.6px;
+}
+
+.owner-nav-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+    overflow-x: auto;
+}
+
+.owner-tab-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a0a0b2;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.owner-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.owner-tab-btn.active {
+    background: rgba(255, 215, 0, 0.12);
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.45);
+}
+
+.owner-card-panel {
+    background: #15151c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.owner-card-panel h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.owner-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.owner-form-grid .form-col-full {
+    grid-column: 1 / -1;
+}
+
+.owner-table-wrap {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.owner-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    text-align: left;
+}
+
+.owner-table th {
+    background: #1a1a24;
+    color: #8f90a6;
+    padding: 10px 12px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.owner-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: #e0e0ea;
+}
+
+.owner-status-pill {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.72rem;
+}
+
+.owner-status-pill.active {
+    background: rgba(0, 230, 118, 0.15);
+    color: #00e676;
+    border: 1px solid rgba(0, 230, 118, 0.35);
+}
+
+.owner-status-pill.inactive {
+    background: rgba(255, 82, 82, 0.15);
+    color: #ff5252;
+    border: 1px solid rgba(255, 82, 82, 0.35);
 }
