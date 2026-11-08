@@ -19,7 +19,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261108c">
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
@@ -805,6 +805,15 @@
                     uploaderImg.classList.add('uploader-avatar-thumb');
                     uploaderImg.width = 24;
                     uploaderImg.height = 24;
+                    uploaderImg.style.width = '24px';
+                    uploaderImg.style.height = '24px';
+                    uploaderImg.style.minWidth = '24px';
+                    uploaderImg.style.minHeight = '24px';
+                    uploaderImg.style.maxWidth = '24px';
+                    uploaderImg.style.maxHeight = '24px';
+                    uploaderImg.style.borderRadius = '50%';
+                    uploaderImg.style.objectFit = 'cover';
+                    uploaderImg.style.border = '1.5px solid #00adb5';
                     uploaderBox.appendChild(uploaderImg);
                 } else {
                     const uploaderIcon = document.createElement('span');
