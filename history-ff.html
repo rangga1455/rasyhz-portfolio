@@ -806,6 +806,8 @@
                     uploaderImg.src = data.uploaderAvatar;
                     uploaderImg.alt = data.uploadedBy || 'Admin';
                     uploaderImg.classList.add('uploader-avatar-thumb');
+                    uploaderImg.width = 24;
+                    uploaderImg.height = 24;
                     uploaderBox.appendChild(uploaderImg);
                 } else {
                     const uploaderIcon = document.createElement('span');
@@ -878,7 +880,7 @@
                 }
                 const author = uploader || 'Admin Rasyhz';
                 const avatarHtml = uploaderAvatar
-                    ? `<img src="${uploaderAvatar}" alt="${escapeHtml(author)}" class="uploader-avatar-thumb">`
+                    ? `<img src="${uploaderAvatar}" alt="${escapeHtml(author)}" class="uploader-avatar-thumb" width="24" height="24">`
                     : `<span class="uploader-avatar-icon">👤</span>`;
 
                 metaEl.innerHTML = `<span class="lightbox-uploader">${avatarHtml} <span>Diunggah oleh: <strong>${escapeHtml(author)}</strong></span></span> <span class="lightbox-meta-divider">•</span> <span>📅 ${dateStr}</span>`;

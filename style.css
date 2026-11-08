@@ -344,7 +344,8 @@ button:active,
     box-shadow: 0 8px 20px rgba(0, 173, 181, 0.25);
 }
 
-.card img {
+.card:not(.ff-card) img,
+.card-thumb-wrap img {
     width: 100%;
     height: 180px;
     object-fit: cover;
@@ -787,13 +788,24 @@ button:active,
     gap: 7px;
 }
 
-.uploader-avatar-thumb {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1.5px solid #00adb5;
-    flex-shrink: 0;
+.uploader-avatar-thumb,
+.ff-card .uploader-avatar-thumb,
+.card .uploader-avatar-thumb,
+.lightbox-meta .uploader-avatar-thumb {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    max-width: 24px !important;
+    max-height: 24px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 1.5px solid #00adb5 !important;
+    display: inline-block !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
 }
 
 .uploader-avatar-icon {
@@ -867,12 +879,17 @@ button:active,
 }
 
 .nav-avatar-mini {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1.5px solid #00adb5;
-    flex-shrink: 0;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 1.5px solid #00adb5 !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
 }
 
 .nav-avatar-fallback {
@@ -1158,7 +1175,8 @@ button:active,
     align-items: center;
 }
 
-.lightbox-content img {
+.lightbox-content > img,
+#lightbox-img {
     max-width: 100%;
     max-height: 70vh;
     object-fit: contain;
@@ -2124,7 +2142,7 @@ button:active,
         border-radius: 12px;
     }
 
-    .card img,
+    .card:not(.ff-card) img,
     .card-thumb-wrap img {
         height: 160px;
     }
@@ -2260,7 +2278,8 @@ button:active,
         font-size: 1.6rem;
     }
 
-    .lightbox-content img {
+    .lightbox-content > img,
+    #lightbox-img {
         max-height: 60vh;
     }
 
