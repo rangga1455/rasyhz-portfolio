@@ -1114,23 +1114,55 @@ button:active,
 .admin-panel-top {
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 20px;
+    justify-content: flex-start;
+    margin-bottom: 14px;
 }
 
 .admin-badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    background-color: rgba(0, 173, 181, 0.15);
-    color: #00adb5;
-    border: 1px solid rgba(0, 173, 181, 0.35);
-    padding: 7px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    background-color: #00adb5;
+    color: #ffffff;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 6px;
+    line-height: 1;
+}
+
+.admin-badge .uploader-avatar-thumb {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 1.5px solid #ffffff !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+}
+
+#admin-badge-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+#admin-badge-text {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+#admin-badge-text strong {
+    color: #ffffff;
+    font-weight: 800;
+    margin-left: 4px;
 }
 
 /* ================= LIGHTBOX MODAL ================= */
@@ -1252,17 +1284,6 @@ button:active,
 .admin-login-btn:hover {
     background-color: #00adb5;
     color: #ffffff;
-}
-
-.admin-badge {
-    display: inline-block;
-    background-color: #00adb5;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border-radius: 4px;
-    margin-bottom: 12px;
 }
 
 .upload-box {
