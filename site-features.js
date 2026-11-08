@@ -132,10 +132,11 @@
     let audio = null;
     let ytPlayer = null;
     let ytReady = false;
+    let pendingYTAction = null;
     let isPlaying = false;
     let currentTrackIndex = 0;
     let saveTimeThrottle = null;
-    const blobCache = {}; // Cache for reassembled uploaded audio blobs
+    const blobCache = {}; // In-memory Blob URL cache
 
     // Fetch custom music added by Owner in Firestore
     async function fetchCustomMusic() {
@@ -210,7 +211,9 @@
         if (!wrap) {
             wrap = document.createElement('div');
             wrap.id = 'yt-bg-player-wrap';
-            wrap.style.cssText = 'position:fixed;bottom:-9999px;right:-9999px;width:200px;height:200px;opacity:0.001;pointer-events:none;z-index:-1;';
+            // In-viewport 1x1 bottom-left pixel, opacity 0.01, pointer-events none
+            // In-viewport positioning prevents mobile Chrome/Android from freezing background playback
+            wrap.style.cssText = 'position:fixed;bottom:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-999;overflow:hidden;';
             const inner = document.createElement('div');
             inner.id = 'yt-bg-player';
             wrap.appendChild(inner);
@@ -219,29 +222,85 @@
 
         try {
             ytPlayer = new window.YT.Player('yt-bg-player', {
-                height: '200',
-                width: '200',
+                height: '100',
+                width: '100',
                 videoId: '',
                 playerVars: {
-                    autoplay: 0,
+                    autoplay: 1,
                     controls: 0,
                     disablekb: 1,
                     fs: 0,
                     playsinline: 1,
-                    modestbranding: 1
+                    enablejsapi: 1,
+                    origin: window.location.origin
                 },
                 events: {
-                    onReady: () => {
+                    onReady: (event) => {
                         ytReady = true;
+                        try {
+                            event.target.unMute();
+                            event.target.setVolume(80);
+                        } catch (e) {}
+
+                        if (pendingYTAction) {
+                            try {
+                                event.target.loadVideoById({
+                                    videoId: pendingYTAction.videoId,
+                                    startSeconds: pendingYTAction.startSeconds || 0
+                                });
+                                if (pendingYTAction.autoPlay) {
+                                    event.target.playVideo();
+                                    isPlaying = true;
+                                    sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                                    sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
+                                    updatePlayerUI(true);
+                                    clearResumeHint();
+                                }
+                            } catch (err) {
+                                console.warn('YT onReady action error:', err);
+                            }
+                            pendingYTAction = null;
+                        } else {
+                            const cur = activePlaylist[currentTrackIndex];
+                            if (cur && cur.type === 'youtube') {
+                                const shouldPlay = sessionStorage.getItem('lxvoid_lofi_playing') === '1' || sessionStorage.getItem('lxvoid_lofi_playing_intent') === '1';
+                                const savedTime = parseFloat(sessionStorage.getItem('lxvoid_lofi_time') || '0');
+                                event.target.loadVideoById({
+                                    videoId: cur.youtubeId,
+                                    startSeconds: savedTime || 0
+                                });
+                                if (shouldPlay) {
+                                    event.target.playVideo();
+                                    isPlaying = true;
+                                    sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                                    sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
+                                    updatePlayerUI(true);
+                                    clearResumeHint();
+                                }
+                            }
+                        }
                     },
                     onStateChange: (e) => {
                         if (e.data === window.YT.PlayerState.PLAYING) {
                             isPlaying = true;
+                            sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                            sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
                             updatePlayerUI(true);
+                            clearResumeHint();
                         } else if (e.data === window.YT.PlayerState.PAUSED) {
-                            isPlaying = false;
-                            updatePlayerUI(false);
+                            // Only set false if not navigating to another page
+                            if (sessionStorage.getItem('lxvoid_lofi_navigating') !== '1') {
+                                isPlaying = false;
+                                sessionStorage.setItem('lxvoid_lofi_playing', '0');
+                                updatePlayerUI(false);
+                            }
                         } else if (e.data === window.YT.PlayerState.ENDED) {
+                            nextTrack(true);
+                        }
+                    },
+                    onError: (e) => {
+                        console.warn('YouTube engine error:', e.data);
+                        if (e.data === 150 || e.data === 101) {
                             nextTrack(true);
                         }
                     }
@@ -252,12 +311,29 @@
         }
     }
 
-    // Fetch and reassemble chunked audio uploaded by Owner
+    // Fetch and reassemble chunked audio uploaded by Owner, with Cache Storage persistence
     async function getUploadedBlobUrl(track) {
         if (blobCache[track.id]) {
             return blobCache[track.id];
         }
 
+        // Try local Cache Storage first (instant retrieval across page transitions!)
+        if ('caches' in window) {
+            try {
+                const cache = await caches.open('lxvoid-audio-v1');
+                const matched = await cache.match(`/lxvoid-audio/${track.id}`);
+                if (matched) {
+                    const blob = await matched.blob();
+                    const blobUrl = URL.createObjectURL(blob);
+                    blobCache[track.id] = blobUrl;
+                    return blobUrl;
+                }
+            } catch (cacheErr) {
+                console.debug('CacheStorage check:', cacheErr);
+            }
+        }
+
+        // Fetch from Firestore REST API chunks if not in cache
         const projectId = 'ff-ft-1c86d';
         const chunks = [];
         const numChunks = track.numChunks || 1;
@@ -282,32 +358,78 @@
         const blob = new Blob([bytes], { type: track.mimeType || 'audio/mpeg' });
         const blobUrl = URL.createObjectURL(blob);
         blobCache[track.id] = blobUrl;
+
+        // Persist to Cache Storage for instant retrieval on next pages
+        if ('caches' in window) {
+            try {
+                const cache = await caches.open('lxvoid-audio-v1');
+                await cache.put(`/lxvoid-audio/${track.id}`, new Response(blob, {
+                    headers: { 'Content-Type': track.mimeType || 'audio/mpeg' }
+                }));
+            } catch (e) {}
+        }
+
         return blobUrl;
     }
 
     async function initMusicPlayer() {
-        // Load custom music from Firestore and merge with defaults
-        const customSongs = await fetchCustomMusic();
-        if (customSongs.length > 0) {
-            // Prioritize custom music added by owner, followed by curated Lo-Fi
-            activePlaylist = [...customSongs, ...DEFAULT_PLAYLIST];
+        // 1. Instantly read custom songs from localStorage cache (0ms delay for seamless user gesture)
+        let cachedSongs = [];
+        try {
+            const raw = localStorage.getItem('lxvoid_cached_custom_music');
+            if (raw) cachedSongs = JSON.parse(raw);
+        } catch (e) {}
+
+        if (Array.isArray(cachedSongs) && cachedSongs.length > 0) {
+            activePlaylist = [...cachedSongs, ...DEFAULT_PLAYLIST];
         } else {
             activePlaylist = [...DEFAULT_PLAYLIST];
         }
 
+        // Background update of custom music without blocking playback start
+        fetchCustomMusic().then(freshSongs => {
+            if (Array.isArray(freshSongs) && freshSongs.length >= 0) {
+                try {
+                    localStorage.setItem('lxvoid_cached_custom_music', JSON.stringify(freshSongs));
+                } catch (e) {}
+                const cur = activePlaylist[currentTrackIndex];
+                activePlaylist = [...freshSongs, ...DEFAULT_PLAYLIST];
+                if (cur) {
+                    const newIdx = activePlaylist.findIndex(t => (t.id && t.id === cur.id) || (t.title === cur.title));
+                    if (newIdx !== -1) {
+                        currentTrackIndex = newIdx;
+                        sessionStorage.setItem('lxvoid_lofi_track_idx', currentTrackIndex.toString());
+                    }
+                }
+            }
+        }).catch(err => console.debug('Background custom music refresh:', err));
+
         const wasNavigating = sessionStorage.getItem('lxvoid_lofi_navigating') === '1';
         const hasSession = sessionStorage.getItem('lxvoid_lofi_session') === '1';
-        const savedTrackStr = sessionStorage.getItem('lxvoid_lofi_track_idx');
+        const savedTrackId = sessionStorage.getItem('lxvoid_lofi_track_id');
+        const savedTrackTitle = sessionStorage.getItem('lxvoid_lofi_track_title');
+        const savedTrackIdxStr = sessionStorage.getItem('lxvoid_lofi_track_idx');
 
-        if (!hasSession || !wasNavigating || savedTrackStr === null) {
-            // Fresh visit to the website! Pick a RANDOM song from playlist
+        if (!hasSession || !wasNavigating || (savedTrackId === null && savedTrackIdxStr === null)) {
+            // Fresh visit to website: Pick a RANDOM song from playlist
             currentTrackIndex = Math.floor(Math.random() * activePlaylist.length);
             sessionStorage.setItem('lxvoid_lofi_track_idx', currentTrackIndex.toString());
             sessionStorage.setItem('lxvoid_lofi_session', '1');
         } else {
-            // Internal page transition: keep current track
-            const parsed = parseInt(savedTrackStr, 10);
-            currentTrackIndex = (!isNaN(parsed) && parsed >= 0 && parsed < activePlaylist.length) ? parsed : 0;
+            // Internal page transition: match exact track by ID or Title or index
+            let foundIdx = -1;
+            if (savedTrackId) {
+                foundIdx = activePlaylist.findIndex(t => t.id && t.id === savedTrackId);
+            }
+            if (foundIdx === -1 && savedTrackTitle) {
+                foundIdx = activePlaylist.findIndex(t => t.title && t.title === savedTrackTitle);
+            }
+            if (foundIdx !== -1) {
+                currentTrackIndex = foundIdx;
+            } else {
+                const parsed = parseInt(savedTrackIdxStr, 10);
+                currentTrackIndex = (!isNaN(parsed) && parsed >= 0 && parsed < activePlaylist.length) ? parsed : 0;
+            }
         }
 
         sessionStorage.removeItem('lxvoid_lofi_navigating');
@@ -340,7 +462,7 @@
         createMusicPlayerUI();
 
         // Restore playback position if navigating from another page
-        const savedPlaying = sessionStorage.getItem('lxvoid_lofi_playing') === '1';
+        const savedPlaying = sessionStorage.getItem('lxvoid_lofi_playing') === '1' || sessionStorage.getItem('lxvoid_lofi_playing_intent') === '1';
         const savedTime = parseFloat(sessionStorage.getItem('lxvoid_lofi_time') || '0');
         const navTime = parseInt(sessionStorage.getItem('lxvoid_lofi_nav_time') || '0', 10);
         const elapsed = navTime ? Math.max(0, (Date.now() - navTime) / 1000) : 0;
@@ -423,11 +545,32 @@
         });
     }
 
+    function setAudioStartTime(audioEl, startTime) {
+        if (!startTime || startTime <= 0) return;
+        if (audioEl.readyState >= 1) {
+            try { audioEl.currentTime = startTime; } catch (e) {}
+        } else {
+            const onMeta = () => {
+                try { audioEl.currentTime = startTime; } catch (e) {}
+                audioEl.removeEventListener('loadedmetadata', onMeta);
+            };
+            audioEl.addEventListener('loadedmetadata', onMeta, { once: true });
+        }
+    }
+
     async function loadTrack(index, startTime = 0) {
         currentTrackIndex = (index + activePlaylist.length) % activePlaylist.length;
         sessionStorage.setItem('lxvoid_lofi_track_idx', currentTrackIndex.toString());
 
         const track = activePlaylist[currentTrackIndex];
+        if (!track) return;
+
+        sessionStorage.setItem('lxvoid_lofi_track_id', track.id || '');
+        sessionStorage.setItem('lxvoid_lofi_track_type', track.type || 'direct');
+        sessionStorage.setItem('lxvoid_lofi_track_title', track.title || '');
+        sessionStorage.setItem('lxvoid_lofi_track_src', track.src || '');
+        sessionStorage.setItem('lxvoid_lofi_track_ytid', track.youtubeId || '');
+
         updatePlayerUI(isPlaying);
 
         if (track.type === 'youtube') {
@@ -437,28 +580,42 @@
                 audio.src = '';
             }
 
-            if (ytPlayer && ytPlayer.loadVideoById) {
-                ytPlayer.loadVideoById({
-                    videoId: track.youtubeId,
-                    startSeconds: startTime || 0
-                });
-                if (!isPlaying) {
-                    ytPlayer.pauseVideo();
+            if (ytPlayer && ytReady && ytPlayer.loadVideoById) {
+                try {
+                    ytPlayer.unMute();
+                    ytPlayer.setVolume(80);
+                    ytPlayer.loadVideoById({
+                        videoId: track.youtubeId,
+                        startSeconds: startTime || 0
+                    });
+                    if (isPlaying) {
+                        ytPlayer.playVideo();
+                    } else {
+                        ytPlayer.pauseVideo();
+                    }
+                } catch (e) {
+                    console.warn('YT loadVideoById error:', e);
                 }
+            } else {
+                // Queue pending action for when YouTube onReady fires
+                pendingYTAction = {
+                    videoId: track.youtubeId,
+                    startSeconds: startTime || 0,
+                    autoPlay: isPlaying || (sessionStorage.getItem('lxvoid_lofi_playing_intent') === '1')
+                };
             }
         } else if (track.type === 'uploaded') {
             // Stop YouTube player
-            if (ytPlayer && ytPlayer.stopVideo) {
+            if (ytPlayer && ytReady && ytPlayer.stopVideo) {
                 try { ytPlayer.stopVideo(); } catch (e) {}
             }
+            pendingYTAction = null;
 
             try {
                 const blobUrl = await getUploadedBlobUrl(track);
                 if (audio) {
                     audio.src = blobUrl;
-                    if (startTime > 0) {
-                        audio.currentTime = startTime;
-                    }
+                    setAudioStartTime(audio, startTime);
                 }
             } catch (err) {
                 console.warn('Gagal memuat uploaded track, lanjut track berikutnya:', err);
@@ -466,15 +623,14 @@
             }
         } else {
             // Direct audio stream / Default Lo-Fi
-            if (ytPlayer && ytPlayer.stopVideo) {
+            if (ytPlayer && ytReady && ytPlayer.stopVideo) {
                 try { ytPlayer.stopVideo(); } catch (e) {}
             }
+            pendingYTAction = null;
 
             if (audio) {
                 audio.src = track.src || track.url;
-                if (startTime > 0) {
-                    audio.currentTime = startTime;
-                }
+                setAudioStartTime(audio, startTime);
             }
         }
 
@@ -497,16 +653,37 @@
         const track = activePlaylist[currentTrackIndex];
         if (!track) return;
 
+        sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
+
         if (track.type === 'youtube') {
-            if (ytPlayer && ytPlayer.playVideo) {
-                ytPlayer.playVideo();
+            if (ytPlayer && ytReady && ytPlayer.playVideo) {
+                try {
+                    ytPlayer.unMute();
+                    ytPlayer.setVolume(80);
+                    ytPlayer.playVideo();
+                    isPlaying = true;
+                    sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                    sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
+                    updatePlayerUI(true);
+                    clearResumeHint();
+                } catch (e) {
+                    console.warn("YT play error:", e);
+                    showResumeHint();
+                }
+            } else {
                 isPlaying = true;
                 sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
                 updatePlayerUI(true);
-                clearResumeHint();
-            } else {
-                // If YT not ready yet, wait for ready
-                showResumeHint();
+                if (pendingYTAction) {
+                    pendingYTAction.autoPlay = true;
+                } else {
+                    pendingYTAction = {
+                        videoId: track.youtubeId,
+                        startSeconds: parseFloat(sessionStorage.getItem('lxvoid_lofi_time') || '0'),
+                        autoPlay: true
+                    };
+                }
             }
         } else {
             if (!audio) return;
@@ -515,12 +692,13 @@
                 playPromise.then(() => {
                     isPlaying = true;
                     sessionStorage.setItem('lxvoid_lofi_playing', '1');
+                    sessionStorage.setItem('lxvoid_lofi_playing_intent', '1');
                     updatePlayerUI(true);
                     clearResumeHint();
                 }).catch((err) => {
-                    console.warn('Audio play waiting for interaction:', err);
+                    console.warn('Audio play blocked by browser autoplay:', err);
                     isPlaying = false;
-                    sessionStorage.setItem('lxvoid_lofi_playing', '0');
+                    // Do NOT reset lxvoid_lofi_playing_intent so the user's next tap resumes immediately!
                     updatePlayerUI(false);
                     showResumeHint();
                 });
@@ -531,9 +709,10 @@
     function pauseMusic() {
         const track = activePlaylist[currentTrackIndex];
         if (track && track.type === 'youtube') {
-            if (ytPlayer && ytPlayer.pauseVideo) {
+            if (ytPlayer && ytReady && ytPlayer.pauseVideo) {
                 try { ytPlayer.pauseVideo(); } catch (e) {}
             }
+            if (pendingYTAction) pendingYTAction.autoPlay = false;
         } else {
             if (audio) {
                 audio.pause();
@@ -543,6 +722,7 @@
 
         isPlaying = false;
         sessionStorage.setItem('lxvoid_lofi_playing', '0');
+        sessionStorage.setItem('lxvoid_lofi_playing_intent', '0');
         updatePlayerUI(false);
         clearResumeHint();
     }
@@ -595,17 +775,17 @@
             const onFirstGesture = () => {
                 resumeListenerAttached = false;
                 clearResumeHint();
-                if (sessionStorage.getItem('lxvoid_lofi_playing_intent') !== '0') {
+                if (sessionStorage.getItem('lxvoid_lofi_playing_intent') === '1') {
                     attemptPlay();
                 }
-                window.removeEventListener('click', onFirstGesture);
-                window.removeEventListener('touchstart', onFirstGesture);
-                window.removeEventListener('keydown', onFirstGesture);
+                window.removeEventListener('click', onFirstGesture, true);
+                window.removeEventListener('touchstart', onFirstGesture, true);
+                window.removeEventListener('keydown', onFirstGesture, true);
             };
 
-            window.addEventListener('click', onFirstGesture, { once: true });
-            window.addEventListener('touchstart', onFirstGesture, { once: true });
-            window.addEventListener('keydown', onFirstGesture, { once: true });
+            window.addEventListener('click', onFirstGesture, true);
+            window.addEventListener('touchstart', onFirstGesture, true);
+            window.addEventListener('keydown', onFirstGesture, true);
         }
     }
 
@@ -628,13 +808,20 @@
                     const track = activePlaylist[currentTrackIndex];
                     let curTime = 0;
                     if (track && track.type === 'youtube') {
-                        if (ytPlayer && ytPlayer.getCurrentTime) {
-                            curTime = ytPlayer.getCurrentTime() || 0;
+                        if (ytPlayer && ytReady && ytPlayer.getCurrentTime) {
+                            try { curTime = ytPlayer.getCurrentTime() || 0; } catch (e) {}
                         }
                     } else if (audio) {
                         curTime = audio.currentTime || 0;
                     }
 
+                    if (track) {
+                        sessionStorage.setItem('lxvoid_lofi_track_id', track.id || '');
+                        sessionStorage.setItem('lxvoid_lofi_track_title', track.title || '');
+                        sessionStorage.setItem('lxvoid_lofi_track_type', track.type || '');
+                        sessionStorage.setItem('lxvoid_lofi_track_ytid', track.youtubeId || '');
+                        sessionStorage.setItem('lxvoid_lofi_track_src', track.src || '');
+                    }
                     sessionStorage.setItem('lxvoid_lofi_playing', isPlaying ? '1' : '0');
                     sessionStorage.setItem('lxvoid_lofi_playing_intent', isPlaying ? '1' : '0');
                     sessionStorage.setItem('lxvoid_lofi_time', curTime.toString());
@@ -649,15 +836,23 @@
             const track = activePlaylist[currentTrackIndex];
             let curTime = 0;
             if (track && track.type === 'youtube') {
-                if (ytPlayer && ytPlayer.getCurrentTime) {
-                    curTime = ytPlayer.getCurrentTime() || 0;
+                if (ytPlayer && ytReady && ytPlayer.getCurrentTime) {
+                    try { curTime = ytPlayer.getCurrentTime() || 0; } catch (e) {}
                 }
             } else if (audio) {
                 curTime = audio.currentTime || 0;
             }
 
-            sessionStorage.setItem('lxvoid_lofi_playing', isPlaying ? '1' : '0');
-            sessionStorage.setItem('lxvoid_lofi_time', curTime.toString());
+            if (curTime > 0) {
+                sessionStorage.setItem('lxvoid_lofi_time', curTime.toString());
+            }
+            if (track) {
+                sessionStorage.setItem('lxvoid_lofi_track_id', track.id || '');
+                sessionStorage.setItem('lxvoid_lofi_track_title', track.title || '');
+                sessionStorage.setItem('lxvoid_lofi_track_type', track.type || '');
+                sessionStorage.setItem('lxvoid_lofi_track_ytid', track.youtubeId || '');
+                sessionStorage.setItem('lxvoid_lofi_track_src', track.src || '');
+            }
             sessionStorage.setItem('lxvoid_lofi_track_idx', currentTrackIndex.toString());
             sessionStorage.setItem('lxvoid_lofi_nav_time', Date.now().toString());
         });

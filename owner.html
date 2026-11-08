@@ -1290,6 +1290,7 @@
                                 active: newActive,
                                 updatedAt: Date.now()
                             });
+                            try { localStorage.removeItem('lxvoid_cached_custom_music'); } catch (e) {}
                             showToast(`Status lagu "${m.title}" diubah!`);
                             loadCustomMusic();
                         } catch (e) {
@@ -1302,13 +1303,22 @@
                         if (confirm(`Hapus lagu "${m.title}" dari playlist website?`)) {
                             try {
                                 await deleteDoc(doc(db, "custom_music", docSnap.id));
-                                // Jika file upload, hapus chunks
-                                if (m.type === 'uploaded' && m.numChunks) {
-                                    for (let i = 0; i < m.numChunks; i++) {
+                                try { localStorage.removeItem('lxvoid_cached_custom_music'); } catch (e) {}
+                                // Jika file upload, hapus chunks & cache
+                                if (m.type === 'uploaded') {
+                                    if ('caches' in window) {
                                         try {
-                                            await deleteDoc(doc(db, "custom_music_chunks", `${docSnap.id}_${i}`));
-                                        } catch (chunkErr) {
-                                            // Lanjut jika chunk sudah terhapus
+                                            const c = await caches.open('lxvoid-audio-v1');
+                                            await c.delete(`/lxvoid-audio/${docSnap.id}`);
+                                        } catch (ce) {}
+                                    }
+                                    if (m.numChunks) {
+                                        for (let i = 0; i < m.numChunks; i++) {
+                                            try {
+                                                await deleteDoc(doc(db, "custom_music_chunks", `${docSnap.id}_${i}`));
+                                            } catch (chunkErr) {
+                                                // Lanjut jika chunk sudah terhapus
+                                            }
                                         }
                                     }
                                 }
@@ -1365,6 +1375,7 @@
                     musicUrlInput.value = '';
                     musicTitleInput.value = '';
                     musicArtistInput.value = '';
+                    try { localStorage.removeItem('lxvoid_cached_custom_music'); } catch (e) {}
                     showToast(`Lagu "${title}" berhasil ditambahkan ke playlist website! 🎵`);
                     loadCustomMusic();
                 } catch (err) {
@@ -1452,6 +1463,19 @@
                     musicUploadBar.style.width = "100%";
                     musicUploadPct.textContent = "100%";
                     musicUploadStatusText.textContent = "Selesai!";
+
+                    // Simpan file audio langsung ke Cache Storage lokal agar instan diputar tanpa download ulang
+                    if ('caches' in window) {
+                        try {
+                            const audioCache = await caches.open('lxvoid-audio-v1');
+                            await audioCache.put(`/lxvoid-audio/${songDoc.id}`, new Response(file, {
+                                headers: { 'Content-Type': file.type || 'audio/mpeg' }
+                            }));
+                        } catch (cacheErr) {
+                            console.debug('Cache write err:', cacheErr);
+                        }
+                    }
+                    try { localStorage.removeItem('lxvoid_cached_custom_music'); } catch (e) {}
 
                     musicFileInput.value = '';
                     musicFileTitleInput.value = '';
