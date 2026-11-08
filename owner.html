@@ -527,12 +527,12 @@
                     </p>
 
                     <!-- Pilihan Sumber Musik: Link vs Upload File -->
-                    <div style="display:flex; gap:10px; margin-bottom:16px;">
-                        <button type="button" id="btn-mode-link" class="owner-tab-btn active" style="flex:1; justify-content:center;">
-                            🔗 Link Musik (YouTube / MP3 / dll.)
+                    <div class="music-submode-nav">
+                        <button type="button" id="btn-mode-link" class="music-submode-btn active">
+                            <span>🔗</span> Link Musik (YouTube / MP3)
                         </button>
-                        <button type="button" id="btn-mode-upload" class="owner-tab-btn" style="flex:1; justify-content:center;">
-                            📁 Upload File Sendiri
+                        <button type="button" id="btn-mode-upload" class="music-submode-btn">
+                            <span>📁</span> Upload File Sendiri
                         </button>
                     </div>
 
@@ -542,7 +542,7 @@
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">
                                 Link Lagu / Video:
                             </label>
-                            <input type="text" id="music-url-input" placeholder="Paste link YouTube (cth: https://youtu.be/... atau https://www.youtube.com/watch?v=...) atau link MP3 langsung" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <input type="text" id="music-url-input" placeholder="Paste link YouTube (cth: https://youtu.be/... atau link direct MP3)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                             <small style="color:#00adb5; font-size:0.75rem; margin-top:4px; display:block;">
                                 ✨ Didukung: Link YouTube, YouTube Music, Google Drive share link, Dropbox direct link, atau link direct .mp3
                             </small>
@@ -563,10 +563,12 @@
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">
                                 Pilih File Musik (.mp3, .m4a, .wav):
                             </label>
-                            <input type="file" id="music-file-input" accept="audio/*,.mp3,.m4a,.wav,.ogg" style="display:block; color:#a0a0b0; font-size:0.85rem; padding:8px 0;">
-                            <small style="color:#ffd700; font-size:0.75rem; margin-top:4px; display:block;">
-                                💡 Disarankan ukuran file di bawah 4MB untuk kecepatan loading pengunjung terbaik.
-                            </small>
+                            <div class="music-file-upload-box">
+                                <input type="file" id="music-file-input" accept="audio/*,.mp3,.m4a,.wav,.ogg" style="display:block; width:100%; color:#a0a0b0; font-size:0.85rem; padding:6px 0; box-sizing:border-box;">
+                                <small style="color:#ffd700; font-size:0.75rem; margin-top:4px; display:block;">
+                                    💡 Disarankan ukuran file di bawah 4MB untuk kecepatan loading pengunjung terbaik.
+                                </small>
+                            </div>
                             <div id="music-upload-progress-wrap" class="hidden" style="margin-top:12px;">
                                 <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#00adb5; margin-bottom:4px;">
                                     <span id="music-upload-status-text">Mengunggah audio...</span>
@@ -870,11 +872,12 @@
         btnOwnerLogoutDenied.addEventListener('click', handleLogout);
 
         // ================= TABS NAVIGATION =================
-        document.querySelectorAll('.owner-tab-btn').forEach(btn => {
+        document.querySelectorAll('.owner-nav-tabs .owner-tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.owner-tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
                 const targetTab = btn.getAttribute('data-tab');
+                if (!targetTab) return;
+                document.querySelectorAll('.owner-nav-tabs .owner-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
                 document.querySelectorAll('.owner-tab-content').forEach(p => p.classList.add('hidden'));
                 const panel = document.getElementById(targetTab);
                 if (panel) panel.classList.remove('hidden');
@@ -1266,14 +1269,14 @@
 
                     tr.innerHTML = `
                         <td data-label="Lagu & Artis">
-                            <div>
-                                <strong style="color:#ffffff; font-size:0.9rem;">${m.title}</strong>
-                                <div style="color:#8f90a6; font-size:0.75rem;">${m.artist || 'Custom Audio'}</div>
+                            <div class="music-table-title-block">
+                                <strong style="color:#ffffff; font-size:0.9rem; display:block; word-break:break-word;">${m.title}</strong>
+                                <div style="color:#8f90a6; font-size:0.75rem; margin-top:2px;">${m.artist || 'Custom Audio'}</div>
                             </div>
                         </td>
                         <td data-label="Tipe Sumber">${typeBadge}</td>
                         <td data-label="Status"><span class="owner-status-pill ${statusClass}">${statusText}</span></td>
-                        <td data-label="Aksi">
+                        <td data-label="Aksi" class="td-actions">
                             <button type="button" class="btn-action-sm btn-toggle-sm" data-id="${docSnap.id}" data-active="${m.active !== false}">${m.active !== false ? 'Nonaktifkan' : 'Aktifkan'}</button>
                             <button type="button" class="btn-action-sm btn-del-sm" data-id="${docSnap.id}" data-title="${m.title}">Hapus</button>
                         </td>
