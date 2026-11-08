@@ -1480,6 +1480,62 @@ button:active,
     transform: translateY(-1px);
 }
 
+.post-locked-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 7px 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    font-size: 0.76rem;
+    color: #888899;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    user-select: none;
+    text-align: center;
+}
+
+.nav-owner-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    color: #121212;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.profile-role-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profile-role-pill.role-owner {
+    background: rgba(255, 215, 0, 0.12);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.35);
+}
+
+.profile-role-pill.role-admin {
+    background: rgba(0, 173, 181, 0.12);
+    color: #00adb5;
+    border: 1px solid rgba(0, 173, 181, 0.35);
+}
+
 /* Upload Preview Scoreboard */
 .match-upload-preview-wrap {
     background: rgba(0, 173, 181, 0.05);

@@ -87,16 +87,19 @@
             <div id="login-modal" class="modal hidden">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3>Login Khusus Admin</h3>
+                        <h3>Login Admin / Owner</h3>
                         <button type="button" class="modal-close-icon" id="close-login-x-btn">&times;</button>
                     </div>
-                    <input type="text" id="admin-email" placeholder="Username atau Email Admin" autocomplete="username">
+                    <input type="text" id="admin-email" placeholder="Username atau Email (cth: owner@rasyhz.com)" autocomplete="username">
 
                     <div class="password-box">
-                        <input type="password" id="admin-password" placeholder="Password Admin" autocomplete="current-password">
+                        <input type="password" id="admin-password" placeholder="Password Akun" autocomplete="current-password">
                         <button type="button" id="toggle-password-btn" class="eye-toggle-btn"
                             title="Lihat/Sembunyikan Sandi">👁️</button>
                     </div>
+                    <small style="display:block;color:#888899;font-size:0.75rem;margin:6px 0 12px;text-align:left;">
+                        💡 Email dengan awalan <strong>owner</strong> (cth: <em>owner@rasyhz.com</em>) otomatis mendapat hak akses <strong>Owner</strong> penuh.
+                    </small>
 
                     <div class="modal-actions">
                         <button id="do-login-btn" class="custom-file-upload">Masuk</button>
@@ -139,6 +142,11 @@
                         <div class="field-group">
                             <label for="profile-email-display">Email Akun (Login):</label>
                             <input type="email" id="profile-email-display" readonly disabled class="input-readonly">
+                        </div>
+
+                        <div class="field-group">
+                            <label>Tingkat Hak Akses:</label>
+                            <div id="profile-role-badge" class="profile-role-pill role-admin">🛡️ <strong>ADMIN</strong> — Hanya kelola upload sendiri</div>
                         </div>
                     </div>
 
@@ -509,12 +517,62 @@
             }, 3000);
         }
 
+        // ================= PERMISSION & ROLE SYSTEM (OWNER vs ADMIN) =================
+        // Email yang berawalan 'owner' (cth: owner@rasyhz.com, owner1@...) adalah Owner
+        function isCurrentUserOwner() {
+            if (!auth.currentUser) return false;
+            const email = (auth.currentUser.email || '').toLowerCase().trim();
+            return email.startsWith('owner');
+        }
+
+        // Cek apakah user berhak mengedit / menghapus post
+        // Aturan:
+        // 1. Owner berhak mengedit & menghapus SEMUA postingan siapapun
+        // 2. Admin biasa HANYA berhak mengedit & menghapus postingan miliknya sendiri
+        function canManagePost(postData) {
+            if (!isAdmin || !auth.currentUser) return false;
+
+            // 1. Owner punya akses tak terbatas
+            if (isCurrentUserOwner()) return true;
+
+            // 2. Admin biasa dicocokkan dengan postingannya
+            const currentUid = auth.currentUser.uid;
+            const currentEmail = (auth.currentUser.email || '').toLowerCase().trim();
+            const currentUsername = (currentAdminProfile.username || '').toLowerCase().trim();
+            const emailPrefix = currentEmail.split('@')[0];
+
+            // Cek kecocokan UID pengunggah
+            if (postData.uploaderUid && currentUid) {
+                if (postData.uploaderUid === currentUid) return true;
+            }
+
+            // Cek kecocokan Email pengunggah
+            if (postData.uploaderEmail && currentEmail) {
+                if (postData.uploaderEmail.toLowerCase().trim() === currentEmail) return true;
+            }
+
+            // Cek kecocokan Username / nama pengunggah
+            if (postData.uploadedBy) {
+                const author = postData.uploadedBy.toLowerCase().trim();
+                if (currentUsername && author === currentUsername) return true;
+                if (emailPrefix && (author === emailPrefix || author === `admin ${emailPrefix}` || author === `admin_${emailPrefix}`)) return true;
+            }
+
+            return false;
+        }
+
         // Sinkronisasi Tampilan Navbar & Admin Badge dengan Profil Aktif
         function syncProfileUI(user) {
             if (user) {
                 authBtn.classList.add('hidden');
                 adminUserMenu.classList.remove('hidden');
-                navUserName.textContent = currentAdminProfile.username || 'Admin';
+
+                const isOwner = isCurrentUserOwner();
+                if (isOwner) {
+                    navUserName.innerHTML = `${escapeHtml(currentAdminProfile.username || 'Owner')} <span class="nav-owner-tag">👑 OWNER</span>`;
+                } else {
+                    navUserName.textContent = currentAdminProfile.username || 'Admin';
+                }
 
                 if (currentAdminProfile.photoURL) {
                     navUserAvatar.src = currentAdminProfile.photoURL;
@@ -535,7 +593,22 @@
                 }
 
                 if (adminBadgeText) {
-                    adminBadgeText.innerHTML = `Mode Admin Aktif • Pengunggah: <strong>${escapeHtml(currentAdminProfile.username || 'Admin')}</strong>`;
+                    if (isOwner) {
+                        adminBadgeText.innerHTML = `Mode Owner Aktif 👑 • Akses Penuh: <strong>${escapeHtml(currentAdminProfile.username || 'Owner')}</strong>`;
+                    } else {
+                        adminBadgeText.innerHTML = `Mode Admin Aktif • Pengunggah: <strong>${escapeHtml(currentAdminProfile.username || 'Admin')}</strong>`;
+                    }
+                }
+
+                const roleBadgeEl = document.getElementById('profile-role-badge');
+                if (roleBadgeEl) {
+                    if (isOwner) {
+                        roleBadgeEl.className = 'profile-role-pill role-owner';
+                        roleBadgeEl.innerHTML = '👑 <strong>OWNER</strong> — Akses Penuh (Dapat edit & hapus semua upload)';
+                    } else {
+                        roleBadgeEl.className = 'profile-role-pill role-admin';
+                        roleBadgeEl.innerHTML = '🛡️ <strong>ADMIN</strong> — Akses Terbatas (Hanya dapat edit & hapus upload sendiri)';
+                    }
                 }
             } else {
                 authBtn.classList.remove('hidden');
@@ -690,6 +763,18 @@
             newAvatarBase64 = null;
             currentAvatarRawSrc = null;
 
+            const isOwner = isCurrentUserOwner();
+            const roleBadgeEl = document.getElementById('profile-role-badge');
+            if (roleBadgeEl) {
+                if (isOwner) {
+                    roleBadgeEl.className = 'profile-role-pill role-owner';
+                    roleBadgeEl.innerHTML = '👑 <strong>OWNER</strong> — Akses Penuh (Dapat edit & hapus semua upload)';
+                } else {
+                    roleBadgeEl.className = 'profile-role-pill role-admin';
+                    roleBadgeEl.innerHTML = '🛡️ <strong>ADMIN</strong> — Akses Terbatas (Hanya dapat edit & hapus upload sendiri)';
+                }
+            }
+
             if (currentAdminProfile.photoURL) {
                 profileAvatarPreview.src = currentAdminProfile.photoURL;
                 profileAvatarPreview.classList.remove('hidden');
@@ -797,6 +882,7 @@
                     username: newUsername,
                     photoURL: finalPhotoURL,
                     email: auth.currentUser.email || '',
+                    isOwner: isCurrentUserOwner(),
                     updatedAt: Date.now()
                 }, { merge: true });
 
@@ -1236,6 +1322,11 @@
 
         // ================= EDIT MATCH MODAL FUNCTIONS =================
         function openEditMatchModal(matchData) {
+            if (!canManagePost(matchData)) {
+                showToast("Akses ditolak: Hanya pengunggah asli atau Owner yang dapat mengedit postingan ini!", true);
+                return;
+            }
+
             currentEditingMatch = matchData;
             editPendingImageBase64 = null;
             editCurrentRawSrc = null;
@@ -1332,6 +1423,11 @@
                 return;
             }
 
+            if (currentEditingMatch && !canManagePost(currentEditingMatch)) {
+                showToast("Akses ditolak: Hanya pengunggah asli atau Owner yang dapat mengedit postingan ini!", true);
+                return;
+            }
+
             if (!title) {
                 showToast("Judul match tidak boleh kosong!", true);
                 editMatchTitleInput.focus();
@@ -1404,9 +1500,11 @@
                         console.warn("Gagal lookup username dari Firestore:", dbErr);
                     }
 
-                    // 2. Fallback cepat untuk akun admin utama (selalu tembus)
+                    // 2. Fallback cepat untuk akun admin utama & owner
                     if (!targetEmail || !targetEmail.includes('@')) {
-                        if (cleanIdentifier === 'rasyhz' || cleanIdentifier === 'admin' || cleanIdentifier === 'admin1') {
+                        if (cleanIdentifier.startsWith('owner')) {
+                            targetEmail = `${cleanIdentifier}@rasyhz.com`;
+                        } else if (cleanIdentifier === 'rasyhz' || cleanIdentifier === 'admin' || cleanIdentifier === 'admin1') {
                             targetEmail = 'admin1@rasyhz.com';
                         } else if (cleanIdentifier === 'ucup67' || cleanIdentifier === 'ayi') {
                             targetEmail = 'ayi@rasyhz.com';
@@ -1418,7 +1516,8 @@
 
                 await signInWithEmailAndPassword(auth, targetEmail, pass);
                 closeLoginModal();
-                showToast("Login berhasil! Selamat datang Admin.");
+                const isOwnerLogin = targetEmail.toLowerCase().startsWith('owner');
+                showToast(isOwnerLogin ? "Login berhasil! Selamat datang Owner 👑." : "Login berhasil! Selamat datang Admin.");
             } catch (err) {
                 let errMsg = err.code || err.message;
                 if (errMsg.includes('auth/invalid-credential') || errMsg.includes('auth/wrong-password') || errMsg.includes('auth/user-not-found')) {
@@ -1490,6 +1589,8 @@
             try {
                 const uploaderName = currentAdminProfile.username || 'Admin';
                 const uploaderAvatar = currentAdminProfile.photoURL || '';
+                const uploaderEmail = auth.currentUser && auth.currentUser.email ? auth.currentUser.email.toLowerCase().trim() : '';
+                const isOwner = isCurrentUserOwner();
 
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
@@ -1499,6 +1600,8 @@
                     uploadedBy: uploaderName,
                     uploaderAvatar: uploaderAvatar,
                     uploaderUid: auth.currentUser ? auth.currentUser.uid : "",
+                    uploaderEmail: uploaderEmail,
+                    isOwnerUpload: isOwner,
                     createdAt: new Date().getTime()
                 });
 
@@ -1644,35 +1747,60 @@
                     const actionsRow = document.createElement('div');
                     actionsRow.classList.add('card-admin-actions');
 
-                    const editBtn = document.createElement('button');
-                    editBtn.type = 'button';
-                    editBtn.classList.add('edit-post-btn');
-                    editBtn.innerHTML = '✏️ Edit Match';
-                    editBtn.title = 'Edit judul, keterangan, kategori, atau foto scoreboard';
-                    editBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openEditMatchModal(data);
-                    });
+                    const canManage = canManagePost(data);
+                    const isOwner = isCurrentUserOwner();
 
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.type = 'button';
-                    deleteBtn.classList.add('delete-btn');
-                    deleteBtn.textContent = '🗑️ Hapus Foto';
-                    deleteBtn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        if (confirm(`Hapus foto dokumentasi "${data.title}"?`)) {
-                            try {
-                                await deleteDoc(doc(db, "ff_matches", data.id));
-                                showToast("Foto match berhasil dihapus!");
-                                loadPublicGallery();
-                            } catch (err) {
-                                showToast("Gagal menghapus: " + err.message, true);
+                    if (canManage) {
+                        const editBtn = document.createElement('button');
+                        editBtn.type = 'button';
+                        editBtn.classList.add('edit-post-btn');
+                        editBtn.innerHTML = '✏️ Edit Match';
+                        editBtn.title = isOwner && (data.uploaderUid && data.uploaderUid !== auth.currentUser?.uid)
+                            ? 'Edit Match (Hak Akses Penuh Owner)'
+                            : 'Edit judul, keterangan, kategori, atau foto scoreboard';
+                        editBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openEditMatchModal(data);
+                        });
+
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.type = 'button';
+                        deleteBtn.classList.add('delete-btn');
+                        deleteBtn.textContent = '🗑️ Hapus Foto';
+                        deleteBtn.title = isOwner && (data.uploaderUid && data.uploaderUid !== auth.currentUser?.uid)
+                            ? 'Hapus Foto (Hak Akses Penuh Owner)'
+                            : 'Hapus foto dokumentasi';
+                        deleteBtn.addEventListener('click', async (e) => {
+                            e.stopPropagation();
+                            if (!canManagePost(data)) {
+                                showToast("Akses ditolak: Anda hanya dapat menghapus upload Anda sendiri!", true);
+                                return;
                             }
-                        }
-                    });
+                            const confirmMsg = isOwner && (data.uploaderUid && data.uploaderUid !== auth.currentUser?.uid)
+                                ? `[AKSES OWNER] Hapus foto dokumentasi "${data.title}" milik ${data.uploadedBy || 'Admin'}?`
+                                : `Hapus foto dokumentasi "${data.title}"?`;
+                            if (confirm(confirmMsg)) {
+                                try {
+                                    await deleteDoc(doc(db, "ff_matches", data.id));
+                                    showToast("Foto match berhasil dihapus!");
+                                    loadPublicGallery();
+                                } catch (err) {
+                                    showToast("Gagal menghapus: " + err.message, true);
+                                }
+                            }
+                        });
 
-                    actionsRow.appendChild(editBtn);
-                    actionsRow.appendChild(deleteBtn);
+                        actionsRow.appendChild(editBtn);
+                        actionsRow.appendChild(deleteBtn);
+                    } else {
+                        // Admin lain tidak berhak mengedit / menghapus post ini
+                        const lockedNotice = document.createElement('div');
+                        lockedNotice.classList.add('post-locked-info');
+                        lockedNotice.innerHTML = `<span>🔒 Postingan ${escapeHtml(data.uploadedBy || 'Admin lain')}</span>`;
+                        lockedNotice.title = 'Hanya pengunggah asli atau Owner yang memiliki izin edit & hapus foto ini';
+                        actionsRow.appendChild(lockedNotice);
+                    }
+
                     info.appendChild(actionsRow);
                 }
 
