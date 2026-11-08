@@ -2865,12 +2865,6 @@ button:active,
     color: #c084fc;
 }
 
-.region-element-badge.quest {
-    background: rgba(45, 30, 10, 0.92);
-    border-color: rgba(245, 158, 11, 0.6);
-    color: #fbbf24;
-}
-
 .region-element-badge.fate {
     background: linear-gradient(135deg, rgba(45, 15, 35, 0.92), rgba(15, 35, 45, 0.92));
     border-color: rgba(236, 72, 153, 0.55);
@@ -3384,12 +3378,6 @@ button:active,
     align-items: center;
     gap: 8px;
     width: 100%;
-}
-
-.quest-service-badge {
-    background: rgba(245, 158, 11, 0.12) !important;
-    border-color: rgba(245, 158, 11, 0.4) !important;
-    color: #fbbf24 !important;
 }
 
 .fate-service-badge {
