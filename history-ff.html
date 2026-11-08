@@ -150,11 +150,10 @@
             <div id="admin-upload-panel" class="upload-box hidden">
                 <div class="admin-panel-top">
                     <div class="admin-badge" id="admin-badge-status">
-                        <img id="admin-badge-avatar" src="" alt="Avatar" class="uploader-avatar-thumb hidden">
+                        <img id="admin-badge-avatar" src="" alt="Avatar" class="uploader-avatar-thumb hidden" width="22" height="22">
                         <span id="admin-badge-icon">👤</span>
                         <span id="admin-badge-text">Mode Admin Aktif • Pengunggah: <strong>Admin</strong></span>
                     </div>
-                    <button type="button" id="panel-edit-profile-btn" class="btn-panel-profile">⚙️ Edit Profil</button>
                 </div>
                 <div class="input-group">
                     <input type="text" id="match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
@@ -315,7 +314,6 @@
         const profileEmailDisplay = document.getElementById('profile-email-display');
         const saveProfileBtn = document.getElementById('save-profile-btn');
         const profileLogoutBtn = document.getElementById('profile-logout-btn');
-        const panelEditProfileBtn = document.getElementById('panel-edit-profile-btn');
 
         // Element Admin Upload Panel & Gallery
         const adminUploadPanel = document.getElementById('admin-upload-panel');
@@ -513,7 +511,6 @@
         }
 
         if (openProfileBtn) openProfileBtn.addEventListener('click', openProfileModal);
-        if (panelEditProfileBtn) panelEditProfileBtn.addEventListener('click', openProfileModal);
         if (closeProfileModalBtn) closeProfileModalBtn.addEventListener('click', closeProfileModal);
 
         profileModal.addEventListener('click', (e) => {

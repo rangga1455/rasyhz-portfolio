@@ -1114,40 +1114,23 @@ button:active,
 .admin-panel-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 14px;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .admin-badge {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     background-color: rgba(0, 173, 181, 0.15);
     color: #00adb5;
     border: 1px solid rgba(0, 173, 181, 0.35);
-    padding: 6px 12px;
+    padding: 7px 16px;
     border-radius: 20px;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 600;
-}
-
-.btn-panel-profile {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    font-size: 0.74rem;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-panel-profile:hover {
-    background: #00adb5;
-    color: #121212;
-    border-color: #00adb5;
 }
 
 /* ================= LIGHTBOX MODAL ================= */
