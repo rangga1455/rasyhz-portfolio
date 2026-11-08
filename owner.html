@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Owner Control Center - LXVOID COMMUNITY</title>
-    <meta name="description" content="Dashboard kontrol eksklusif Owner LXVOID COMMUNITY — Atur pengumuman website, kelola kode promo joki, dan publikasikan testimoni pelanggan.">
+    <meta name="description"
+        content="Dashboard kontrol eksklusif Owner LXVOID COMMUNITY — Atur pengumuman website, kelola kode promo joki, dan publikasikan testimoni pelanggan.">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#121218">
@@ -248,16 +249,19 @@
         <div id="owner-login-view" class="auth-guard-card">
             <div class="auth-guard-icon">👑</div>
             <h2>Owner Control Center</h2>
-            <p>Silakan masuk menggunakan akun khusus <strong>Owner</strong> (email berawalan <code>owner</code>, cth: <em>owner@rasyhz.com</em>).</p>
+            <p>Silakan masuk menggunakan akun khusus <strong>Owner</strong> (email berawalan <code>owner</code>, cth:
+                <em>owner@rasyhz.com</em>).</p>
 
             <form id="owner-login-form" onsubmit="return false;">
                 <div class="auth-input-group">
                     <label for="owner-email-input">Username atau Email Owner:</label>
-                    <input type="text" id="owner-email-input" placeholder="owner atau owner@rasyhz.com" autocomplete="username" required>
+                    <input type="text" id="owner-email-input" placeholder="owner atau owner@rasyhz.com"
+                        autocomplete="username" required>
                 </div>
                 <div class="auth-input-group">
                     <label for="owner-pass-input">Password Akun:</label>
-                    <input type="password" id="owner-pass-input" placeholder="Password Owner" autocomplete="current-password" required>
+                    <input type="password" id="owner-pass-input" placeholder="Password Owner"
+                        autocomplete="current-password" required>
                 </div>
                 <button type="submit" id="btn-do-owner-login" class="btn-owner-gold">Masuk sebagai Owner 👑</button>
             </form>
@@ -267,10 +271,15 @@
         <div id="owner-denied-view" class="auth-guard-card hidden" style="border-color: #d9534f;">
             <div class="auth-guard-icon">⛔</div>
             <h2>Akses Ditolak</h2>
-            <p>Akun Anda (<strong id="denied-user-email">user@...</strong>) bukan merupakan akun <strong>Owner</strong>. Halaman ini memiliki hak akses level tertinggi dan hanya diperuntukkan bagi email yang berawalan <code>owner</code>.</p>
+            <p>Akun Anda (<strong id="denied-user-email">user@...</strong>) bukan merupakan akun <strong>Owner</strong>.
+                Halaman ini memiliki hak akses level tertinggi dan hanya diperuntukkan bagi email yang berawalan
+                <code>owner</code>.</p>
             <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                <button type="button" id="btn-owner-logout-denied" class="btn-del-sm" style="flex:1; min-width: 140px; padding: 12px;">Ganti Akun / Logout</button>
-                <a href="index.html" class="btn-toggle-sm" style="flex:1; min-width: 140px; padding: 12px; text-decoration:none; text-align:center; display:inline-flex; align-items:center; justify-content:center; border-radius:6px;">Ke Beranda</a>
+                <button type="button" id="btn-owner-logout-denied" class="btn-del-sm"
+                    style="flex:1; min-width: 140px; padding: 12px;">Ganti Akun / Logout</button>
+                <a href="index.html" class="btn-toggle-sm"
+                    style="flex:1; min-width: 140px; padding: 12px; text-decoration:none; text-align:center; display:inline-flex; align-items:center; justify-content:center; border-radius:6px;">Ke
+                    Beranda</a>
             </div>
         </div>
 
@@ -287,7 +296,8 @@
                 </div>
                 <div class="owner-header-user-side">
                     <span class="owner-user-pill" id="owner-user-display">owner@...</span>
-                    <button type="button" id="btn-owner-logout" class="btn-del-sm" style="padding: 7px 14px; min-height: 34px;">Logout</button>
+                    <button type="button" id="btn-owner-logout" class="btn-del-sm"
+                        style="padding: 7px 14px; min-height: 34px;">Logout</button>
                 </div>
             </div>
 
@@ -308,41 +318,58 @@
             <div id="tab-announcement" class="owner-tab-content">
                 <div class="owner-card-panel">
                     <h3>📢 Kelola Pengumuman Banner Website</h3>
-                    <p class="section-desc" style="margin-bottom: 16px;">Teks pengumuman ini akan otomatis tampil di bagian atas seluruh halaman website jika diaktifkan.</p>
+                    <p class="section-desc" style="margin-bottom: 16px;">Teks pengumuman ini akan otomatis tampil di
+                        bagian atas seluruh halaman website jika diaktifkan.</p>
 
                     <label class="switch-toggle-wrap" for="announcement-active-toggle" style="cursor: pointer;">
                         <input type="checkbox" id="announcement-active-toggle">
                         <div>
                             <div class="switch-label-title">Status Banner Pengumuman</div>
-                            <div class="switch-label-desc">Centang untuk menampilkan banner pengumuman kepada pengunjung di seluruh web.</div>
+                            <div class="switch-label-desc">Centang untuk menampilkan banner pengumuman kepada pengunjung
+                                di seluruh web.</div>
                         </div>
                     </label>
 
                     <div class="owner-form-grid">
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tag / Kategori:</label>
-                            <input type="text" id="announcement-tag-input" placeholder="cth: INFO RESMI, PROMO, EVENT" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tag
+                                / Kategori:</label>
+                            <input type="text" id="announcement-tag-input" placeholder="cth: INFO RESMI, PROMO, EVENT"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Link Tombol / Tujuan (Opsional):</label>
-                            <input type="text" id="announcement-url-input" placeholder="cth: https://discord.gg/... atau joki.html" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Link
+                                Tombol / Tujuan (Opsional):</label>
+                            <input type="text" id="announcement-url-input"
+                                placeholder="cth: https://discord.gg/... atau joki.html"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div class="form-col-full">
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Isi Teks Pengumuman:</label>
-                            <textarea id="announcement-text-input" rows="3" placeholder="Tulis pengumuman resmi di sini... (cth: Open Member TEAM LXVOID Free Fire & Diskon Joki Genshin 20% Minggu Ini!)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Isi
+                                Teks Pengumuman:</label>
+                            <textarea id="announcement-text-input" rows="3"
+                                placeholder="Tulis pengumuman resmi di sini... (cth: Open Member TEAM LXVOID Free Fire & Diskon Joki Genshin 20% Minggu Ini!)"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
                         </div>
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <button type="button" id="btn-save-announcement" class="btn-owner-gold" style="padding:12px 24px;">💾 Simpan Pengumuman</button>
+                        <button type="button" id="btn-save-announcement" class="btn-owner-gold"
+                            style="padding:12px 24px;">💾 Simpan Pengumuman</button>
                     </div>
 
                     <div class="preview-box-outer">
                         <div class="preview-box-label">Pratinjau Banner Langsung (Live Preview):</div>
-                        <div id="announcement-preview-bar" class="announcement-bar" style="border-radius: 8px; flex-wrap: wrap;">
+                        <div id="announcement-preview-bar" class="announcement-bar"
+                            style="border-radius: 8px; flex-wrap: wrap;">
                             <div class="announcement-main" style="white-space: normal;">
                                 <span class="announcement-tag" id="prev-tag">INFO RESMI</span>
-                                <span class="announcement-text" id="prev-text" style="white-space: normal; word-break: break-word;">Pratinjau isi pengumuman akan muncul di sini...</span>
+                                <span class="announcement-text" id="prev-text"
+                                    style="white-space: normal; word-break: break-word;">Pratinjau isi pengumuman akan
+                                    muncul di sini...</span>
                             </div>
                         </div>
                     </div>
@@ -353,32 +380,46 @@
             <div id="tab-promo" class="owner-tab-content hidden">
                 <div class="owner-card-panel">
                     <h3>🎟️ Tambah Kode Promo Baru</h3>
-                    <p class="section-desc" style="margin-bottom: 16px;">Kode promo ini dapat digunakan pelanggan saat menghitung pesanan di kalkulator Joki Genshin.</p>
+                    <p class="section-desc" style="margin-bottom: 16px;">Kode promo ini dapat digunakan pelanggan saat
+                        menghitung pesanan di kalkulator Joki Genshin.</p>
 
                     <div class="owner-form-grid">
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Kode Kupon (Huruf Besar):</label>
-                            <input type="text" id="promo-code-input" placeholder="misal: LXVOID20" style="text-transform:uppercase; width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; font-weight:700; letter-spacing:1px;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Kode
+                                Kupon (Huruf Besar):</label>
+                            <input type="text" id="promo-code-input" placeholder="misal: LXVOID20"
+                                style="text-transform:uppercase; width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; font-weight:700; letter-spacing:1px;">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tipe Diskon:</label>
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tipe
+                                Diskon:</label>
                             <select id="promo-type-select" class="custom-select" style="width:100%; min-height:44px;">
                                 <option value="percent">Persentase (%)</option>
                                 <option value="fixed">Potongan Tetap (Rp)</option>
                             </select>
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nilai Diskon:</label>
-                            <input type="number" id="promo-value-input" placeholder="cth: 20 (untuk 20%) atau 15000" min="1" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nilai
+                                Diskon:</label>
+                            <input type="number" id="promo-value-input" placeholder="cth: 20 (untuk 20%) atau 15000"
+                                min="1"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Minimal Belanja (Rp):</label>
-                            <input type="number" id="promo-min-input" placeholder="0 jika tanpa batas" value="0" min="0" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Minimal
+                                Belanja (Rp):</label>
+                            <input type="number" id="promo-min-input" placeholder="0 jika tanpa batas" value="0" min="0"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <button type="button" id="btn-save-promo" class="btn-owner-gold" style="padding:12px 24px;">+ Simpan Kode Promo</button>
+                        <button type="button" id="btn-save-promo" class="btn-owner-gold" style="padding:12px 24px;">+
+                            Simpan Kode Promo</button>
                     </div>
                 </div>
 
@@ -397,7 +438,8 @@
                             </thead>
                             <tbody id="promo-list-body">
                                 <tr>
-                                    <td colspan="5" style="text-align:center; color:#8f90a6; padding:20px;">Memuat daftar kode promo...</td>
+                                    <td colspan="5" style="text-align:center; color:#8f90a6; padding:20px;">Memuat
+                                        daftar kode promo...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -409,19 +451,29 @@
             <div id="tab-testimonials" class="owner-tab-content hidden">
                 <div class="owner-card-panel">
                     <h3>⭐ Tambah Testimoni Pelanggan Baru</h3>
-                    <p class="section-desc" style="margin-bottom: 16px;">Testimoni ini akan langsung tampil di seksi ulasan pelanggan pada halaman Joki Genshin Impact.</p>
+                    <p class="section-desc" style="margin-bottom: 16px;">Testimoni ini akan langsung tampil di seksi
+                        ulasan pelanggan pada halaman Joki Genshin Impact.</p>
 
                     <div class="owner-form-grid">
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama Pelanggan (In-Game / Panggilan):</label>
-                            <input type="text" id="testi-author-input" placeholder="cth: Arya (AR 58)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama
+                                Pelanggan (In-Game / Panggilan):</label>
+                            <input type="text" id="testi-author-input" placeholder="cth: Arya (AR 58)"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Layanan yang Dipesan:</label>
-                            <input type="text" id="testi-service-input" placeholder="cth: 100% Explore Natlan + All Pyroculus" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Layanan
+                                yang Dipesan:</label>
+                            <input type="text" id="testi-service-input"
+                                placeholder="cth: 100% Explore Natlan + All Pyroculus"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Rating Bintang:</label>
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Rating
+                                Bintang:</label>
                             <select id="testi-stars-select" class="custom-select" style="width:100%; min-height:44px;">
                                 <option value="5">⭐⭐⭐⭐⭐ (5 / 5 Sangat Puas)</option>
                                 <option value="4">⭐⭐⭐⭐ (4 / 5 Puas)</option>
@@ -429,20 +481,29 @@
                             </select>
                         </div>
                         <div class="form-col-full">
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Ulasan / Review Pelanggan:</label>
-                            <textarea id="testi-body-input" rows="3" placeholder="cth: Pengerjaan super cepat, akun aman sentosa tanpa kendala, seller ramah & fast respond. Recomended banget joki di LXVOID!" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Ulasan
+                                / Review Pelanggan:</label>
+                            <textarea id="testi-body-input" rows="3"
+                                placeholder="cth: Pengerjaan super cepat, akun aman sentosa tanpa kendala, seller ramah & fast respond. Recomended banget joki di LXVOID!"
+                                style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
                         </div>
                         <div class="form-col-full">
-                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Foto Screenshot Bukti Chat / Hasil (Opsional):</label>
-                            <input type="file" id="testi-proof-file" accept="image/*" style="display:block; color:#a0a0b0; font-size:0.85rem; padding:6px 0;">
-                            <div id="testi-preview-wrap" class="hidden" style="margin-top:10px; max-width:200px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.2);">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Foto
+                                Screenshot Bukti Chat / Hasil (Opsional):</label>
+                            <input type="file" id="testi-proof-file" accept="image/*"
+                                style="display:block; color:#a0a0b0; font-size:0.85rem; padding:6px 0;">
+                            <div id="testi-preview-wrap" class="hidden"
+                                style="margin-top:10px; max-width:200px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.2);">
                                 <img id="testi-preview-img" src="" alt="Bukti" style="width:100%; display:block;">
                             </div>
                         </div>
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <button type="button" id="btn-save-testi" class="btn-owner-gold" style="padding:12px 24px;">+ Publikasikan Testimoni</button>
+                        <button type="button" id="btn-save-testi" class="btn-owner-gold" style="padding:12px 24px;">+
+                            Publikasikan Testimoni</button>
                     </div>
                 </div>
 
@@ -474,19 +535,22 @@
         </a>
         <a href="presets.html" class="nav-item">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
+                <path
+                    d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
             </svg>
             <span>Presets</span>
         </a>
         <a href="joki.html" class="nav-item">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                <path
+                    d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
             </svg>
             <span>Joki</span>
         </a>
         <a href="history-ff.html" class="nav-item">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c1.98-.44 3.53-2.07 3.61-4.06C19.08 11.63 21 9.55 21 7V5c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
+                <path
+                    d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c1.98-.44 3.53-2.07 3.61-4.06C19.08 11.63 21 9.55 21 7V5c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
             </svg>
             <span>History FF</span>
         </a>
@@ -496,7 +560,8 @@
         </a>
         <a href="links.html" class="nav-item">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+                <path
+                    d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
             </svg>
             <span>Links</span>
         </a>
