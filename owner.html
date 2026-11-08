@@ -312,6 +312,9 @@
                 <button type="button" class="owner-tab-btn" data-tab="tab-testimonials">
                     ⭐ Testimoni Joki Genshin
                 </button>
+                <button type="button" class="owner-tab-btn" data-tab="tab-music">
+                    🎵 Musik Playlist Web
+                </button>
             </div>
 
             <!-- ================= TAB 1: PENGUMUMAN WEBSITE ================= -->
@@ -514,6 +517,106 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ================= TAB 4: KELOLA MUSIK PLAYLIST ================= -->
+            <div id="tab-music" class="owner-tab-content hidden">
+                <div class="owner-card-panel">
+                    <h3>🎵 Tambah Musik Custom Website</h3>
+                    <p class="section-desc" style="margin-bottom: 16px;">
+                        Tambahkan lagu custom pilihan Anda agar dapat didengarkan oleh semua pengunjung website secara gratis dan otomatis.
+                    </p>
+
+                    <!-- Pilihan Sumber Musik: Link vs Upload File -->
+                    <div style="display:flex; gap:10px; margin-bottom:16px;">
+                        <button type="button" id="btn-mode-link" class="owner-tab-btn active" style="flex:1; justify-content:center;">
+                            🔗 Link Musik (YouTube / MP3 / dll.)
+                        </button>
+                        <button type="button" id="btn-mode-upload" class="owner-tab-btn" style="flex:1; justify-content:center;">
+                            📁 Upload File Sendiri
+                        </button>
+                    </div>
+
+                    <!-- Form Mode A: Link Musik -->
+                    <div id="music-form-link" class="owner-form-grid">
+                        <div class="form-col-full">
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">
+                                Link Lagu / Video:
+                            </label>
+                            <input type="text" id="music-url-input" placeholder="Paste link YouTube (cth: https://youtu.be/... atau https://www.youtube.com/watch?v=...) atau link MP3 langsung" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                            <small style="color:#00adb5; font-size:0.75rem; margin-top:4px; display:block;">
+                                ✨ Didukung: Link YouTube, YouTube Music, Google Drive share link, Dropbox direct link, atau link direct .mp3
+                            </small>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Judul Lagu:</label>
+                            <input type="text" id="music-title-input" placeholder="cth: Suzume / Ghibli Lofi / Senja" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama Artis / Channel (Opsional):</label>
+                            <input type="text" id="music-artist-input" placeholder="cth: Radwimps / Lofi Girl / LXVOID" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                        </div>
+                    </div>
+
+                    <!-- Form Mode B: Upload File Musik Sendiri -->
+                    <div id="music-form-upload" class="owner-form-grid hidden">
+                        <div class="form-col-full">
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">
+                                Pilih File Musik (.mp3, .m4a, .wav):
+                            </label>
+                            <input type="file" id="music-file-input" accept="audio/*,.mp3,.m4a,.wav,.ogg" style="display:block; color:#a0a0b0; font-size:0.85rem; padding:8px 0;">
+                            <small style="color:#ffd700; font-size:0.75rem; margin-top:4px; display:block;">
+                                💡 Disarankan ukuran file di bawah 4MB untuk kecepatan loading pengunjung terbaik.
+                            </small>
+                            <div id="music-upload-progress-wrap" class="hidden" style="margin-top:12px;">
+                                <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#00adb5; margin-bottom:4px;">
+                                    <span id="music-upload-status-text">Mengunggah audio...</span>
+                                    <span id="music-upload-pct">0%</span>
+                                </div>
+                                <div style="width:100%; height:6px; background:#1b1c24; border-radius:3px; overflow:hidden;">
+                                    <div id="music-upload-bar" style="width:0%; height:100%; background:linear-gradient(90deg, #00adb5, #00e5ff); transition:width 0.2s ease;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Judul Lagu:</label>
+                            <input type="text" id="music-file-title-input" placeholder="cth: My Favorite Chill Track" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama Artis / Pembuat (Opsional):</label>
+                            <input type="text" id="music-file-artist-input" placeholder="cth: LXVOID Music" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 18px;">
+                        <button type="button" id="btn-save-music" class="btn-owner-gold" style="padding:12px 24px;">+ Tambah ke Playlist Website 🎵</button>
+                    </div>
+                </div>
+
+                <!-- Daftar Musik Custom -->
+                <div class="owner-card-panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                        <h3>Daftar Musik Custom Owner</h3>
+                        <span style="font-size:0.75rem; color:#8f90a6;" id="music-count-badge">0 Lagu Custom</span>
+                    </div>
+                    <div class="owner-table-wrap">
+                        <table class="owner-table">
+                            <thead>
+                                <tr>
+                                    <th>Lagu & Artis</th>
+                                    <th>Tipe Sumber</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="custom-music-list-body">
+                                <tr>
+                                    <td colspan="4" style="text-align:center; color:#8f90a6; padding:20px;">Memuat daftar musik...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -627,6 +730,26 @@
         const btnSaveTesti = document.getElementById('btn-save-testi');
         const testiListGrid = document.getElementById('testi-list-grid');
 
+        // Music Playlist Elements
+        const btnModeLink = document.getElementById('btn-mode-link');
+        const btnModeUpload = document.getElementById('btn-mode-upload');
+        const musicFormLink = document.getElementById('music-form-link');
+        const musicFormUpload = document.getElementById('music-form-upload');
+        const musicUrlInput = document.getElementById('music-url-input');
+        const musicTitleInput = document.getElementById('music-title-input');
+        const musicArtistInput = document.getElementById('music-artist-input');
+        const musicFileInput = document.getElementById('music-file-input');
+        const musicFileTitleInput = document.getElementById('music-file-title-input');
+        const musicFileArtistInput = document.getElementById('music-file-artist-input');
+        const musicUploadProgressWrap = document.getElementById('music-upload-progress-wrap');
+        const musicUploadStatusText = document.getElementById('music-upload-status-text');
+        const musicUploadPct = document.getElementById('music-upload-pct');
+        const musicUploadBar = document.getElementById('music-upload-bar');
+        const btnSaveMusic = document.getElementById('btn-save-music');
+        const customMusicListBody = document.getElementById('custom-music-list-body');
+        const musicCountBadge = document.getElementById('music-count-badge');
+        let currentMusicMode = 'link'; // 'link' | 'upload'
+
         let pendingTestiImageBase64 = null;
         let toastTimeout = null;
 
@@ -661,6 +784,7 @@
                     loadAnnouncementData();
                     loadPromoCodes();
                     loadTestimonials();
+                    loadCustomMusic();
                 } else {
                     ownerLoginView.classList.add('hidden');
                     ownerDeniedView.classList.remove('hidden');
@@ -1043,6 +1167,304 @@
             } finally {
                 btnSaveTesti.innerText = "+ Publikasikan Testimoni";
                 btnSaveTesti.disabled = false;
+            }
+        });
+
+        // ================= TAB 4: KELOLA MUSIK PLAYLIST =================
+        // Mode switch (Link vs Upload)
+        btnModeLink.addEventListener('click', () => {
+            currentMusicMode = 'link';
+            btnModeLink.classList.add('active');
+            btnModeUpload.classList.remove('active');
+            musicFormLink.classList.remove('hidden');
+            musicFormUpload.classList.add('hidden');
+        });
+
+        btnModeUpload.addEventListener('click', () => {
+            currentMusicMode = 'upload';
+            btnModeUpload.classList.add('active');
+            btnModeLink.classList.remove('active');
+            musicFormUpload.classList.remove('hidden');
+            musicFormLink.classList.add('hidden');
+        });
+
+        // Auto-fill title from selected file
+        musicFileInput.addEventListener('change', () => {
+            const file = musicFileInput.files[0];
+            if (!file) return;
+            if (!musicFileTitleInput.value.trim()) {
+                const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+                musicFileTitleInput.value = nameWithoutExt;
+            }
+        });
+
+        function parseMusicUrl(rawUrl) {
+            const url = (rawUrl || '').trim();
+            if (!url) return null;
+
+            // 1. YouTube & YouTube Music
+            const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/)|music\.youtube\.com\/watch\?v=)([\w-]{11})/i);
+            if (ytMatch && ytMatch[1]) {
+                return {
+                    type: 'youtube',
+                    youtubeId: ytMatch[1],
+                    url: url
+                };
+            }
+
+            // 2. Google Drive share link
+            const gdriveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (gdriveMatch && gdriveMatch[1]) {
+                return {
+                    type: 'direct',
+                    url: `https://docs.google.com/uc?export=download&id=${gdriveMatch[1]}`
+                };
+            }
+
+            // 3. Dropbox direct stream
+            if (url.includes('dropbox.com')) {
+                return {
+                    type: 'direct',
+                    url: url.replace('?dl=0', '?dl=1')
+                };
+            }
+
+            // 4. Direct audio stream (.mp3, .m4a, dll)
+            return {
+                type: 'direct',
+                url: url
+            };
+        }
+
+        async function loadCustomMusic() {
+            try {
+                const q = query(collection(db, "custom_music"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                customMusicListBody.innerHTML = '';
+                musicCountBadge.textContent = `${snap.size} Lagu Custom`;
+
+                if (snap.empty) {
+                    customMusicListBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#8f90a6; padding:20px;">Belum ada musik custom. Tambahkan lagu pilihan Anda di atas!</td></tr>';
+                    return;
+                }
+
+                snap.forEach(docSnap => {
+                    const m = docSnap.data();
+                    const tr = document.createElement('tr');
+
+                    let typeBadge = '';
+                    if (m.type === 'youtube') {
+                        typeBadge = '<span class="owner-status-pill" style="background:rgba(255,0,0,0.15); color:#ff4d4d; border:1px solid rgba(255,0,0,0.3);">🔴 YouTube</span>';
+                    } else if (m.type === 'uploaded') {
+                        typeBadge = '<span class="owner-status-pill" style="background:rgba(0,173,181,0.15); color:#00adb5; border:1px solid rgba(0,173,181,0.3);">📁 File Upload</span>';
+                    } else {
+                        typeBadge = '<span class="owner-status-pill" style="background:rgba(255,215,0,0.15); color:#ffd700; border:1px solid rgba(255,215,0,0.3);">🔗 Direct Audio</span>';
+                    }
+
+                    const statusClass = m.active !== false ? 'active' : 'inactive';
+                    const statusText = m.active !== false ? 'Aktif' : 'Nonaktif';
+
+                    tr.innerHTML = `
+                        <td data-label="Lagu & Artis">
+                            <div>
+                                <strong style="color:#ffffff; font-size:0.9rem;">${m.title}</strong>
+                                <div style="color:#8f90a6; font-size:0.75rem;">${m.artist || 'Custom Audio'}</div>
+                            </div>
+                        </td>
+                        <td data-label="Tipe Sumber">${typeBadge}</td>
+                        <td data-label="Status"><span class="owner-status-pill ${statusClass}">${statusText}</span></td>
+                        <td data-label="Aksi">
+                            <button type="button" class="btn-action-sm btn-toggle-sm" data-id="${docSnap.id}" data-active="${m.active !== false}">${m.active !== false ? 'Nonaktifkan' : 'Aktifkan'}</button>
+                            <button type="button" class="btn-action-sm btn-del-sm" data-id="${docSnap.id}" data-title="${m.title}">Hapus</button>
+                        </td>
+                    `;
+
+                    // Toggle active
+                    tr.querySelector('.btn-toggle-sm').addEventListener('click', async () => {
+                        try {
+                            const newActive = m.active === false;
+                            await updateDoc(doc(db, "custom_music", docSnap.id), {
+                                active: newActive,
+                                updatedAt: Date.now()
+                            });
+                            showToast(`Status lagu "${m.title}" diubah!`);
+                            loadCustomMusic();
+                        } catch (e) {
+                            showToast("Gagal update status: " + e.message, true);
+                        }
+                    });
+
+                    // Delete
+                    tr.querySelector('.btn-del-sm').addEventListener('click', async () => {
+                        if (confirm(`Hapus lagu "${m.title}" dari playlist website?`)) {
+                            try {
+                                await deleteDoc(doc(db, "custom_music", docSnap.id));
+                                // Jika file upload, hapus chunks
+                                if (m.type === 'uploaded' && m.numChunks) {
+                                    for (let i = 0; i < m.numChunks; i++) {
+                                        try {
+                                            await deleteDoc(doc(db, "custom_music_chunks", `${docSnap.id}_${i}`));
+                                        } catch (chunkErr) {
+                                            // Lanjut jika chunk sudah terhapus
+                                        }
+                                    }
+                                }
+                                showToast(`Lagu "${m.title}" berhasil dihapus!`);
+                                loadCustomMusic();
+                            } catch (e) {
+                                showToast("Gagal menghapus: " + e.message, true);
+                            }
+                        }
+                    });
+
+                    customMusicListBody.appendChild(tr);
+                });
+            } catch (err) {
+                customMusicListBody.innerHTML = `<tr><td colspan="4" style="color:#ff5252; padding:15px;">Gagal memuat musik: ${err.message}</td></tr>`;
+            }
+        }
+
+        btnSaveMusic.addEventListener('click', async () => {
+            btnSaveMusic.disabled = true;
+
+            if (currentMusicMode === 'link') {
+                const url = musicUrlInput.value.trim();
+                const title = musicTitleInput.value.trim();
+                const artist = musicArtistInput.value.trim();
+
+                if (!url || !title) {
+                    showToast("Harap isi link musik dan judul lagu!", true);
+                    btnSaveMusic.disabled = false;
+                    return;
+                }
+
+                const parsed = parseMusicUrl(url);
+                if (!parsed) {
+                    showToast("Format link tidak valid!", true);
+                    btnSaveMusic.disabled = false;
+                    return;
+                }
+
+                btnSaveMusic.innerText = "Menyimpan Lagu...";
+
+                try {
+                    await addDoc(collection(db, "custom_music"), {
+                        title: title,
+                        artist: artist || (parsed.type === 'youtube' ? 'YouTube Audio' : 'Custom Music'),
+                        type: parsed.type, // 'youtube' | 'direct'
+                        url: parsed.url,
+                        youtubeId: parsed.youtubeId || "",
+                        active: true,
+                        createdAt: Date.now(),
+                        createdBy: auth.currentUser?.email || 'owner'
+                    });
+
+                    musicUrlInput.value = '';
+                    musicTitleInput.value = '';
+                    musicArtistInput.value = '';
+                    showToast(`Lagu "${title}" berhasil ditambahkan ke playlist website! 🎵`);
+                    loadCustomMusic();
+                } catch (err) {
+                    showToast("Gagal menyimpan musik: " + err.message, true);
+                } finally {
+                    btnSaveMusic.innerText = "+ Tambah ke Playlist Website 🎵";
+                    btnSaveMusic.disabled = false;
+                }
+            } else {
+                // Upload File Sendiri
+                const file = musicFileInput.files[0];
+                const title = musicFileTitleInput.value.trim();
+                const artist = musicFileArtistInput.value.trim();
+
+                if (!file || !title) {
+                    showToast("Harap pilih file audio dan isi judul lagu!", true);
+                    btnSaveMusic.disabled = false;
+                    return;
+                }
+
+                // Cek batas ukuran (max 4.5MB untuk Firestore chunks)
+                const maxBytes = 4.5 * 1024 * 1024;
+                if (file.size > maxBytes) {
+                    showToast(`Ukuran file (${(file.size / (1024 * 1024)).toFixed(1)}MB) melebihi batas 4.5MB. Silakan gunakan link YouTube atau kompres audio!`, true);
+                    btnSaveMusic.disabled = false;
+                    return;
+                }
+
+                btnSaveMusic.innerText = "Memproses Audio...";
+                musicUploadProgressWrap.classList.remove('hidden');
+                musicUploadStatusText.textContent = "Membaca file audio...";
+                musicUploadBar.style.width = "20%";
+                musicUploadPct.textContent = "20%";
+
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    musicUploadStatusText.textContent = "Mengompres & memecah data audio...";
+                    musicUploadBar.style.width = "40%";
+                    musicUploadPct.textContent = "40%";
+
+                    // Convert to base64
+                    let binary = '';
+                    const bytes = new Uint8Array(arrayBuffer);
+                    const len = bytes.byteLength;
+                    const batchSize = 8192;
+                    for (let i = 0; i < len; i += batchSize) {
+                        binary += String.fromCharCode.apply(null, bytes.subarray(i, Math.min(i + batchSize, len)));
+                    }
+                    const base64 = btoa(binary);
+
+                    // Split into ~450KB chunks
+                    const chunkSize = 450 * 1024;
+                    const numChunks = Math.ceil(base64.length / chunkSize);
+
+                    musicUploadStatusText.textContent = `Menyimpan ${numChunks} data audio ke Firestore...`;
+                    musicUploadBar.style.width = "60%";
+                    musicUploadPct.textContent = "60%";
+
+                    const songDoc = await addDoc(collection(db, "custom_music"), {
+                        title: title,
+                        artist: artist || "Uploaded Audio",
+                        type: "uploaded",
+                        numChunks: numChunks,
+                        totalSize: len,
+                        mimeType: file.type || "audio/mpeg",
+                        active: true,
+                        createdAt: Date.now(),
+                        createdBy: auth.currentUser?.email || 'owner'
+                    });
+
+                    // Upload each chunk
+                    for (let i = 0; i < numChunks; i++) {
+                        const chunkData = base64.slice(i * chunkSize, (i + 1) * chunkSize);
+                        await setDoc(doc(db, "custom_music_chunks", `${songDoc.id}_${i}`), {
+                            songId: songDoc.id,
+                            chunkIndex: i,
+                            data: chunkData
+                        });
+
+                        const pct = Math.round(60 + ((i + 1) / numChunks) * 35);
+                        musicUploadBar.style.width = `${pct}%`;
+                        musicUploadPct.textContent = `${pct}%`;
+                    }
+
+                    musicUploadBar.style.width = "100%";
+                    musicUploadPct.textContent = "100%";
+                    musicUploadStatusText.textContent = "Selesai!";
+
+                    musicFileInput.value = '';
+                    musicFileTitleInput.value = '';
+                    musicFileArtistInput.value = '';
+                    showToast(`File audio "${title}" berhasil diunggah ke website! 🎵`);
+                    loadCustomMusic();
+                } catch (err) {
+                    showToast("Gagal mengunggah file musik: " + err.message, true);
+                } finally {
+                    btnSaveMusic.innerText = "+ Tambah ke Playlist Website 🎵";
+                    btnSaveMusic.disabled = false;
+                    setTimeout(() => {
+                        musicUploadProgressWrap.classList.add('hidden');
+                        musicUploadBar.style.width = "0%";
+                    }, 2000);
+                }
             }
         });
     </script>
