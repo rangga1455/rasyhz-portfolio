@@ -1011,6 +1011,15 @@ button:active,
     transform: scale(1.1);
 }
 
+.avatar-btn-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .btn-change-avatar {
     font-size: 0.76rem;
     font-weight: 700;
@@ -1020,13 +1029,30 @@ button:active,
     padding: 5px 14px;
     border-radius: 14px;
     cursor: pointer;
-    margin-bottom: 4px;
     transition: all 0.2s ease;
 }
 
 .btn-change-avatar:hover {
     background: #00adb5;
     color: #121212;
+}
+
+.btn-recrop-avatar {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-recrop-avatar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #00adb5;
+    border-color: #00adb5;
 }
 
 .avatar-hint {
@@ -1406,19 +1432,334 @@ button:active,
     cursor: pointer;
 }
 
+/* Card Admin Action Bar (Edit & Hapus) */
+.card-admin-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.card-admin-actions button {
+    margin-top: 0 !important;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-post-btn {
+    background-color: #00adb5;
+    color: #121212;
+    border: none;
+}
+
+.edit-post-btn:hover {
+    background-color: #00c4ce;
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.4);
+    transform: translateY(-1px);
+}
+
 .delete-btn {
-    margin-top: 10px;
     background-color: #d9534f;
     color: #fff;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
 }
 
 .delete-btn:hover {
     background-color: #c9302c;
+    box-shadow: 0 0 10px rgba(217, 83, 79, 0.35);
+    transform: translateY(-1px);
+}
+
+/* Upload Preview Scoreboard */
+.match-upload-preview-wrap {
+    background: rgba(0, 173, 181, 0.05);
+    border: 1px dashed rgba(0, 173, 181, 0.4);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+.match-preview-thumb-box {
+    max-height: 180px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #0a0a0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-preview-thumb-box img {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    display: block;
+}
+
+.match-preview-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-recrop {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-recrop:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #00adb5;
+    color: #00adb5;
+}
+
+/* Edit Match Modal Styles */
+.edit-match-modal-content {
+    max-width: 500px;
+    width: 95%;
+    padding: 24px;
+    border-radius: 14px;
+    background: #16171d;
+    border: 1px solid rgba(0, 173, 181, 0.35);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.edit-modal-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 14px 0 18px;
+}
+
+.edit-match-img-preview-box {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #101115;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.edit-match-img-preview-box img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    display: block;
+}
+
+.edit-match-file-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-change-photo {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #00adb5;
+    background: rgba(0, 173, 181, 0.12);
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-change-photo:hover {
+    background: #00adb5;
+    color: #121212;
+}
+
+/* Universal Image Cropper Modal */
+.crop-modal-overlay {
+    z-index: 99999 !important;
+}
+
+.crop-modal-content {
+    max-width: 720px;
+    width: 95%;
+    max-height: 94vh;
+    padding: 20px;
+    border-radius: 14px;
+    background: #14151b;
+    border: 1px solid rgba(0, 173, 181, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.88);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.crop-viewport-container {
+    width: 100%;
+    height: 50vh;
+    min-height: 260px;
+    max-height: 480px;
+    background: #090a0d;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crop-viewport-container img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Cropper Circular Mask for Profile Avatar */
+.crop-circle-mode .cropper-view-box,
+.crop-circle-mode .cropper-face {
+    border-radius: 50%;
+}
+
+.crop-circle-mode .cropper-view-box {
+    outline: 2px solid #00adb5;
+    outline-color: rgba(0, 173, 181, 0.85);
+}
+
+.crop-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.crop-ratio-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.crop-ratio-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #8c8c9e;
+    margin-right: 2px;
+}
+
+.btn-crop-tool {
+    background: rgba(255, 255, 255, 0.06);
+    color: #cfcfe0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-crop-tool:hover {
+    background: rgba(0, 173, 181, 0.15);
+    color: #00adb5;
+    border-color: rgba(0, 173, 181, 0.4);
+}
+
+.btn-crop-tool.active {
+    background: #00adb5;
+    color: #121212;
+    font-weight: 700;
+    border-color: #00adb5;
+}
+
+.crop-action-tools {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-crop-action {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-crop-action:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border-color: #00adb5;
+}
+
+.crop-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.crop-modal-actions button {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .crop-modal-content {
+        width: 96%;
+        padding: 14px;
+        max-height: 96vh;
+    }
+
+    .crop-viewport-container {
+        height: 42vh;
+        min-height: 220px;
+    }
+
+    .crop-toolbar {
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .btn-crop-tool,
+    .btn-crop-action {
+        padding: 4px 7px;
+        font-size: 0.7rem;
+    }
+
+    .edit-match-modal-content {
+        width: 95%;
+        padding: 16px;
+    }
 }
 
 .password-box {

@@ -19,7 +19,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="style.css?v=20261108c">
+    <!-- Cropper.js for image cropping -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=20261109a">
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
@@ -118,11 +121,14 @@
                         <div class="avatar-preview-wrap">
                             <img id="profile-avatar-preview" src="" alt="Avatar" class="profile-avatar-img hidden">
                             <div id="profile-avatar-placeholder" class="profile-avatar-placeholder">👤</div>
-                            <label for="profile-avatar-input" class="avatar-edit-badge" title="Ganti Foto Profil">📷</label>
+                            <label for="profile-avatar-input" class="avatar-edit-badge" title="Ganti & Potong Foto Profil">📷</label>
                         </div>
                         <input type="file" id="profile-avatar-input" accept="image/*" style="display: none;">
-                        <label for="profile-avatar-input" class="btn-change-avatar">Pilih Foto Baru</label>
-                        <span class="avatar-hint">Pilih foto dari perangkat (otomatis dikompres ringan)</span>
+                        <div class="avatar-btn-row">
+                            <label for="profile-avatar-input" class="btn-change-avatar">Pilih & Potong Foto</label>
+                            <button type="button" id="recrop-avatar-btn" class="btn-recrop-avatar hidden">✂️ Crop Ulang</button>
+                        </div>
+                        <span class="avatar-hint">Pilih foto dari perangkat (fitur potong 1:1 persegi/bulat)</span>
                     </div>
 
                     <!-- Ubah Username & Tampilan Email -->
@@ -142,6 +148,95 @@
                     <div class="modal-actions profile-modal-actions">
                         <button type="button" id="save-profile-btn" class="custom-file-upload">💾 Simpan Profil</button>
                         <button type="button" id="profile-logout-btn" class="btn-danger-outline">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= MODAL EDIT MATCH DOKUMENTASI ================= -->
+            <div id="edit-match-modal" class="modal hidden">
+                <div class="modal-content edit-match-modal-content">
+                    <div class="modal-header">
+                        <h3>✏️ Edit Dokumentasi Match</h3>
+                        <button type="button" class="modal-close-icon" id="close-edit-match-btn">&times;</button>
+                    </div>
+
+                    <input type="hidden" id="edit-match-id">
+
+                    <div class="edit-modal-fields">
+                        <div class="field-group">
+                            <label for="edit-match-title">Judul Match:</label>
+                            <input type="text" id="edit-match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="edit-match-desc">Keterangan:</label>
+                            <input type="text" id="edit-match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="edit-match-category">Kategori Match:</label>
+                            <select id="edit-match-category" class="custom-select">
+                                <option value="Champion">🏆 Champion / Booyah</option>
+                                <option value="Tournament">⚔️ Fast Tournament</option>
+                                <option value="Scrim">🛡️ Scrim / Guild War</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Foto Scoreboard Match:</label>
+                            <div class="edit-match-img-preview-box">
+                                <img id="edit-match-img-preview" src="" alt="Preview Scoreboard">
+                            </div>
+                            <div class="edit-match-file-actions">
+                                <label for="edit-match-file-input" class="btn-change-photo">
+                                    📁 Ganti & Crop Foto Baru
+                                </label>
+                                <input type="file" id="edit-match-file-input" accept="image/*" style="display: none;">
+                                <button type="button" id="edit-recrop-btn" class="btn-recrop hidden">✂️ Crop Ulang Foto Ini</button>
+                            </div>
+                            <span id="edit-file-status" class="file-status-text">Menggunakan foto scoreboard saat ini</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" id="save-edit-match-btn" class="custom-file-upload">💾 Simpan Perubahan</button>
+                        <button type="button" id="cancel-edit-match-btn" class="cancel-btn">Batal</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= MODAL CROP GAMBAR (UNIVERSAL) ================= -->
+            <div id="image-crop-modal" class="modal crop-modal-overlay hidden">
+                <div class="modal-content crop-modal-content">
+                    <div class="modal-header">
+                        <h3 id="crop-modal-title">✂️ Potong & Sesuaikan Gambar</h3>
+                        <button type="button" class="modal-close-icon" id="close-crop-modal-btn">&times;</button>
+                    </div>
+
+                    <div class="crop-viewport-container" id="crop-viewport-wrap">
+                        <img id="cropper-target-img" src="" alt="Target Crop">
+                    </div>
+
+                    <!-- Toolbar Kontrol Crop (Rasio, Zoom, Rotate, Reset) -->
+                    <div class="crop-toolbar">
+                        <div class="crop-ratio-group" id="crop-ratio-selector">
+                            <span class="crop-ratio-label">Rasio:</span>
+                            <button type="button" class="btn-crop-tool active" data-ratio="free">Bebas</button>
+                            <button type="button" class="btn-crop-tool" data-ratio="16/9">16:9 (Scoreboard)</button>
+                            <button type="button" class="btn-crop-tool" data-ratio="4/3">4:3</button>
+                            <button type="button" class="btn-crop-tool" data-ratio="1">1:1 (Persegi)</button>
+                        </div>
+                        <div class="crop-action-tools">
+                            <button type="button" class="btn-crop-action" id="crop-zoom-in" title="Perbesar">🔍+</button>
+                            <button type="button" class="btn-crop-action" id="crop-zoom-out" title="Perkecil">🔍−</button>
+                            <button type="button" class="btn-crop-action" id="crop-rotate" title="Putar 90 Derajat">🔄 Putar</button>
+                            <button type="button" class="btn-crop-action" id="crop-reset" title="Reset Posisi">↩️ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions crop-modal-actions">
+                        <button type="button" id="apply-crop-btn" class="custom-file-upload">✓ Terapkan Hasil Crop</button>
+                        <button type="button" id="cancel-crop-btn" class="cancel-btn">Batal</button>
                     </div>
                 </div>
             </div>
@@ -170,6 +265,17 @@
                         📁 Pilih File Gambar Scoreboard dari Perangkat
                     </label>
                     <input type="file" id="match-file-input" accept="image/*" style="display: none;">
+
+                    <!-- Preview Thumbnail of selected & cropped image -->
+                    <div id="match-preview-wrap" class="match-upload-preview-wrap hidden">
+                        <div class="match-preview-thumb-box">
+                            <img id="match-preview-img" src="" alt="Preview Scoreboard">
+                        </div>
+                        <div class="match-preview-actions">
+                            <span id="match-preview-status" class="file-status-text">✓ Foto siap diposting</span>
+                            <button type="button" id="recrop-match-btn" class="btn-recrop">✂️ Sesuaikan / Crop Ulang</button>
+                        </div>
+                    </div>
                     <span id="selected-file-name" class="file-status-text">Belum ada file dipilih</span>
 
                     <button id="save-photo-btn" class="custom-file-upload">
@@ -222,7 +328,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCT2JQgsl7APNAqRGz_J5kxlZ73UBJBmts",
@@ -304,12 +410,13 @@
         const passwordInput = document.getElementById('admin-password');
         const togglePasswordBtn = document.getElementById('toggle-password-btn');
 
-        // Element Profile Modal
+        // Element Profile Modal & Crop Re-crop
         const profileModal = document.getElementById('profile-modal');
         const closeProfileModalBtn = document.getElementById('close-profile-modal-btn');
         const profileAvatarPreview = document.getElementById('profile-avatar-preview');
         const profileAvatarPlaceholder = document.getElementById('profile-avatar-placeholder');
         const profileAvatarInput = document.getElementById('profile-avatar-input');
+        const recropAvatarBtn = document.getElementById('recrop-avatar-btn');
         const profileUsernameInput = document.getElementById('profile-username-input');
         const profileEmailDisplay = document.getElementById('profile-email-display');
         const saveProfileBtn = document.getElementById('save-profile-btn');
@@ -324,6 +431,49 @@
         const savePhotoBtn = document.getElementById('save-photo-btn');
         const fileInput = document.getElementById('match-file-input');
         const fileNameLabel = document.getElementById('selected-file-name');
+        const matchPreviewWrap = document.getElementById('match-preview-wrap');
+        const matchPreviewImg = document.getElementById('match-preview-img');
+        const matchPreviewStatus = document.getElementById('match-preview-status');
+        const recropMatchBtn = document.getElementById('recrop-match-btn');
+
+        // Element Edit Match Modal
+        const editMatchModal = document.getElementById('edit-match-modal');
+        const closeEditMatchBtn = document.getElementById('close-edit-match-btn');
+        const cancelEditMatchBtn = document.getElementById('cancel-edit-match-btn');
+        const saveEditMatchBtn = document.getElementById('save-edit-match-btn');
+        const editMatchIdInput = document.getElementById('edit-match-id');
+        const editMatchTitleInput = document.getElementById('edit-match-title');
+        const editMatchDescInput = document.getElementById('edit-match-desc');
+        const editMatchCategorySelect = document.getElementById('edit-match-category');
+        const editMatchImgPreview = document.getElementById('edit-match-img-preview');
+        const editMatchFileInput = document.getElementById('edit-match-file-input');
+        const editRecropBtn = document.getElementById('edit-recrop-btn');
+        const editFileStatus = document.getElementById('edit-file-status');
+
+        // Element Universal Crop Modal
+        const cropModal = document.getElementById('image-crop-modal');
+        const cropModalTitle = document.getElementById('crop-modal-title');
+        const closeCropModalBtn = document.getElementById('close-crop-modal-btn');
+        const cancelCropBtn = document.getElementById('cancel-crop-btn');
+        const applyCropBtn = document.getElementById('apply-crop-btn');
+        const cropperTargetImg = document.getElementById('cropper-target-img');
+        const cropRatioSelector = document.getElementById('crop-ratio-selector');
+        const cropViewportWrap = document.getElementById('crop-viewport-wrap');
+        const cropZoomInBtn = document.getElementById('crop-zoom-in');
+        const cropZoomOutBtn = document.getElementById('crop-zoom-out');
+        const cropRotateBtn = document.getElementById('crop-rotate');
+        const cropResetBtn = document.getElementById('crop-reset');
+
+        // State Variabel Crop & Upload
+        let currentCropper = null;
+        let currentCropCallback = null;
+        let currentCropRawSrc = null;
+        let currentAvatarRawSrc = null;
+        let pendingMatchImageBase64 = null;
+        let currentMatchRawSrc = null;
+        let editPendingImageBase64 = null;
+        let editCurrentRawSrc = null;
+        let currentEditingMatch = null;
 
         function escapeHtml(text) {
             if (!text) return '';
@@ -444,14 +594,63 @@
             }
         });
 
-        // File Input Change
+        // File Input Match Scoreboard Change -> Buka Modal Crop
         fileInput.addEventListener('change', () => {
-            if (fileInput.files.length > 0) {
-                fileNameLabel.innerText = "File: " + fileInput.files[0].name;
-            } else {
-                fileNameLabel.innerText = "Belum ada file dipilih";
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast("Harap pilih file gambar!", true);
+                return;
             }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const rawSrc = e.target.result;
+                currentMatchRawSrc = rawSrc;
+                openCropModal({
+                    imageSrc: rawSrc,
+                    title: '✂️ Potong Foto Scoreboard Match',
+                    aspectRatio: 16 / 9,
+                    hideRatioSelector: false,
+                    isCircle: false,
+                    maxWidth: 1200,
+                    maxHeight: 1200,
+                    quality: 0.82,
+                    onCropComplete: (croppedDataUrl) => {
+                        pendingMatchImageBase64 = croppedDataUrl;
+                        if (matchPreviewImg) matchPreviewImg.src = croppedDataUrl;
+                        if (matchPreviewWrap) matchPreviewWrap.classList.remove('hidden');
+                        if (fileNameLabel) fileNameLabel.classList.add('hidden');
+                        if (matchPreviewStatus) matchPreviewStatus.innerText = "✓ Foto siap (" + file.name + ")";
+                        showToast("Foto scoreboard berhasil dipotong & siap dipublikasikan!");
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
         });
+
+        if (recropMatchBtn) {
+            recropMatchBtn.addEventListener('click', () => {
+                const srcToCrop = currentMatchRawSrc || pendingMatchImageBase64;
+                if (!srcToCrop) return;
+                openCropModal({
+                    imageSrc: srcToCrop,
+                    title: '✂️ Sesuaikan / Crop Ulang Foto Scoreboard',
+                    aspectRatio: 16 / 9,
+                    hideRatioSelector: false,
+                    isCircle: false,
+                    maxWidth: 1200,
+                    maxHeight: 1200,
+                    quality: 0.82,
+                    onCropComplete: (croppedDataUrl) => {
+                        pendingMatchImageBase64 = croppedDataUrl;
+                        if (matchPreviewImg) matchPreviewImg.src = croppedDataUrl;
+                        showToast("Foto scoreboard berhasil disesuaikan!");
+                    }
+                });
+            });
+        }
 
         // Modal Login Helpers
         function openLoginModal() {
@@ -490,14 +689,17 @@
             profileUsernameInput.value = currentAdminProfile.username || '';
             profileEmailDisplay.value = auth.currentUser.email || '';
             newAvatarBase64 = null;
+            currentAvatarRawSrc = null;
 
             if (currentAdminProfile.photoURL) {
                 profileAvatarPreview.src = currentAdminProfile.photoURL;
                 profileAvatarPreview.classList.remove('hidden');
                 profileAvatarPlaceholder.classList.add('hidden');
+                if (recropAvatarBtn) recropAvatarBtn.classList.remove('hidden');
             } else {
                 profileAvatarPreview.classList.add('hidden');
                 profileAvatarPlaceholder.classList.remove('hidden');
+                if (recropAvatarBtn) recropAvatarBtn.classList.add('hidden');
             }
 
             profileModal.classList.remove('hidden');
@@ -507,6 +709,7 @@
         function closeProfileModal() {
             profileModal.classList.add('hidden');
             newAvatarBase64 = null;
+            currentAvatarRawSrc = null;
             profileAvatarInput.value = '';
         }
 
@@ -519,8 +722,8 @@
             }
         });
 
-        // Handle Pergantian Foto Profil (Kompres ringan Base64 240x240)
-        profileAvatarInput.addEventListener('change', async () => {
+        // Handle Pergantian Foto Profil (Crop 1:1 Persegi/Bulat)
+        profileAvatarInput.addEventListener('change', () => {
             const file = profileAvatarInput.files[0];
             if (!file) return;
 
@@ -529,17 +732,55 @@
                 return;
             }
 
-            try {
-                const compressedAvatar = await compressImage(file, 240, 240, 0.82);
-                newAvatarBase64 = compressedAvatar;
-                profileAvatarPreview.src = compressedAvatar;
-                profileAvatarPreview.classList.remove('hidden');
-                profileAvatarPlaceholder.classList.add('hidden');
-                showToast("Foto profil baru dipilih. Klik 'Simpan Profil' untuk menerapkan.");
-            } catch (err) {
-                showToast("Gagal memproses foto: " + err.message, true);
-            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const rawSrc = e.target.result;
+                currentAvatarRawSrc = rawSrc;
+                openCropModal({
+                    imageSrc: rawSrc,
+                    title: '✂️ Potong Foto Profil Admin (1:1)',
+                    aspectRatio: 1,
+                    hideRatioSelector: true,
+                    isCircle: true,
+                    maxWidth: 400,
+                    maxHeight: 400,
+                    quality: 0.85,
+                    onCropComplete: (croppedDataUrl) => {
+                        newAvatarBase64 = croppedDataUrl;
+                        profileAvatarPreview.src = croppedDataUrl;
+                        profileAvatarPreview.classList.remove('hidden');
+                        profileAvatarPlaceholder.classList.add('hidden');
+                        if (recropAvatarBtn) recropAvatarBtn.classList.remove('hidden');
+                        showToast("Foto profil berhasil dipotong. Klik 'Simpan Profil' untuk menerapkan.");
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
         });
+
+        if (recropAvatarBtn) {
+            recropAvatarBtn.addEventListener('click', () => {
+                const srcToCrop = currentAvatarRawSrc || newAvatarBase64 || currentAdminProfile.photoURL;
+                if (!srcToCrop) return;
+                openCropModal({
+                    imageSrc: srcToCrop,
+                    title: '✂️ Sesuaikan / Crop Ulang Foto Profil (1:1)',
+                    aspectRatio: 1,
+                    hideRatioSelector: true,
+                    isCircle: true,
+                    maxWidth: 400,
+                    maxHeight: 400,
+                    quality: 0.85,
+                    onCropComplete: (croppedDataUrl) => {
+                        newAvatarBase64 = croppedDataUrl;
+                        profileAvatarPreview.src = croppedDataUrl;
+                        profileAvatarPreview.classList.remove('hidden');
+                        profileAvatarPlaceholder.classList.add('hidden');
+                        showToast("Foto profil berhasil disesuaikan!");
+                    }
+                });
+            });
+        }
 
         // Simpan Profil Admin ke Firestore & Auth
         saveProfileBtn.addEventListener('click', async () => {
@@ -603,6 +844,14 @@
         // Global Escape key handler
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                if (!cropModal.classList.contains('hidden')) {
+                    closeCropModal();
+                    return;
+                }
+                if (!editMatchModal.classList.contains('hidden')) {
+                    closeEditMatchModal();
+                    return;
+                }
                 if (!loginModal.classList.contains('hidden')) {
                     closeLoginModal();
                 }
@@ -613,6 +862,295 @@
                 if (lightbox && !lightbox.classList.contains('hidden')) {
                     lightbox.classList.add('hidden');
                 }
+            }
+        });
+
+        // ================= UNIVERSAL IMAGE CROPPER FUNCTIONS =================
+        function openCropModal({
+            imageSrc,
+            title = '✂️ Potong & Sesuaikan Gambar',
+            aspectRatio = NaN,
+            hideRatioSelector = false,
+            isCircle = false,
+            maxWidth = 1200,
+            maxHeight = 1200,
+            quality = 0.82,
+            onCropComplete
+        }) {
+            if (typeof Cropper === 'undefined') {
+                showToast("Modul pemotong gambar belum siap, silakan coba beberapa detik lagi.", true);
+                return;
+            }
+
+            currentCropRawSrc = imageSrc;
+            currentCropCallback = onCropComplete;
+
+            if (cropModalTitle) cropModalTitle.textContent = title;
+
+            if (hideRatioSelector) {
+                if (cropRatioSelector) cropRatioSelector.classList.add('hidden');
+            } else {
+                if (cropRatioSelector) cropRatioSelector.classList.remove('hidden');
+                document.querySelectorAll('.btn-crop-tool').forEach(btn => {
+                    const r = btn.getAttribute('data-ratio');
+                    if ((isNaN(aspectRatio) && r === 'free') || (Math.abs(aspectRatio - 16 / 9) < 0.05 && r === '16/9') || (aspectRatio === 1 && r === '1')) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            if (isCircle) {
+                cropViewportWrap.classList.add('crop-circle-mode');
+            } else {
+                cropViewportWrap.classList.remove('crop-circle-mode');
+            }
+
+            if (currentCropper) {
+                currentCropper.destroy();
+                currentCropper = null;
+            }
+
+            cropperTargetImg.src = imageSrc;
+            cropModal.classList.remove('hidden');
+
+            const initCropper = () => {
+                if (currentCropper) currentCropper.destroy();
+                currentCropper = new Cropper(cropperTargetImg, {
+                    aspectRatio: isNaN(aspectRatio) ? NaN : aspectRatio,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    autoCropArea: 0.94,
+                    restore: false,
+                    guides: true,
+                    center: true,
+                    highlight: false,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    toggleDragModeOnDblclick: false,
+                    responsive: true,
+                    checkCrossOrigin: false
+                });
+            };
+
+            if (cropperTargetImg.complete && cropperTargetImg.naturalWidth) {
+                setTimeout(initCropper, 40);
+            } else {
+                cropperTargetImg.onload = () => {
+                    initCropper();
+                };
+            }
+
+            cropModal._cropOptions = { maxWidth, maxHeight, quality };
+        }
+
+        function closeCropModal() {
+            if (currentCropper) {
+                currentCropper.destroy();
+                currentCropper = null;
+            }
+            cropModal.classList.add('hidden');
+            currentCropCallback = null;
+            cropperTargetImg.onload = null;
+        }
+
+        if (closeCropModalBtn) closeCropModalBtn.addEventListener('click', closeCropModal);
+        if (cancelCropBtn) cancelCropBtn.addEventListener('click', closeCropModal);
+
+        cropModal.addEventListener('click', (e) => {
+            if (e.target === cropModal) closeCropModal();
+        });
+
+        // Ratio selector buttons
+        document.querySelectorAll('.btn-crop-tool').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!currentCropper) return;
+                document.querySelectorAll('.btn-crop-tool').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const ratio = btn.getAttribute('data-ratio');
+                if (ratio === 'free') {
+                    currentCropper.setAspectRatio(NaN);
+                } else if (ratio === '16/9') {
+                    currentCropper.setAspectRatio(16 / 9);
+                } else if (ratio === '4/3') {
+                    currentCropper.setAspectRatio(4 / 3);
+                } else if (ratio === '1') {
+                    currentCropper.setAspectRatio(1);
+                }
+            });
+        });
+
+        // Toolbar actions
+        if (cropZoomInBtn) cropZoomInBtn.addEventListener('click', () => currentCropper && currentCropper.zoom(0.1));
+        if (cropZoomOutBtn) cropZoomOutBtn.addEventListener('click', () => currentCropper && currentCropper.zoom(-0.1));
+        if (cropRotateBtn) cropRotateBtn.addEventListener('click', () => currentCropper && currentCropper.rotate(90));
+        if (cropResetBtn) cropResetBtn.addEventListener('click', () => currentCropper && currentCropper.reset());
+
+        // Apply crop button
+        if (applyCropBtn) {
+            applyCropBtn.addEventListener('click', () => {
+                if (!currentCropper) {
+                    closeCropModal();
+                    return;
+                }
+
+                const opts = cropModal._cropOptions || { maxWidth: 1200, maxHeight: 1200, quality: 0.82 };
+                const canvas = currentCropper.getCroppedCanvas({
+                    maxWidth: opts.maxWidth,
+                    maxHeight: opts.maxHeight,
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high'
+                });
+
+                if (!canvas) {
+                    showToast("Gagal memproses hasil crop!", true);
+                    return;
+                }
+
+                const croppedBase64 = canvas.toDataURL('image/jpeg', opts.quality);
+                if (typeof currentCropCallback === 'function') {
+                    currentCropCallback(croppedBase64, currentCropRawSrc);
+                }
+                closeCropModal();
+            });
+        }
+
+        // ================= EDIT MATCH MODAL FUNCTIONS =================
+        function openEditMatchModal(matchData) {
+            currentEditingMatch = matchData;
+            editPendingImageBase64 = null;
+            editCurrentRawSrc = null;
+
+            editMatchIdInput.value = matchData.id || '';
+            editMatchTitleInput.value = matchData.title || '';
+            editMatchDescInput.value = matchData.desc || '';
+            editMatchCategorySelect.value = matchData.category || 'Tournament';
+
+            editMatchImgPreview.src = matchData.imageUrl || FALLBACK_SCOREBOARD;
+            editFileStatus.textContent = 'Menggunakan foto scoreboard saat ini';
+            if (editRecropBtn) editRecropBtn.classList.remove('hidden');
+            editMatchFileInput.value = '';
+
+            editMatchModal.classList.remove('hidden');
+            editMatchTitleInput.focus();
+        }
+
+        function closeEditMatchModal() {
+            editMatchModal.classList.add('hidden');
+            currentEditingMatch = null;
+            editPendingImageBase64 = null;
+            editCurrentRawSrc = null;
+            editMatchFileInput.value = '';
+        }
+
+        if (closeEditMatchBtn) closeEditMatchBtn.addEventListener('click', closeEditMatchModal);
+        if (cancelEditMatchBtn) cancelEditMatchBtn.addEventListener('click', closeEditMatchModal);
+
+        editMatchModal.addEventListener('click', (e) => {
+            if (e.target === editMatchModal) closeEditMatchModal();
+        });
+
+        // File input for Edit Modal -> Langsung Buka Modal Crop
+        editMatchFileInput.addEventListener('change', () => {
+            const file = editMatchFileInput.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast("Harap pilih file gambar!", true);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const rawSrc = e.target.result;
+                editCurrentRawSrc = rawSrc;
+                openCropModal({
+                    imageSrc: rawSrc,
+                    title: '✂️ Potong Foto Scoreboard Baru (Edit)',
+                    aspectRatio: 16 / 9,
+                    hideRatioSelector: false,
+                    isCircle: false,
+                    maxWidth: 1200,
+                    maxHeight: 1200,
+                    quality: 0.82,
+                    onCropComplete: (croppedDataUrl) => {
+                        editPendingImageBase64 = croppedDataUrl;
+                        editMatchImgPreview.src = croppedDataUrl;
+                        if (editRecropBtn) editRecropBtn.classList.remove('hidden');
+                        editFileStatus.textContent = '✓ Foto baru siap diperbarui (' + file.name + ')';
+                        showToast("Foto baru berhasil dipotong & siap disimpan!");
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        if (editRecropBtn) {
+            editRecropBtn.addEventListener('click', () => {
+                const srcToCrop = editCurrentRawSrc || editPendingImageBase64 || (currentEditingMatch && currentEditingMatch.imageUrl);
+                if (!srcToCrop) return;
+                openCropModal({
+                    imageSrc: srcToCrop,
+                    title: '✂️ Sesuaikan / Crop Ulang Foto (Edit)',
+                    aspectRatio: 16 / 9,
+                    hideRatioSelector: false,
+                    isCircle: false,
+                    maxWidth: 1200,
+                    maxHeight: 1200,
+                    quality: 0.82,
+                    onCropComplete: (croppedDataUrl) => {
+                        editPendingImageBase64 = croppedDataUrl;
+                        editMatchImgPreview.src = croppedDataUrl;
+                        showToast("Foto berhasil disesuaikan!");
+                    }
+                });
+            });
+        }
+
+        // Simpan Perubahan Edit ke Firestore
+        saveEditMatchBtn.addEventListener('click', async () => {
+            const matchId = editMatchIdInput.value;
+            const title = editMatchTitleInput.value.trim();
+            const desc = editMatchDescInput.value.trim();
+            const category = editMatchCategorySelect.value;
+
+            if (!matchId) {
+                showToast("ID match tidak valid!", true);
+                return;
+            }
+
+            if (!title) {
+                showToast("Judul match tidak boleh kosong!", true);
+                editMatchTitleInput.focus();
+                return;
+            }
+
+            saveEditMatchBtn.innerText = "Menyimpan perubahan...";
+            saveEditMatchBtn.disabled = true;
+
+            try {
+                const updatePayload = {
+                    title: title,
+                    desc: desc || "Dokumentasi Match",
+                    category: category || "Tournament",
+                    updatedAt: Date.now()
+                };
+
+                if (editPendingImageBase64) {
+                    updatePayload.imageUrl = editPendingImageBase64;
+                }
+
+                await updateDoc(doc(db, "ff_matches", matchId), updatePayload);
+
+                showToast("Dokumentasi match berhasil diperbarui!");
+                closeEditMatchModal();
+                loadPublicGallery();
+            } catch (err) {
+                showToast("Gagal memperbarui match: " + err.message, true);
+            } finally {
+                saveEditMatchBtn.innerText = "💾 Simpan Perubahan";
+                saveEditMatchBtn.disabled = false;
             }
         });
 
@@ -682,7 +1220,17 @@
             const category = categoryInput.value;
             const file = fileInput.files[0];
 
-            if (!title || !file) {
+            let finalImageUrl = pendingMatchImageBase64;
+            if (!finalImageUrl && file) {
+                try {
+                    finalImageUrl = await compressImage(file);
+                } catch (err) {
+                    showToast("Gagal memproses gambar: " + err.message, true);
+                    return;
+                }
+            }
+
+            if (!title || !finalImageUrl) {
                 showToast("Harap isi judul dan pilih foto scoreboard!", true);
                 return;
             }
@@ -691,9 +1239,6 @@
             savePhotoBtn.disabled = true;
 
             try {
-                // Kompres gambar ke Base64 JPEG ringan (~50KB) - bebas blokir ISP / Kominfo
-                const compressedImageUrl = await compressImage(file);
-
                 const uploaderName = currentAdminProfile.username || 'Admin';
                 const uploaderAvatar = currentAdminProfile.photoURL || '';
 
@@ -701,7 +1246,7 @@
                     title: title,
                     desc: desc || "Dokumentasi Match",
                     category: category || "Tournament",
-                    imageUrl: compressedImageUrl,
+                    imageUrl: finalImageUrl,
                     uploadedBy: uploaderName,
                     uploaderAvatar: uploaderAvatar,
                     uploaderUid: auth.currentUser ? auth.currentUser.uid : "",
@@ -711,7 +1256,13 @@
                 titleInput.value = '';
                 descInput.value = '';
                 fileInput.value = '';
-                fileNameLabel.innerText = 'Belum ada file dipilih';
+                pendingMatchImageBase64 = null;
+                currentMatchRawSrc = null;
+                if (matchPreviewWrap) matchPreviewWrap.classList.add('hidden');
+                if (fileNameLabel) {
+                    fileNameLabel.classList.remove('hidden');
+                    fileNameLabel.innerText = 'Belum ada file dipilih';
+                }
 
                 showToast("Match baru berhasil dipublikasikan oleh " + uploaderName + "!");
                 loadPublicGallery();
@@ -841,7 +1392,21 @@
                 info.appendChild(metaRow);
 
                 if (isAdmin) {
+                    const actionsRow = document.createElement('div');
+                    actionsRow.classList.add('card-admin-actions');
+
+                    const editBtn = document.createElement('button');
+                    editBtn.type = 'button';
+                    editBtn.classList.add('edit-post-btn');
+                    editBtn.innerHTML = '✏️ Edit Match';
+                    editBtn.title = 'Edit judul, keterangan, kategori, atau foto scoreboard';
+                    editBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openEditMatchModal(data);
+                    });
+
                     const deleteBtn = document.createElement('button');
+                    deleteBtn.type = 'button';
                     deleteBtn.classList.add('delete-btn');
                     deleteBtn.textContent = '🗑️ Hapus Foto';
                     deleteBtn.addEventListener('click', async (e) => {
@@ -856,7 +1421,10 @@
                             }
                         }
                     });
-                    info.appendChild(deleteBtn);
+
+                    actionsRow.appendChild(editBtn);
+                    actionsRow.appendChild(deleteBtn);
+                    info.appendChild(actionsRow);
                 }
 
                 card.appendChild(thumbWrap);
