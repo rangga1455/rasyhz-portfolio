@@ -380,36 +380,26 @@
                     </div>
                 </div>
 
-                <!-- Pilihan Tipe Layanan Joki -->
-                <div class="service-type-bar">
-                    <span class="service-type-label">Tipe Layanan untuk Daerah Terpilih:</span>
-                    <div class="service-type-options">
-                        <label class="service-pill-option active">
-                            <input type="radio" name="global-service-type" value="explore_100" checked onchange="changeServiceType('explore_100')">
-                            <span>🗺️ Full Explore 100% (All Chest + Oculus)</span>
-                        </label>
-                        <label class="service-pill-option">
-                            <input type="radio" name="global-service-type" value="oculus_only" onchange="changeServiceType('oculus_only')">
-                            <span>✨ Kumpul Oculus (Per Biji / Region)</span>
-                        </label>
-                        <label class="service-pill-option">
-                            <input type="radio" name="global-service-type" value="waypoint_only" onchange="changeServiceType('waypoint_only')">
-                            <span>📍 Buka Teleport & Statue Saja</span>
-                        </label>
-                        <label class="service-pill-option">
-                            <input type="radio" name="global-service-type" value="quest_only" onchange="changeServiceType('quest_only')">
-                            <span>📜 World Quest Pembuka Area</span>
-                        </label>
+                <!-- Pilihan Tipe Layanan Joki Dinamis -->
+                <div class="service-type-bar" id="service-type-bar">
+                    <span class="service-type-label" id="service-type-label">Tipe Layanan untuk Daerah Terpilih:</span>
+                    <div class="service-type-options" id="service-type-options">
+                        <!-- Diisi secara dinamis lewat renderServiceTypeOptions() -->
                     </div>
                 </div>
 
-                <!-- Container Daftar Daerah Dinamis (Explore, Waypoint, Quest) -->
+                <!-- Container Daftar Daerah Dinamis (Explore, Endgame, Quest) -->
                 <div class="area-checkbox-grid" id="area-checkbox-grid">
                     <!-- Diisi lewat JavaScript sesuai Region yang dipilih -->
                 </div>
 
                 <!-- Container Kalkulator Oculus (Khusus saat Oculus dipilih) -->
                 <div class="oculus-configurator-box hidden" id="oculus-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
+                </div>
+
+                <!-- Container Kalkulator Teleport Waypoint (Khusus saat Waypoint dipilih) -->
+                <div class="teleport-configurator-box hidden" id="teleport-configurator-box">
                     <!-- Diisi lewat JavaScript -->
                 </div>
 
@@ -783,20 +773,76 @@
             }
         };
 
+        // Master Data Teleport Waypoint per Region (Tarif Rp 1.500/TP, Min Order 3 TP)
+        const teleportDatabase = {
+            'snezhnaya': { totalTP: 65, packagePrice: 60000 },
+            'frostmoon': { totalTP: 25, packagePrice: 25000 },
+            'nodkrai': { totalTP: 35, packagePrice: 35000 },
+            'natlan': { totalTP: 50, packagePrice: 50000 },
+            'fontaine': { totalTP: 85, packagePrice: 75000 },
+            'sumeru': { totalTP: 155, packagePrice: 120000 },
+            'inazuma': { totalTP: 85, packagePrice: 75000 },
+            'liyue': { totalTP: 95, packagePrice: 80000 },
+            'mondstadt': { totalTP: 35, packagePrice: 35000 }
+        };
+        const TP_PRICE_PER_ITEM = 1500;
+        const TP_MIN_ORDER = 3;
+
         // State Saat Ini
         let currentSelectedRegion = 'snezhnaya';
         let currentServiceType = 'explore_100';
         let selectedAreaIds = new Set();
-        let selectedOculusRegion = 'snezhnaya';
         let selectedOculusQty = 180;
+        let selectedTeleportQty = 3;
 
-        // Multiplier harga per tipe layanan non-oculus
+        // Multiplier harga per tipe layanan sub-daerah
         const serviceMultipliers = {
-            'explore_100': { mult: 1.0, label: 'Full Explore 100% (All Chest + Oculus)' },
-            'oculus_only': { mult: 0.6, label: 'Kumpul Oculus Saja (Per Biji / Region)' },
-            'waypoint_only': { mult: 0.35, label: 'Buka Teleport & Statue Saja' },
-            'quest_only': { mult: 0.75, label: 'World Quest Pembuka Area' }
+            'explore_100': { mult: 1.0, label: 'Full Explore 100% (All Chest + Quest)' },
+            'oculus_only': { mult: 1.0, label: 'Kumpul Oculus Saja' },
+            'waypoint_only': { mult: 1.0, label: 'Buka Teleport Waypoint (Min. 3 TP)' },
+            'quest_only': { mult: 0.75, label: 'World Quest Pembuka Area' },
+            'endgame_clear': { mult: 1.0, label: 'Clear Endgame Trials' }
         };
+
+        // Render Opsi Tipe Layanan Sesuai Region / Endgame yang Aktif
+        function renderServiceTypeOptions() {
+            const container = document.getElementById('service-type-options');
+            const labelEl = document.getElementById('service-type-label');
+            if (!container) return;
+
+            if (currentSelectedRegion === 'endgame') {
+                if (labelEl) labelEl.textContent = 'Mode Layanan Tantangan Endgame:';
+                container.innerHTML = `
+                    <div class="endgame-service-badge">
+                        <span>⚔️</span>
+                        <span>Mode Khusus: Endgame & Combat Trials (Centang tantangan di bawah • Bintang 36★ & Full Clear)</span>
+                    </div>
+                `;
+                return;
+            }
+
+            if (labelEl) labelEl.textContent = 'Tipe Layanan untuk Daerah Terpilih:';
+            const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
+
+            container.innerHTML = `
+                <label class="service-pill-option ${currentServiceType === 'explore_100' ? 'active' : ''}">
+                    <input type="radio" name="global-service-type" value="explore_100" ${currentServiceType === 'explore_100' ? 'checked' : ''} onchange="changeServiceType('explore_100')">
+                    <span>🗺️ Full Explore 100% (All Chest + Quest)</span>
+                </label>
+                <label class="service-pill-option ${currentServiceType === 'oculus_only' ? 'active' : ''}">
+                    <input type="radio" name="global-service-type" value="oculus_only" ${currentServiceType === 'oculus_only' ? 'checked' : ''} onchange="changeServiceType('oculus_only')">
+                    <span>✨ Kumpul ${oculus.name} Saja (${oculus.max} Max)</span>
+                </label>
+                <label class="service-pill-option ${currentServiceType === 'waypoint_only' ? 'active' : ''}">
+                    <input type="radio" name="global-service-type" value="waypoint_only" ${currentServiceType === 'waypoint_only' ? 'checked' : ''} onchange="changeServiceType('waypoint_only')">
+                    <span>📍 Buka Teleport Waypoint (Min. 3 TP)</span>
+                </label>
+                <label class="service-pill-option ${currentServiceType === 'quest_only' ? 'active' : ''}">
+                    <input type="radio" name="global-service-type" value="quest_only" ${currentServiceType === 'quest_only' ? 'checked' : ''} onchange="changeServiceType('quest_only')">
+                    <span>📜 World Quest Pembuka Area</span>
+                </label>
+            `;
+        }
 
         // Fungsi Pilih Region dari Kartu Utama
         function selectRegion(regionId) {
@@ -818,19 +864,61 @@
 
             document.getElementById('drawer-region-badge').textContent = data.badge;
 
-            if (currentServiceType === 'oculus_only') {
-                if (regionId !== 'endgame' && oculusDatabase[regionId]) {
-                    selectedOculusRegion = regionId;
-                    selectedOculusQty = oculusDatabase[regionId].max;
-                }
-                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
-                document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${oculus.regionName}`;
-                document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji), atau ambil paket borongan full region.`;
-                renderOculusConfigurator();
-            } else {
-                document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
-                document.getElementById('drawer-region-desc').textContent = data.desc;
+            const areaGrid = document.getElementById('area-checkbox-grid');
+            const oculusBox = document.getElementById('oculus-configurator-box');
+            const teleportBox = document.getElementById('teleport-configurator-box');
+            const drawerActions = document.getElementById('drawer-header-actions');
+
+            if (regionId === 'endgame') {
+                currentServiceType = 'endgame_clear';
+                renderServiceTypeOptions();
+
+                if (areaGrid) areaGrid.classList.remove('hidden');
+                if (oculusBox) oculusBox.classList.add('hidden');
+                if (teleportBox) teleportBox.classList.add('hidden');
+                if (drawerActions) drawerActions.classList.remove('hidden');
+
+                document.getElementById('drawer-region-title').textContent = 'Pilih Mode Endgame & Combat Trials';
+                document.getElementById('drawer-region-desc').textContent = 'Centang mode endgame atau tantangan tempur yang ingin dijoki. Garansi Bintang 36★ & Full Clearance.';
                 renderAreaList(data.areas);
+            } else {
+                if (currentServiceType === 'endgame_clear') {
+                    currentServiceType = 'explore_100';
+                }
+                renderServiceTypeOptions();
+
+                if (currentServiceType === 'oculus_only') {
+                    if (areaGrid) areaGrid.classList.add('hidden');
+                    if (oculusBox) oculusBox.classList.remove('hidden');
+                    if (teleportBox) teleportBox.classList.add('hidden');
+                    if (drawerActions) drawerActions.classList.add('hidden');
+
+                    const oculus = oculusDatabase[regionId] || oculusDatabase['snezhnaya'];
+                    selectedOculusQty = oculus.max;
+                    document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${data.name}`;
+                    document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji khusus region ini), atau ambil paket borongan full region.`;
+                    renderOculusConfigurator();
+                } else if (currentServiceType === 'waypoint_only') {
+                    if (areaGrid) areaGrid.classList.add('hidden');
+                    if (oculusBox) oculusBox.classList.add('hidden');
+                    if (teleportBox) teleportBox.classList.remove('hidden');
+                    if (drawerActions) drawerActions.classList.add('hidden');
+
+                    const tpData = teleportDatabase[regionId] || { totalTP: 50 };
+                    selectedTeleportQty = Math.max(TP_MIN_ORDER, selectedTeleportQty || TP_MIN_ORDER);
+                    document.getElementById('drawer-region-title').textContent = `Buka Teleport Waypoint - ${data.name}`;
+                    document.getElementById('drawer-region-desc').textContent = `Atur jumlah Teleport Waypoint yang ingin dibuka (Minimal 3 TP • Maksimal ${tpData.totalTP} TP di region ini).`;
+                    renderTeleportConfigurator();
+                } else {
+                    if (areaGrid) areaGrid.classList.remove('hidden');
+                    if (oculusBox) oculusBox.classList.add('hidden');
+                    if (teleportBox) teleportBox.classList.add('hidden');
+                    if (drawerActions) drawerActions.classList.remove('hidden');
+
+                    document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
+                    document.getElementById('drawer-region-desc').textContent = data.desc;
+                    renderAreaList(data.areas);
+                }
             }
 
             updateCheckoutSummary();
@@ -840,7 +928,7 @@
             drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Render List Daerah (Explore / Waypoint / Quest)
+        // Render List Daerah (Explore / Endgame / Quest)
         function renderAreaList(areas) {
             const container = document.getElementById('area-checkbox-grid');
             if (!container) return;
@@ -848,7 +936,7 @@
 
             areas.forEach(area => {
                 const isChecked = selectedAreaIds.has(area.id);
-                const currentPrice = Math.round(area.price * serviceMultipliers[currentServiceType].mult);
+                const currentPrice = Math.round(area.price * (serviceMultipliers[currentServiceType]?.mult || 1.0));
 
                 const item = document.createElement('div');
                 item.className = `area-checkbox-card ${isChecked ? 'selected' : ''}`;
@@ -870,7 +958,7 @@
                         <h4>${area.name}</h4>
                         <p>${area.desc}</p>
                         <div class="area-card-submeta">
-                            <span class="area-service-tag">${serviceMultipliers[currentServiceType].label}</span>
+                            <span class="area-service-tag">${serviceMultipliers[currentServiceType]?.label || 'Layanan Joki'}</span>
                             <span class="area-price-tag">Rp ${currentPrice.toLocaleString('id-ID')}</span>
                         </div>
                     </div>
@@ -879,12 +967,12 @@
             });
         }
 
-        // Render Kalkulator Oculus Interaktif (Bisa Atur Jumlah & Max Sesuai Region)
+        // Render Kalkulator Oculus (Khusus untuk Region yang sedang dipilih)
         function renderOculusConfigurator() {
             const container = document.getElementById('oculus-configurator-box');
             if (!container) return;
 
-            const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+            const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
             if (selectedOculusQty > oculus.max) selectedOculusQty = oculus.max;
             if (selectedOculusQty < 1) selectedOculusQty = 1;
 
@@ -893,25 +981,7 @@
             const finalPrice = isMax ? oculus.packagePrice : singleTotal;
             const savings = isMax ? Math.max(0, singleTotal - oculus.packagePrice) : 0;
 
-            // Region pills list
-            let regionPillsHtml = '';
-            for (const [key, item] of Object.entries(oculusDatabase)) {
-                const activeCls = key === selectedOculusRegion ? 'active' : '';
-                regionPillsHtml += `
-                    <button type="button" class="oculus-chip-btn ${activeCls}" onclick="switchOculusRegion('${key}')">
-                        ${item.badge} (${item.max})
-                    </button>
-                `;
-            }
-
             container.innerHTML = `
-                <div class="oculus-region-chips-wrapper">
-                    <span class="oculus-chips-label">Pilih Region Oculus:</span>
-                    <div class="oculus-region-chips">
-                        ${regionPillsHtml}
-                    </div>
-                </div>
-
                 <div class="oculus-card-hero">
                     <div class="oculus-hero-top">
                         <div class="oculus-title-col">
@@ -933,7 +1003,7 @@
 
                     <div class="oculus-controls-section">
                         <label class="oculus-controls-label" for="oculus-qty-input">
-                            Atur Jumlah ${oculus.name} yang Ingin Diambil (Maksimal: ${oculus.max} Biji):
+                            Atur Jumlah ${oculus.name} yang Ingin Diambil (Maksimal: ${oculus.max} Biji di ${oculus.regionName}):
                         </label>
                         
                         <div class="oculus-stepper-row">
@@ -992,36 +1062,9 @@
             updateCheckoutSummary();
         }
 
-        // Switch Region Oculus Langsung dari Chip
-        function switchOculusRegion(regionKey) {
-            if (!oculusDatabase[regionKey]) return;
-            selectedOculusRegion = regionKey;
-            currentSelectedRegion = regionKey;
-            selectedOculusQty = oculusDatabase[regionKey].max;
-
-            // Highlight top card
-            document.querySelectorAll('.region-overview-card').forEach(card => {
-                if (card.getAttribute('data-region-id') === regionKey) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-
-            // Update drawer header
-            const data = regionDatabase[regionKey];
-            if (data) {
-                document.getElementById('drawer-region-badge').textContent = data.badge;
-                document.getElementById('drawer-region-title').textContent = `Kumpul ${oculusDatabase[regionKey].name} - ${data.name}`;
-                document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculusDatabase[regionKey].name} yang ingin dijoki (1 s/d ${oculusDatabase[regionKey].max} biji), atau ambil paket borongan full region.`;
-            }
-
-            renderOculusConfigurator();
-        }
-
         // Set Jumlah Oculus
         function setOculusQty(val) {
-            const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+            const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
             let num = parseInt(val, 10);
             if (isNaN(num)) num = 1;
             if (num > oculus.max) num = oculus.max;
@@ -1030,14 +1073,137 @@
             renderOculusConfigurator();
         }
 
-        // Step Jumlah Oculus (+1, -1, +5, -5)
         function stepOculusQty(delta) {
             setOculusQty(selectedOculusQty + delta);
         }
 
-        // Event Input & Slider Oculus
         function onOculusQtyChange(val) {
             setOculusQty(val);
+        }
+
+        // Render Kalkulator Teleport Waypoint (Minimum 3 TP)
+        function renderTeleportConfigurator() {
+            const container = document.getElementById('teleport-configurator-box');
+            if (!container) return;
+
+            const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50, packagePrice: 50000 };
+            const region = regionDatabase[currentSelectedRegion] || { name: 'Region' };
+
+            if (selectedTeleportQty < TP_MIN_ORDER) selectedTeleportQty = TP_MIN_ORDER;
+            if (selectedTeleportQty > tpData.totalTP) selectedTeleportQty = tpData.totalTP;
+
+            const isAll = selectedTeleportQty === tpData.totalTP;
+            const singleTotal = selectedTeleportQty * TP_PRICE_PER_ITEM;
+            const finalPrice = isAll ? tpData.packagePrice : singleTotal;
+            const savings = isAll ? Math.max(0, singleTotal - tpData.packagePrice) : 0;
+
+            container.innerHTML = `
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb">📍</div>
+                            <div class="oculus-hero-text">
+                                <h4>Buka Teleport Waypoint & Statue - ${region.name}</h4>
+                                <p>Buka Teleport Waypoint dan Statue of the Seven yang belum terbuka untuk mempermudah navigasi map.</p>
+                            </div>
+                        </div>
+                        <div class="oculus-rate-badges">
+                            <div class="oculus-rate-badge">
+                                <span>Tarif Per TP:</span> <strong>Rp ${TP_PRICE_PER_ITEM.toLocaleString('id-ID')} / titik</strong>
+                            </div>
+                            <div class="oculus-rate-badge">
+                                <span>Paket All (${tpData.totalTP} TP):</span> <strong>Rp ${tpData.packagePrice.toLocaleString('id-ID')}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="teleport-rule-badge">
+                        <span>⚠️</span>
+                        <span>Open Joki Teleport: Minimum 3 TP yang belum terbuka yang diterima!</span>
+                    </div>
+
+                    <div class="oculus-controls-section">
+                        <label class="oculus-controls-label" for="teleport-qty-input">
+                            Jumlah Teleport yang Belum Terbuka (Minimal 3 TP • Total Tersedia: ${tpData.totalTP} TP di ${region.name}):
+                        </label>
+                        
+                        <div class="oculus-stepper-row">
+                            <button type="button" class="btn-oculus-step" onclick="stepTeleportQty(-5)" title="Kurang 5">-5</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepTeleportQty(-1)" title="Kurang 1">-</button>
+                            
+                            <div class="oculus-display-box">
+                                <input type="number" id="teleport-qty-input" class="oculus-number-input" 
+                                       min="3" max="${tpData.totalTP}" value="${selectedTeleportQty}"
+                                       oninput="onTeleportQtyChange(this.value)">
+                                <span class="oculus-max-label">/ ${tpData.totalTP} TP</span>
+                            </div>
+
+                            <button type="button" class="btn-oculus-step" onclick="stepTeleportQty(1)" title="Tambah 1">+</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepTeleportQty(5)" title="Tambah 5">+5</button>
+                        </div>
+
+                        <input type="range" id="teleport-qty-slider" class="oculus-range-slider"
+                               min="3" max="${tpData.totalTP}" value="${selectedTeleportQty}"
+                               oninput="onTeleportQtyChange(this.value)">
+
+                        <div class="oculus-presets-row">
+                            <button type="button" class="btn-oculus-preset" onclick="setTeleportQty(3)">3 TP (Min. Order)</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setTeleportQty(5)">5 TP</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setTeleportQty(10)">10 TP</button>
+                            ${tpData.totalTP >= 20 ? `<button type="button" class="btn-oculus-preset" onclick="setTeleportQty(20)">20 TP</button>` : ''}
+                            <button type="button" class="btn-oculus-preset max-preset" onclick="setTeleportQty(${tpData.totalTP})">
+                                📍 Buka Semua (${tpData.totalTP} TP di Region Ini)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                ${isAll 
+                                    ? `🎁 Paket Borongan Buka Semua ${tpData.totalTP} Teleport Waypoint di ${region.name}` 
+                                    : `Kalkulasi: ${selectedTeleportQty} Teleport × Rp ${TP_PRICE_PER_ITEM.toLocaleString('id-ID')}`
+                                }
+                            </span>
+                            <span class="oculus-calc-hint">
+                                ${isAll && savings > 0 
+                                    ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif satuan!` 
+                                    : `Bisa request titik teleport tertentu (misal: dekat Boss/Domain/Oculus).`
+                                }
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price">
+                            Rp ${finalPrice.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        // Set Jumlah Teleport (Enforce Minimum 3 TP)
+        function setTeleportQty(val) {
+            const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50 };
+            let num = parseInt(val, 10);
+            if (isNaN(num)) num = TP_MIN_ORDER;
+            if (num < TP_MIN_ORDER) {
+                num = TP_MIN_ORDER;
+                if (typeof showToast === 'function') {
+                    showToast('Minimum order joki teleport adalah 3 TP!');
+                }
+            }
+            if (num > tpData.totalTP) num = tpData.totalTP;
+            selectedTeleportQty = num;
+            renderTeleportConfigurator();
+        }
+
+        function stepTeleportQty(delta) {
+            setTeleportQty(selectedTeleportQty + delta);
+        }
+
+        function onTeleportQtyChange(val) {
+            setTeleportQty(val);
         }
 
         // Toggle Centang Daerah
@@ -1083,40 +1249,44 @@
         // Ubah Tipe Layanan
         function changeServiceType(newType) {
             currentServiceType = newType;
-            document.querySelectorAll('.service-pill-option').forEach(label => {
-                const input = label.querySelector('input');
-                if (input && input.value === newType) {
-                    label.classList.add('active');
-                } else {
-                    label.classList.remove('active');
-                }
-            });
+            renderServiceTypeOptions();
 
             const areaGrid = document.getElementById('area-checkbox-grid');
             const oculusBox = document.getElementById('oculus-configurator-box');
+            const teleportBox = document.getElementById('teleport-configurator-box');
             const drawerActions = document.getElementById('drawer-header-actions');
 
             if (newType === 'oculus_only') {
-                if (currentSelectedRegion === 'endgame') {
-                    currentSelectedRegion = selectedOculusRegion || 'snezhnaya';
-                } else {
-                    selectedOculusRegion = currentSelectedRegion;
-                }
-
                 if (areaGrid) areaGrid.classList.add('hidden');
                 if (oculusBox) oculusBox.classList.remove('hidden');
+                if (teleportBox) teleportBox.classList.add('hidden');
                 if (drawerActions) drawerActions.classList.add('hidden');
 
-                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
                 selectedOculusQty = oculus.max;
 
                 document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${oculus.regionName}`;
                 document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji), atau ambil paket borongan full region.`;
 
                 renderOculusConfigurator();
+            } else if (newType === 'waypoint_only') {
+                if (areaGrid) areaGrid.classList.add('hidden');
+                if (oculusBox) oculusBox.classList.add('hidden');
+                if (teleportBox) teleportBox.classList.remove('hidden');
+                if (drawerActions) drawerActions.classList.add('hidden');
+
+                const region = regionDatabase[currentSelectedRegion];
+                const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50 };
+                selectedTeleportQty = Math.max(TP_MIN_ORDER, selectedTeleportQty || TP_MIN_ORDER);
+
+                document.getElementById('drawer-region-title').textContent = `Buka Teleport Waypoint - ${region.name}`;
+                document.getElementById('drawer-region-desc').textContent = `Atur jumlah Teleport Waypoint yang ingin dibuka (Minimal 3 TP • Maksimal ${tpData.totalTP} TP di region ini).`;
+
+                renderTeleportConfigurator();
             } else {
                 if (areaGrid) areaGrid.classList.remove('hidden');
                 if (oculusBox) oculusBox.classList.add('hidden');
+                if (teleportBox) teleportBox.classList.add('hidden');
                 if (drawerActions) drawerActions.classList.remove('hidden');
 
                 const data = regionDatabase[currentSelectedRegion];
@@ -1137,7 +1307,7 @@
             const priceEl = document.getElementById('summary-total-price');
 
             if (currentServiceType === 'oculus_only') {
-                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
                 const isMax = selectedOculusQty === oculus.max;
                 const singleTotal = selectedOculusQty * oculus.pricePerItem;
                 const finalPrice = isMax ? oculus.packagePrice : singleTotal;
@@ -1153,6 +1323,24 @@
                 return;
             }
 
+            if (currentServiceType === 'waypoint_only') {
+                const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50, packagePrice: 50000 };
+                const isAll = selectedTeleportQty === tpData.totalTP;
+                const singleTotal = selectedTeleportQty * TP_PRICE_PER_ITEM;
+                const finalPrice = isAll ? tpData.packagePrice : singleTotal;
+
+                if (isAll) {
+                    countEl.innerHTML = `${selectedTeleportQty} / ${tpData.totalTP} TP <span class="bundle-badge">🎁 Paket Semua TP</span>`;
+                } else {
+                    countEl.textContent = `${selectedTeleportQty} Teleport (Min. 3)`;
+                }
+
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = finalPrice;
+                return;
+            }
+
+            // Normal area or endgame
             const areas = regionDatabase[currentSelectedRegion]?.areas || [];
             let total = 0;
             let count = 0;
@@ -1160,12 +1348,14 @@
             areas.forEach(a => {
                 if (selectedAreaIds.has(a.id)) {
                     count++;
-                    total += Math.round(a.price * serviceMultipliers[currentServiceType].mult);
+                    const mult = serviceMultipliers[currentServiceType]?.mult || 1.0;
+                    total += Math.round(a.price * mult);
                 }
             });
 
-            // Diskon Bundle jika pilih semua daerah di region (minimal 4 daerah)
-            if (count >= 4 && count === areas.length) {
+            if (currentSelectedRegion === 'endgame') {
+                countEl.textContent = `${count} Mode Endgame`;
+            } else if (count >= 4 && count === areas.length) {
                 total = Math.round(total * 0.85); // Diskon 15% bundle full region
                 countEl.innerHTML = `${count} Daerah <span class="bundle-badge">🎁 Diskon Bundle 15%</span>`;
             } else {
@@ -1183,11 +1373,29 @@
             let message = '';
 
             if (currentServiceType === 'oculus_only') {
-                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
                 const isMax = selectedOculusQty === oculus.max;
                 const packageNote = isMax ? ' (Paket Borongan Full Region - Diskon Hemat)' : '';
 
-                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n✨ Layanan: Kumpul Oculus (Per Region / Satuan)\n📍 Region: ${oculus.regionName}\n🔮 Jenis Oculus: ${oculus.name}\n🔢 Jumlah yang Diambil: ${selectedOculusQty} dari total ${oculus.max} Biji${packageNote}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n✨ Layanan: Kumpul Oculus Saja\n📍 Region: ${oculus.regionName}\n🔮 Jenis Oculus: ${oculus.name}\n🔢 Jumlah yang Diambil: ${selectedOculusQty} dari total ${oculus.max} Biji${packageNote}\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentServiceType === 'waypoint_only') {
+                const region = regionDatabase[currentSelectedRegion];
+                const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50 };
+                const isAll = selectedTeleportQty === tpData.totalTP;
+                const allNote = isAll ? ' (Paket Borongan Semua TP di Region)' : '';
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📍 Layanan: Buka Teleport Waypoint & Statue Saja\n🗺️ Region: ${region.name}\n⚡ Jumlah TP yang Ingin Dibuka: ${selectedTeleportQty} Teleport (Min. 3 TP)${allNote}\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            } else if (currentSelectedRegion === 'endgame') {
+                const count = selectedAreaIds.size;
+                if (count === 0) {
+                    alert('Silakan centang minimal 1 tantangan Endgame yang ingin Anda joki.');
+                    return;
+                }
+                const region = regionDatabase['endgame'];
+                const areas = region.areas.filter(a => selectedAreaIds.has(a.id));
+                const trialListText = areas.map((a, i) => `${i + 1}. ${a.name} (Rp ${a.price.toLocaleString('id-ID')})`).join('\n');
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n⚔️ Layanan: Endgame & Combat Trials\n🏆 Mode / Tantangan yang Dipilih:\n${trialListText}\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
             } else {
                 const count = selectedAreaIds.size;
                 if (count === 0) {
@@ -1197,7 +1405,7 @@
 
                 const region = regionDatabase[currentSelectedRegion];
                 const areas = region.areas.filter(a => selectedAreaIds.has(a.id));
-                const service = serviceMultipliers[currentServiceType].label;
+                const service = serviceMultipliers[currentServiceType]?.label || 'Full Explore';
                 const areaListText = areas.map((a, i) => `${i + 1}. ${a.name}`).join('\n');
 
                 message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📍 Region: ${region.name}\n⚡ Layanan: ${service}\n\n🗺️ Daerah yang Dipilih (${count} daerah):\n${areaListText}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
