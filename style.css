@@ -1603,157 +1603,222 @@ button:active,
     color: #121212;
 }
 
-/* Universal Image Cropper Modal */
+/* ================= WHATSAPP / INSTAGRAM STYLE CROPPER ================= */
 .crop-modal-overlay {
     z-index: 99999 !important;
 }
 
-.crop-modal-content {
-    max-width: 720px;
+.wa-crop-modal-content {
+    max-width: 520px;
     width: 95%;
-    max-height: 94vh;
     padding: 20px;
-    border-radius: 14px;
-    background: #14151b;
+    border-radius: 16px;
+    background: #121319;
     border: 1px solid rgba(0, 173, 181, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.88);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    user-select: none;
 }
 
-.crop-viewport-container {
-    width: 100%;
-    height: 50vh;
-    min-height: 260px;
-    max-height: 480px;
-    background: #090a0d;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.crop-viewport-container img {
-    max-width: 100%;
-    display: block;
-}
-
-/* Cropper Circular Mask for Profile Avatar */
-.crop-circle-mode .cropper-view-box,
-.crop-circle-mode .cropper-face {
-    border-radius: 50%;
-}
-
-.crop-circle-mode .cropper-view-box {
-    outline: 2px solid #00adb5;
-    outline-color: rgba(0, 173, 181, 0.85);
-}
-
-.crop-toolbar {
+.wa-crop-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin: 12px 0;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 8px;
 }
 
-.crop-ratio-group {
+.wa-crop-title-group {
     display: flex;
     align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.crop-ratio-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #8c8c9e;
-    margin-right: 2px;
-}
-
-.btn-crop-tool {
-    background: rgba(255, 255, 255, 0.06);
-    color: #cfcfe0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 0.74rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-crop-tool:hover {
+.wa-crop-badge {
     background: rgba(0, 173, 181, 0.15);
     color: #00adb5;
-    border-color: rgba(0, 173, 181, 0.4);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 173, 181, 0.3);
 }
 
-.btn-crop-tool.active {
+.wa-crop-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.wa-crop-instructions {
+    font-size: 0.74rem;
+    color: #9292a4;
+    text-align: center;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.wa-crop-viewport {
+    width: 100%;
+    height: 380px;
+    background: #08090d;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    touch-action: none;
+}
+
+.wa-crop-viewport:active {
+    cursor: grabbing;
+}
+
+.wa-crop-viewport canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wa-crop-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0 10px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wa-zoom-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wa-btn-icon {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.wa-btn-icon:hover {
     background: #00adb5;
     color: #121212;
-    font-weight: 700;
     border-color: #00adb5;
 }
 
-.crop-action-tools {
+#crop-zoom-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    cursor: pointer;
+}
+
+#crop-zoom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00adb5;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.6);
+    border: 2px solid #ffffff;
+    transition: transform 0.15s ease;
+}
+
+#crop-zoom-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+#crop-zoom-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00adb5;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.6);
+    border: 2px solid #ffffff;
+}
+
+.wa-crop-action-row {
     display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.wa-btn-tool {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e0e0e8;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
 }
 
-.btn-crop-action {
-    background: rgba(255, 255, 255, 0.06);
-    color: #e0e0e0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 0.76rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-crop-action:hover {
-    background: rgba(255, 255, 255, 0.14);
-    color: #ffffff;
+.wa-btn-tool:hover {
+    background: rgba(0, 173, 181, 0.15);
+    color: #00adb5;
     border-color: #00adb5;
 }
 
-.crop-modal-actions {
+.wa-crop-modal-actions {
     display: flex;
     gap: 10px;
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
-.crop-modal-actions button {
+.wa-crop-modal-actions button {
     flex: 1;
 }
 
+.wa-crop-confirm-btn {
+    background: #00adb5 !important;
+    color: #121212 !important;
+    font-weight: 700;
+}
+
+.wa-crop-confirm-btn:hover {
+    background: #00c4ce !important;
+    box-shadow: 0 0 14px rgba(0, 173, 181, 0.5);
+}
+
 @media (max-width: 600px) {
-    .crop-modal-content {
+    .wa-crop-modal-content {
+        padding: 16px;
         width: 96%;
-        padding: 14px;
-        max-height: 96vh;
     }
 
-    .crop-viewport-container {
-        height: 42vh;
-        min-height: 220px;
-    }
-
-    .crop-toolbar {
-        padding: 6px 8px;
-        gap: 6px;
-    }
-
-    .btn-crop-tool,
-    .btn-crop-action {
-        padding: 4px 7px;
-        font-size: 0.7rem;
+    .wa-crop-viewport {
+        height: 310px;
     }
 
     .edit-match-modal-content {

@@ -19,10 +19,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Cropper.js for image cropping -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <link rel="stylesheet" href="style.css?v=20261109a">
+    <link rel="stylesheet" href="style.css?v=20261109b">
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
@@ -205,38 +202,49 @@
                 </div>
             </div>
 
-            <!-- ================= MODAL CROP GAMBAR (UNIVERSAL) ================= -->
+            <!-- ================= MODAL CROP GAMBAR (WHATSAPP / INSTAGRAM STYLE) ================= -->
             <div id="image-crop-modal" class="modal crop-modal-overlay hidden">
-                <div class="modal-content crop-modal-content">
-                    <div class="modal-header">
-                        <h3 id="crop-modal-title">✂️ Potong & Sesuaikan Gambar</h3>
-                        <button type="button" class="modal-close-icon" id="close-crop-modal-btn">&times;</button>
-                    </div>
-
-                    <div class="crop-viewport-container" id="crop-viewport-wrap">
-                        <img id="cropper-target-img" src="" alt="Target Crop">
-                    </div>
-
-                    <!-- Toolbar Kontrol Crop (Rasio, Zoom, Rotate, Reset) -->
-                    <div class="crop-toolbar">
-                        <div class="crop-ratio-group" id="crop-ratio-selector">
-                            <span class="crop-ratio-label">Rasio:</span>
-                            <button type="button" class="btn-crop-tool active" data-ratio="free">Bebas</button>
-                            <button type="button" class="btn-crop-tool" data-ratio="16/9">16:9 (Scoreboard)</button>
-                            <button type="button" class="btn-crop-tool" data-ratio="4/3">4:3</button>
-                            <button type="button" class="btn-crop-tool" data-ratio="1">1:1 (Persegi)</button>
+                <div class="modal-content wa-crop-modal-content">
+                    <div class="modal-header wa-crop-header">
+                        <div class="wa-crop-title-group">
+                            <span class="wa-crop-badge">✂️ Crop Foto</span>
+                            <h3 id="crop-modal-title">Sesuaikan Foto</h3>
                         </div>
-                        <div class="crop-action-tools">
-                            <button type="button" class="btn-crop-action" id="crop-zoom-in" title="Perbesar">🔍+</button>
-                            <button type="button" class="btn-crop-action" id="crop-zoom-out" title="Perkecil">🔍−</button>
-                            <button type="button" class="btn-crop-action" id="crop-rotate" title="Putar 90 Derajat">🔄 Putar</button>
-                            <button type="button" class="btn-crop-action" id="crop-reset" title="Reset Posisi">↩️ Reset</button>
+                        <button type="button" class="modal-close-icon" id="close-crop-modal-btn" title="Tutup">&times;</button>
+                    </div>
+
+                    <div class="wa-crop-instructions">
+                        <span>💡 Geser foto untuk memposisikan, gunakan slider atau cubit layar untuk zoom</span>
+                    </div>
+
+                    <div class="wa-crop-viewport" id="wa-crop-viewport">
+                        <canvas id="crop-canvas"></canvas>
+                    </div>
+
+                    <!-- WhatsApp / Instagram Style Zoom Slider & Controls -->
+                    <div class="wa-crop-controls">
+                        <div class="wa-zoom-slider-row">
+                            <button type="button" class="wa-btn-icon" id="crop-zoom-out" title="Perkecil">➖</button>
+                            <input type="range" id="crop-zoom-slider" min="1" max="4" step="0.01" value="1" title="Geser untuk zoom">
+                            <button type="button" class="wa-btn-icon" id="crop-zoom-in" title="Perbesar">➕</button>
+                        </div>
+                        <div class="wa-crop-action-row">
+                            <button type="button" class="wa-btn-tool" id="crop-rotate" title="Putar 90 Derajat">
+                                <span>🔄</span> Putar 90°
+                            </button>
+                            <button type="button" class="wa-btn-tool" id="crop-reset" title="Kembalikan ke posisi awal">
+                                <span>↩️</span> Reset
+                            </button>
                         </div>
                     </div>
 
-                    <div class="modal-actions crop-modal-actions">
-                        <button type="button" id="apply-crop-btn" class="custom-file-upload">✓ Terapkan Hasil Crop</button>
-                        <button type="button" id="cancel-crop-btn" class="cancel-btn">Batal</button>
+                    <div class="modal-actions wa-crop-modal-actions">
+                        <button type="button" id="apply-crop-btn" class="custom-file-upload wa-crop-confirm-btn">
+                            ✓ Gunakan Foto
+                        </button>
+                        <button type="button" id="cancel-crop-btn" class="cancel-btn">
+                            Batal
+                        </button>
                     </div>
                 </div>
             </div>
@@ -450,24 +458,21 @@
         const editRecropBtn = document.getElementById('edit-recrop-btn');
         const editFileStatus = document.getElementById('edit-file-status');
 
-        // Element Universal Crop Modal
+        // Element WhatsApp / Instagram Style Crop Modal
         const cropModal = document.getElementById('image-crop-modal');
         const cropModalTitle = document.getElementById('crop-modal-title');
         const closeCropModalBtn = document.getElementById('close-crop-modal-btn');
         const cancelCropBtn = document.getElementById('cancel-crop-btn');
         const applyCropBtn = document.getElementById('apply-crop-btn');
-        const cropperTargetImg = document.getElementById('cropper-target-img');
-        const cropRatioSelector = document.getElementById('crop-ratio-selector');
-        const cropViewportWrap = document.getElementById('crop-viewport-wrap');
+        const cropViewport = document.getElementById('wa-crop-viewport');
+        const cropCanvas = document.getElementById('crop-canvas');
+        const cropZoomSlider = document.getElementById('crop-zoom-slider');
         const cropZoomInBtn = document.getElementById('crop-zoom-in');
         const cropZoomOutBtn = document.getElementById('crop-zoom-out');
         const cropRotateBtn = document.getElementById('crop-rotate');
         const cropResetBtn = document.getElementById('crop-reset');
 
         // State Variabel Crop & Upload
-        let currentCropper = null;
-        let currentCropCallback = null;
-        let currentCropRawSrc = null;
         let currentAvatarRawSrc = null;
         let pendingMatchImageBase64 = null;
         let currentMatchRawSrc = null;
@@ -610,20 +615,17 @@
                 currentMatchRawSrc = rawSrc;
                 openCropModal({
                     imageSrc: rawSrc,
-                    title: '✂️ Potong Foto Scoreboard Match',
-                    aspectRatio: 16 / 9,
-                    hideRatioSelector: false,
-                    isCircle: false,
-                    maxWidth: 1200,
-                    maxHeight: 1200,
-                    quality: 0.82,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Foto Scoreboard',
+                    mode: 'rect',
+                    targetWidth: 1280,
+                    targetHeight: 720,
+                    onComplete: (croppedDataUrl) => {
                         pendingMatchImageBase64 = croppedDataUrl;
                         if (matchPreviewImg) matchPreviewImg.src = croppedDataUrl;
                         if (matchPreviewWrap) matchPreviewWrap.classList.remove('hidden');
                         if (fileNameLabel) fileNameLabel.classList.add('hidden');
                         if (matchPreviewStatus) matchPreviewStatus.innerText = "✓ Foto siap (" + file.name + ")";
-                        showToast("Foto scoreboard berhasil dipotong & siap dipublikasikan!");
+                        showToast("Foto scoreboard berhasil disesuaikan & siap dipublikasikan!");
                     }
                 });
             };
@@ -636,14 +638,11 @@
                 if (!srcToCrop) return;
                 openCropModal({
                     imageSrc: srcToCrop,
-                    title: '✂️ Sesuaikan / Crop Ulang Foto Scoreboard',
-                    aspectRatio: 16 / 9,
-                    hideRatioSelector: false,
-                    isCircle: false,
-                    maxWidth: 1200,
-                    maxHeight: 1200,
-                    quality: 0.82,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Ulang Foto Scoreboard',
+                    mode: 'rect',
+                    targetWidth: 1280,
+                    targetHeight: 720,
+                    onComplete: (croppedDataUrl) => {
                         pendingMatchImageBase64 = croppedDataUrl;
                         if (matchPreviewImg) matchPreviewImg.src = croppedDataUrl;
                         showToast("Foto scoreboard berhasil disesuaikan!");
@@ -722,7 +721,7 @@
             }
         });
 
-        // Handle Pergantian Foto Profil (Crop 1:1 Persegi/Bulat)
+        // Handle Pergantian Foto Profil (Crop Lingkaran Ala WhatsApp / Instagram)
         profileAvatarInput.addEventListener('change', () => {
             const file = profileAvatarInput.files[0];
             if (!file) return;
@@ -738,20 +737,17 @@
                 currentAvatarRawSrc = rawSrc;
                 openCropModal({
                     imageSrc: rawSrc,
-                    title: '✂️ Potong Foto Profil Admin (1:1)',
-                    aspectRatio: 1,
-                    hideRatioSelector: true,
-                    isCircle: true,
-                    maxWidth: 400,
-                    maxHeight: 400,
-                    quality: 0.85,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Foto Profil',
+                    mode: 'circle',
+                    targetWidth: 400,
+                    targetHeight: 400,
+                    onComplete: (croppedDataUrl) => {
                         newAvatarBase64 = croppedDataUrl;
                         profileAvatarPreview.src = croppedDataUrl;
                         profileAvatarPreview.classList.remove('hidden');
                         profileAvatarPlaceholder.classList.add('hidden');
                         if (recropAvatarBtn) recropAvatarBtn.classList.remove('hidden');
-                        showToast("Foto profil berhasil dipotong. Klik 'Simpan Profil' untuk menerapkan.");
+                        showToast("Foto profil berhasil disesuaikan. Klik 'Simpan Profil' untuk menerapkan.");
                     }
                 });
             };
@@ -764,14 +760,11 @@
                 if (!srcToCrop) return;
                 openCropModal({
                     imageSrc: srcToCrop,
-                    title: '✂️ Sesuaikan / Crop Ulang Foto Profil (1:1)',
-                    aspectRatio: 1,
-                    hideRatioSelector: true,
-                    isCircle: true,
-                    maxWidth: 400,
-                    maxHeight: 400,
-                    quality: 0.85,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Ulang Foto Profil',
+                    mode: 'circle',
+                    targetWidth: 400,
+                    targetHeight: 400,
+                    onComplete: (croppedDataUrl) => {
                         newAvatarBase64 = croppedDataUrl;
                         profileAvatarPreview.src = croppedDataUrl;
                         profileAvatarPreview.classList.remove('hidden');
@@ -865,94 +858,193 @@
             }
         });
 
-        // ================= UNIVERSAL IMAGE CROPPER FUNCTIONS =================
+        // ================= WHATSAPP / INSTAGRAM STYLE CROPPER =================
+        let cropImg = new Image();
+        let cropMode = 'circle'; // 'circle' | 'rect'
+        let cropTargetW = 400;
+        let cropTargetH = 400;
+        let cropCallback = null;
+        let panX = 0;
+        let panY = 0;
+        let userZoom = 1;
+        let rotation = 0; // 0, 90, 180, 270
+        let isInteracting = false;
+        let isDragging = false;
+        let startPointerX = 0;
+        let startPointerY = 0;
+        let startPanX = 0;
+        let startPanY = 0;
+        let initialPinchDistance = null;
+        let initialPinchZoom = 1;
+        let cropCanvasLayout = { W: 0, H: 0, cx: 0, cy: 0, frameW: 0, frameH: 0, radius: 0, frameLeft: 0, frameTop: 0, baseScale: 1, effNatW: 1, effNatH: 1 };
+
+        function updateCanvasLayout() {
+            if (!cropCanvas || !cropViewport) return;
+            const rect = cropViewport.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            const W = rect.width || 420;
+            const H = rect.height || 360;
+
+            cropCanvas.width = W * dpr;
+            cropCanvas.height = H * dpr;
+
+            const ctx = cropCanvas.getContext('2d');
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+
+            const cx = W / 2;
+            const cy = H / 2;
+
+            let frameW, frameH, radius;
+            if (cropMode === 'circle') {
+                radius = Math.min(W, H) * 0.38;
+                frameW = radius * 2;
+                frameH = radius * 2;
+            } else {
+                // 16:9 Landscape for Scoreboard
+                frameW = Math.min(W * 0.90, 480);
+                frameH = frameW * (9 / 16);
+                if (frameH > H * 0.82) {
+                    frameH = H * 0.82;
+                    frameW = frameH * (16 / 9);
+                }
+                radius = 0;
+            }
+
+            const frameLeft = cx - frameW / 2;
+            const frameTop = cy - frameH / 2;
+
+            // Calculate Base Scale based on rotation
+            const isRotated90 = (rotation === 90 || rotation === 270);
+            const effNatW = isRotated90 ? (cropImg.naturalHeight || 1) : (cropImg.naturalWidth || 1);
+            const effNatH = isRotated90 ? (cropImg.naturalWidth || 1) : (cropImg.naturalHeight || 1);
+
+            const baseScale = Math.max(frameW / effNatW, frameH / effNatH);
+
+            cropCanvasLayout = {
+                W, H, cx, cy, frameW, frameH, radius, frameLeft, frameTop, baseScale, effNatW, effNatH
+            };
+        }
+
+        function clampPan() {
+            const { frameW, frameH, baseScale, effNatW, effNatH } = cropCanvasLayout;
+            const totalScale = baseScale * userZoom;
+            const effDrawW = effNatW * totalScale;
+            const effDrawH = effNatH * totalScale;
+
+            const maxPanX = Math.max(0, (effDrawW - frameW) / 2);
+            const maxPanY = Math.max(0, (effDrawH - frameH) / 2);
+
+            panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+            panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        function drawCropCanvas() {
+            if (!cropCanvas || !cropImg.complete || !cropImg.naturalWidth) return;
+            const ctx = cropCanvas.getContext('2d');
+            const { W, H, cx, cy, frameW, frameH, radius, frameLeft, frameTop, baseScale } = cropCanvasLayout;
+            if (!W || !H) return;
+
+            clampPan();
+
+            const totalScale = baseScale * userZoom;
+            const drawW = cropImg.naturalWidth * totalScale;
+            const drawH = cropImg.naturalHeight * totalScale;
+
+            // 1. Clear background
+            ctx.clearRect(0, 0, W, H);
+
+            // 2. Draw user photo transformed
+            ctx.save();
+            ctx.translate(cx + panX, cy + panY);
+            ctx.rotate((rotation * Math.PI) / 180);
+            ctx.drawImage(cropImg, -drawW / 2, -drawH / 2, drawW, drawH);
+            ctx.restore();
+
+            // 3. Draw Dark Vignette / Scrim Mask (WhatsApp / Instagram style 75% dark)
+            ctx.save();
+            ctx.fillStyle = 'rgba(10, 12, 18, 0.75)';
+            ctx.fillRect(0, 0, W, H);
+
+            // 4. Cut out the transparent viewfinder hole
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            if (cropMode === 'circle') {
+                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            } else {
+                ctx.rect(frameLeft, frameTop, frameW, frameH);
+            }
+            ctx.fill();
+
+            // 5. Draw Frame Border (Teal glow border)
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.strokeStyle = '#00adb5';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            if (cropMode === 'circle') {
+                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            } else {
+                ctx.rect(frameLeft, frameTop, frameW, frameH);
+            }
+            ctx.stroke();
+
+            // 6. Draw 3x3 Rule of Thirds Grid (Active while dragging or zooming)
+            if (isInteracting) {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                // Vertical grid lines
+                ctx.moveTo(frameLeft + frameW / 3, frameTop);
+                ctx.lineTo(frameLeft + frameW / 3, frameTop + frameH);
+                ctx.moveTo(frameLeft + (2 * frameW) / 3, frameTop);
+                ctx.lineTo(frameLeft + (2 * frameW) / 3, frameTop + frameH);
+                // Horizontal grid lines
+                ctx.moveTo(frameLeft, frameTop + frameH / 3);
+                ctx.lineTo(frameLeft + frameW, frameTop + frameH / 3);
+                ctx.moveTo(frameLeft, frameTop + (2 * frameH) / 3);
+                ctx.lineTo(frameLeft + frameW, frameTop + (2 * frameH) / 3);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
         function openCropModal({
             imageSrc,
-            title = '✂️ Potong & Sesuaikan Gambar',
-            aspectRatio = NaN,
-            hideRatioSelector = false,
-            isCircle = false,
-            maxWidth = 1200,
-            maxHeight = 1200,
-            quality = 0.82,
-            onCropComplete
+            title = 'Sesuaikan Foto',
+            mode = 'circle', // 'circle' | 'rect'
+            targetWidth = 400,
+            targetHeight = 400,
+            onComplete
         }) {
-            if (typeof Cropper === 'undefined') {
-                showToast("Modul pemotong gambar belum siap, silakan coba beberapa detik lagi.", true);
-                return;
-            }
-
-            currentCropRawSrc = imageSrc;
-            currentCropCallback = onCropComplete;
+            cropCallback = onComplete;
+            cropMode = mode;
+            cropTargetW = targetWidth;
+            cropTargetH = targetHeight;
+            panX = 0;
+            panY = 0;
+            userZoom = 1;
+            rotation = 0;
+            isInteracting = false;
+            isDragging = false;
 
             if (cropModalTitle) cropModalTitle.textContent = title;
+            if (cropZoomSlider) cropZoomSlider.value = 1;
 
-            if (hideRatioSelector) {
-                if (cropRatioSelector) cropRatioSelector.classList.add('hidden');
-            } else {
-                if (cropRatioSelector) cropRatioSelector.classList.remove('hidden');
-                document.querySelectorAll('.btn-crop-tool').forEach(btn => {
-                    const r = btn.getAttribute('data-ratio');
-                    if ((isNaN(aspectRatio) && r === 'free') || (Math.abs(aspectRatio - 16 / 9) < 0.05 && r === '16/9') || (aspectRatio === 1 && r === '1')) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-            }
-
-            if (isCircle) {
-                cropViewportWrap.classList.add('crop-circle-mode');
-            } else {
-                cropViewportWrap.classList.remove('crop-circle-mode');
-            }
-
-            if (currentCropper) {
-                currentCropper.destroy();
-                currentCropper = null;
-            }
-
-            cropperTargetImg.src = imageSrc;
             cropModal.classList.remove('hidden');
 
-            const initCropper = () => {
-                if (currentCropper) currentCropper.destroy();
-                currentCropper = new Cropper(cropperTargetImg, {
-                    aspectRatio: isNaN(aspectRatio) ? NaN : aspectRatio,
-                    viewMode: 1,
-                    dragMode: 'move',
-                    autoCropArea: 0.94,
-                    restore: false,
-                    guides: true,
-                    center: true,
-                    highlight: false,
-                    cropBoxMovable: true,
-                    cropBoxResizable: true,
-                    toggleDragModeOnDblclick: false,
-                    responsive: true,
-                    checkCrossOrigin: false
-                });
+            cropImg = new Image();
+            cropImg.onload = () => {
+                updateCanvasLayout();
+                drawCropCanvas();
             };
-
-            if (cropperTargetImg.complete && cropperTargetImg.naturalWidth) {
-                setTimeout(initCropper, 40);
-            } else {
-                cropperTargetImg.onload = () => {
-                    initCropper();
-                };
-            }
-
-            cropModal._cropOptions = { maxWidth, maxHeight, quality };
+            cropImg.src = imageSrc;
         }
 
         function closeCropModal() {
-            if (currentCropper) {
-                currentCropper.destroy();
-                currentCropper = null;
-            }
             cropModal.classList.add('hidden');
-            currentCropCallback = null;
-            cropperTargetImg.onload = null;
+            cropCallback = null;
+            isDragging = false;
+            isInteracting = false;
         }
 
         if (closeCropModalBtn) closeCropModalBtn.addEventListener('click', closeCropModal);
@@ -962,59 +1054,185 @@
             if (e.target === cropModal) closeCropModal();
         });
 
-        // Ratio selector buttons
-        document.querySelectorAll('.btn-crop-tool').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (!currentCropper) return;
-                document.querySelectorAll('.btn-crop-tool').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const ratio = btn.getAttribute('data-ratio');
-                if (ratio === 'free') {
-                    currentCropper.setAspectRatio(NaN);
-                } else if (ratio === '16/9') {
-                    currentCropper.setAspectRatio(16 / 9);
-                } else if (ratio === '4/3') {
-                    currentCropper.setAspectRatio(4 / 3);
-                } else if (ratio === '1') {
-                    currentCropper.setAspectRatio(1);
-                }
+        // Zoom Slider & Buttons
+        if (cropZoomSlider) {
+            cropZoomSlider.addEventListener('input', () => {
+                userZoom = parseFloat(cropZoomSlider.value) || 1;
+                isInteracting = true;
+                drawCropCanvas();
             });
-        });
+            cropZoomSlider.addEventListener('change', () => {
+                isInteracting = false;
+                drawCropCanvas();
+            });
+        }
 
-        // Toolbar actions
-        if (cropZoomInBtn) cropZoomInBtn.addEventListener('click', () => currentCropper && currentCropper.zoom(0.1));
-        if (cropZoomOutBtn) cropZoomOutBtn.addEventListener('click', () => currentCropper && currentCropper.zoom(-0.1));
-        if (cropRotateBtn) cropRotateBtn.addEventListener('click', () => currentCropper && currentCropper.rotate(90));
-        if (cropResetBtn) cropResetBtn.addEventListener('click', () => currentCropper && currentCropper.reset());
+        if (cropZoomInBtn) {
+            cropZoomInBtn.addEventListener('click', () => {
+                if (!cropZoomSlider) return;
+                cropZoomSlider.value = Math.min(4, parseFloat(cropZoomSlider.value) + 0.25);
+                cropZoomSlider.dispatchEvent(new Event('input'));
+                setTimeout(() => { isInteracting = false; drawCropCanvas(); }, 250);
+            });
+        }
 
-        // Apply crop button
+        if (cropZoomOutBtn) {
+            cropZoomOutBtn.addEventListener('click', () => {
+                if (!cropZoomSlider) return;
+                cropZoomSlider.value = Math.max(1, parseFloat(cropZoomSlider.value) - 0.25);
+                cropZoomSlider.dispatchEvent(new Event('input'));
+                setTimeout(() => { isInteracting = false; drawCropCanvas(); }, 250);
+            });
+        }
+
+        // Rotate 90° Clockwise
+        if (cropRotateBtn) {
+            cropRotateBtn.addEventListener('click', () => {
+                rotation = (rotation + 90) % 360;
+                panX = 0;
+                panY = 0;
+                updateCanvasLayout();
+                drawCropCanvas();
+            });
+        }
+
+        // Reset
+        if (cropResetBtn) {
+            cropResetBtn.addEventListener('click', () => {
+                panX = 0;
+                panY = 0;
+                userZoom = 1;
+                rotation = 0;
+                if (cropZoomSlider) cropZoomSlider.value = 1;
+                updateCanvasLayout();
+                drawCropCanvas();
+            });
+        }
+
+        // Dragging & Panning gestures on Viewport
+        if (cropViewport) {
+            cropViewport.addEventListener('pointerdown', (e) => {
+                if (e.button !== 0 && e.pointerType === 'mouse') return;
+                isDragging = true;
+                isInteracting = true;
+                startPointerX = e.clientX;
+                startPointerY = e.clientY;
+                startPanX = panX;
+                startPanY = panY;
+                cropViewport.setPointerCapture(e.pointerId);
+                drawCropCanvas();
+            });
+
+            cropViewport.addEventListener('pointermove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startPointerX;
+                const dy = e.clientY - startPointerY;
+                panX = startPanX + dx;
+                panY = startPanY + dy;
+                drawCropCanvas();
+            });
+
+            const stopDrag = (e) => {
+                if (isDragging) {
+                    isDragging = false;
+                    isInteracting = false;
+                    try { cropViewport.releasePointerCapture(e.pointerId); } catch (_) {}
+                    drawCropCanvas();
+                }
+            };
+
+            cropViewport.addEventListener('pointerup', stopDrag);
+            cropViewport.addEventListener('pointercancel', stopDrag);
+
+            // Mouse wheel to zoom
+            cropViewport.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 0.12 : -0.12;
+                userZoom = Math.max(1, Math.min(4, userZoom + delta));
+                if (cropZoomSlider) cropZoomSlider.value = userZoom;
+                isInteracting = true;
+                drawCropCanvas();
+                clearTimeout(cropViewport._wheelTimer);
+                cropViewport._wheelTimer = setTimeout(() => {
+                    isInteracting = false;
+                    drawCropCanvas();
+                }, 300);
+            }, { passive: false });
+
+            // Multi-touch pinch-to-zoom on mobile
+            cropViewport.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    isDragging = false;
+                    isInteracting = true;
+                    initialPinchDistance = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    initialPinchZoom = userZoom;
+                }
+            }, { passive: true });
+
+            cropViewport.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2 && initialPinchDistance) {
+                    const currentDist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    const factor = currentDist / initialPinchDistance;
+                    userZoom = Math.max(1, Math.min(4, initialPinchZoom * factor));
+                    if (cropZoomSlider) cropZoomSlider.value = userZoom;
+                    drawCropCanvas();
+                }
+            }, { passive: true });
+
+            cropViewport.addEventListener('touchend', (e) => {
+                if (e.touches.length < 2) {
+                    initialPinchDistance = null;
+                    isInteracting = false;
+                    drawCropCanvas();
+                }
+            }, { passive: true });
+        }
+
+        // Apply crop button -> export crisp target image
         if (applyCropBtn) {
             applyCropBtn.addEventListener('click', () => {
-                if (!currentCropper) {
+                if (!cropImg.complete || !cropImg.naturalWidth) {
                     closeCropModal();
                     return;
                 }
 
-                const opts = cropModal._cropOptions || { maxWidth: 1200, maxHeight: 1200, quality: 0.82 };
-                const canvas = currentCropper.getCroppedCanvas({
-                    maxWidth: opts.maxWidth,
-                    maxHeight: opts.maxHeight,
-                    imageSmoothingEnabled: true,
-                    imageSmoothingQuality: 'high'
-                });
+                const { frameW, frameH, baseScale } = cropCanvasLayout;
+                const totalScale = baseScale * userZoom;
 
-                if (!canvas) {
-                    showToast("Gagal memproses hasil crop!", true);
-                    return;
-                }
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = cropTargetW;
+                exportCanvas.height = cropTargetH;
+                const expCtx = exportCanvas.getContext('2d');
 
-                const croppedBase64 = canvas.toDataURL('image/jpeg', opts.quality);
-                if (typeof currentCropCallback === 'function') {
-                    currentCropCallback(croppedBase64, currentCropRawSrc);
+                // Ratio between export resolution and display frame
+                const expRatio = cropTargetW / frameW;
+
+                expCtx.translate(cropTargetW / 2, cropTargetH / 2);
+                expCtx.rotate((rotation * Math.PI) / 180);
+                expCtx.scale(expRatio * totalScale, expRatio * totalScale);
+                expCtx.translate(panX / totalScale, panY / totalScale);
+                expCtx.drawImage(cropImg, -cropImg.naturalWidth / 2, -cropImg.naturalHeight / 2);
+
+                const outputBase64 = exportCanvas.toDataURL('image/jpeg', 0.88);
+                if (typeof cropCallback === 'function') {
+                    cropCallback(outputBase64);
                 }
                 closeCropModal();
             });
         }
+
+        window.addEventListener('resize', () => {
+            if (cropModal && !cropModal.classList.contains('hidden')) {
+                updateCanvasLayout();
+                drawCropCanvas();
+            }
+        });
 
         // ================= EDIT MATCH MODAL FUNCTIONS =================
         function openEditMatchModal(matchData) {
@@ -1067,19 +1285,16 @@
                 editCurrentRawSrc = rawSrc;
                 openCropModal({
                     imageSrc: rawSrc,
-                    title: '✂️ Potong Foto Scoreboard Baru (Edit)',
-                    aspectRatio: 16 / 9,
-                    hideRatioSelector: false,
-                    isCircle: false,
-                    maxWidth: 1200,
-                    maxHeight: 1200,
-                    quality: 0.82,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Foto Scoreboard Baru',
+                    mode: 'rect',
+                    targetWidth: 1280,
+                    targetHeight: 720,
+                    onComplete: (croppedDataUrl) => {
                         editPendingImageBase64 = croppedDataUrl;
                         editMatchImgPreview.src = croppedDataUrl;
                         if (editRecropBtn) editRecropBtn.classList.remove('hidden');
                         editFileStatus.textContent = '✓ Foto baru siap diperbarui (' + file.name + ')';
-                        showToast("Foto baru berhasil dipotong & siap disimpan!");
+                        showToast("Foto baru berhasil disesuaikan & siap disimpan!");
                     }
                 });
             };
@@ -1092,14 +1307,11 @@
                 if (!srcToCrop) return;
                 openCropModal({
                     imageSrc: srcToCrop,
-                    title: '✂️ Sesuaikan / Crop Ulang Foto (Edit)',
-                    aspectRatio: 16 / 9,
-                    hideRatioSelector: false,
-                    isCircle: false,
-                    maxWidth: 1200,
-                    maxHeight: 1200,
-                    quality: 0.82,
-                    onCropComplete: (croppedDataUrl) => {
+                    title: 'Sesuaikan Ulang Foto Scoreboard',
+                    mode: 'rect',
+                    targetWidth: 1280,
+                    targetHeight: 720,
+                    onComplete: (croppedDataUrl) => {
                         editPendingImageBase64 = croppedDataUrl;
                         editMatchImgPreview.src = croppedDataUrl;
                         showToast("Foto berhasil disesuaikan!");
