@@ -79,10 +79,10 @@
             <div id="login-modal" class="modal hidden">
                 <div class="modal-content">
                     <h3>Login Khusus Admin</h3>
-                    <input type="email" id="admin-email" placeholder="Email Admin">
+                    <input type="text" id="admin-username" placeholder="Username atau Email Admin" autocomplete="username">
 
                     <div class="password-box">
-                        <input type="password" id="admin-password" placeholder="Password Admin">
+                        <input type="password" id="admin-password" placeholder="Password Admin" autocomplete="current-password">
                         <button type="button" id="toggle-password-btn" class="eye-toggle-btn"
                             title="Lihat/Sembunyikan Sandi">👁️</button>
                     </div>
@@ -96,10 +96,11 @@
 
             <!-- ================= PANEL UPLOAD KHUSUS ADMIN ================= -->
             <div id="admin-upload-panel" class="upload-box hidden">
-                <div class="admin-badge">Mode Admin Aktif</div>
+                <div class="admin-badge" id="admin-badge-status">Mode Admin Aktif</div>
                 <div class="input-group">
                     <input type="text" id="match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
                     <input type="text" id="match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
+                    <input type="text" id="match-uploader" placeholder="Nama / Nick Pengunggah (misal: RASYHZ)">
 
                     <!-- Kategori Dropdown -->
                     <select id="match-category" class="custom-select">
@@ -136,6 +137,7 @@
                 <span id="lightbox-tag" class="match-tag lightbox-tag-badge"></span>
                 <h3 id="lightbox-title"></h3>
                 <p id="lightbox-desc"></p>
+                <div id="lightbox-meta" class="lightbox-meta" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -232,9 +234,28 @@
         const savePhotoBtn = document.getElementById('save-photo-btn');
         const fileInput = document.getElementById('match-file-input');
         const fileNameLabel = document.getElementById('selected-file-name');
-        const emailInput = document.getElementById('admin-email');
+        const usernameInput = document.getElementById('admin-username');
         const passwordInput = document.getElementById('admin-password');
+        const uploaderInput = document.getElementById('match-uploader');
+        const adminBadgeStatus = document.getElementById('admin-badge-status');
         const togglePasswordBtn = document.getElementById('toggle-password-btn');
+
+        // Helper Konversi Username ke Email yang terdaftar di Firebase Auth
+        function resolveAdminEmail(input) {
+            const val = input.trim();
+            if (val.includes('@')) return val;
+            
+            const lower = val.toLowerCase();
+            const aliases = {
+                'wjwhaha5': 'wjwhaha5@gmail.com',
+                'rasyhz': 'wjwhaha5@gmail.com',
+                'rasyhze': 'wjwhaha5@gmail.com',
+                'admin': 'wjwhaha5@gmail.com'
+            };
+            if (aliases[lower]) return aliases[lower];
+            // Format default jika username lain dibuat di Firebase Auth
+            return `${lower}@gmail.com`;
+        }
 
         // Toast Helper
         function showToast(message, isError = false) {
@@ -276,7 +297,7 @@
         // Modal Helpers
         function openLoginModal() {
             loginModal.classList.remove('hidden');
-            emailInput.focus();
+            usernameInput.focus();
         }
 
         function closeLoginModal() {
@@ -295,7 +316,7 @@
         });
 
         // Submit login on Enter key
-        [emailInput, passwordInput].forEach(input => {
+        [usernameInput, passwordInput].forEach(input => {
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -321,8 +342,15 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 isAdmin = true;
-                authBtn.innerText = "Logout (" + user.email.split('@')[0] + ")";
+                const rawUsername = user.displayName || user.email.split('@')[0];
+                authBtn.innerText = "Logout (" + rawUsername + ")";
                 adminUploadPanel.classList.remove('hidden');
+                if (adminBadgeStatus) {
+                    adminBadgeStatus.innerText = "Mode Admin Aktif • Pengunggah: " + rawUsername;
+                }
+                if (uploaderInput && !uploaderInput.value) {
+                    uploaderInput.value = rawUsername;
+                }
             } else {
                 isAdmin = false;
                 authBtn.innerText = "Login Admin";
@@ -342,12 +370,13 @@
         });
 
         doLoginBtn.addEventListener('click', async () => {
-            const email = emailInput.value.trim();
+            const rawUser = usernameInput.value.trim();
             const pass = passwordInput.value;
-            if (!email || !pass) {
-                showToast("Harap isi email dan password!", true);
+            if (!rawUser || !pass) {
+                showToast("Harap isi username/email dan password!", true);
                 return;
             }
+            const email = resolveAdminEmail(rawUser);
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 closeLoginModal();
@@ -390,11 +419,16 @@
                 // Kompres gambar ke Base64 JPEG ringan (~50KB) - bebas blokir ISP / Kominfo
                 const compressedImageUrl = await compressImage(file);
 
+                // Ambil nama pengunggah: dari input khusus uploader atau otomatis dari akun yang login
+                const currentUsername = auth.currentUser ? (auth.currentUser.displayName || auth.currentUser.email.split('@')[0]) : 'Admin';
+                const uploaderName = (uploaderInput && uploaderInput.value.trim()) ? uploaderInput.value.trim() : currentUsername;
+
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
                     desc: desc || "Dokumentasi Match",
                     category: category || "Tournament",
                     imageUrl: compressedImageUrl,
+                    uploadedBy: uploaderName,
                     createdAt: new Date().getTime()
                 });
 
@@ -403,7 +437,7 @@
                 fileInput.value = '';
                 fileNameLabel.innerText = 'Belum ada file dipilih';
 
-                showToast("Match baru berhasil dipublikasikan!");
+                showToast("Match baru berhasil dipublikasikan oleh " + uploaderName + "!");
                 loadPublicGallery();
             } catch (e) {
                 showToast("Error: " + e.message, true);
@@ -452,7 +486,7 @@
                 thumbWrap.classList.add('card-thumb-wrap');
                 thumbWrap.title = 'Klik untuk perbesar preview';
                 thumbWrap.addEventListener('click', () => {
-                    openLightbox(data.imageUrl, data.title, data.desc, data.category || 'Tournament');
+                    openLightbox(data.imageUrl, data.title, data.desc, data.category || 'Tournament', data.uploadedBy, data.createdAt);
                 });
 
                 const img = document.createElement('img');
@@ -481,6 +515,27 @@
                 info.appendChild(titleEl);
                 info.appendChild(descEl);
 
+                // Info Pengunggah (Uploader) & Tanggal
+                const metaRow = document.createElement('div');
+                metaRow.classList.add('ff-card-meta');
+
+                const uploaderEl = document.createElement('span');
+                uploaderEl.classList.add('meta-uploader');
+                uploaderEl.innerHTML = `👤 <span>${data.uploadedBy || 'Admin Rasyhz'}</span>`;
+
+                const dateEl = document.createElement('span');
+                dateEl.classList.add('meta-date');
+                if (data.createdAt) {
+                    const d = new Date(data.createdAt);
+                    dateEl.textContent = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                } else {
+                    dateEl.textContent = 'Dokumentasi FF';
+                }
+
+                metaRow.appendChild(uploaderEl);
+                metaRow.appendChild(dateEl);
+                info.appendChild(metaRow);
+
                 if (isAdmin) {
                     const deleteBtn = document.createElement('button');
                     deleteBtn.classList.add('delete-btn');
@@ -507,16 +562,28 @@
         }
 
         // Lightbox Functions
-        window.openLightbox = (url, title, desc, tag) => {
+        window.openLightbox = (url, title, desc, tag, uploader, timestamp) => {
             const imgEl = document.getElementById('lightbox-img');
             const titleEl = document.getElementById('lightbox-title');
             const descEl = document.getElementById('lightbox-desc');
             const tagEl = document.getElementById('lightbox-tag');
+            const metaEl = document.getElementById('lightbox-meta');
 
             imgEl.src = url || '';
             titleEl.textContent = title || '';
             descEl.textContent = desc || '';
             tagEl.textContent = tag || 'Match';
+
+            if (metaEl) {
+                let dateStr = 'Dokumentasi FF';
+                if (timestamp) {
+                    const d = new Date(timestamp);
+                    dateStr = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                }
+                const author = uploader || 'Admin Rasyhz';
+                metaEl.innerHTML = `<span>👤 Diunggah oleh: <strong>${author}</strong></span> • <span>📅 ${dateStr}</span>`;
+                metaEl.style.display = 'inline-flex';
+            }
 
             document.getElementById('lightbox-modal').classList.remove('hidden');
         };
