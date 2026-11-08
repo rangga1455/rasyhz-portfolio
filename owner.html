@@ -16,7 +16,7 @@
         .owner-view-wrap {
             max-width: 1080px;
             margin: 30px auto;
-            padding: 0 20px;
+            padding: 0 20px 140px;
             min-height: 70vh;
         }
 
@@ -25,10 +25,11 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 16px;
             max-width: 440px;
-            margin: 60px auto;
+            margin: 50px auto;
             padding: 35px 25px;
             text-align: center;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.12);
+            box-sizing: border-box;
         }
 
         .auth-guard-icon {
@@ -68,9 +69,9 @@
             background: #0f1014;
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 8px;
-            padding: 10px 14px;
+            padding: 11px 14px;
             color: #ffffff;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             box-sizing: border-box;
         }
 
@@ -85,12 +86,13 @@
             color: #121212;
             border: none;
             border-radius: 8px;
-            padding: 11px 22px;
+            padding: 12px 22px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             cursor: pointer;
             width: 100%;
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .btn-owner-gold:hover {
@@ -111,15 +113,21 @@
             margin-bottom: 16px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 12px 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .switch-toggle-wrap:hover {
+            border-color: rgba(255, 215, 0, 0.3);
         }
 
         .switch-toggle-wrap input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             accent-color: #ffd700;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .switch-label-title {
@@ -151,9 +159,9 @@
         }
 
         .btn-action-sm {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 0.74rem;
+            font-size: 0.76rem;
             font-weight: 700;
             cursor: pointer;
             border: none;
@@ -178,6 +186,39 @@
         .btn-toggle-sm:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
+        @media (max-width: 768px) {
+            .owner-view-wrap {
+                padding: 0 12px 140px;
+                margin: 15px auto;
+            }
+
+            .auth-guard-card {
+                margin: 20px auto 40px;
+                padding: 24px 16px;
+                width: 100%;
+                border-radius: 14px;
+            }
+
+            .auth-input-group input {
+                font-size: 16px !important;
+                padding: 12px 14px;
+            }
+
+            .btn-owner-gold {
+                min-height: 46px;
+                font-size: 0.95rem;
+            }
+
+            .switch-toggle-wrap {
+                padding: 12px 12px;
+                gap: 10px;
+            }
+
+            .preview-box-outer {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -198,6 +239,7 @@
             <a href="history-ff.html">History FF</a>
             <a href="owner.html" class="nav-highlight">👑 Owner Control</a>
             <a href="links.html">Links</a>
+            <a href="index.html" class="admin-login-btn" style="text-decoration:none;">🏠 Ke Web</a>
         </nav>
     </header>
 
@@ -211,7 +253,7 @@
             <form id="owner-login-form" onsubmit="return false;">
                 <div class="auth-input-group">
                     <label for="owner-email-input">Username atau Email Owner:</label>
-                    <input type="text" id="owner-email-input" placeholder="owner@rasyhz.com" autocomplete="username" required>
+                    <input type="text" id="owner-email-input" placeholder="owner atau owner@rasyhz.com" autocomplete="username" required>
                 </div>
                 <div class="auth-input-group">
                     <label for="owner-pass-input">Password Akun:</label>
@@ -226,26 +268,26 @@
             <div class="auth-guard-icon">⛔</div>
             <h2>Akses Ditolak</h2>
             <p>Akun Anda (<strong id="denied-user-email">user@...</strong>) bukan merupakan akun <strong>Owner</strong>. Halaman ini memiliki hak akses level tertinggi dan hanya diperuntukkan bagi email yang berawalan <code>owner</code>.</p>
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <button type="button" id="btn-owner-logout-denied" class="btn-del-sm" style="flex:1; padding: 10px;">Ganti Akun / Logout</button>
-                <a href="index.html" class="btn-toggle-sm" style="flex:1; padding: 10px; text-decoration:none; text-align:center; display:inline-block; border-radius:6px;">Ke Beranda</a>
+            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                <button type="button" id="btn-owner-logout-denied" class="btn-del-sm" style="flex:1; min-width: 140px; padding: 12px;">Ganti Akun / Logout</button>
+                <a href="index.html" class="btn-toggle-sm" style="flex:1; min-width: 140px; padding: 12px; text-decoration:none; text-align:center; display:inline-flex; align-items:center; justify-content:center; border-radius:6px;">Ke Beranda</a>
             </div>
         </div>
 
         <!-- ================= MAIN DASHBOARD (OWNER ONLY) ================= -->
         <div id="owner-dashboard-content" class="hidden">
             <!-- Header Bar -->
-            <div class="owner-header-bar" style="border-radius: 12px; margin-bottom: 20px;">
+            <div class="owner-header-bar">
                 <div class="owner-title-wrap">
-                    <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge" style="width:40px;height:40px;">
+                    <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge" style="width:38px;height:38px;">
                     <div>
                         <h2>Owner Control Center</h2>
                         <span class="owner-crown-badge">👑 OWNER LEVEL ACCESS</span>
                     </div>
                 </div>
-                <div style="display:flex; align-items:center; gap: 12px;">
-                    <span style="font-size: 0.85rem; color: #a0a0b2;" id="owner-user-display">owner@...</span>
-                    <button type="button" id="btn-owner-logout" class="btn-del-sm" style="padding: 7px 14px;">Logout</button>
+                <div class="owner-header-user-side">
+                    <span class="owner-user-pill" id="owner-user-display">owner@...</span>
+                    <button type="button" id="btn-owner-logout" class="btn-del-sm" style="padding: 7px 14px; min-height: 34px;">Logout</button>
                 </div>
             </div>
 
@@ -268,39 +310,39 @@
                     <h3>📢 Kelola Pengumuman Banner Website</h3>
                     <p class="section-desc" style="margin-bottom: 16px;">Teks pengumuman ini akan otomatis tampil di bagian atas seluruh halaman website jika diaktifkan.</p>
 
-                    <div class="switch-toggle-wrap">
+                    <label class="switch-toggle-wrap" for="announcement-active-toggle" style="cursor: pointer;">
                         <input type="checkbox" id="announcement-active-toggle">
                         <div>
                             <div class="switch-label-title">Status Banner Pengumuman</div>
                             <div class="switch-label-desc">Centang untuk menampilkan banner pengumuman kepada pengunjung di seluruh web.</div>
                         </div>
-                    </div>
+                    </label>
 
                     <div class="owner-form-grid">
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tag / Kategori:</label>
-                            <input type="text" id="announcement-tag-input" placeholder="cth: INFO RESMI, PROMO, EVENT" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="text" id="announcement-tag-input" placeholder="cth: INFO RESMI, PROMO, EVENT" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Link Tombol / Tujuan (Opsional):</label>
-                            <input type="text" id="announcement-url-input" placeholder="cth: https://discord.gg/... atau joki.html" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="text" id="announcement-url-input" placeholder="cth: https://discord.gg/... atau joki.html" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div class="form-col-full">
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Isi Teks Pengumuman:</label>
-                            <textarea id="announcement-text-input" rows="3" placeholder="Tulis pengumuman resmi di sini... (cth: Open Member TEAM LXVOID Free Fire & Diskon Joki Genshin 20% Minggu Ini!)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; resize:vertical;"></textarea>
+                            <textarea id="announcement-text-input" rows="3" placeholder="Tulis pengumuman resmi di sini... (cth: Open Member TEAM LXVOID Free Fire & Diskon Joki Genshin 20% Minggu Ini!)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
                         </div>
                     </div>
 
-                    <div style="margin-top: 20px;">
-                        <button type="button" id="btn-save-announcement" class="btn-owner-gold" style="width:auto; padding:10px 24px;">💾 Simpan Pengumuman</button>
+                    <div style="margin-top: 18px;">
+                        <button type="button" id="btn-save-announcement" class="btn-owner-gold" style="padding:12px 24px;">💾 Simpan Pengumuman</button>
                     </div>
 
                     <div class="preview-box-outer">
                         <div class="preview-box-label">Pratinjau Banner Langsung (Live Preview):</div>
-                        <div id="announcement-preview-bar" class="announcement-bar" style="border-radius: 8px;">
-                            <div class="announcement-main">
+                        <div id="announcement-preview-bar" class="announcement-bar" style="border-radius: 8px; flex-wrap: wrap;">
+                            <div class="announcement-main" style="white-space: normal;">
                                 <span class="announcement-tag" id="prev-tag">INFO RESMI</span>
-                                <span class="announcement-text" id="prev-text">Pratinjau isi pengumuman akan muncul di sini...</span>
+                                <span class="announcement-text" id="prev-text" style="white-space: normal; word-break: break-word;">Pratinjau isi pengumuman akan muncul di sini...</span>
                             </div>
                         </div>
                     </div>
@@ -316,27 +358,27 @@
                     <div class="owner-form-grid">
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Kode Kupon (Huruf Besar):</label>
-                            <input type="text" id="promo-code-input" placeholder="misal: LXVOID20" style="text-transform:uppercase; width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; font-weight:700; letter-spacing:1px;">
+                            <input type="text" id="promo-code-input" placeholder="misal: LXVOID20" style="text-transform:uppercase; width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; font-weight:700; letter-spacing:1px;">
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Tipe Diskon:</label>
-                            <select id="promo-type-select" class="custom-select" style="width:100%; height:42px;">
+                            <select id="promo-type-select" class="custom-select" style="width:100%; min-height:44px;">
                                 <option value="percent">Persentase (%)</option>
                                 <option value="fixed">Potongan Tetap (Rp)</option>
                             </select>
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nilai Diskon:</label>
-                            <input type="number" id="promo-value-input" placeholder="cth: 20 (untuk 20%) atau 15000" min="1" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="number" id="promo-value-input" placeholder="cth: 20 (untuk 20%) atau 15000" min="1" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Minimal Belanja (Rp):</label>
-                            <input type="number" id="promo-min-input" placeholder="0 jika tanpa batas" value="0" min="0" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="number" id="promo-min-input" placeholder="0 jika tanpa batas" value="0" min="0" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <button type="button" id="btn-save-promo" class="btn-owner-gold" style="width:auto; padding:10px 24px;">+ Simpan Kode Promo</button>
+                        <button type="button" id="btn-save-promo" class="btn-owner-gold" style="padding:12px 24px;">+ Simpan Kode Promo</button>
                     </div>
                 </div>
 
@@ -372,15 +414,15 @@
                     <div class="owner-form-grid">
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Nama Pelanggan (In-Game / Panggilan):</label>
-                            <input type="text" id="testi-author-input" placeholder="cth: Arya (AR 58)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="text" id="testi-author-input" placeholder="cth: Arya (AR 58)" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Layanan yang Dipesan:</label>
-                            <input type="text" id="testi-service-input" placeholder="cth: 100% Explore Natlan + All Pyroculus" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box;">
+                            <input type="text" id="testi-service-input" placeholder="cth: 100% Explore Natlan + All Pyroculus" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box;">
                         </div>
                         <div>
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Rating Bintang:</label>
-                            <select id="testi-stars-select" class="custom-select" style="width:100%; height:42px;">
+                            <select id="testi-stars-select" class="custom-select" style="width:100%; min-height:44px;">
                                 <option value="5">⭐⭐⭐⭐⭐ (5 / 5 Sangat Puas)</option>
                                 <option value="4">⭐⭐⭐⭐ (4 / 5 Puas)</option>
                                 <option value="3">⭐⭐⭐ (3 / 5 Cukup)</option>
@@ -388,19 +430,19 @@
                         </div>
                         <div class="form-col-full">
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Ulasan / Review Pelanggan:</label>
-                            <textarea id="testi-body-input" rows="3" placeholder="cth: Pengerjaan super cepat, akun aman sentosa tanpa kendala, seller ramah & fast respond. Recomended banget joki di LXVOID!" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px; color:#fff; font-size:0.85rem; box-sizing:border-box; resize:vertical;"></textarea>
+                            <textarea id="testi-body-input" rows="3" placeholder="cth: Pengerjaan super cepat, akun aman sentosa tanpa kendala, seller ramah & fast respond. Recomended banget joki di LXVOID!" style="width:100%; background:#0f1014; border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:10px 12px; color:#fff; box-sizing:border-box; resize:vertical;"></textarea>
                         </div>
                         <div class="form-col-full">
                             <label style="font-size:0.8rem; font-weight:700; color:#d0d0e0; display:block; margin-bottom:6px;">Foto Screenshot Bukti Chat / Hasil (Opsional):</label>
-                            <input type="file" id="testi-proof-file" accept="image/*" style="display:block; color:#a0a0b0; font-size:0.82rem;">
-                            <div id="testi-preview-wrap" class="hidden" style="margin-top:10px; max-width:180px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.2);">
+                            <input type="file" id="testi-proof-file" accept="image/*" style="display:block; color:#a0a0b0; font-size:0.85rem; padding:6px 0;">
+                            <div id="testi-preview-wrap" class="hidden" style="margin-top:10px; max-width:200px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.2);">
                                 <img id="testi-preview-img" src="" alt="Bukti" style="width:100%; display:block;">
                             </div>
                         </div>
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <button type="button" id="btn-save-testi" class="btn-owner-gold" style="width:auto; padding:10px 24px;">+ Publikasikan Testimoni</button>
+                        <button type="button" id="btn-save-testi" class="btn-owner-gold" style="padding:12px 24px;">+ Publikasikan Testimoni</button>
                     </div>
                 </div>
 
@@ -421,6 +463,44 @@
             <p class="footer-copyright">© 2026 LXVOID COMMUNITY. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- ================= ANDROID BOTTOM NAVIGATION BAR ================= -->
+    <nav class="mobile-bottom-nav" aria-label="Navigasi Bawah Mobile">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            <span>Home</span>
+        </a>
+        <a href="presets.html" class="nav-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
+            </svg>
+            <span>Presets</span>
+        </a>
+        <a href="joki.html" class="nav-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+            </svg>
+            <span>Joki</span>
+        </a>
+        <a href="history-ff.html" class="nav-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c1.98-.44 3.53-2.07 3.61-4.06C19.08 11.63 21 9.55 21 7V5c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
+            </svg>
+            <span>History FF</span>
+        </a>
+        <a href="owner.html" class="nav-item active">
+            <span style="font-size: 1.25rem; line-height: 1;">👑</span>
+            <span>Owner</span>
+        </a>
+        <a href="links.html" class="nav-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+            </svg>
+            <span>Links</span>
+        </a>
+    </nav>
 
     <!-- ================= FIREBASE & OWNER SCRIPT ================= -->
     <script type="module">
@@ -527,9 +607,9 @@
 
         // Login Handler
         btnDoOwnerLogin.addEventListener('click', async () => {
-            const identifier = ownerEmailInput.value.trim();
+            const rawIdentifier = ownerEmailInput.value.trim();
             const pass = ownerPassInput.value;
-            if (!identifier || !pass) {
+            if (!rawIdentifier || !pass) {
                 showToast("Harap isi username/email dan password Owner!", true);
                 return;
             }
@@ -538,9 +618,31 @@
             btnDoOwnerLogin.disabled = true;
 
             try {
-                let targetEmail = identifier;
-                if (!identifier.includes('@')) {
-                    targetEmail = `${identifier.toLowerCase()}@rasyhz.com`;
+                let targetEmail = rawIdentifier.toLowerCase();
+
+                // Cek pencocokan username di Firestore admin_profiles
+                if (!targetEmail.includes('@')) {
+                    try {
+                        const profilesSnap = await getDocs(collection(db, "admin_profiles"));
+                        profilesSnap.forEach(docSnap => {
+                            const data = docSnap.data();
+                            if (data.username && data.username.trim().toLowerCase() === targetEmail) {
+                                targetEmail = data.email.toLowerCase();
+                            }
+                            if (!targetEmail.includes('@') && data.email) {
+                                const prefix = data.email.split('@')[0].toLowerCase();
+                                if (prefix === targetEmail) {
+                                    targetEmail = data.email.toLowerCase();
+                                }
+                            }
+                        });
+                    } catch (e) {
+                        console.warn("Lookup admin profile:", e);
+                    }
+                }
+
+                if (!targetEmail.includes('@')) {
+                    targetEmail = `${rawIdentifier.toLowerCase()}@rasyhz.com`;
                 }
 
                 if (!isOwnerEmail(targetEmail)) {
@@ -553,7 +655,13 @@
                 await signInWithEmailAndPassword(auth, targetEmail, pass);
                 showToast("Selamat datang di Owner Control Center 👑!");
             } catch (err) {
-                showToast("Login gagal: " + (err.message || "Email atau sandi salah"), true);
+                let errMsg = err.code || err.message;
+                if (errMsg.includes('auth/invalid-credential') || errMsg.includes('auth/wrong-password') || errMsg.includes('auth/user-not-found')) {
+                    errMsg = "Email/Username atau sandi salah!";
+                } else if (errMsg.includes('auth/invalid-email')) {
+                    errMsg = "Format email/username tidak valid!";
+                }
+                showToast("Login gagal: " + errMsg, true);
             } finally {
                 btnDoOwnerLogin.innerText = "Masuk sebagai Owner 👑";
                 btnDoOwnerLogin.disabled = false;
@@ -652,11 +760,11 @@
                     const statusText = p.active ? 'Aktif' : 'Nonaktif';
 
                     tr.innerHTML = `
-                        <td><strong style="color:#00adb5; letter-spacing:1px;">${p.code}</strong></td>
-                        <td>${valStr}</td>
-                        <td>${minStr}</td>
-                        <td><span class="owner-status-pill ${statusClass}">${statusText}</span></td>
-                        <td>
+                        <td data-label="Kode Kupon"><strong style="color:#00adb5; letter-spacing:1px; font-size:0.95rem;">${p.code}</strong></td>
+                        <td data-label="Tipe & Nilai">${valStr}</td>
+                        <td data-label="Min. Belanja">${minStr}</td>
+                        <td data-label="Status"><span class="owner-status-pill ${statusClass}">${statusText}</span></td>
+                        <td data-label="Aksi">
                             <button type="button" class="btn-action-sm btn-toggle-sm" data-id="${docSnap.id}" data-active="${p.active}">${p.active ? 'Nonaktifkan' : 'Aktifkan'}</button>
                             <button type="button" class="btn-action-sm btn-del-sm" data-id="${docSnap.id}" data-code="${p.code}">Hapus</button>
                         </td>
@@ -738,11 +846,37 @@
         testiProofFile.addEventListener('change', () => {
             const file = testiProofFile.files[0];
             if (!file) return;
+
+            // Optimasi Android: Kompres foto galeri/kamera HP ke max 800px agar di bawah 80KB (tidak kena limit Firestore)
             const reader = new FileReader();
             reader.onload = (e) => {
-                pendingTestiImageBase64 = e.target.result;
-                testiPreviewImg.src = e.target.result;
-                testiPreviewWrap.classList.remove('hidden');
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height * maxDim) / width);
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width * maxDim) / height);
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    pendingTestiImageBase64 = canvas.toDataURL('image/jpeg', 0.78);
+                    testiPreviewImg.src = pendingTestiImageBase64;
+                    testiPreviewWrap.classList.remove('hidden');
+                };
+                img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         });
