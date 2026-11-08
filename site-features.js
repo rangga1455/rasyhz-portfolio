@@ -193,7 +193,14 @@
         player.id = 'floating-music-player';
         player.title = 'Putar Musik Lo-Fi Trending LXVOID';
 
+        // Check if user previously minimized the player
+        const isMinimized = localStorage.getItem('lxvoid_lofi_minimized') === '1';
+        if (isMinimized) {
+            player.classList.add('is-mini');
+        }
+
         player.innerHTML = `
+            <div class="music-mini-icon" id="music-mini-icon" title="Ketuk untuk perbesar pemutar musik">🎵</div>
             <div class="music-btn-group">
                 <button type="button" class="music-play-btn" id="music-toggle-btn" aria-label="Play/Pause BGM" title="Putar / Jeda Musik">▶</button>
                 <button type="button" class="music-next-btn" id="music-next-btn" aria-label="Lagu Selanjutnya" title="Ganti Lagu Lo-Fi Selanjutnya">⏭</button>
@@ -205,6 +212,7 @@
                     <div class="music-bars"><span></span><span></span><span></span></div>
                 </span>
             </div>
+            <button type="button" class="music-minimize-btn" id="music-minimize-btn" title="Kecilkan pemutar musik" aria-label="Kecilkan">✕</button>
         `;
 
         document.body.appendChild(player);
@@ -212,6 +220,8 @@
         const playBtn = player.querySelector('#music-toggle-btn');
         const nextBtn = player.querySelector('#music-next-btn');
         const metaInfo = player.querySelector('#music-meta-info');
+        const minBtn = player.querySelector('#music-minimize-btn');
+        const miniIcon = player.querySelector('#music-mini-icon');
 
         playBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -226,6 +236,19 @@
         metaInfo.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleMusic();
+        });
+
+        minBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            player.classList.add('is-mini');
+            localStorage.setItem('lxvoid_lofi_minimized', '1');
+        });
+
+        player.addEventListener('click', () => {
+            if (player.classList.contains('is-mini')) {
+                player.classList.remove('is-mini');
+                localStorage.setItem('lxvoid_lofi_minimized', '0');
+            }
         });
     }
 
