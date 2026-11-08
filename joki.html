@@ -149,7 +149,7 @@
                         </div>
                         <p class="region-tagline">Dark Side of the Moon, Lunar Highlands, dan Samudra Pasang Moontide Sea.</p>
                         <div class="region-meta-tags">
-                            <span>Three Moons Lore</span>
+                            <span>Lunoculus x60</span>
                             <span>Lunar Highlands</span>
                             <span>Moontide Sea</span>
                         </div>
@@ -174,7 +174,7 @@
                         </div>
                         <p class="region-tagline">Ashveil Peak, Dunanna Pit, Hiisi Island, Lempo Isle, Paha Isle, Voidsea Outlook, Wavechaser Plain.</p>
                         <div class="region-meta-tags">
-                            <span>Kuuvahki Energy</span>
+                            <span>Kuuvahkiculus x75</span>
                             <span>7 Frontier Areas</span>
                             <span>v6.0 - v6.6</span>
                         </div>
@@ -370,7 +370,7 @@
                         <h3 class="drawer-region-title" id="drawer-region-title">Pilih Daerah di Snezhnaya yang Ingin Dijoki</h3>
                         <p class="drawer-region-subtitle" id="drawer-region-desc">Centang satu atau beberapa daerah di bawah. Harga estimasi dan rincian pesanan WhatsApp otomatis dihitung.</p>
                     </div>
-                    <div class="drawer-header-actions">
+                    <div class="drawer-header-actions" id="drawer-header-actions">
                         <button type="button" class="btn-drawer-action select-all-btn" onclick="toggleSelectAllAreas()">
                             ✓ Pilih Semua Daerah
                         </button>
@@ -390,7 +390,7 @@
                         </label>
                         <label class="service-pill-option">
                             <input type="radio" name="global-service-type" value="oculus_only" onchange="changeServiceType('oculus_only')">
-                            <span>✨ Kumpul Oculus Saja</span>
+                            <span>✨ Kumpul Oculus (Per Biji / Region)</span>
                         </label>
                         <label class="service-pill-option">
                             <input type="radio" name="global-service-type" value="waypoint_only" onchange="changeServiceType('waypoint_only')">
@@ -403,9 +403,14 @@
                     </div>
                 </div>
 
-                <!-- Container Daftar Daerah Dinamis -->
+                <!-- Container Daftar Daerah Dinamis (Explore, Waypoint, Quest) -->
                 <div class="area-checkbox-grid" id="area-checkbox-grid">
                     <!-- Diisi lewat JavaScript sesuai Region yang dipilih -->
+                </div>
+
+                <!-- Container Kalkulator Oculus (Khusus saat Oculus dipilih) -->
+                <div class="oculus-configurator-box hidden" id="oculus-configurator-box">
+                    <!-- Diisi lewat JavaScript -->
                 </div>
 
                 <!-- Sticky / Floating Order Checkout Summary -->
@@ -675,17 +680,122 @@
             }
         };
 
+        // ================= MASTER DATA OCULUS PER REGION (RESMI GENSHIN IMPACT) =================
+        const oculusDatabase = {
+            'snezhnaya': {
+                name: 'Cryoculus',
+                regionKey: 'snezhnaya',
+                regionName: 'Snezhnaya (Negeri Cryo v7.2)',
+                badge: '❄️ Snezhnaya',
+                icon: '❄️',
+                max: 180,
+                pricePerItem: 400,
+                packagePrice: 65000,
+                desc: 'Oculus Cryo tersebar di seluruh padang es, benteng Fatui, dan puncak Fellfrost Peak.'
+            },
+            'frostmoon': {
+                name: 'Lunoculus',
+                regionKey: 'frostmoon',
+                regionName: 'Frost Moon (Three Moons Realm)',
+                badge: '🌙 Frost Moon',
+                icon: '🌙',
+                max: 60,
+                pricePerItem: 400,
+                packagePrice: 22000,
+                desc: 'Oculus cahaya Three Moons di Dark Side of the Moon, Lunar Highlands, dan Moontide Sea.'
+            },
+            'nodkrai': {
+                name: 'Kuuvahkiculus',
+                regionKey: 'nodkrai',
+                regionName: 'Nod-Krai (Autonomous Region)',
+                badge: '✨ Nod-Krai',
+                icon: '✨',
+                max: 75,
+                pricePerItem: 400,
+                packagePrice: 28000,
+                desc: 'Oculus energi Kuuvahki di 7 kepulauan dan kawasan perbatasan selatan Snezhnaya.'
+            },
+            'natlan': {
+                name: 'Pyroculus',
+                regionKey: 'natlan',
+                regionName: 'Natlan (Pyro Nation)',
+                badge: '🔥 Natlan',
+                icon: '🔥',
+                max: 108,
+                pricePerItem: 450,
+                packagePrice: 45000,
+                desc: 'Oculus Api tersebar di tebing vulkanik, 6 suku Saurian purba, dan Reruntuhan Ochkanatlan.'
+            },
+            'fontaine': {
+                name: 'Hydroculus',
+                regionKey: 'fontaine',
+                regionName: 'Fontaine (Hydro Nation)',
+                badge: '💧 Fontaine',
+                icon: '💧',
+                max: 216,
+                pricePerItem: 380,
+                packagePrice: 75000,
+                desc: 'Mencakup seluruh daratan, kanal air terjun, hingga kedalaman Laut Kuno Remuria.'
+            },
+            'sumeru': {
+                name: 'Dendroculus',
+                regionKey: 'sumeru',
+                regionName: 'Sumeru (Dendro Nation)',
+                badge: '🌿 Sumeru',
+                icon: '🌿',
+                max: 271,
+                pricePerItem: 350,
+                packagePrice: 85000,
+                desc: 'Tersebar di hutan hujan lebat Vanarana hingga gurun piramida luas Raja Deshret.'
+            },
+            'inazuma': {
+                name: 'Electroculus',
+                regionKey: 'inazuma',
+                regionName: 'Inazuma (Electro Nation)',
+                badge: '⚡ Inazuma',
+                icon: '⚡',
+                max: 181,
+                pricePerItem: 400,
+                packagePrice: 65000,
+                desc: 'Tersebar di 6 kepulauan berbadai petir Inazuma (Narukami s/d Tsurumi & Enkanomiya).'
+            },
+            'liyue': {
+                name: 'Geoculus',
+                regionKey: 'liyue',
+                regionName: 'Liyue (Geo Nation)',
+                badge: '🪨 Liyue',
+                icon: '🪨',
+                max: 131,
+                pricePerItem: 350,
+                packagePrice: 40000,
+                desc: 'Persembahan Statue of The Seven di Liyue untuk stamina maksimal & Nine Pillars.'
+            },
+            'mondstadt': {
+                name: 'Anemoculus',
+                regionKey: 'mondstadt',
+                regionName: 'Mondstadt (Anemo Nation)',
+                badge: '🍃 Mondstadt',
+                icon: '🍃',
+                max: 66,
+                pricePerItem: 350,
+                packagePrice: 20000,
+                desc: 'Persembahan awal Barbatos untuk stamina maksimal karakter petualang (+70 Stamina).'
+            }
+        };
+
         // State Saat Ini
         let currentSelectedRegion = 'snezhnaya';
         let currentServiceType = 'explore_100';
         let selectedAreaIds = new Set();
+        let selectedOculusRegion = 'snezhnaya';
+        let selectedOculusQty = 180;
 
-        // Multiplier harga per tipe layanan
+        // Multiplier harga per tipe layanan non-oculus
         const serviceMultipliers = {
             'explore_100': { mult: 1.0, label: 'Full Explore 100% (All Chest + Oculus)' },
-            'oculus_only': { mult: 0.6, label: 'Kumpul Oculus Daerah Terpilih' },
-            'waypoint_only': { mult: 0.4, label: 'Buka Seluruh Waypoint & Statue Saja' },
-            'quest_only': { mult: 0.8, label: 'World Quest Pembuka Area' }
+            'oculus_only': { mult: 0.6, label: 'Kumpul Oculus Saja (Per Biji / Region)' },
+            'waypoint_only': { mult: 0.35, label: 'Buka Teleport & Statue Saja' },
+            'quest_only': { mult: 0.75, label: 'World Quest Pembuka Area' }
         };
 
         // Fungsi Pilih Region dari Kartu Utama
@@ -707,11 +817,22 @@
             if (!data) return;
 
             document.getElementById('drawer-region-badge').textContent = data.badge;
-            document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
-            document.getElementById('drawer-region-desc').textContent = data.desc;
 
-            // Render Daftar Checkbox Daerah
-            renderAreaList(data.areas);
+            if (currentServiceType === 'oculus_only') {
+                if (regionId !== 'endgame' && oculusDatabase[regionId]) {
+                    selectedOculusRegion = regionId;
+                    selectedOculusQty = oculusDatabase[regionId].max;
+                }
+                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${oculus.regionName}`;
+                document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji), atau ambil paket borongan full region.`;
+                renderOculusConfigurator();
+            } else {
+                document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
+                document.getElementById('drawer-region-desc').textContent = data.desc;
+                renderAreaList(data.areas);
+            }
+
             updateCheckoutSummary();
 
             // Scroll mulus ke drawer
@@ -719,9 +840,10 @@
             drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Render List Daerah
+        // Render List Daerah (Explore / Waypoint / Quest)
         function renderAreaList(areas) {
             const container = document.getElementById('area-checkbox-grid');
+            if (!container) return;
             container.innerHTML = '';
 
             areas.forEach(area => {
@@ -755,6 +877,167 @@
                 `;
                 container.appendChild(item);
             });
+        }
+
+        // Render Kalkulator Oculus Interaktif (Bisa Atur Jumlah & Max Sesuai Region)
+        function renderOculusConfigurator() {
+            const container = document.getElementById('oculus-configurator-box');
+            if (!container) return;
+
+            const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+            if (selectedOculusQty > oculus.max) selectedOculusQty = oculus.max;
+            if (selectedOculusQty < 1) selectedOculusQty = 1;
+
+            const isMax = selectedOculusQty === oculus.max;
+            const singleTotal = selectedOculusQty * oculus.pricePerItem;
+            const finalPrice = isMax ? oculus.packagePrice : singleTotal;
+            const savings = isMax ? Math.max(0, singleTotal - oculus.packagePrice) : 0;
+
+            // Region pills list
+            let regionPillsHtml = '';
+            for (const [key, item] of Object.entries(oculusDatabase)) {
+                const activeCls = key === selectedOculusRegion ? 'active' : '';
+                regionPillsHtml += `
+                    <button type="button" class="oculus-chip-btn ${activeCls}" onclick="switchOculusRegion('${key}')">
+                        ${item.badge} (${item.max})
+                    </button>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="oculus-region-chips-wrapper">
+                    <span class="oculus-chips-label">Pilih Region Oculus:</span>
+                    <div class="oculus-region-chips">
+                        ${regionPillsHtml}
+                    </div>
+                </div>
+
+                <div class="oculus-card-hero">
+                    <div class="oculus-hero-top">
+                        <div class="oculus-title-col">
+                            <div class="oculus-icon-orb">${oculus.icon}</div>
+                            <div class="oculus-hero-text">
+                                <h4>${oculus.name} - ${oculus.regionName}</h4>
+                                <p>${oculus.desc}</p>
+                            </div>
+                        </div>
+                        <div class="oculus-rate-badges">
+                            <div class="oculus-rate-badge">
+                                <span>Harga Satuan:</span> <strong>Rp ${oculus.pricePerItem.toLocaleString('id-ID')} / biji</strong>
+                            </div>
+                            <div class="oculus-rate-badge">
+                                <span>Paket All (Max ${oculus.max}):</span> <strong>Rp ${oculus.packagePrice.toLocaleString('id-ID')}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oculus-controls-section">
+                        <label class="oculus-controls-label" for="oculus-qty-input">
+                            Atur Jumlah ${oculus.name} yang Ingin Diambil (Maksimal: ${oculus.max} Biji):
+                        </label>
+                        
+                        <div class="oculus-stepper-row">
+                            <button type="button" class="btn-oculus-step" onclick="stepOculusQty(-5)" title="Kurang 5">-5</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepOculusQty(-1)" title="Kurang 1">-</button>
+                            
+                            <div class="oculus-display-box">
+                                <input type="number" id="oculus-qty-input" class="oculus-number-input" 
+                                       min="1" max="${oculus.max}" value="${selectedOculusQty}"
+                                       oninput="onOculusQtyChange(this.value)">
+                                <span class="oculus-max-label">/ ${oculus.max} Biji</span>
+                            </div>
+
+                            <button type="button" class="btn-oculus-step" onclick="stepOculusQty(1)" title="Tambah 1">+</button>
+                            <button type="button" class="btn-oculus-step" onclick="stepOculusQty(5)" title="Tambah 5">+5</button>
+                        </div>
+
+                        <input type="range" id="oculus-qty-slider" class="oculus-range-slider"
+                               min="1" max="${oculus.max}" value="${selectedOculusQty}"
+                               oninput="onOculusQtyChange(this.value)">
+
+                        <div class="oculus-presets-row">
+                            <button type="button" class="btn-oculus-preset" onclick="setOculusQty(10)">+10 Biji</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setOculusQty(25)">+25 Biji</button>
+                            <button type="button" class="btn-oculus-preset" onclick="setOculusQty(50)">+50 Biji</button>
+                            ${oculus.max > 120 ? `<button type="button" class="btn-oculus-preset" onclick="setOculusQty(100)">+100 Biji</button>` : ''}
+                            <button type="button" class="btn-oculus-preset" onclick="setOculusQty(Math.round(${oculus.max} / 2))">Setengah (${Math.round(oculus.max / 2)} Biji)</button>
+                            <button type="button" class="btn-oculus-preset max-preset" onclick="setOculusQty(${oculus.max})">
+                                ✨ Ambil Semua (${oculus.max} Biji Max)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="oculus-calc-summary-box">
+                        <div class="oculus-calc-details">
+                            <span class="oculus-calc-formula">
+                                ${isMax 
+                                    ? `🎁 Paket Borongan Lengkap Full ${oculus.max} ${oculus.name}` 
+                                    : `Kalkulasi: ${selectedOculusQty} Biji × Rp ${oculus.pricePerItem.toLocaleString('id-ID')}`
+                                }
+                            </span>
+                            <span class="oculus-calc-hint">
+                                ${isMax && savings > 0 
+                                    ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding harga satuan!` 
+                                    : `Bisa request titik sisa oculus yang belum kamu ambil di in-game.`
+                                }
+                            </span>
+                        </div>
+                        <div class="oculus-calc-price">
+                            Rp ${finalPrice.toLocaleString('id-ID')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateCheckoutSummary();
+        }
+
+        // Switch Region Oculus Langsung dari Chip
+        function switchOculusRegion(regionKey) {
+            if (!oculusDatabase[regionKey]) return;
+            selectedOculusRegion = regionKey;
+            currentSelectedRegion = regionKey;
+            selectedOculusQty = oculusDatabase[regionKey].max;
+
+            // Highlight top card
+            document.querySelectorAll('.region-overview-card').forEach(card => {
+                if (card.getAttribute('data-region-id') === regionKey) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Update drawer header
+            const data = regionDatabase[regionKey];
+            if (data) {
+                document.getElementById('drawer-region-badge').textContent = data.badge;
+                document.getElementById('drawer-region-title').textContent = `Kumpul ${oculusDatabase[regionKey].name} - ${data.name}`;
+                document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculusDatabase[regionKey].name} yang ingin dijoki (1 s/d ${oculusDatabase[regionKey].max} biji), atau ambil paket borongan full region.`;
+            }
+
+            renderOculusConfigurator();
+        }
+
+        // Set Jumlah Oculus
+        function setOculusQty(val) {
+            const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+            let num = parseInt(val, 10);
+            if (isNaN(num)) num = 1;
+            if (num > oculus.max) num = oculus.max;
+            if (num < 1) num = 1;
+            selectedOculusQty = num;
+            renderOculusConfigurator();
+        }
+
+        // Step Jumlah Oculus (+1, -1, +5, -5)
+        function stepOculusQty(delta) {
+            setOculusQty(selectedOculusQty + delta);
+        }
+
+        // Event Input & Slider Oculus
+        function onOculusQtyChange(val) {
+            setOculusQty(val);
         }
 
         // Toggle Centang Daerah
@@ -809,8 +1092,42 @@
                 }
             });
 
-            const areas = regionDatabase[currentSelectedRegion]?.areas || [];
-            renderAreaList(areas);
+            const areaGrid = document.getElementById('area-checkbox-grid');
+            const oculusBox = document.getElementById('oculus-configurator-box');
+            const drawerActions = document.getElementById('drawer-header-actions');
+
+            if (newType === 'oculus_only') {
+                if (currentSelectedRegion === 'endgame') {
+                    currentSelectedRegion = selectedOculusRegion || 'snezhnaya';
+                } else {
+                    selectedOculusRegion = currentSelectedRegion;
+                }
+
+                if (areaGrid) areaGrid.classList.add('hidden');
+                if (oculusBox) oculusBox.classList.remove('hidden');
+                if (drawerActions) drawerActions.classList.add('hidden');
+
+                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                selectedOculusQty = oculus.max;
+
+                document.getElementById('drawer-region-title').textContent = `Kumpul ${oculus.name} - ${oculus.regionName}`;
+                document.getElementById('drawer-region-desc').textContent = `Atur jumlah ${oculus.name} yang ingin dijoki (1 s/d ${oculus.max} biji), atau ambil paket borongan full region.`;
+
+                renderOculusConfigurator();
+            } else {
+                if (areaGrid) areaGrid.classList.remove('hidden');
+                if (oculusBox) oculusBox.classList.add('hidden');
+                if (drawerActions) drawerActions.classList.remove('hidden');
+
+                const data = regionDatabase[currentSelectedRegion];
+                if (data) {
+                    document.getElementById('drawer-region-badge').textContent = data.badge;
+                    document.getElementById('drawer-region-title').textContent = `Pilih Daerah di ${data.name}`;
+                    document.getElementById('drawer-region-desc').textContent = data.desc;
+                    renderAreaList(data.areas);
+                }
+            }
+
             updateCheckoutSummary();
         }
 
@@ -818,8 +1135,25 @@
         function updateCheckoutSummary() {
             const countEl = document.getElementById('summary-selected-count');
             const priceEl = document.getElementById('summary-total-price');
-            const areas = regionDatabase[currentSelectedRegion]?.areas || [];
 
+            if (currentServiceType === 'oculus_only') {
+                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                const isMax = selectedOculusQty === oculus.max;
+                const singleTotal = selectedOculusQty * oculus.pricePerItem;
+                const finalPrice = isMax ? oculus.packagePrice : singleTotal;
+
+                if (isMax) {
+                    countEl.innerHTML = `${selectedOculusQty} / ${oculus.max} ${oculus.name} <span class="bundle-badge">🎁 Paket Full Region</span>`;
+                } else {
+                    countEl.textContent = `${selectedOculusQty} / ${oculus.max} ${oculus.name}`;
+                }
+
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+                priceEl.dataset.numericTotal = finalPrice;
+                return;
+            }
+
+            const areas = regionDatabase[currentSelectedRegion]?.areas || [];
             let total = 0;
             let count = 0;
 
@@ -844,21 +1178,30 @@
 
         // Kirim Order ke WhatsApp
         function sendCustomJokiOrderWA() {
-            const count = selectedAreaIds.size;
-            if (count === 0) {
-                alert('Silakan centang minimal 1 daerah di atas yang ingin Anda joki.');
-                return;
-            }
-
-            const region = regionDatabase[currentSelectedRegion];
-            const areas = region.areas.filter(a => selectedAreaIds.has(a.id));
-            const total = document.getElementById('summary-total-price').textContent;
-            const service = serviceMultipliers[currentServiceType].label;
-
-            let areaListText = areas.map((a, i) => `${i + 1}. ${a.name}`).join('\n');
-
             const waNumber = '6285397460252';
-            const message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📍 Region: ${region.name}\n⚡ Layanan: ${service}\n\n🗺️ Daerah yang Dipilih (${count} daerah):\n${areaListText}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            const total = document.getElementById('summary-total-price').textContent;
+            let message = '';
+
+            if (currentServiceType === 'oculus_only') {
+                const oculus = oculusDatabase[selectedOculusRegion] || oculusDatabase['snezhnaya'];
+                const isMax = selectedOculusQty === oculus.max;
+                const packageNote = isMax ? ' (Paket Borongan Full Region - Diskon Hemat)' : '';
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n✨ Layanan: Kumpul Oculus (Per Region / Satuan)\n📍 Region: ${oculus.regionName}\n🔮 Jenis Oculus: ${oculus.name}\n🔢 Jumlah yang Diambil: ${selectedOculusQty} dari total ${oculus.max} Biji${packageNote}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            } else {
+                const count = selectedAreaIds.size;
+                if (count === 0) {
+                    alert('Silakan centang minimal 1 daerah di atas yang ingin Anda joki.');
+                    return;
+                }
+
+                const region = regionDatabase[currentSelectedRegion];
+                const areas = region.areas.filter(a => selectedAreaIds.has(a.id));
+                const service = serviceMultipliers[currentServiceType].label;
+                const areaListText = areas.map((a, i) => `${i + 1}. ${a.name}`).join('\n');
+
+                message = `Halo Bang Rasyhz, saya mau pesan Joki Genshin Impact:\n\n📍 Region: ${region.name}\n⚡ Layanan: ${service}\n\n🗺️ Daerah yang Dipilih (${count} daerah):\n${areaListText}\n\n💰 Total Estimasi: ${total}\n\nMohon info ketersediaan slot joki & rekening pembayarannya ya Bang. Terima kasih!`;
+            }
 
             // Deteksi perangkat: PC / Laptop langsung buka WhatsApp Web agar emoji tidak rusak akibat bug redirect wa.me
             const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);

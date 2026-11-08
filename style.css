@@ -3253,6 +3253,298 @@ button:active,
     transform: translateY(-2px);
 }
 
+/* ================= OCULUS CONFIGURATOR (PER REGION & PER OCULUS) ================= */
+.oculus-configurator-box {
+    background: #111216;
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.oculus-region-chips-wrapper {
+    margin-bottom: 20px;
+}
+
+.oculus-chips-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #8c8c9e;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.oculus-region-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
+}
+
+.oculus-chip-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b0b0be;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.oculus-chip-btn:hover {
+    border-color: #00adb5;
+    color: #ffffff;
+    background: rgba(0, 173, 181, 0.1);
+}
+
+.oculus-chip-btn.active {
+    background: rgba(0, 173, 181, 0.22);
+    border-color: #00adb5;
+    color: #00adb5;
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.25);
+}
+
+.oculus-card-hero {
+    background: #16171d;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.oculus-hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.oculus-title-col {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.oculus-icon-orb {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(0, 173, 181, 0.15);
+    border: 2px solid #00adb5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 0 14px rgba(0, 173, 181, 0.25);
+    flex-shrink: 0;
+}
+
+.oculus-hero-text h4 {
+    margin: 0 0 3px 0;
+    font-size: 1.15rem;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.oculus-hero-text p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #8c8c9e;
+}
+
+.oculus-rate-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.oculus-rate-badge {
+    background: rgba(0, 173, 181, 0.1);
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    color: #ffffff;
+}
+
+.oculus-rate-badge strong {
+    color: #00adb5;
+    font-weight: 800;
+}
+
+/* Stepper Controller */
+.oculus-controls-section {
+    margin: 18px 0;
+}
+
+.oculus-controls-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.oculus-stepper-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.btn-oculus-step {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(0, 173, 181, 0.15);
+    border: 1px solid #00adb5;
+    color: #00adb5;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.btn-oculus-step:hover {
+    background: #00adb5;
+    color: #121212;
+}
+
+.oculus-display-box {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    background: #0b0c10;
+    border: 1.5px solid #00adb5;
+    border-radius: 10px;
+    padding: 8px 18px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.oculus-number-input {
+    width: 75px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00adb5;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    font-family: inherit;
+}
+
+.oculus-max-label {
+    font-size: 0.85rem;
+    color: #727284;
+    font-weight: 700;
+}
+
+/* Slider Track */
+.oculus-range-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #252834;
+    outline: none;
+    accent-color: #00adb5;
+    cursor: pointer;
+    margin: 12px 0 16px;
+}
+
+/* Quick Shortcut Pills */
+.oculus-presets-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.btn-oculus-preset {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b0b0be;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-oculus-preset:hover {
+    border-color: #00adb5;
+    color: #00adb5;
+    background: rgba(0, 173, 181, 0.1);
+}
+
+.btn-oculus-preset.max-preset {
+    background: rgba(0, 173, 181, 0.18);
+    border-color: #00adb5;
+    color: #00adb5;
+}
+
+.btn-oculus-preset.max-preset:hover {
+    background: #00adb5;
+    color: #121212;
+}
+
+/* Calculation & Guarantee Footer */
+.oculus-calc-summary-box {
+    background: rgba(0, 173, 181, 0.06);
+    border: 1px dashed rgba(0, 173, 181, 0.35);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.oculus-calc-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.oculus-calc-formula {
+    font-size: 0.82rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.oculus-calc-hint {
+    font-size: 0.72rem;
+    color: #8c8c9e;
+}
+
+.oculus-calc-price {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #00adb5;
+}
+
 /* ================= RESPONSIVE STYLES (MOBILE & ANDROID) ================= */
 @media (max-width: 768px) {
     /* Prevent any horizontal screen sliding/overflow */
@@ -3564,6 +3856,36 @@ button:active,
         font-size: 0.88rem;
         border-radius: 10px;
         justify-content: center;
+    }
+
+    /* Mobile Oculus Configurator */
+    .oculus-configurator-box {
+        padding: 14px 12px;
+    }
+
+    .oculus-hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .oculus-rate-badges {
+        width: 100%;
+        display: flex;
+        gap: 6px;
+    }
+
+    .oculus-rate-badge {
+        flex: 1;
+        font-size: 0.7rem;
+        padding: 6px 8px;
+        text-align: center;
+    }
+
+    .oculus-calc-summary-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 
     .commission-footer-note {
