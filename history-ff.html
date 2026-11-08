@@ -36,6 +36,14 @@
             <a href="history-ff.html" class="nav-highlight">History FF</a>
             <a href="links.html">Links</a>
             <button id="auth-btn" class="admin-login-btn">Login Admin</button>
+            <div id="admin-user-menu" class="admin-user-menu hidden">
+                <button type="button" id="open-profile-btn" class="nav-user-pill" title="Buka Pengaturan Profil Admin">
+                    <img id="nav-user-avatar" src="" alt="Avatar" class="nav-avatar-mini hidden">
+                    <span id="nav-user-icon" class="nav-avatar-fallback">👤</span>
+                    <span id="nav-user-name" class="nav-user-name">Admin</span>
+                    <span class="nav-user-caret">⚙️</span>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -78,8 +86,11 @@
             <!-- ================= MODAL LOGIN ADMIN ================= -->
             <div id="login-modal" class="modal hidden">
                 <div class="modal-content">
-                    <h3>Login Khusus Admin</h3>
-                    <input type="text" id="admin-username" placeholder="Username atau Email Admin" autocomplete="username">
+                    <div class="modal-header">
+                        <h3>Login Khusus Admin</h3>
+                        <button type="button" class="modal-close-icon" id="close-login-x-btn">&times;</button>
+                    </div>
+                    <input type="email" id="admin-email" placeholder="Email Admin" autocomplete="email">
 
                     <div class="password-box">
                         <input type="password" id="admin-password" placeholder="Password Admin" autocomplete="current-password">
@@ -94,13 +105,60 @@
                 </div>
             </div>
 
+            <!-- ================= MODAL PENGATURAN PROFIL ADMIN ================= -->
+            <div id="profile-modal" class="modal hidden">
+                <div class="modal-content profile-modal-content">
+                    <div class="modal-header">
+                        <h3>Pengaturan Profil Admin</h3>
+                        <button type="button" class="modal-close-icon" id="close-profile-modal-btn">&times;</button>
+                    </div>
+
+                    <!-- Ganti Foto Profil / Avatar -->
+                    <div class="profile-avatar-section">
+                        <div class="avatar-preview-wrap">
+                            <img id="profile-avatar-preview" src="" alt="Avatar" class="profile-avatar-img hidden">
+                            <div id="profile-avatar-placeholder" class="profile-avatar-placeholder">👤</div>
+                            <label for="profile-avatar-input" class="avatar-edit-badge" title="Ganti Foto Profil">📷</label>
+                        </div>
+                        <input type="file" id="profile-avatar-input" accept="image/*" style="display: none;">
+                        <label for="profile-avatar-input" class="btn-change-avatar">Pilih Foto Baru</label>
+                        <span class="avatar-hint">Pilih foto dari perangkat (otomatis dikompres ringan)</span>
+                    </div>
+
+                    <!-- Ubah Username & Tampilan Email -->
+                    <div class="profile-fields">
+                        <div class="field-group">
+                            <label for="profile-username-input">Username / Nama Pengunggah:</label>
+                            <input type="text" id="profile-username-input" placeholder="Masukkan username baru (misal: RASYHZ)">
+                            <small class="field-hint">Nama dan foto ini otomatis menjadi tanda pengunggah pada foto scoreboard.</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="profile-email-display">Email Akun (Login):</label>
+                            <input type="email" id="profile-email-display" readonly disabled class="input-readonly">
+                        </div>
+                    </div>
+
+                    <div class="modal-actions profile-modal-actions">
+                        <button type="button" id="save-profile-btn" class="custom-file-upload">💾 Simpan Profil</button>
+                        <button type="button" id="profile-logout-btn" class="btn-danger-outline">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- ================= PANEL UPLOAD KHUSUS ADMIN ================= -->
             <div id="admin-upload-panel" class="upload-box hidden">
-                <div class="admin-badge" id="admin-badge-status">Mode Admin Aktif</div>
+                <div class="admin-panel-top">
+                    <div class="admin-badge" id="admin-badge-status">
+                        <img id="admin-badge-avatar" src="" alt="Avatar" class="uploader-avatar-thumb hidden">
+                        <span id="admin-badge-icon">👤</span>
+                        <span id="admin-badge-text">Mode Admin Aktif • Pengunggah: <strong>Admin</strong></span>
+                    </div>
+                    <button type="button" id="panel-edit-profile-btn" class="btn-panel-profile">⚙️ Edit Profil</button>
+                </div>
                 <div class="input-group">
                     <input type="text" id="match-title" placeholder="Judul Match (misal: Grand Final Fast Tournament)">
                     <input type="text" id="match-desc" placeholder="Keterangan (misal: Booyah #1 • 14 Kills)">
-                    <input type="text" id="match-uploader" placeholder="Nama / Nick Pengunggah (misal: RASYHZ)">
 
                     <!-- Kategori Dropdown -->
                     <select id="match-category" class="custom-select">
@@ -164,8 +222,8 @@
     <!-- ================= FIREBASE & APP SCRIPT ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCT2JQgsl7APNAqRGz_J5kxlZ73UBJBmts",
@@ -224,37 +282,61 @@
         let allMatches = [];
         let currentFilter = 'all';
         let toastTimeout;
+        let currentAdminProfile = {
+            username: 'Admin',
+            photoURL: ''
+        };
+        let newAvatarBase64 = null;
 
+        // Element Nav & Auth
         const authBtn = document.getElementById('auth-btn');
+        const adminUserMenu = document.getElementById('admin-user-menu');
+        const openProfileBtn = document.getElementById('open-profile-btn');
+        const navUserAvatar = document.getElementById('nav-user-avatar');
+        const navUserIcon = document.getElementById('nav-user-icon');
+        const navUserName = document.getElementById('nav-user-name');
+
+        // Element Login Modal
         const loginModal = document.getElementById('login-modal');
         const closeLoginBtn = document.getElementById('close-login-btn');
+        const closeLoginXBtn = document.getElementById('close-login-x-btn');
         const doLoginBtn = document.getElementById('do-login-btn');
+        const emailInput = document.getElementById('admin-email');
+        const passwordInput = document.getElementById('admin-password');
+        const togglePasswordBtn = document.getElementById('toggle-password-btn');
+
+        // Element Profile Modal
+        const profileModal = document.getElementById('profile-modal');
+        const closeProfileModalBtn = document.getElementById('close-profile-modal-btn');
+        const profileAvatarPreview = document.getElementById('profile-avatar-preview');
+        const profileAvatarPlaceholder = document.getElementById('profile-avatar-placeholder');
+        const profileAvatarInput = document.getElementById('profile-avatar-input');
+        const profileUsernameInput = document.getElementById('profile-username-input');
+        const profileEmailDisplay = document.getElementById('profile-email-display');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const profileLogoutBtn = document.getElementById('profile-logout-btn');
+        const panelEditProfileBtn = document.getElementById('panel-edit-profile-btn');
+
+        // Element Admin Upload Panel & Gallery
         const adminUploadPanel = document.getElementById('admin-upload-panel');
+        const adminBadgeAvatar = document.getElementById('admin-badge-avatar');
+        const adminBadgeIcon = document.getElementById('admin-badge-icon');
+        const adminBadgeText = document.getElementById('admin-badge-text');
         const galleryGrid = document.getElementById('ff-gallery-grid');
         const savePhotoBtn = document.getElementById('save-photo-btn');
         const fileInput = document.getElementById('match-file-input');
         const fileNameLabel = document.getElementById('selected-file-name');
-        const usernameInput = document.getElementById('admin-username');
-        const passwordInput = document.getElementById('admin-password');
-        const uploaderInput = document.getElementById('match-uploader');
-        const adminBadgeStatus = document.getElementById('admin-badge-status');
-        const togglePasswordBtn = document.getElementById('toggle-password-btn');
 
-        // Helper Konversi Username ke Email yang terdaftar di Firebase Auth
-        function resolveAdminEmail(input) {
-            const val = input.trim();
-            if (val.includes('@')) return val;
-            
-            const lower = val.toLowerCase();
-            const aliases = {
-                'wjwhaha5': 'wjwhaha5@gmail.com',
-                'rasyhz': 'wjwhaha5@gmail.com',
-                'rasyhze': 'wjwhaha5@gmail.com',
-                'admin': 'wjwhaha5@gmail.com'
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
             };
-            if (aliases[lower]) return aliases[lower];
-            // Format default jika username lain dibuat di Firebase Auth
-            return `${lower}@gmail.com`;
+            return String(text).replace(/[&<>"']/g, m => map[m]);
         }
 
         // Toast Helper
@@ -272,6 +354,85 @@
             toastTimeout = setTimeout(() => {
                 toastEl.classList.remove('show');
             }, 3000);
+        }
+
+        // Sinkronisasi Tampilan Navbar & Admin Badge dengan Profil Aktif
+        function syncProfileUI(user) {
+            if (user) {
+                authBtn.classList.add('hidden');
+                adminUserMenu.classList.remove('hidden');
+                navUserName.textContent = currentAdminProfile.username || 'Admin';
+
+                if (currentAdminProfile.photoURL) {
+                    navUserAvatar.src = currentAdminProfile.photoURL;
+                    navUserAvatar.classList.remove('hidden');
+                    navUserIcon.classList.add('hidden');
+
+                    if (adminBadgeAvatar) {
+                        adminBadgeAvatar.src = currentAdminProfile.photoURL;
+                        adminBadgeAvatar.classList.remove('hidden');
+                    }
+                    if (adminBadgeIcon) adminBadgeIcon.classList.add('hidden');
+                } else {
+                    navUserAvatar.classList.add('hidden');
+                    navUserIcon.classList.remove('hidden');
+
+                    if (adminBadgeAvatar) adminBadgeAvatar.classList.add('hidden');
+                    if (adminBadgeIcon) adminBadgeIcon.classList.remove('hidden');
+                }
+
+                if (adminBadgeText) {
+                    adminBadgeText.innerHTML = `Mode Admin Aktif • Pengunggah: <strong>${escapeHtml(currentAdminProfile.username || 'Admin')}</strong>`;
+                }
+            } else {
+                authBtn.classList.remove('hidden');
+                adminUserMenu.classList.add('hidden');
+                navUserName.textContent = 'Admin';
+                navUserAvatar.classList.add('hidden');
+                navUserIcon.classList.remove('hidden');
+                if (adminBadgeAvatar) adminBadgeAvatar.classList.add('hidden');
+                if (adminBadgeIcon) adminBadgeIcon.classList.remove('hidden');
+                if (adminBadgeText) {
+                    adminBadgeText.innerHTML = 'Mode Admin Aktif • Pengunggah: <strong>Admin</strong>';
+                }
+            }
+        }
+
+        // Ambil Data Profil Admin dari Firestore
+        async function loadAdminProfile(user) {
+            if (!user) {
+                currentAdminProfile = { username: 'Admin', photoURL: '' };
+                syncProfileUI(null);
+                return;
+            }
+
+            const defaultName = user.displayName || (user.email ? user.email.split('@')[0] : 'Admin');
+            const defaultPhoto = user.photoURL || '';
+
+            try {
+                const profileRef = doc(db, "admin_profiles", user.uid);
+                const profileSnap = await getDoc(profileRef);
+                if (profileSnap.exists()) {
+                    const data = profileSnap.data();
+                    currentAdminProfile = {
+                        username: data.username || defaultName,
+                        photoURL: data.photoURL || defaultPhoto
+                    };
+                } else {
+                    currentAdminProfile = {
+                        username: defaultName,
+                        photoURL: defaultPhoto
+                    };
+                }
+            } catch (err) {
+                console.warn("Gagal membaca profil admin dari Firestore:", err);
+                currentAdminProfile = {
+                    username: defaultName,
+                    photoURL: defaultPhoto
+                };
+            }
+
+            syncProfileUI(user);
         }
 
         // Toggle Password Visibility
@@ -294,10 +455,10 @@
             }
         });
 
-        // Modal Helpers
+        // Modal Login Helpers
         function openLoginModal() {
             loginModal.classList.remove('hidden');
-            usernameInput.focus();
+            emailInput.focus();
         }
 
         function closeLoginModal() {
@@ -306,17 +467,17 @@
             togglePasswordBtn.innerText = '👁️';
         }
 
+        authBtn.addEventListener('click', openLoginModal);
         closeLoginBtn.addEventListener('click', closeLoginModal);
+        if (closeLoginXBtn) closeLoginXBtn.addEventListener('click', closeLoginModal);
 
-        // Click outside modal to close
         loginModal.addEventListener('click', (e) => {
             if (e.target === loginModal) {
                 closeLoginModal();
             }
         });
 
-        // Submit login on Enter key
-        [usernameInput, passwordInput].forEach(input => {
+        [emailInput, passwordInput].forEach(input => {
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -325,11 +486,131 @@
             });
         });
 
+        // Modal Profil Admin Helpers
+        function openProfileModal() {
+            if (!auth.currentUser) return;
+            profileUsernameInput.value = currentAdminProfile.username || '';
+            profileEmailDisplay.value = auth.currentUser.email || '';
+            newAvatarBase64 = null;
+
+            if (currentAdminProfile.photoURL) {
+                profileAvatarPreview.src = currentAdminProfile.photoURL;
+                profileAvatarPreview.classList.remove('hidden');
+                profileAvatarPlaceholder.classList.add('hidden');
+            } else {
+                profileAvatarPreview.classList.add('hidden');
+                profileAvatarPlaceholder.classList.remove('hidden');
+            }
+
+            profileModal.classList.remove('hidden');
+            profileUsernameInput.focus();
+        }
+
+        function closeProfileModal() {
+            profileModal.classList.add('hidden');
+            newAvatarBase64 = null;
+            profileAvatarInput.value = '';
+        }
+
+        if (openProfileBtn) openProfileBtn.addEventListener('click', openProfileModal);
+        if (panelEditProfileBtn) panelEditProfileBtn.addEventListener('click', openProfileModal);
+        if (closeProfileModalBtn) closeProfileModalBtn.addEventListener('click', closeProfileModal);
+
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                closeProfileModal();
+            }
+        });
+
+        // Handle Pergantian Foto Profil (Kompres ringan Base64 240x240)
+        profileAvatarInput.addEventListener('change', async () => {
+            const file = profileAvatarInput.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast("Harap pilih file gambar!", true);
+                return;
+            }
+
+            try {
+                const compressedAvatar = await compressImage(file, 240, 240, 0.82);
+                newAvatarBase64 = compressedAvatar;
+                profileAvatarPreview.src = compressedAvatar;
+                profileAvatarPreview.classList.remove('hidden');
+                profileAvatarPlaceholder.classList.add('hidden');
+                showToast("Foto profil baru dipilih. Klik 'Simpan Profil' untuk menerapkan.");
+            } catch (err) {
+                showToast("Gagal memproses foto: " + err.message, true);
+            }
+        });
+
+        // Simpan Profil Admin ke Firestore & Auth
+        saveProfileBtn.addEventListener('click', async () => {
+            if (!auth.currentUser) return;
+
+            const newUsername = profileUsernameInput.value.trim();
+            if (!newUsername) {
+                showToast("Username / nama pengunggah tidak boleh kosong!", true);
+                profileUsernameInput.focus();
+                return;
+            }
+
+            saveProfileBtn.innerText = "Menyimpan...";
+            saveProfileBtn.disabled = true;
+
+            try {
+                const finalPhotoURL = newAvatarBase64 !== null ? newAvatarBase64 : (currentAdminProfile.photoURL || '');
+
+                // 1. Simpan ke Firestore admin_profiles/{uid}
+                await setDoc(doc(db, "admin_profiles", auth.currentUser.uid), {
+                    username: newUsername,
+                    photoURL: finalPhotoURL,
+                    email: auth.currentUser.email || '',
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                // 2. Update Firebase Auth displayName
+                try {
+                    await updateProfile(auth.currentUser, {
+                        displayName: newUsername
+                    });
+                } catch (authErr) {
+                    console.warn("Update displayName Firebase Auth:", authErr);
+                }
+
+                currentAdminProfile.username = newUsername;
+                currentAdminProfile.photoURL = finalPhotoURL;
+
+                syncProfileUI(auth.currentUser);
+                closeProfileModal();
+                showToast("Profil admin berhasil diperbarui!");
+            } catch (err) {
+                showToast("Gagal menyimpan profil: " + err.message, true);
+            } finally {
+                saveProfileBtn.innerText = "💾 Simpan Profil";
+                saveProfileBtn.disabled = false;
+            }
+        });
+
+        // Logout Admin dari Modal Profil
+        profileLogoutBtn.addEventListener('click', async () => {
+            closeProfileModal();
+            try {
+                await signOut(auth);
+                showToast("Berhasil logout.");
+            } catch (err) {
+                showToast("Logout gagal: " + err.message, true);
+            }
+        });
+
         // Global Escape key handler
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 if (!loginModal.classList.contains('hidden')) {
                     closeLoginModal();
+                }
+                if (!profileModal.classList.contains('hidden')) {
+                    closeProfileModal();
                 }
                 const lightbox = document.getElementById('lightbox-modal');
                 if (lightbox && !lightbox.classList.contains('hidden')) {
@@ -338,52 +619,49 @@
             }
         });
 
-        // Auth State Listener
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                isAdmin = true;
-                const rawUsername = user.displayName || user.email.split('@')[0];
-                authBtn.innerText = "Logout (" + rawUsername + ")";
-                adminUploadPanel.classList.remove('hidden');
-                if (adminBadgeStatus) {
-                    adminBadgeStatus.innerText = "Mode Admin Aktif • Pengunggah: " + rawUsername;
-                }
-                if (uploaderInput && !uploaderInput.value) {
-                    uploaderInput.value = rawUsername;
-                }
-            } else {
-                isAdmin = false;
-                authBtn.innerText = "Login Admin";
-                adminUploadPanel.classList.add('hidden');
-            }
-            loadPublicGallery();
-        });
-
-        authBtn.addEventListener('click', () => {
-            if (isAdmin) {
-                signOut(auth).then(() => {
-                    showToast("Berhasil logout.");
-                });
-            } else {
-                openLoginModal();
-            }
-        });
-
+        // Login Handler dengan Email & Password
         doLoginBtn.addEventListener('click', async () => {
-            const rawUser = usernameInput.value.trim();
+            const email = emailInput.value.trim();
             const pass = passwordInput.value;
-            if (!rawUser || !pass) {
-                showToast("Harap isi username/email dan password!", true);
+            if (!email || !pass) {
+                showToast("Harap isi email dan password admin!", true);
                 return;
             }
-            const email = resolveAdminEmail(rawUser);
+
+            doLoginBtn.innerText = "Memeriksa...";
+            doLoginBtn.disabled = true;
+
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 closeLoginModal();
-                showToast("Login berhasil! Mode admin aktif.");
+                showToast("Login berhasil! Selamat datang Admin.");
             } catch (err) {
-                showToast("Login gagal: " + (err.code || err.message), true);
+                let errMsg = err.code || err.message;
+                if (errMsg.includes('auth/invalid-credential') || errMsg.includes('auth/wrong-password') || errMsg.includes('auth/user-not-found')) {
+                    errMsg = "Email atau password admin salah!";
+                } else if (errMsg.includes('auth/invalid-email')) {
+                    errMsg = "Format email tidak valid!";
+                }
+                showToast("Login gagal: " + errMsg, true);
+            } finally {
+                doLoginBtn.innerText = "Masuk";
+                doLoginBtn.disabled = false;
             }
+        });
+
+        // Auth State Listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                isAdmin = true;
+                adminUploadPanel.classList.remove('hidden');
+                await loadAdminProfile(user);
+            } else {
+                isAdmin = false;
+                adminUploadPanel.classList.add('hidden');
+                currentAdminProfile = { username: 'Admin', photoURL: '' };
+                syncProfileUI(null);
+            }
+            loadPublicGallery();
         });
 
         // Filter button click handler
@@ -419,9 +697,8 @@
                 // Kompres gambar ke Base64 JPEG ringan (~50KB) - bebas blokir ISP / Kominfo
                 const compressedImageUrl = await compressImage(file);
 
-                // Ambil nama pengunggah: dari input khusus uploader atau otomatis dari akun yang login
-                const currentUsername = auth.currentUser ? (auth.currentUser.displayName || auth.currentUser.email.split('@')[0]) : 'Admin';
-                const uploaderName = (uploaderInput && uploaderInput.value.trim()) ? uploaderInput.value.trim() : currentUsername;
+                const uploaderName = currentAdminProfile.username || 'Admin';
+                const uploaderAvatar = currentAdminProfile.photoURL || '';
 
                 await addDoc(collection(db, "ff_matches"), {
                     title: title,
@@ -429,6 +706,8 @@
                     category: category || "Tournament",
                     imageUrl: compressedImageUrl,
                     uploadedBy: uploaderName,
+                    uploaderAvatar: uploaderAvatar,
+                    uploaderUid: auth.currentUser ? auth.currentUser.uid : "",
                     createdAt: new Date().getTime()
                 });
 
@@ -486,7 +765,7 @@
                 thumbWrap.classList.add('card-thumb-wrap');
                 thumbWrap.title = 'Klik untuk perbesar preview';
                 thumbWrap.addEventListener('click', () => {
-                    openLightbox(data.imageUrl, data.title, data.desc, data.category || 'Tournament', data.uploadedBy, data.createdAt);
+                    openLightbox(data.imageUrl, data.title, data.desc, data.category || 'Tournament', data.uploadedBy, data.createdAt, data.uploaderAvatar);
                 });
 
                 const img = document.createElement('img');
@@ -519,9 +798,26 @@
                 const metaRow = document.createElement('div');
                 metaRow.classList.add('ff-card-meta');
 
-                const uploaderEl = document.createElement('span');
-                uploaderEl.classList.add('meta-uploader');
-                uploaderEl.innerHTML = `👤 <span>${data.uploadedBy || 'Admin Rasyhz'}</span>`;
+                const uploaderBox = document.createElement('div');
+                uploaderBox.classList.add('meta-uploader-box');
+
+                if (data.uploaderAvatar) {
+                    const uploaderImg = document.createElement('img');
+                    uploaderImg.src = data.uploaderAvatar;
+                    uploaderImg.alt = data.uploadedBy || 'Admin';
+                    uploaderImg.classList.add('uploader-avatar-thumb');
+                    uploaderBox.appendChild(uploaderImg);
+                } else {
+                    const uploaderIcon = document.createElement('span');
+                    uploaderIcon.classList.add('uploader-avatar-icon');
+                    uploaderIcon.textContent = '👤';
+                    uploaderBox.appendChild(uploaderIcon);
+                }
+
+                const uploaderNameEl = document.createElement('span');
+                uploaderNameEl.classList.add('meta-uploader-name');
+                uploaderNameEl.textContent = data.uploadedBy || 'Admin Rasyhz';
+                uploaderBox.appendChild(uploaderNameEl);
 
                 const dateEl = document.createElement('span');
                 dateEl.classList.add('meta-date');
@@ -532,7 +828,7 @@
                     dateEl.textContent = 'Dokumentasi FF';
                 }
 
-                metaRow.appendChild(uploaderEl);
+                metaRow.appendChild(uploaderBox);
                 metaRow.appendChild(dateEl);
                 info.appendChild(metaRow);
 
@@ -562,7 +858,7 @@
         }
 
         // Lightbox Functions
-        window.openLightbox = (url, title, desc, tag, uploader, timestamp) => {
+        window.openLightbox = (url, title, desc, tag, uploader, timestamp, uploaderAvatar) => {
             const imgEl = document.getElementById('lightbox-img');
             const titleEl = document.getElementById('lightbox-title');
             const descEl = document.getElementById('lightbox-desc');
@@ -581,7 +877,11 @@
                     dateStr = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                 }
                 const author = uploader || 'Admin Rasyhz';
-                metaEl.innerHTML = `<span>👤 Diunggah oleh: <strong>${author}</strong></span> • <span>📅 ${dateStr}</span>`;
+                const avatarHtml = uploaderAvatar
+                    ? `<img src="${uploaderAvatar}" alt="${escapeHtml(author)}" class="uploader-avatar-thumb">`
+                    : `<span class="uploader-avatar-icon">👤</span>`;
+
+                metaEl.innerHTML = `<span class="lightbox-uploader">${avatarHtml} <span>Diunggah oleh: <strong>${escapeHtml(author)}</strong></span></span> <span class="lightbox-meta-divider">•</span> <span>📅 ${dateStr}</span>`;
                 metaEl.style.display = 'inline-flex';
             }
 
