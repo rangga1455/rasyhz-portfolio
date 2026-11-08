@@ -20,7 +20,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="style.css?v=20261108c">
+    <link rel="stylesheet" href="style.css?v=20261108d">
     <!-- Vercel Web Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -1402,7 +1402,8 @@
                             <div class="oculus-display-box">
                                 <input type="number" id="oculus-qty-input" class="oculus-number-input" 
                                        min="1" max="${oculus.max}" value="${selectedOculusQty}"
-                                       oninput="onOculusQtyChange(this.value)">
+                                       oninput="onOculusQtyChange(this.value, 'input')"
+                                       onblur="setOculusQty(this.value, true, true)">
                                 <span class="oculus-max-label">/ ${oculus.max} Biji</span>
                             </div>
 
@@ -1412,7 +1413,7 @@
 
                         <input type="range" id="oculus-qty-slider" class="oculus-range-slider"
                                min="1" max="${oculus.max}" value="${selectedOculusQty}"
-                               oninput="onOculusQtyChange(this.value)">
+                               oninput="onOculusQtyChange(this.value, 'slider')">
 
                         <div class="oculus-presets-row">
                             <button type="button" class="btn-oculus-preset" onclick="setOculusQty(10)">+10 Biji</button>
@@ -1428,20 +1429,20 @@
 
                     <div class="oculus-calc-summary-box">
                         <div class="oculus-calc-details">
-                            <span class="oculus-calc-formula">
+                            <span class="oculus-calc-formula" id="oculus-calc-formula">
                                 ${isMax 
                                     ? `🎁 Paket Borongan Lengkap Full ${oculus.max} ${oculus.name}` 
                                     : `Kalkulasi: ${selectedOculusQty} Biji × Rp ${oculus.pricePerItem.toLocaleString('id-ID')}`
                                 }
                             </span>
-                            <span class="oculus-calc-hint">
+                            <span class="oculus-calc-hint" id="oculus-calc-hint">
                                 ${isMax && savings > 0 
                                     ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding harga satuan!` 
                                     : `Bisa request titik sisa oculus yang belum kamu ambil di in-game.`
                                 }
                             </span>
                         </div>
-                        <div class="oculus-calc-price">
+                        <div class="oculus-calc-price" id="oculus-calc-price">
                             Rp ${finalPrice.toLocaleString('id-ID')}
                         </div>
                     </div>
@@ -1451,22 +1452,57 @@
             updateCheckoutSummary();
         }
 
-        function setOculusQty(val) {
+        function setOculusQty(val, syncInput = true, syncSlider = true) {
             const oculus = oculusDatabase[currentSelectedRegion] || oculusDatabase['snezhnaya'];
             let num = parseInt(val, 10);
             if (isNaN(num)) num = 1;
             if (num > oculus.max) num = oculus.max;
             if (num < 1) num = 1;
             selectedOculusQty = num;
-            renderOculusConfigurator();
+
+            const inputEl = document.getElementById('oculus-qty-input');
+            const sliderEl = document.getElementById('oculus-qty-slider');
+            const formulaEl = document.getElementById('oculus-calc-formula');
+            const hintEl = document.getElementById('oculus-calc-hint');
+            const priceEl = document.getElementById('oculus-calc-price');
+
+            if (syncInput && inputEl && inputEl.value != num) inputEl.value = num;
+            if (syncSlider && sliderEl && sliderEl.value != num) sliderEl.value = num;
+
+            const isMax = selectedOculusQty === oculus.max;
+            const singleTotal = selectedOculusQty * oculus.pricePerItem;
+            const finalPrice = isMax ? oculus.packagePrice : singleTotal;
+            const savings = isMax ? Math.max(0, singleTotal - oculus.packagePrice) : 0;
+
+            if (formulaEl) {
+                formulaEl.innerHTML = isMax 
+                    ? `🎁 Paket Borongan Lengkap Full ${oculus.max} ${oculus.name}` 
+                    : `Kalkulasi: ${selectedOculusQty} Biji × Rp ${oculus.pricePerItem.toLocaleString('id-ID')}`;
+            }
+            if (hintEl) {
+                hintEl.textContent = isMax && savings > 0 
+                    ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding harga satuan!` 
+                    : `Bisa request titik sisa oculus yang belum kamu ambil di in-game.`;
+            }
+            if (priceEl) {
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+            }
+
+            updateCheckoutSummary();
         }
 
         function stepOculusQty(delta) {
-            setOculusQty(selectedOculusQty + delta);
+            setOculusQty(selectedOculusQty + delta, true, true);
         }
 
-        function onOculusQtyChange(val) {
-            setOculusQty(val);
+        function onOculusQtyChange(val, source) {
+            if (source === 'slider') {
+                setOculusQty(val, true, false);
+            } else if (source === 'input') {
+                setOculusQty(val, false, true);
+            } else {
+                setOculusQty(val, true, true);
+            }
         }
 
         // Render Kalkulator Teleport Waypoint (Minimum 3 TP)
@@ -1522,7 +1558,8 @@
                             <div class="oculus-display-box">
                                 <input type="number" id="teleport-qty-input" class="oculus-number-input" 
                                        min="3" max="${tpData.totalTP}" value="${selectedTeleportQty}"
-                                       oninput="onTeleportQtyChange(this.value)">
+                                       oninput="onTeleportQtyChange(this.value, 'input')"
+                                       onblur="setTeleportQty(this.value, true, true)">
                                 <span class="oculus-max-label">/ ${tpData.totalTP} TP</span>
                             </div>
 
@@ -1532,7 +1569,7 @@
 
                         <input type="range" id="teleport-qty-slider" class="oculus-range-slider"
                                min="3" max="${tpData.totalTP}" value="${selectedTeleportQty}"
-                               oninput="onTeleportQtyChange(this.value)">
+                               oninput="onTeleportQtyChange(this.value, 'slider')">
 
                         <div class="oculus-presets-row">
                             <button type="button" class="btn-oculus-preset" onclick="setTeleportQty(3)">3 TP (Min. Order)</button>
@@ -1547,20 +1584,20 @@
 
                     <div class="oculus-calc-summary-box">
                         <div class="oculus-calc-details">
-                            <span class="oculus-calc-formula">
+                            <span class="oculus-calc-formula" id="teleport-calc-formula">
                                 ${isAll 
                                     ? `🎁 Paket Borongan Buka Semua ${tpData.totalTP} Teleport Waypoint di ${region.name}` 
                                     : `Kalkulasi: ${selectedTeleportQty} Teleport × Rp ${TP_PRICE_PER_ITEM.toLocaleString('id-ID')}`
                                 }
                             </span>
-                            <span class="oculus-calc-hint">
+                            <span class="oculus-calc-hint" id="teleport-calc-hint">
                                 ${isAll && savings > 0 
                                     ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif satuan!` 
                                     : `Bisa request titik teleport tertentu (misal: dekat Boss/Domain/Oculus).`
                                 }
                             </span>
                         </div>
-                        <div class="oculus-calc-price">
+                        <div class="oculus-calc-price" id="teleport-calc-price">
                             Rp ${finalPrice.toLocaleString('id-ID')}
                         </div>
                     </div>
@@ -1570,27 +1607,60 @@
             updateCheckoutSummary();
         }
 
-        function setTeleportQty(val) {
-            const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50 };
+        function setTeleportQty(val, syncInput = true, syncSlider = true) {
+            const tpData = teleportDatabase[currentSelectedRegion] || { totalTP: 50, packagePrice: 50000 };
+            const region = regionDatabase[currentSelectedRegion] || { name: 'Region' };
             let num = parseInt(val, 10);
             if (isNaN(num)) num = TP_MIN_ORDER;
             if (num < TP_MIN_ORDER) {
                 num = TP_MIN_ORDER;
-                if (typeof showToast === 'function') {
-                    showToast('Minimum order joki teleport adalah 3 TP!');
-                }
             }
             if (num > tpData.totalTP) num = tpData.totalTP;
             selectedTeleportQty = num;
-            renderTeleportConfigurator();
+
+            const inputEl = document.getElementById('teleport-qty-input');
+            const sliderEl = document.getElementById('teleport-qty-slider');
+            const formulaEl = document.getElementById('teleport-calc-formula');
+            const hintEl = document.getElementById('teleport-calc-hint');
+            const priceEl = document.getElementById('teleport-calc-price');
+
+            if (syncInput && inputEl && inputEl.value != num) inputEl.value = num;
+            if (syncSlider && sliderEl && sliderEl.value != num) sliderEl.value = num;
+
+            const isAll = selectedTeleportQty === tpData.totalTP;
+            const singleTotal = selectedTeleportQty * TP_PRICE_PER_ITEM;
+            const finalPrice = isAll ? tpData.packagePrice : singleTotal;
+            const savings = isAll ? Math.max(0, singleTotal - tpData.packagePrice) : 0;
+
+            if (formulaEl) {
+                formulaEl.innerHTML = isAll 
+                    ? `🎁 Paket Borongan Buka Semua ${tpData.totalTP} Teleport Waypoint di ${region.name}` 
+                    : `Kalkulasi: ${selectedTeleportQty} Teleport × Rp ${TP_PRICE_PER_ITEM.toLocaleString('id-ID')}`;
+            }
+            if (hintEl) {
+                hintEl.textContent = isAll && savings > 0 
+                    ? `Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif satuan!` 
+                    : `Bisa request titik teleport tertentu (misal: dekat Boss/Domain/Oculus).`;
+            }
+            if (priceEl) {
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+            }
+
+            updateCheckoutSummary();
         }
 
         function stepTeleportQty(delta) {
-            setTeleportQty(selectedTeleportQty + delta);
+            setTeleportQty(selectedTeleportQty + delta, true, true);
         }
 
-        function onTeleportQtyChange(val) {
-            setTeleportQty(val);
+        function onTeleportQtyChange(val, source) {
+            if (source === 'slider') {
+                setTeleportQty(val, true, false);
+            } else if (source === 'input') {
+                setTeleportQty(val, false, true);
+            } else {
+                setTeleportQty(val, true, true);
+            }
         }
 
         // ================= 1. KONFIGURATOR INTERTWINED FATE =================
@@ -1639,7 +1709,8 @@
                                 <input type="number" id="fate-qty-input" class="oculus-number-input" 
                                        min="1" max="180" value="${selectedFateQty}"
                                        style="color: #f472b6;"
-                                       oninput="onFateQtyChange(this.value)">
+                                       oninput="onFateQtyChange(this.value, 'input')"
+                                       onblur="setFateQty(this.value, true, true)">
                                 <span class="oculus-max-label">/ 180 Fate Max</span>
                             </div>
 
@@ -1650,7 +1721,7 @@
                         <input type="range" id="fate-qty-slider" class="oculus-range-slider"
                                min="1" max="180" value="${selectedFateQty}"
                                style="accent-color: #f472b6;"
-                               oninput="onFateQtyChange(this.value)">
+                               oninput="onFateQtyChange(this.value, 'slider')">
 
                         <div class="oculus-presets-row">
                             <button type="button" class="btn-oculus-preset" onclick="setFateQty(5)">5 Fate (800 Primo)</button>
@@ -1668,16 +1739,16 @@
 
                     <div class="oculus-calc-summary-box">
                         <div class="oculus-calc-details">
-                            <span class="oculus-calc-formula">
+                            <span class="oculus-calc-formula" id="fate-calc-formula">
                                 Setara: <strong>${primoEquiv.toLocaleString('id-ID')} Primogems</strong> (${selectedFateQty}x Wish Intertwined)
                             </span>
-                            <span class="oculus-calc-hint">
+                            <span class="oculus-calc-hint" id="fate-calc-hint">
                                 ${savings > 0 
                                     ? `🎁 Paket Borongan Hemat! Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif normal.` 
                                     : 'Farming manual aman anti-banned tanpa aplikasi ketiga.'}
                             </span>
                         </div>
-                        <div class="oculus-calc-price" style="color: #f472b6;">
+                        <div class="oculus-calc-price" id="fate-calc-price" style="color: #f472b6;">
                             Rp ${finalPrice.toLocaleString('id-ID')}
                         </div>
                     </div>
@@ -1687,21 +1758,54 @@
             updateCheckoutSummary();
         }
 
-        function setFateQty(val) {
+        function setFateQty(val, syncInput = true, syncSlider = true) {
             let num = parseInt(val, 10);
             if (isNaN(num)) num = 1;
             if (num < 1) num = 1;
             if (num > 180) num = 180;
             selectedFateQty = num;
-            renderFateConfigurator();
+
+            const inputEl = document.getElementById('fate-qty-input');
+            const sliderEl = document.getElementById('fate-qty-slider');
+            const formulaEl = document.getElementById('fate-calc-formula');
+            const hintEl = document.getElementById('fate-calc-hint');
+            const priceEl = document.getElementById('fate-calc-price');
+
+            if (syncInput && inputEl && inputEl.value != num) inputEl.value = num;
+            if (syncSlider && sliderEl && sliderEl.value != num) sliderEl.value = num;
+
+            const finalPrice = calculateFatePrice(selectedFateQty);
+            const primoEquiv = selectedFateQty * 160;
+            const singleRefPrice = selectedFateQty * 3500;
+            const savings = Math.max(0, singleRefPrice - finalPrice);
+
+            if (formulaEl) {
+                formulaEl.innerHTML = `Setara: <strong>${primoEquiv.toLocaleString('id-ID')} Primogems</strong> (${selectedFateQty}x Wish Intertwined)`;
+            }
+            if (hintEl) {
+                hintEl.textContent = savings > 0 
+                    ? `🎁 Paket Borongan Hemat! Lebih hemat Rp ${savings.toLocaleString('id-ID')} dibanding tarif normal.` 
+                    : 'Farming manual aman anti-banned tanpa aplikasi ketiga.';
+            }
+            if (priceEl) {
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+            }
+
+            updateCheckoutSummary();
         }
 
         function stepFateQty(delta) {
-            setFateQty(selectedFateQty + delta);
+            setFateQty(selectedFateQty + delta, true, true);
         }
 
-        function onFateQtyChange(val) {
-            setFateQty(val);
+        function onFateQtyChange(val, source) {
+            if (source === 'slider') {
+                setFateQty(val, true, false);
+            } else if (source === 'input') {
+                setFateQty(val, false, true);
+            } else {
+                setFateQty(val, true, true);
+            }
         }
 
         // ================= 2. KONFIGURATOR BUILD KARAKTER =================
@@ -1881,7 +1985,8 @@
                                 <input type="number" id="loot-qty-input" class="oculus-number-input" 
                                        min="10" max="300" value="${selectedLootQty}"
                                        style="color: #34d399;"
-                                       oninput="onLootQtyChange(this.value)">
+                                       oninput="onLootQtyChange(this.value, 'input')"
+                                       onblur="setLootQty(this.value, true, true)">
                                 <span class="oculus-max-label">/ 300 Buah</span>
                             </div>
 
@@ -1892,7 +1997,7 @@
                         <input type="range" id="loot-qty-slider" class="oculus-range-slider"
                                min="10" max="300" value="${selectedLootQty}"
                                style="accent-color: #34d399;"
-                               oninput="onLootQtyChange(this.value)">
+                               oninput="onLootQtyChange(this.value, 'slider')">
 
                         <div class="oculus-presets-row">
                             <button type="button" class="btn-oculus-preset" onclick="setLootQty(50)">50 Buah (Rp 15.000)</button>
@@ -1906,16 +2011,16 @@
 
                     <div class="oculus-calc-summary-box">
                         <div class="oculus-calc-details">
-                            <span class="oculus-calc-formula">
+                            <span class="oculus-calc-formula" id="loot-calc-formula">
                                 Material: ${selectedLootMaterialName.trim() ? `<strong>${escapeHtml(selectedLootMaterialName)}</strong>` : '(Belum diketik)'} • <strong>${selectedLootQty} Buah</strong>
                             </span>
-                            <span class="oculus-calc-hint">
+                            <span class="oculus-calc-hint" id="loot-calc-hint">
                                 ${selectedLootQty === 168 
                                     ? '🎁 Paket Manis: Pas untuk kenaikan karakter dari Level 1 sampai Level 90.' 
                                     : 'Farming manual di world akun kamu atau open co-op resmi.'}
                             </span>
                         </div>
-                        <div class="oculus-calc-price" style="color: #34d399;">
+                        <div class="oculus-calc-price" id="loot-calc-price" style="color: #34d399;">
                             Rp ${finalPrice.toLocaleString('id-ID')}
                         </div>
                     </div>
@@ -1927,6 +2032,10 @@
 
         function onLootMaterialNameChange(val) {
             selectedLootMaterialName = val;
+            const formulaEl = document.getElementById('loot-calc-formula');
+            if (formulaEl) {
+                formulaEl.innerHTML = `Material: ${selectedLootMaterialName.trim() ? `<strong>${escapeHtml(selectedLootMaterialName)}</strong>` : '(Belum diketik)'} • <strong>${selectedLootQty} Buah</strong>`;
+            }
             updateCheckoutSummary();
         }
 
@@ -1935,21 +2044,51 @@
             renderLootConfigurator();
         }
 
-        function setLootQty(val) {
+        function setLootQty(val, syncInput = true, syncSlider = true) {
             let num = parseInt(val, 10);
             if (isNaN(num)) num = 10;
             if (num < 10) num = 10;
             if (num > 300) num = 300;
             selectedLootQty = num;
-            renderLootConfigurator();
+
+            const inputEl = document.getElementById('loot-qty-input');
+            const sliderEl = document.getElementById('loot-qty-slider');
+            const formulaEl = document.getElementById('loot-calc-formula');
+            const hintEl = document.getElementById('loot-calc-hint');
+            const priceEl = document.getElementById('loot-calc-price');
+
+            if (syncInput && inputEl && inputEl.value != num) inputEl.value = num;
+            if (syncSlider && sliderEl && sliderEl.value != num) sliderEl.value = num;
+
+            const finalPrice = calculateLootPrice(selectedLootQty);
+
+            if (formulaEl) {
+                formulaEl.innerHTML = `Material: ${selectedLootMaterialName.trim() ? `<strong>${escapeHtml(selectedLootMaterialName)}</strong>` : '(Belum diketik)'} • <strong>${selectedLootQty} Buah</strong>`;
+            }
+            if (hintEl) {
+                hintEl.textContent = selectedLootQty === 168 
+                    ? '🎁 Paket Manis: Pas untuk kenaikan karakter dari Level 1 sampai Level 90.' 
+                    : 'Farming manual di world akun kamu atau open co-op resmi.';
+            }
+            if (priceEl) {
+                priceEl.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+            }
+
+            updateCheckoutSummary();
         }
 
         function stepLootQty(delta) {
-            setLootQty(selectedLootQty + delta);
+            setLootQty(selectedLootQty + delta, true, true);
         }
 
-        function onLootQtyChange(val) {
-            setLootQty(val);
+        function onLootQtyChange(val, source) {
+            if (source === 'slider') {
+                setLootQty(val, true, false);
+            } else if (source === 'input') {
+                setLootQty(val, false, true);
+            } else {
+                setLootQty(val, true, true);
+            }
         }
 
         // ================= 4. KONFIGURATOR RAWAT AKUN =================

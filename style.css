@@ -3812,13 +3812,14 @@ button:active,
 /* Slider Track */
 .oculus-range-slider {
     width: 100%;
-    height: 8px;
-    border-radius: 5px;
+    height: 10px;
+    border-radius: 6px;
     background: #252834;
     outline: none;
     accent-color: #00adb5;
     cursor: pointer;
-    margin: 12px 0 16px;
+    margin: 14px 0 18px;
+    touch-action: pan-y;
 }
 
 /* Quick Shortcut Pills */
