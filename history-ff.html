@@ -90,7 +90,7 @@
                         <h3>Login Khusus Admin</h3>
                         <button type="button" class="modal-close-icon" id="close-login-x-btn">&times;</button>
                     </div>
-                    <input type="email" id="admin-email" placeholder="Email Admin" autocomplete="email">
+                    <input type="text" id="admin-email" placeholder="Username atau Email Admin" autocomplete="username">
 
                     <div class="password-box">
                         <input type="password" id="admin-password" placeholder="Password Admin" autocomplete="current-password">
@@ -1366,12 +1366,12 @@
             }
         });
 
-        // Login Handler dengan Email & Password
+        // Login Handler dengan Username ATAU Email & Password
         doLoginBtn.addEventListener('click', async () => {
-            const email = emailInput.value.trim();
+            const identifier = emailInput.value.trim();
             const pass = passwordInput.value;
-            if (!email || !pass) {
-                showToast("Harap isi email dan password admin!", true);
+            if (!identifier || !pass) {
+                showToast("Harap isi username atau email dan password admin!", true);
                 return;
             }
 
@@ -1379,15 +1379,52 @@
             doLoginBtn.disabled = true;
 
             try {
-                await signInWithEmailAndPassword(auth, email, pass);
+                let targetEmail = identifier;
+
+                // Jika pengguna memasukkan username (tidak mengandung '@')
+                if (!identifier.includes('@')) {
+                    const cleanIdentifier = identifier.toLowerCase();
+
+                    // 1. Coba cari email yang cocok di Firestore admin_profiles
+                    try {
+                        const profilesSnap = await getDocs(collection(db, "admin_profiles"));
+                        profilesSnap.forEach(docSnap => {
+                            const data = docSnap.data();
+                            if (data.username && data.username.trim().toLowerCase() === cleanIdentifier) {
+                                targetEmail = data.email;
+                            }
+                            if (!targetEmail && data.email) {
+                                const prefix = data.email.split('@')[0].toLowerCase();
+                                if (prefix === cleanIdentifier) {
+                                    targetEmail = data.email;
+                                }
+                            }
+                        });
+                    } catch (dbErr) {
+                        console.warn("Gagal lookup username dari Firestore:", dbErr);
+                    }
+
+                    // 2. Fallback cepat untuk akun admin utama (selalu tembus)
+                    if (!targetEmail || !targetEmail.includes('@')) {
+                        if (cleanIdentifier === 'rasyhz' || cleanIdentifier === 'admin' || cleanIdentifier === 'admin1') {
+                            targetEmail = 'admin1@rasyhz.com';
+                        } else if (cleanIdentifier === 'ucup67' || cleanIdentifier === 'ayi') {
+                            targetEmail = 'ayi@rasyhz.com';
+                        } else {
+                            targetEmail = `${identifier}@rasyhz.com`;
+                        }
+                    }
+                }
+
+                await signInWithEmailAndPassword(auth, targetEmail, pass);
                 closeLoginModal();
                 showToast("Login berhasil! Selamat datang Admin.");
             } catch (err) {
                 let errMsg = err.code || err.message;
                 if (errMsg.includes('auth/invalid-credential') || errMsg.includes('auth/wrong-password') || errMsg.includes('auth/user-not-found')) {
-                    errMsg = "Email atau password admin salah!";
+                    errMsg = "Username/Email atau password admin salah!";
                 } else if (errMsg.includes('auth/invalid-email')) {
-                    errMsg = "Format email tidak valid!";
+                    errMsg = "Format email atau username tidak valid!";
                 }
                 showToast("Login gagal: " + errMsg, true);
             } finally {
