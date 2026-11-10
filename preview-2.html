@@ -385,12 +385,15 @@
         /* Cyber Hero Banner Card */
         .cyber-banner-box {
             position: relative;
+            width: 100%;
+            height: 370px;
+            min-height: 370px;
+            max-height: 370px;
             background: #0d0f18;
             border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 26px;
             overflow: hidden;
             box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.55);
-            min-height: 350px;
             transition: border-color 0.5s ease, box-shadow 0.5s ease;
         }
 
@@ -437,18 +440,23 @@
         .cyber-slides-track {
             position: relative;
             width: 100%;
-            min-height: 350px;
+            height: 100%;
+            min-height: 370px;
         }
 
         .cyber-slide-item {
             position: absolute;
             inset: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 38px 46px;
+            padding: 36px 48px 52px;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transition: opacity 0.45s ease, visibility 0.45s ease;
             z-index: 1;
         }
@@ -478,14 +486,18 @@
         .cyber-slide-item.active-slide {
             opacity: 1;
             visibility: visible;
-            position: relative;
+            pointer-events: auto;
             z-index: 2;
         }
 
         .cyber-content-wrap {
+            flex: 1;
             max-width: 560px;
             z-index: 3;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .cyber-badge {
@@ -535,7 +547,8 @@
             font-size: 0.95rem;
             color: #adb0ca;
             line-height: 1.6;
-            margin: 0 0 24px;
+            margin: 0 0 20px;
+            min-height: 48px;
         }
 
         .cyber-actions-row {
@@ -601,6 +614,8 @@
         .cyber-art-box {
             position: relative;
             flex-shrink: 0;
+            width: 320px;
+            height: 285px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -618,9 +633,12 @@
         }
 
         .cyber-art-img {
-            max-width: 320px;
-            max-height: 310px;
+            max-width: 290px;
+            max-height: 275px;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            object-position: center;
             position: relative;
             z-index: 3;
             transition: transform 0.35s ease, filter 0.35s ease;
@@ -885,27 +903,47 @@
             .cyber-chip {
                 flex-shrink: 0;
             }
+            .cyber-banner-box {
+                height: 460px;
+                min-height: 460px;
+                max-height: 460px;
+            }
+            .cyber-slides-track {
+                height: 100%;
+                min-height: 460px;
+            }
             .cyber-slide-item {
-                padding: 24px 18px 46px;
+                height: 100%;
+                padding: 22px 18px 52px;
                 flex-direction: column-reverse;
+                justify-content: flex-end;
                 text-align: left;
                 align-items: flex-start;
+                box-sizing: border-box;
+            }
+            .cyber-content-wrap {
+                width: 100%;
+                max-width: 100%;
             }
             .cyber-title {
-                font-size: 1.6rem;
+                font-size: 1.55rem;
+                margin: 0 0 8px;
             }
             .cyber-desc {
-                font-size: 0.85rem;
-                margin-bottom: 16px;
+                font-size: 0.84rem;
+                line-height: 1.45;
+                margin: 0 0 14px;
+                min-height: 38px;
             }
             .cyber-art-box {
                 width: 100%;
-                justify-content: flex-end;
-                margin-bottom: 10px;
+                height: 160px;
+                justify-content: center;
+                margin-bottom: 8px;
             }
             .cyber-art-img {
-                max-width: 170px;
-                max-height: 170px;
+                max-width: 160px;
+                max-height: 155px;
             }
             .cyber-bottom-bar {
                 left: 18px;
@@ -1051,7 +1089,7 @@
                         <div class="cyber-art-box">
                             <div class="cyber-art-halo" style="background:radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,170,0,0.1) 60%, transparent 80%);"></div>
                             <img src="assets/logo.png"
-                                 alt="LXVOID Logo Guild" class="cyber-art-img" style="border-radius: 50%; max-width: 240px; max-height: 240px;" loading="lazy">
+                                 alt="LXVOID Logo Guild" class="cyber-art-img" style="border-radius: 50%; width: 240px; height: 240px; object-fit: contain;" loading="lazy">
                         </div>
                     </div>
 

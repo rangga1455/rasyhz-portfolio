@@ -325,12 +325,14 @@
         .showcase-container {
             position: relative;
             width: 100%;
+            height: 360px;
+            min-height: 360px;
+            max-height: 360px;
             border-radius: 26px;
             overflow: hidden;
             background: #0d1222;
             border: 1px solid rgba(138, 180, 248, 0.25);
             box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.55);
-            min-height: 340px;
             transition: border-color 0.5s ease, box-shadow 0.5s ease;
         }
 
@@ -368,19 +370,24 @@
         .showcase-slides {
             position: relative;
             width: 100%;
-            min-height: 340px;
+            height: 100%;
+            min-height: 360px;
         }
 
         .showcase-slide {
             position: absolute;
             inset: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 40px 48px;
+            padding: 36px 48px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
             z-index: 1;
         }
 
@@ -416,14 +423,18 @@
         .showcase-slide.active-slide {
             opacity: 1;
             visibility: visible;
-            position: relative;
+            pointer-events: auto;
             z-index: 2;
         }
 
         .slide-content-left {
+            flex: 1;
             max-width: 580px;
             z-index: 3;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .slide-badge-pill {
@@ -467,20 +478,21 @@
         }
 
         .slide-title {
-            font-size: 2.4rem;
+            font-size: 2.3rem;
             font-weight: 900;
             color: #ffffff;
-            margin: 0 0 12px;
+            margin: 0 0 10px;
             line-height: 1.2;
             letter-spacing: -0.5px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .slide-desc {
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             color: #cbd1ea;
             line-height: 1.6;
-            margin: 0 0 24px;
+            margin: 0 0 22px;
+            min-height: 48px;
             max-width: 520px;
         }
 
@@ -568,6 +580,8 @@
         .slide-art-right {
             position: relative;
             flex-shrink: 0;
+            width: 320px;
+            height: 290px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -613,9 +627,12 @@
         }
 
         .slide-art-img {
-            max-width: 320px;
-            max-height: 310px;
+            max-width: 290px;
+            max-height: 280px;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            object-position: center;
             position: relative;
             z-index: 3;
             transition: transform 0.4s ease, filter 0.4s ease;
@@ -981,27 +998,47 @@
             .modern-chip {
                 flex-shrink: 0;
             }
+            .showcase-container {
+                height: 440px;
+                min-height: 440px;
+                max-height: 440px;
+            }
+            .showcase-slides {
+                height: 100%;
+                min-height: 440px;
+            }
             .showcase-slide {
-                padding: 26px 20px 50px;
+                height: 100%;
+                padding: 22px 20px 48px;
                 flex-direction: column-reverse;
+                justify-content: flex-end;
                 text-align: left;
                 align-items: flex-start;
+                box-sizing: border-box;
+            }
+            .slide-content-left {
+                width: 100%;
+                max-width: 100%;
             }
             .slide-title {
-                font-size: 1.65rem;
+                font-size: 1.55rem;
+                margin: 0 0 8px;
             }
             .slide-desc {
-                font-size: 0.86rem;
-                margin-bottom: 18px;
+                font-size: 0.84rem;
+                line-height: 1.45;
+                margin: 0 0 14px;
+                min-height: 38px;
             }
             .slide-art-right {
                 width: 100%;
-                justify-content: flex-end;
-                margin-bottom: 10px;
+                height: 160px;
+                justify-content: center;
+                margin-bottom: 8px;
             }
             .slide-art-img {
-                max-width: 180px;
-                max-height: 180px;
+                max-width: 160px;
+                max-height: 155px;
             }
             .showcase-arrow-btn {
                 display: none;
@@ -1125,7 +1162,7 @@
                         <div class="slide-art-right">
                             <div class="slide-art-glow gold-glow"></div>
                             <img src="assets/logo.png"
-                                 alt="LXVOID Logo Guild" class="slide-art-img" style="border-radius: 50%; max-width: 240px; max-height: 240px;" loading="lazy">
+                                 alt="LXVOID Logo Guild" class="slide-art-img" style="border-radius: 50%; width: 240px; height: 240px; object-fit: contain;" loading="lazy">
                         </div>
                     </div>
 
