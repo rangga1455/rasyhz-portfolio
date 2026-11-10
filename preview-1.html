@@ -1095,21 +1095,60 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile Optimization */
+        /* Mobile Optimization (Android & Responsive Phones) */
         @media (max-width: 860px) {
+            body {
+                padding-bottom: 74px !important;
+            }
+
+            /* Preview Top Bar on Mobile */
+            .preview-top-bar {
+                padding: 6px 12px;
+                gap: 6px;
+            }
+            .preview-info-tag {
+                font-size: 0.72rem;
+            }
+            .preview-badge-pill {
+                font-size: 0.65rem;
+                padding: 2px 6px;
+            }
+            .preview-nav-btns {
+                gap: 5px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            .preview-nav-btns::-webkit-scrollbar {
+                display: none;
+            }
+            .preview-btn {
+                padding: 4px 9px;
+                font-size: 0.72rem;
+                white-space: nowrap;
+            }
+
+            /* Site Header on Mobile */
             .site-header-holder {
-                height: 56px;
-                margin: 8px auto 6px;
+                height: 54px;
+                margin: 6px auto 4px;
                 padding: 0 12px;
             }
             .modern-reference-header {
                 border-radius: 14px;
-                padding: 10px 14px;
+                padding: 8px 12px;
+            }
+            .ref-brand-logo {
+                width: 32px;
+                height: 32px;
+            }
+            .ref-brand-name {
+                font-size: 1.05rem;
             }
             .modern-reference-header.header-scrolled {
-                top: 8px;
+                top: 6px;
                 width: calc(100% - 24px);
-                padding: 8px 14px;
+                padding: 7px 12px;
                 border-radius: 14px;
             }
             .ref-header-center {
@@ -1120,13 +1159,17 @@
             }
             .ref-btn-solid {
                 padding: 6px 14px;
-                font-size: 0.78rem;
+                font-size: 0.76rem;
+                border-radius: 20px;
             }
+
+            /* Quick Ticker Chips */
             .modern-quick-bar {
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 justify-content: flex-start;
-                padding: 4px 14px;
+                padding: 4px 12px;
+                margin: 4px auto 14px;
                 scrollbar-width: none;
             }
             .modern-quick-bar::-webkit-scrollbar {
@@ -1134,92 +1177,272 @@
             }
             .modern-chip {
                 flex-shrink: 0;
+                padding: 5px 11px;
+                font-size: 0.74rem;
+            }
+
+            /* Hero Banner Box: Sleek 310px Side-by-Side (Sesuai Referensi Layla) */
+            .showcase-carousel-wrapper {
+                margin: 8px auto 20px;
+                padding: 0 12px;
+                overflow: visible;
             }
             .showcase-container {
-                height: 440px;
-                min-height: 440px;
-                max-height: 440px;
+                height: 310px;
+                min-height: 310px;
+                max-height: 310px;
+                border-radius: 22px;
+                overflow: visible;
             }
             .showcase-slides {
                 height: 100%;
-                min-height: 440px;
+                min-height: 310px;
+                overflow: visible;
             }
             .showcase-slide {
                 height: 100%;
-                padding: 22px 20px 48px;
-                flex-direction: column-reverse;
-                justify-content: flex-end;
-                text-align: left;
-                align-items: flex-start;
+                padding: 24px 18px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 22px;
+                overflow: visible;
                 box-sizing: border-box;
             }
+
+            /* Left Content (Text, Badge, Title, CTA) */
             .slide-content-left {
-                width: 100%;
-                max-width: 100%;
+                width: 58%;
+                max-width: 58%;
+                z-index: 5;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .slide-badge-pill {
+                font-size: 0.66rem;
+                letter-spacing: 0.5px;
+                margin-bottom: 6px;
+                gap: 4px;
             }
             .slide-title {
-                font-size: 1.55rem;
-                margin: 0 0 8px;
+                font-size: 1.25rem;
+                font-weight: 900;
+                line-height: 1.2;
+                margin: 0 0 6px;
             }
             .slide-desc {
-                font-size: 0.84rem;
-                line-height: 1.45;
-                margin: 0 0 14px;
-                min-height: 38px;
+                font-size: 0.74rem;
+                line-height: 1.4;
+                margin: 0 0 12px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                color: #a4a7bf;
+                min-height: auto;
             }
+            .slide-btn-cta {
+                padding: 7px 15px;
+                font-size: 0.76rem;
+                border-radius: 18px;
+            }
+
+            /* Right Side Character: Grounded firmly to bottom: 0, Head pops out ~35px at top */
             .slide-art-right {
-                width: 100%;
-                height: 160px;
-                justify-content: center;
-                margin-bottom: 8px;
-            }
-            .slide-art-img {
-                max-width: 160px;
-                max-height: 155px;
-            }
-            .showcase-slide[data-index="0"] .slide-art-right {
-                position: relative;
-                right: auto;
-                bottom: auto;
-                width: 100%;
-                height: 190px;
+                position: absolute;
+                right: 4px;
+                bottom: 0;
+                width: 46%;
+                height: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: center;
-                margin-bottom: 8px;
+                z-index: 4;
+                overflow: visible;
+                pointer-events: none;
+                margin-bottom: 0;
             }
-            .showcase-slide[data-index="0"] .slide-art-glow.gold-sun-glow {
-                width: 220px;
-                height: 220px;
-                bottom: auto;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+
+            /* Violet Evergarden on Mobile */
+            .showcase-slide[data-index="0"] .slide-art-right {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 48%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                overflow: visible;
+                z-index: 4;
+                margin-bottom: 0;
             }
             .showcase-slide[data-index="0"] .slide-art-img {
-                max-width: 230px;
-                max-height: 230px;
-                height: 220px;
-                transform: translateY(-6px);
-                object-position: center;
+                height: 345px;
+                max-height: none;
+                max-width: none;
+                width: auto;
+                object-fit: contain;
+                object-position: bottom center;
+                display: block;
+                transform: translateY(0);
+                filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 16px rgba(245, 208, 134, 0.25));
             }
+            .showcase-slide[data-index="0"] .slide-art-glow.gold-sun-glow {
+                width: 260px;
+                height: 260px;
+                bottom: 10px;
+                left: 50%;
+                top: auto;
+                transform: translateX(-50%);
+                filter: blur(36px);
+            }
+
+            /* Slide 1: Hu Tao on Mobile */
+            .showcase-slide[data-index="1"] .slide-art-img {
+                height: 310px;
+                max-height: none;
+                max-width: none;
+                width: auto;
+                object-fit: contain;
+                object-position: bottom center;
+            }
+            .showcase-slide[data-index="1"] .slide-art-glow.red-glow {
+                width: 250px;
+                height: 250px;
+                bottom: 10px;
+                left: 50%;
+                top: auto;
+                transform: translateX(-50%);
+                filter: blur(34px);
+            }
+
+            /* Slide 2: History FF Logo on Mobile */
+            .showcase-slide[data-index="2"] .slide-art-img {
+                width: 140px !important;
+                height: 140px !important;
+                max-width: 140px !important;
+                max-height: 140px !important;
+                object-fit: contain;
+                margin-bottom: 45px;
+            }
+
+            /* Slide 3: Raiden Shogun on Mobile */
+            .showcase-slide[data-index="3"] .slide-art-img {
+                height: 310px;
+                max-height: none;
+                max-width: none;
+                width: auto;
+                object-fit: contain;
+                object-position: bottom center;
+            }
+
+            /* Arrows & Pagination */
             .showcase-arrow-btn {
                 display: none;
             }
             .showcase-pagination {
-                left: 20px;
-                bottom: 14px;
+                left: 18px;
+                bottom: 10px;
+                gap: 5px;
+                z-index: 10;
+            }
+            .pagination-dash {
+                width: 16px;
+                height: 4px;
+            }
+            .pagination-dash.active {
+                width: 28px;
+            }
+
+            /* Stats Section on Mobile */
+            .stats-section {
+                margin: 20px auto 26px !important;
+                padding: 0 12px !important;
+            }
+            .stats-grid {
+                padding: 14px 12px !important;
+                gap: 10px !important;
+                border-radius: 16px !important;
+            }
+            .stat-card {
+                padding: 12px 10px !important;
+            }
+            .stat-icon {
+                font-size: 1.5rem !important;
+                margin-bottom: 4px !important;
+            }
+            .stat-number {
+                font-size: 1.45rem !important;
+            }
+            .stat-plus, .stat-unit {
+                font-size: 1.1rem !important;
+            }
+            .stat-label {
+                font-size: 0.76rem !important;
+            }
+
+            /* Glass Grid Cards on Mobile */
+            .lower-hub-section {
+                margin: 0 auto 24px !important;
+                padding: 0 12px !important;
             }
             .glass-grid-3 {
                 grid-template-columns: 1fr;
-                gap: 14px;
+                gap: 12px;
+            }
+            .glass-card-item {
+                padding: 22px 18px;
+                border-radius: 18px;
+            }
+            .glass-card-item h3 {
+                font-size: 1.2rem;
+            }
+            .glass-card-item p {
+                font-size: 0.86rem;
+                margin-bottom: 14px;
             }
             .minimal-discord-bar {
                 flex-direction: column;
                 align-items: stretch;
+                padding: 14px 16px;
+                border-radius: 16px;
             }
             .btn-discord-mini {
                 justify-content: center;
+            }
+
+            /* Social Section on Mobile */
+            .social-section {
+                padding: 0 12px 30px !important;
+            }
+            .social-section h2 {
+                font-size: 1.4rem !important;
+            }
+            .social-desc {
+                font-size: 0.86rem !important;
+                margin-bottom: 16px !important;
+            }
+            .social-links-container {
+                gap: 8px !important;
+            }
+            .social-btn {
+                font-size: 0.84rem !important;
+                padding: 10px 14px !important;
+                flex: 1 1 calc(50% - 8px);
+                justify-content: center;
+            }
+
+            /* Floating Switcher Pill (Above Android Bottom Bar) */
+            .preview-floating-pill {
+                bottom: 68px;
+                right: 14px;
+                padding: 6px 14px;
+                font-size: 0.74rem;
+                z-index: 1002;
             }
         }
         .preview-floating-pill {
