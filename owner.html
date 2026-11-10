@@ -227,22 +227,37 @@
     <!-- Toast Notification -->
     <div id="toast" class="toast">Data berhasil diperbarui!</div>
 
-    <!-- ================= NAVBAR ================= -->
-    <header class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge">
-            <h1 class="logo">LXVOID COMMUNITY</h1>
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="presets.html">Presets</a>
-            <a href="joki.html">Joki Genshin</a>
-            <a href="history-ff.html">History FF</a>
-            <a href="owner.html" class="nav-highlight">👑 Owner Control</a>
-            <a href="links.html">Links</a>
-            <a href="index.html" class="admin-login-btn" style="text-decoration:none;">🏠 Ke Web</a>
-        </nav>
-    </header>
+    <!-- ================= MODERN REFERENCE HEADER ================= -->
+    <div class="site-header-holder">
+        <header class="modern-reference-header">
+            <div class="ref-header-inner">
+                <!-- Left: Logo LXVOID + Brand Title -->
+                <div class="ref-header-left">
+                    <a href="index.html" class="ref-brand-link" title="LXVOID">
+                        <img src="assets/logo.png" alt="LXVOID Logo" class="ref-brand-logo" decoding="async">
+                        <span class="ref-brand-name">LXVOID</span>
+                    </a>
+                </div>
+
+                <!-- Center: Nav Links with Reference Underline Indicator -->
+                <nav class="ref-header-center">
+                    <a href="index.html" class="ref-nav-item">Home</a>
+                    <a href="presets.html" class="ref-nav-item">Presets</a>
+                    <a href="joki.html" class="ref-nav-item">Joki Genshin</a>
+                    <a href="history-ff.html" class="ref-nav-item">History FF</a>
+                    <a href="owner.html" class="ref-nav-item active-item">👑 Owner Control</a>
+                    <a href="links.html" class="ref-nav-item">Links</a>
+                </nav>
+
+                <!-- Right: Action Pills -->
+                <div class="ref-header-right">
+                    <a href="index.html" class="ref-btn-solid">
+                        <span>🏠 Ke Web</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </div>
 
     <main class="owner-view-wrap">
         <!-- ================= GUARD 1: LOGIN OWNER REQUIRED ================= -->

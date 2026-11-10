@@ -26,29 +26,42 @@
 <body>
     <div id="toast" class="toast">Data berhasil diperbarui!</div>
 
-    <!-- ================= NAVBAR ================= -->
-    <header class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="assets/logo.png" alt="TEAM LXVOID Logo" class="nav-logo-badge">
-            <h1 class="logo">TEAM LXVOID</h1>
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="presets.html">Presets</a>
-            <a href="joki.html">Joki Genshin</a>
-            <a href="history-ff.html" class="nav-highlight">History FF</a>
-            <a href="links.html">Links</a>
-            <button id="auth-btn" class="admin-login-btn">Login Admin</button>
-            <div id="admin-user-menu" class="admin-user-menu hidden">
-                <button type="button" id="open-profile-btn" class="nav-user-pill" title="Buka Pengaturan Profil Admin">
-                    <img id="nav-user-avatar" src="" alt="Avatar" class="nav-avatar-mini hidden">
-                    <span id="nav-user-icon" class="nav-avatar-fallback">👤</span>
-                    <span id="nav-user-name" class="nav-user-name">Admin</span>
-                    <span class="nav-user-caret">⚙️</span>
-                </button>
+    <!-- ================= MODERN REFERENCE HEADER ================= -->
+    <div class="site-header-holder">
+        <header class="modern-reference-header">
+            <div class="ref-header-inner">
+                <!-- Left: Logo LXVOID + Brand Title -->
+                <div class="ref-header-left">
+                    <a href="index.html" class="ref-brand-link" title="TEAM LXVOID">
+                        <img src="assets/logo.png" alt="TEAM LXVOID Logo" class="ref-brand-logo" decoding="async">
+                        <span class="ref-brand-name">TEAM LXVOID</span>
+                    </a>
+                </div>
+
+                <!-- Center: Nav Links with Reference Underline Indicator -->
+                <nav class="ref-header-center">
+                    <a href="index.html" class="ref-nav-item">Home</a>
+                    <a href="presets.html" class="ref-nav-item">Presets</a>
+                    <a href="joki.html" class="ref-nav-item">Joki Genshin</a>
+                    <a href="history-ff.html" class="ref-nav-item active-item">History FF</a>
+                    <a href="links.html" class="ref-nav-item">Links</a>
+                </nav>
+
+                <!-- Right: Action Pills & Admin Auth -->
+                <div class="ref-header-right">
+                    <button id="auth-btn" class="admin-login-btn ref-btn-outline" style="cursor:pointer;">Login Admin</button>
+                    <div id="admin-user-menu" class="admin-user-menu hidden">
+                        <button type="button" id="open-profile-btn" class="nav-user-pill" title="Buka Pengaturan Profil Admin">
+                            <img id="nav-user-avatar" src="" alt="Avatar" class="nav-avatar-mini hidden">
+                            <span id="nav-user-icon" class="nav-avatar-fallback">👤</span>
+                            <span id="nav-user-name" class="nav-user-name">Admin</span>
+                            <span class="nav-user-caret">⚙️</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </header>
+        </header>
+    </div>
 
     <main>
         <section class="gallery-section">

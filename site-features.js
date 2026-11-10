@@ -885,14 +885,45 @@
         }, { passive: true });
     }
 
+    // ================= 3. MODERN REFERENCE HEADER SCROLL BEHAVIOR =================
+    function initHeaderScroll() {
+        const header = document.querySelector('.modern-reference-header') || document.querySelector('.cyber-reference-header');
+        if (!header) return;
+
+        const holder = document.querySelector('.site-header-holder');
+        let isScrolled = false;
+
+        const updateHeader = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const triggerPoint = holder ? Math.max(25, (holder.offsetTop || 0) + 10) : 25;
+
+            if (scrollY > triggerPoint) {
+                if (!isScrolled) {
+                    isScrolled = true;
+                    header.classList.add('header-scrolled');
+                }
+            } else {
+                if (isScrolled) {
+                    isScrolled = false;
+                    header.classList.remove('header-scrolled');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        updateHeader();
+    }
+
     // ================= INITIALIZATION =================
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initAnnouncement();
             initMusicPlayer();
+            initHeaderScroll();
         });
     } else {
         initAnnouncement();
         initMusicPlayer();
+        initHeaderScroll();
     }
 })();
