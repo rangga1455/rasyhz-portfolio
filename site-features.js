@@ -12,6 +12,12 @@
     async function initAnnouncement() {
         if (sessionStorage.getItem('lxvoid_announcement_closed')) return;
 
+        // Jangan tampilkan banner pengumuman di halaman Sosial / Links (links.html)
+        const path = window.location.pathname.toLowerCase();
+        if (path.endsWith('links.html') || path.endsWith('/links') || path.endsWith('/links/') || document.body.classList.contains('lynkid-body')) {
+            return;
+        }
+
         const projectId = 'ff-ft-1c86d';
         const docUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/site_settings/announcement`;
 
