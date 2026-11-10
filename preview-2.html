@@ -451,6 +451,12 @@
             border-left-color: #a855f7;
         }
 
+        .cyber-badge.badge-red {
+            background: rgba(255, 87, 34, 0.12);
+            color: #ff7043;
+            border-left-color: #ff5722;
+        }
+
         .cyber-badge.badge-gold {
             background: rgba(255, 215, 0, 0.12);
             color: #ffd700;
@@ -888,16 +894,19 @@
             <!-- Segmented Category Tabs -->
             <div class="portal-category-tabs">
                 <button type="button" class="portal-tab-btn active-tab" onclick="jumpToTab(0)">
-                    <span>🗺️ Joki Genshin</span>
+                    <span>👋 Welcome</span>
                 </button>
                 <button type="button" class="portal-tab-btn" onclick="jumpToTab(1)">
-                    <span>⚡ Presets XML</span>
+                    <span>🗺️ Joki Genshin</span>
                 </button>
                 <button type="button" class="portal-tab-btn" onclick="jumpToTab(2)">
-                    <span>🏆 Turnamen FF</span>
+                    <span>🏆 History FF</span>
+                </button>
+                <button type="button" class="portal-tab-btn" onclick="jumpToTab(3)">
+                    <span>⚡ Presets (Soon)</span>
                 </button>
                 <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="portal-tab-btn">
-                    <span>💬 Discord (1.5K+) ↗</span>
+                    <span>💬 Discord ↗</span>
                 </a>
             </div>
 
@@ -907,57 +916,75 @@
                 <div class="cyber-orb orb-right"></div>
 
                 <div class="cyber-slides-track">
-                    <!-- Slide 1: Layla / Genshin Services -->
+                    <!-- Slide 1: Welcome / Violet Evergarden -->
                     <div class="cyber-slide-item active-slide" data-tab="0">
                         <div class="cyber-content-wrap">
-                            <span class="cyber-badge">✨ OPEN JOKI • 100% MANUAL</span>
-                            <h2 class="cyber-title">Layla & Joki Genshin Impact</h2>
+                            <span class="cyber-badge">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
+                            <h2 class="cyber-title">Selamat Datang di LXVOID</h2>
+                            <p class="cyber-desc">Komunitas gaming, jasa joki Genshin Impact terpercaya, dan ekosistem video editing kreatif oleh Rasyhz.</p>
+                            <div class="cyber-actions-row">
+                                <a href="#layanan" class="btn-cyber-main">Jelajahi Hub →</a>
+                                <a href="owner.html" class="btn-cyber-alt">Profil Owner</a>
+                            </div>
+                        </div>
+                        <div class="cyber-art-box">
+                            <div class="cyber-art-halo"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/violet-evergarden/images/0/0e/Violet-portal.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Violet Evergarden - Welcome LXVOID" class="cyber-art-img" loading="eager">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Joki Genshin Impact / Hu Tao -->
+                    <div class="cyber-slide-item" data-tab="1">
+                        <div class="cyber-content-wrap">
+                            <span class="cyber-badge badge-red">🔥 OPEN JOKI • 100% MANUAL</span>
+                            <h2 class="cyber-title">Hu Tao & Joki Genshin Impact</h2>
                             <p class="cyber-desc">Layanan explore map Teyvat per daerah, oculus hunting, quest dunia, hingga Abyss 36★ aman, cepat, dan terpercaya.</p>
                             <div class="cyber-actions-row">
-                                <a href="joki.html" class="btn-cyber-main">Pesan Joki Sekarang →</a>
+                                <a href="joki.html" class="btn-cyber-main" style="background:#ff5722;color:#ffffff;box-shadow:0 0 16px rgba(255,87,34,0.5);">Pesan Joki Sekarang →</a>
                                 <a href="joki.html" class="btn-cyber-alt">Daftar Harga</a>
                             </div>
                         </div>
                         <div class="cyber-art-box">
-                            <div class="cyber-art-halo"></div>
-                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Layla_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
-                                 alt="Layla Genshin Services" class="cyber-art-img" loading="eager">
+                            <div class="cyber-art-halo" style="background:radial-gradient(circle, rgba(255,87,34,0.3) 0%, rgba(255,152,0,0.1) 60%, transparent 80%);"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/5/59/Character_Hu_Tao_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Hu Tao Genshin Services" class="cyber-art-img" loading="lazy">
                         </div>
                     </div>
 
-                    <!-- Slide 2: Raiden Shogun / Presets AMV -->
-                    <div class="cyber-slide-item" data-tab="1">
-                        <div class="cyber-content-wrap">
-                            <span class="cyber-badge badge-purple">⚡ PRESETS & ASET • 60 FPS</span>
-                            <h2 class="cyber-title">Alight Motion XML & CapCut</h2>
-                            <p class="cyber-desc">Download puluhan template preset AMV beat sync, coloring CC aesthetic, dan template CapCut Velocity siap pakai secara instan.</p>
-                            <div class="cyber-actions-row">
-                                <a href="presets.html" class="btn-cyber-main btn-purple">Download Presets →</a>
-                                <a href="presets.html" class="btn-cyber-alt">35+ XML Gratis</a>
-                            </div>
-                        </div>
-                        <div class="cyber-art-box">
-                            <div class="cyber-art-halo"></div>
-                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a3/Character_Raiden_Shogun_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
-                                 alt="Raiden Shogun Editing" class="cyber-art-img" loading="lazy">
-                        </div>
-                    </div>
-
-                    <!-- Slide 3: Furina / Esports Free Fire -->
+                    <!-- Slide 3: History FF / LXVOID Logo -->
                     <div class="cyber-slide-item" data-tab="2">
                         <div class="cyber-content-wrap">
                             <span class="cyber-badge badge-gold">🏆 ESPORTS & GUILD • BOOYAH</span>
-                            <h2 class="cyber-title">History & Turnamen Free Fire</h2>
+                            <h2 class="cyber-title">LXVOID Guild & History FF</h2>
                             <p class="cyber-desc">Dokumentasi match scrim, rekap Booyah turnamen, sertifikat juara, dan open member guild resmi LXVOID Community.</p>
                             <div class="cyber-actions-row">
-                                <a href="history-ff.html" class="btn-cyber-main" style="background:#ffd700;color:#0b0c10;">Rekap Turnamen →</a>
+                                <a href="history-ff.html" class="btn-cyber-main" style="background:#ffd700;color:#0b0c10;box-shadow:0 0 16px rgba(255,215,0,0.4);">Rekap Turnamen →</a>
                                 <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="btn-cyber-alt">Gabung Guild ↗</a>
                             </div>
                         </div>
                         <div class="cyber-art-box">
-                            <div class="cyber-art-halo"></div>
-                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Furina_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
-                                 alt="Furina Guild Esports" class="cyber-art-img" loading="lazy">
+                            <div class="cyber-art-halo" style="background:radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,170,0,0.1) 60%, transparent 80%);"></div>
+                            <img src="assets/logo.png"
+                                 alt="LXVOID Logo Guild" class="cyber-art-img" style="border-radius: 50%; box-shadow: 0 0 35px rgba(255,215,0,0.35); max-width: 240px; max-height: 240px;" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Alight Motion XML & CapCut (Coming Soon) -->
+                    <div class="cyber-slide-item" data-tab="3">
+                        <div class="cyber-content-wrap">
+                            <span class="cyber-badge badge-purple">🔒 COMING SOON • SEGERA HADIR</span>
+                            <h2 class="cyber-title">Alight Motion XML & CapCut</h2>
+                            <p class="cyber-desc">Koleksi preset XML 60FPS, coloring CC aesthetic, dan template CapCut Velocity sedang dipersiapkan untuk rilis mendatang.</p>
+                            <div class="cyber-actions-row">
+                                <a href="javascript:void(0)" onclick="copyText('', 'Preset XML & CapCut akan segera hadir! Nantikan update selanjutnya.')" class="btn-cyber-main" style="background:rgba(255,255,255,0.08);color:#cbd5e1;border:1px dashed rgba(255,255,255,0.3);box-shadow:none;cursor:pointer;">🔒 Segera Hadir</a>
+                                <a href="javascript:void(0)" onclick="copyText('', 'Sedang dalam tahap kurasi dan optimasi!')" class="btn-cyber-alt">Tahap Optimasi</a>
+                            </div>
+                        </div>
+                        <div class="cyber-art-box">
+                            <div class="cyber-art-halo" style="background:radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(138,75,255,0.1) 60%, transparent 80%);"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a3/Character_Raiden_Shogun_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Raiden Shogun Editing Coming Soon" class="cyber-art-img" style="opacity: 0.85;" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -968,6 +995,7 @@
                         <span class="cyber-dot active" onclick="jumpToTab(0)"></span>
                         <span class="cyber-dot" onclick="jumpToTab(1)"></span>
                         <span class="cyber-dot" onclick="jumpToTab(2)"></span>
+                        <span class="cyber-dot" onclick="jumpToTab(3)"></span>
                     </div>
                     <div class="cyber-arrow-pills">
                         <button class="cyber-arrow-pill" onclick="slideStep(-1)" aria-label="Slide sebelumnya">‹</button>
@@ -1016,7 +1044,7 @@
         </section>
 
         <!-- ================= LOWER HUB: DUAL SPLIT CARDS & LIVE STATUS ================= -->
-        <section class="cyber-split-section">
+        <section class="cyber-split-section" id="layanan">
             <div class="split-cards-grid">
                 <!-- Card A: Creative Lab -->
                 <a href="presets.html" class="split-card split-cyan">
@@ -1171,7 +1199,7 @@
                 s.classList.toggle('active-slide', i === cyberIndex);
             });
             tabBtns.forEach((b, i) => {
-                if (i < 3) b.classList.toggle('active-tab', i === cyberIndex);
+                if (b.tagName === 'BUTTON') b.classList.toggle('active-tab', i === cyberIndex);
             });
             cyberDots.forEach((d, i) => {
                 d.classList.toggle('active', i === cyberIndex);
