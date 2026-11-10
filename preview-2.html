@@ -689,27 +689,54 @@
             transform: scale(1.05) translateY(-4px);
         }
 
-        /* Violet Evergarden 3D Pop-out Effect (Extends above banner box) */
-        .cyber-slide-item[data-tab="0"] .cyber-art-box {
-            position: relative;
+        /* Violet Evergarden 3D Pop-out Effect (Firmly grounded at bottom, head extends above banner) */
+        .cyber-slide-item[data-tab="0"] {
             overflow: visible;
+        }
+
+        .cyber-slide-item[data-tab="0"] .cyber-art-box {
+            position: absolute;
+            right: 48px;
+            bottom: 0;
+            width: 450px;
+            height: 480px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: visible;
+            pointer-events: none;
             z-index: 10;
         }
 
+        .cyber-slide-item[data-tab="0"] .cyber-art-halo {
+            position: absolute;
+            width: 440px;
+            height: 440px;
+            bottom: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 208, 134, 0.38) 0%, rgba(27, 50, 92, 0.3) 50%, transparent 75%);
+            filter: blur(48px);
+            pointer-events: none;
+        }
+
         .cyber-slide-item[data-tab="0"] .cyber-art-img {
-            max-width: 420px;
-            max-height: 495px;
-            height: 485px;
+            max-width: 450px;
+            height: 480px;
             width: auto;
-            transform: translateY(-56px) translateX(8px);
+            object-fit: contain;
+            object-position: bottom center;
+            display: block;
+            transform: none;
+            transform-origin: bottom center;
             filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 24px rgba(245, 208, 134, 0.3));
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 98%);
-            mask-image: linear-gradient(to bottom, black 80%, transparent 98%);
-            transition: transform 0.4s ease, filter 0.4s ease;
+            -webkit-mask-image: none;
+            mask-image: none;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .cyber-banner-box:hover .cyber-slide-item[data-tab="0"] .cyber-art-img {
-            transform: translateY(-60px) translateX(8px) scale(1.02);
+            transform: scale(1.025);
+            filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 28px rgba(245, 208, 134, 0.4));
         }
         .cyber-slide-item[data-tab="1"] .cyber-art-img {
             filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 20px rgba(255, 69, 0, 0.3));
@@ -1079,11 +1106,23 @@
                 max-width: 160px;
                 max-height: 155px;
             }
+            .cyber-slide-item[data-tab="0"] .cyber-art-box {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+                height: 175px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 8px;
+            }
             .cyber-slide-item[data-tab="0"] .cyber-art-img {
                 max-width: 195px;
                 max-height: 195px;
-                height: 190px;
-                transform: translateY(-22px);
+                height: 185px;
+                transform: translateY(-10px);
+                object-position: center;
             }
             .cyber-bottom-bar {
                 left: 18px;
