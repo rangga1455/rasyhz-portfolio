@@ -95,10 +95,229 @@
             border-color: #ff5252;
         }
 
-        /* ================= HERO SHOWCASE CAROUSEL (INSPIRED BY REFERENCE) ================= */
+        /* ================= REDESIGNED MODERN REFERENCE HEADER ================= */
+        .modern-reference-header {
+            max-width: 1140px;
+            margin: 16px auto 10px;
+            padding: 10px 22px;
+            background: rgba(14, 18, 34, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(138, 180, 248, 0.2);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+            position: relative;
+            z-index: 99;
+        }
+
+        /* Header Left: User Pill & Plus Button */
+        .ref-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ref-user-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px;
+            border-radius: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .ref-user-pill:hover {
+            background: rgba(0, 173, 181, 0.15);
+            border-color: rgba(0, 173, 181, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .ref-avatar-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #00adb5;
+        }
+
+        .ref-plus-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #00adb5;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .ref-plus-btn:hover {
+            background: #00adb5;
+            color: #0b0c10;
+            border-color: #00adb5;
+            box-shadow: 0 0 12px rgba(0, 173, 181, 0.5);
+            transform: rotate(90deg);
+        }
+
+        /* Header Center: Nav Links with Reference Indicator */
+        .ref-header-center {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .ref-nav-item {
+            color: #9ea1b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 8px 4px;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .ref-nav-item:hover {
+            color: #ffffff;
+        }
+
+        .ref-nav-item.active-item {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .ref-nav-item.active-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #00adb5;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.7);
+        }
+
+        /* Header Right: Pill Action Buttons */
+        .ref-header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ref-btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 0.84rem;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 24px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .ref-btn-outline:hover {
+            border-color: #00adb5;
+            color: #00adb5;
+            background: rgba(0, 173, 181, 0.1);
+        }
+
+        .ref-btn-solid {
+            background: #00adb5;
+            border: 1px solid #00adb5;
+            color: #0b0c10;
+            font-size: 0.84rem;
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 24px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 14px rgba(0, 173, 181, 0.4);
+        }
+
+        .ref-btn-solid:hover {
+            background: #00c7d1;
+            box-shadow: 0 0 20px rgba(0, 173, 181, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* ================= MODERN QUICK CONTACT TICKER ================= */
+        .modern-quick-bar {
+            max-width: 1140px;
+            margin: 6px auto 18px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modern-chip {
+            background: rgba(22, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.76rem;
+            color: #b0b4cb;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .modern-chip strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .modern-chip:hover {
+            background: rgba(0, 173, 181, 0.12);
+            border-color: rgba(0, 173, 181, 0.4);
+            color: #00adb5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .chip-copy-icon {
+            opacity: 0.5;
+            font-size: 0.72rem;
+            margin-left: 2px;
+            transition: opacity 0.2s ease;
+        }
+
+        .modern-chip:hover .chip-copy-icon {
+            opacity: 1;
+        }
+
+        /* ================= HERO SHOWCASE CAROUSEL ================= */
         .showcase-carousel-wrapper {
             max-width: 1140px;
-            margin: 22px auto 26px;
+            margin: 0 auto 26px;
             padding: 0 16px;
             position: relative;
         }
@@ -114,7 +333,6 @@
             min-height: 340px;
         }
 
-        /* Starry Particle Background Effect */
         .showcase-container::before {
             content: '';
             position: absolute;
@@ -127,7 +345,6 @@
             pointer-events: none;
         }
 
-        /* Slides Track */
         .showcase-slides {
             position: relative;
             width: 100%;
@@ -154,7 +371,6 @@
             z-index: 2;
         }
 
-        /* Left Content */
         .slide-content-left {
             max-width: 580px;
             z-index: 3;
@@ -250,7 +466,6 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.6);
         }
 
-        /* Right Character Artwork */
         .slide-art-right {
             position: relative;
             flex-shrink: 0;
@@ -288,7 +503,6 @@
             transform: scale(1.04) translateY(-4px);
         }
 
-        /* Left/Right Carousel Nav Arrows */
         .showcase-arrow-btn {
             position: absolute;
             top: 50%;
@@ -326,7 +540,6 @@
             right: 2px;
         }
 
-        /* Bottom Pagination Dashes (Directly like reference!) */
         .showcase-pagination {
             position: absolute;
             bottom: 18px;
@@ -519,7 +732,6 @@
             transform: translateX(4px);
         }
 
-        /* Minimal Discord Bar */
         .minimal-discord-bar {
             background: linear-gradient(90deg, rgba(25, 27, 43, 0.7), rgba(30, 25, 48, 0.7));
             backdrop-filter: blur(12px);
@@ -586,6 +798,34 @@
 
         /* Mobile Optimization */
         @media (max-width: 860px) {
+            .modern-reference-header {
+                border-radius: 20px;
+                padding: 10px 14px;
+                margin: 10px 14px 6px;
+            }
+            .ref-header-center {
+                display: none; /* Links in Android Bottom Bar */
+            }
+            .ref-btn-outline {
+                display: none;
+            }
+            .ref-btn-solid {
+                padding: 6px 14px;
+                font-size: 0.78rem;
+            }
+            .modern-quick-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 4px 14px;
+                scrollbar-width: none;
+            }
+            .modern-quick-bar::-webkit-scrollbar {
+                display: none;
+            }
+            .modern-chip {
+                flex-shrink: 0;
+            }
             .showcase-slide {
                 padding: 26px 20px 50px;
                 flex-direction: column-reverse;
@@ -609,7 +849,7 @@
                 max-height: 180px;
             }
             .showcase-arrow-btn {
-                display: none; /* Swipe & pagination on mobile */
+                display: none;
             }
             .showcase-pagination {
                 left: 20px;
@@ -635,7 +875,7 @@
     <div class="preview-top-bar">
         <div class="preview-info-tag">
             <span class="preview-badge-pill">OPSI 1</span>
-            <span>Cosmic Celestial Showcase (Sesuai Referensi Banner)</span>
+            <span>Cosmic Celestial Showcase (Header & Banner Referensi)</span>
         </div>
         <div class="preview-nav-btns">
             <a href="preview-1.html" class="preview-btn active">Opsi 1 (Cosmic Showcase)</a>
@@ -647,42 +887,57 @@
     <!-- Toast Notification -->
     <div id="toast" class="toast">Teks disalin ke clipboard!</div>
 
-    <!-- ================= NAVBAR ================= -->
-    <header class="navbar">
-        <a href="preview-1.html" class="logo-link">
-            <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge">
-            <h1 class="logo">LXVOID COMMUNITY</h1>
-        </a>
-        <nav>
-            <a href="preview-1.html" class="nav-highlight">Home</a>
-            <a href="presets.html">Presets</a>
-            <a href="joki.html">Joki Genshin</a>
-            <a href="history-ff.html">History FF</a>
-            <a href="links.html">Links</a>
+    <!-- ================= MODERN REFERENCE HEADER (SESUAI REFERENSI LAYLA) ================= -->
+    <header class="modern-reference-header">
+        <!-- Left: Profile Badge + Plus Action Button -->
+        <div class="ref-header-left">
+            <a href="owner.html" class="ref-user-pill" title="Profil Owner">
+                <img src="assets/logo.png" alt="LXVOID" class="ref-avatar-img">
+                <span>LXVOID</span>
+            </a>
+            <button type="button" class="ref-plus-btn" onclick="copyText('085397460252', 'Nomor WhatsApp Admin disalin!')" title="Klik Cepat: Salin WhatsApp Admin">+</button>
+        </div>
+
+        <!-- Center: Nav Links with Reference Underline Indicator -->
+        <nav class="ref-header-center">
+            <a href="preview-1.html" class="ref-nav-item active-item">Home</a>
+            <a href="presets.html" class="ref-nav-item">Presets</a>
+            <a href="joki.html" class="ref-nav-item">Joki Genshin</a>
+            <a href="history-ff.html" class="ref-nav-item">History FF</a>
+            <a href="links.html" class="ref-nav-item">Links</a>
         </nav>
+
+        <!-- Right: Action Pills (like Log in / Sign up) -->
+        <div class="ref-header-right">
+            <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="ref-btn-outline">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                </svg>
+                <span>Discord</span>
+            </a>
+            <a href="joki.html" class="ref-btn-solid">
+                <span>⚡ Order Joki</span>
+            </a>
+        </div>
     </header>
 
     <main>
-        <!-- Quick Copy Bar -->
-        <section class="quick-copy-bar">
-            <div class="quick-copy-chip" onclick="copyText('085397460252', 'Nomor WhatsApp disalin!')" title="Klik untuk salin Nomor WhatsApp">
-                <span class="chip-icon">📱</span>
-                <span class="chip-text">WA: <strong>0853-9746-0252</strong></span>
+        <!-- ================= MODERN QUICK CONTACT TICKER (SLIM & CLEAN) ================= -->
+        <section class="modern-quick-bar">
+            <div class="modern-chip" onclick="copyText('085397460252', 'Nomor WhatsApp disalin!')" title="Klik untuk salin">
+                <span>📱 WA: <strong>0853-9746-0252</strong></span>
                 <span class="chip-copy-icon">📋</span>
             </div>
-            <div class="quick-copy-chip" onclick="copyText('1234567890', 'UID Free Fire disalin!')" title="Klik untuk salin UID">
-                <span class="chip-icon">🎮</span>
-                <span class="chip-text">UID: <strong>1234567890</strong></span>
+            <div class="modern-chip" onclick="copyText('1234567890', 'UID Free Fire disalin!')" title="Klik untuk salin">
+                <span>🎮 UID: <strong>1234567890</strong></span>
                 <span class="chip-copy-icon">📋</span>
             </div>
-            <div class="quick-copy-chip" onclick="copyText('rasyhze', 'Discord Tag disalin!')" title="Klik untuk salin Discord Tag">
-                <span class="chip-icon">💬</span>
-                <span class="chip-text">Discord: <strong>rasyhze</strong></span>
+            <div class="modern-chip" onclick="copyText('rasyhze', 'Discord Tag disalin!')" title="Klik untuk salin">
+                <span>💬 Discord: <strong>rasyhze</strong></span>
                 <span class="chip-copy-icon">📋</span>
             </div>
-            <div class="quick-copy-chip" onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')" title="Klik untuk salin Email">
-                <span class="chip-icon">✉️</span>
-                <span class="chip-text">Email: <strong>wjwhaha5@gmail.com</strong></span>
+            <div class="modern-chip" onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')" title="Klik untuk salin">
+                <span>✉️ <strong>wjwhaha5@gmail.com</strong></span>
                 <span class="chip-copy-icon">📋</span>
             </div>
         </section>
@@ -1019,8 +1274,8 @@
         function handleSwipe() {
             const diff = touchEndX - touchStartX;
             if (Math.abs(diff) > 40) {
-                if (diff < 0) changeSlide(1); // Swipe Left -> Next
-                else changeSlide(-1);         // Swipe Right -> Prev
+                if (diff < 0) changeSlide(1);
+                else changeSlide(-1);
             }
         }
 
