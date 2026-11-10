@@ -1233,35 +1233,52 @@
                 display: none !important;
             }
 
-            /* Hero Banner Box: Sized to 295px with Pop-Out Character & Clean Genshin-Style Layout */
+            /* Hero Banner Box: Sized to 305px with Pop-Out Character & Clean Genshin-Style Layout */
             .showcase-carousel-wrapper {
                 margin: 4px auto 14px;
                 padding: 0 10px;
                 overflow: visible;
             }
             .showcase-container {
-                height: 295px;
-                min-height: 295px;
-                max-height: 295px;
+                height: 305px;
+                min-height: 305px;
+                max-height: 305px;
                 border-radius: 22px;
                 overflow: visible;
                 position: relative;
             }
             .showcase-slides {
                 height: 100%;
-                min-height: 295px;
+                min-height: 305px;
                 overflow: visible;
+                position: relative;
             }
+
+            /* All Slides Absolute Positioned (Fixes Slide Stacking Bug!) */
             .showcase-slide {
-                height: 100%;
-                padding: 20px 14px 14px 16px;
+                position: absolute !important;
+                inset: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                padding: 22px 14px 16px 16px;
+                display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
                 border-radius: 22px;
                 overflow: visible;
                 box-sizing: border-box;
-                position: relative;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.35s ease, visibility 0.35s ease;
+                z-index: 1;
+            }
+            .showcase-slide.active-slide {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                z-index: 2 !important;
             }
 
             /* Atmospheric Backgrounds */
@@ -1296,8 +1313,8 @@
 
             /* Left Content */
             .slide-content-left {
-                width: 52%;
-                max-width: 52%;
+                width: 53%;
+                max-width: 53%;
                 z-index: 6;
                 position: relative;
                 display: flex;
@@ -1316,16 +1333,16 @@
                 text-overflow: ellipsis;
                 max-width: 100%;
             }
-            .showcase-title {
-                font-size: 1.15rem;
+            .slide-title {
+                font-size: 1.20rem;
                 font-weight: 900;
-                line-height: 1.22;
+                line-height: 1.2;
                 margin: 0 0 6px;
                 color: #ffffff;
                 text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
             }
             .slide-desc {
-                font-size: 0.72rem;
+                font-size: 0.74rem;
                 line-height: 1.42;
                 margin: 0 0 12px;
                 color: #c4d0ec;
@@ -1340,25 +1357,23 @@
                 margin-bottom: 6px;
             }
             .slide-btn-cta {
-                height: 32px;
-                padding: 0 14px;
-                font-size: 0.74rem;
+                height: 33px;
+                padding: 0 15px;
+                font-size: 0.76rem;
                 font-weight: 800;
-                border-radius: 16px;
+                border-radius: 17px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-            }
-            .btn-outline-glass {
-                display: none;
+                white-space: nowrap;
             }
 
-            /* Right Character Box */
+            /* Right Character Box: Grounded at bottom: -4px */
             .slide-art-right {
                 position: absolute;
                 right: 0;
-                bottom: 0;
+                bottom: -4px;
                 width: 50%;
                 height: 100%;
                 display: flex;
@@ -1373,8 +1388,8 @@
             /* Violet Evergarden on Slide 0 */
             .showcase-slide[data-index="0"] .slide-art-right {
                 position: absolute;
-                right: -36px;
-                bottom: 0;
+                right: -28px;
+                bottom: -4px;
                 width: 52%;
                 height: 100%;
                 display: flex;
@@ -1386,7 +1401,7 @@
                 pointer-events: none;
             }
             .showcase-slide[data-index="0"] .slide-art-img {
-                height: 317px;
+                height: 338px;
                 max-height: none;
                 max-width: none;
                 width: auto;
@@ -1409,11 +1424,11 @@
                 background: radial-gradient(circle, rgba(135, 185, 255, 0.4) 0%, rgba(35, 60, 115, 0.3) 50%, transparent 75%);
             }
 
-            /* Slide 1: Hu Tao */
+            /* Slide 1: Hu Tao (Ghost faded, grounded bottom) */
             .showcase-slide[data-index="1"] .slide-art-right {
                 position: absolute;
-                right: -24px;
-                bottom: 0;
+                right: -22px;
+                bottom: -4px;
                 width: 52%;
                 height: 100%;
                 display: flex;
@@ -1425,14 +1440,14 @@
                 pointer-events: none;
             }
             .showcase-slide[data-index="1"] .slide-art-img {
-                height: 315px;
+                height: 322px;
                 max-height: none;
                 max-width: none;
                 width: auto;
                 object-fit: contain;
                 object-position: bottom right;
-                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
-                mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 32%, black 62%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, transparent 32%, black 62%, black 100%);
             }
             .showcase-slide[data-index="1"] .slide-art-glow {
                 width: 250px;
@@ -1444,7 +1459,7 @@
                 filter: blur(40px);
             }
 
-            /* Slide 2: History FF Logo */
+            /* Slide 2: History FF Guild Logo */
             .showcase-slide[data-index="2"] .slide-art-right {
                 position: absolute;
                 right: 0;
@@ -1457,17 +1472,18 @@
                 z-index: 4;
             }
             .showcase-slide[data-index="2"] .slide-art-img {
-                width: 135px !important;
-                height: 135px !important;
-                max-width: 135px !important;
-                max-height: 135px !important;
+                width: 155px !important;
+                height: 155px !important;
+                max-width: 155px !important;
+                max-height: 155px !important;
                 object-fit: contain;
-                margin-bottom: 24px;
-                margin-right: 14px;
+                margin: 0 10px 0 0 !important;
+                border-radius: 50%;
+                box-shadow: 0 0 28px rgba(0, 173, 181, 0.45);
             }
             .showcase-slide[data-index="2"] .slide-art-glow {
-                width: 220px;
-                height: 220px;
+                width: 240px;
+                height: 240px;
                 bottom: 30px;
                 right: 0;
                 left: auto;
@@ -1478,8 +1494,8 @@
             /* Slide 3: Raiden Shogun */
             .showcase-slide[data-index="3"] .slide-art-right {
                 position: absolute;
-                right: -24px;
-                bottom: 0;
+                right: -22px;
+                bottom: -4px;
                 width: 52%;
                 height: 100%;
                 display: flex;
@@ -1491,14 +1507,14 @@
                 pointer-events: none;
             }
             .showcase-slide[data-index="3"] .slide-art-img {
-                height: 315px;
+                height: 320px;
                 max-height: none;
                 max-width: none;
                 width: auto;
                 object-fit: contain;
                 object-position: bottom right;
-                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
-                mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 24%, black 54%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, transparent 24%, black 54%, black 100%);
             }
             .showcase-slide[data-index="3"] .slide-art-glow {
                 width: 250px;
@@ -1510,79 +1526,7 @@
                 filter: blur(40px);
             }
 
-            /* Slide Indicators & Minimal Arrow Capsule */
-            .showcase-bottom-bar {
-                left: 16px;
-                right: auto;
-                bottom: 12px;
-                display: flex;
-                align-items: center;
-                gap: 16px;
-                z-index: 25 !important;
-                pointer-events: auto;
-            }
-            .showcase-dots, .showcase-arrow-capsule {
-                pointer-events: auto;
-            }
-            .showcase-dots {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-            }
-            .showcase-dot {
-                width: 8px;
-                height: 3.5px;
-                border-radius: 2px;
-                background: rgba(255, 255, 255, 0.32);
-                transition: all 0.3s ease;
-                cursor: pointer;
-            }
-            .showcase-dot.active {
-                width: 22px;
-                height: 3.5px;
-                border-radius: 2px;
-                background: #ffffff;
-                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            }
-            .showcase-arrow-capsule {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                background: rgba(8, 12, 22, 0.72);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.16);
-                padding: 2px 5px;
-                border-radius: 14px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-            }
-            .showcase-arrow-btn {
-                width: 22px;
-                height: 22px;
-                border-radius: 50%;
-                background: transparent;
-                border: none;
-                color: #e2e8f0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.68rem;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                padding: 0;
-            }
-            .showcase-arrow-btn svg {
-                width: 12px;
-                height: 12px;
-            }
-            .showcase-arrow-btn:active {
-                background: rgba(255, 255, 255, 0.2);
-                color: #ffffff;
-                transform: scale(0.92);
-            }
-
-            
-            /* Pagination Dashes on Mobile (Clean Genshin Dash Pills) */
+            /* Pagination Dashes on Mobile */
             .showcase-pagination {
                 bottom: 12px !important;
                 left: 16px !important;
@@ -1618,7 +1562,7 @@
                 right: -6px !important;
             }
 
-/* Floating Docks on Mobile */
+            /* Floating Docks on Mobile */
             .modern-audio-dock,
             .floating-music-dock {
                 bottom: 68px !important;
@@ -1835,8 +1779,8 @@
                         <div class="slide-content-left">
                             <span class="slide-badge-pill pill-red">🗺️ OPEN JOKI • 100% MANUAL & AMAN</span>
                             <h2 class="slide-title">Hu Tao & Joki Genshin</h2>
-                            <p class="slide-desc">Layanan explore map Teyvat per daerah, oculus hunting, quest dunia panjang, hingga Spiral Abyss 36★ amanah dan anti-banned.</p>
-                            <a href="joki.html" class="slide-btn-cta btn-cta-red">Pesan Joki Sekarang →</a>
+                            <p class="slide-desc">Explore Teyvat, oculus hunting, quest, hingga Abyss 36★ aman & cepat.</p>
+                            <a href="joki.html" class="slide-btn-cta btn-cta-red">Pesan Joki →</a>
                         </div>
                         <div class="slide-art-right">
                             <div class="slide-art-glow red-glow"></div>
@@ -1850,8 +1794,8 @@
                         <div class="slide-content-left">
                             <span class="slide-badge-pill pill-cyan">🏆 LXVOID GUILD • COMPETITIVE GAMING</span>
                             <h2 class="slide-title">History & Turnamen Free Fire</h2>
-                            <p class="slide-desc">Dokumentasi match scrim, rekap Booyah turnamen, & open member guild resmi.</p>
-                            <a href="history-ff.html" class="slide-btn-cta btn-cta-cyan">Lihat Rekap Turnamen →</a>
+                            <p class="slide-desc">Dokumentasi scrim, rekap Booyah turnamen, & open member guild LXVOID.</p>
+                            <a href="history-ff.html" class="slide-btn-cta btn-cta-cyan">Rekap Turnamen →</a>
                         </div>
                         <div class="slide-art-right">
                             <div class="slide-art-glow cyan-glow"></div>
