@@ -2641,7 +2641,7 @@
                     const card = document.createElement('div');
                     card.className = 'testi-card';
                     let starsHtml = '⭐'.repeat(stars);
-                    let imgHtml = imageUrl ? `<div class="testi-thumb-wrap" onclick="window.open('${escapeHtml(imageUrl)}', '_blank')"><img src="${escapeHtml(imageUrl)}" alt="Bukti Testimoni"></div>` : '';
+                    let imgHtml = imageUrl ? `<div class="testi-thumb-wrap" onclick="window.open('${escapeHtml(imageUrl)}', '_blank')"><img src="${escapeHtml(imageUrl)}" alt="Bukti Testimoni" loading="lazy" decoding="async"></div>` : '';
 
                     card.innerHTML = `
                         <div>

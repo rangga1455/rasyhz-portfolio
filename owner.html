@@ -1091,7 +1091,7 @@
 
                     let starsHtml = '⭐'.repeat(t.stars || 5);
                     let imgHtml = t.imageUrl
-                        ? `<div class="testi-thumb-wrap" style="margin-top:10px;"><img src="${t.imageUrl}" alt="Bukti Testimoni"></div>`
+                        ? `<div class="testi-thumb-wrap" style="margin-top:10px;"><img src="${t.imageUrl}" alt="Bukti Testimoni" loading="lazy" decoding="async"></div>`
                         : '';
 
                     card.innerHTML = `

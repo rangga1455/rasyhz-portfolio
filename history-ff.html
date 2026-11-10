@@ -1830,6 +1830,7 @@
                 img.src = data.imageUrl || FALLBACK_SCOREBOARD;
                 img.alt = data.title || 'Scoreboard Match';
                 img.loading = 'lazy';
+                img.decoding = 'async';
                 img.onerror = () => { img.src = FALLBACK_SCOREBOARD; };
 
                 const tag = document.createElement('span');
@@ -1881,6 +1882,8 @@
                     const uploaderImg = document.createElement('img');
                     uploaderImg.src = data.uploaderAvatar;
                     uploaderImg.alt = data.uploadedBy || 'Admin';
+                    uploaderImg.loading = 'lazy';
+                    uploaderImg.decoding = 'async';
                     uploaderImg.classList.add('uploader-avatar-thumb');
                     uploaderImg.width = 24;
                     uploaderImg.height = 24;
@@ -2035,7 +2038,7 @@
                 }
                 const author = uploader || 'Admin Rasyhz';
                 const avatarHtml = uploaderAvatar
-                    ? `<img src="${uploaderAvatar}" alt="${escapeHtml(author)}" class="uploader-avatar-thumb" width="24" height="24">`
+                    ? `<img src="${uploaderAvatar}" alt="${escapeHtml(author)}" class="uploader-avatar-thumb" width="24" height="24" loading="lazy" decoding="async">`
                     : `<span class="uploader-avatar-icon">👤</span>`;
 
                 metaEl.innerHTML = `<span class="lightbox-uploader">${avatarHtml} <span>Diunggah oleh: <strong>${escapeHtml(author)}</strong></span></span> <span class="lightbox-meta-divider">•</span> <span>📅 ${dateStr}</span>`;
