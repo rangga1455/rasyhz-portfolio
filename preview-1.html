@@ -106,9 +106,8 @@
         .site-header-holder {
             position: relative;
             width: 100%;
-            max-width: 1280px;
-            margin: 16px auto 10px;
-            padding: 0 16px;
+            margin: 0 0 10px;
+            padding: 0;
             height: 66px;
             box-sizing: border-box;
             z-index: 999;
@@ -117,50 +116,63 @@
         /* ================= REDESIGNED MODERN REFERENCE HEADER ================= */
         .modern-reference-header {
             width: 100%;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 12px 24px;
+            margin: 0;
+            padding: 12px 0;
             background: transparent;
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
-            border: 1px solid transparent;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: 1px solid transparent;
+            border-radius: 0 !important;
             box-shadow: none;
             box-sizing: border-box;
             position: relative;
             z-index: 999;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+            transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease, padding 0.3s ease;
+        }
+
+        .ref-header-inner {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
         }
 
         .modern-reference-header.header-scrolled {
             position: fixed;
-            top: 12px;
+            top: 0;
             left: 0;
             right: 0;
-            width: calc(100% - 32px);
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 10px 24px;
-            background: rgba(10, 12, 20, 0.85);
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 10px 0;
+            background: rgba(9, 13, 24, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            box-shadow: 0 12px 35px -4px rgba(0, 0, 0, 0.65), 0 0 1px rgba(255, 255, 255, 0.1);
-            animation: headerSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 0 !important;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+            animation: headerSlideDown 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             z-index: 9999;
         }
 
         @keyframes headerSlideDown {
             0% {
-                transform: translateY(-16px) scale(0.98);
+                transform: translateY(-100%);
                 opacity: 0.3;
             }
             100% {
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
@@ -1147,24 +1159,36 @@
                 white-space: nowrap;
             }
 
-            /* Site Header on Mobile */
+            /* Site Header on Mobile (Transparent initially, Edge-to-Edge Bottom Line on Scroll) */
             .site-header-holder {
-                height: 50px;
-                margin: 4px auto 6px;
-                padding: 0 10px;
+                height: 48px;
+                margin: 0 0 6px;
+                padding: 0;
             }
             .modern-reference-header {
-                border-radius: 18px;
-                padding: 6px 12px;
-                background: rgba(11, 15, 26, 0.88) !important;
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                border: 1px solid rgba(255, 255, 255, 0.09);
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 6px 0 !important;
+                background: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border-top: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: 1px solid transparent !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+            }
+            .ref-header-inner {
+                width: 100%;
+                padding: 0 12px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 box-sizing: border-box;
-                width: 100%;
             }
             .ref-header-left {
                 display: flex;
@@ -1181,10 +1205,24 @@
                 letter-spacing: 0.5px;
             }
             .modern-reference-header.header-scrolled {
-                top: 6px;
-                width: calc(100% - 20px);
-                padding: 6px 12px;
-                border-radius: 18px;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 6px 0 !important;
+                border-radius: 0 !important;
+                background: rgba(9, 13, 24, 0.88) !important;
+                backdrop-filter: blur(18px) !important;
+                -webkit-backdrop-filter: blur(18px) !important;
+                border-top: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+                box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5) !important;
+                animation: headerSlideDown 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                z-index: 9999 !important;
             }
             .ref-header-center {
                 display: none;
@@ -1715,34 +1753,36 @@
     <!-- ================= MODERN REFERENCE HEADER (SESUAI REFERENSI LAYLA) ================= -->
     <div class="site-header-holder">
         <header class="modern-reference-header">
-            <!-- Left: Logo LXVOID + Brand Title -->
-            <div class="ref-header-left">
-                <a href="preview-1.html" class="ref-brand-link" title="LXVOID">
-                    <img src="assets/logo.png" alt="LXVOID Logo" class="ref-brand-logo">
-                    <span class="ref-brand-name">LXVOID</span>
-                </a>
-            </div>
+            <div class="ref-header-inner">
+                <!-- Left: Logo LXVOID + Brand Title -->
+                <div class="ref-header-left">
+                    <a href="preview-1.html" class="ref-brand-link" title="LXVOID">
+                        <img src="assets/logo.png" alt="LXVOID Logo" class="ref-brand-logo">
+                        <span class="ref-brand-name">LXVOID</span>
+                    </a>
+                </div>
 
-            <!-- Center: Nav Links with Reference Underline Indicator -->
-            <nav class="ref-header-center">
-                <a href="preview-1.html" class="ref-nav-item active-item">Home</a>
-                <a href="presets.html" class="ref-nav-item">Presets</a>
-                <a href="joki.html" class="ref-nav-item">Joki Genshin</a>
-                <a href="history-ff.html" class="ref-nav-item">History FF</a>
-                <a href="links.html" class="ref-nav-item">Links</a>
-            </nav>
+                <!-- Center: Nav Links with Reference Underline Indicator -->
+                <nav class="ref-header-center">
+                    <a href="preview-1.html" class="ref-nav-item active-item">Home</a>
+                    <a href="presets.html" class="ref-nav-item">Presets</a>
+                    <a href="joki.html" class="ref-nav-item">Joki Genshin</a>
+                    <a href="history-ff.html" class="ref-nav-item">History FF</a>
+                    <a href="links.html" class="ref-nav-item">Links</a>
+                </nav>
 
-            <!-- Right: Action Pills (like Log in / Sign up) -->
-            <div class="ref-header-right">
-                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="ref-btn-outline">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
-                    </svg>
-                    <span>Discord</span>
-                </a>
-                <a href="joki.html" class="ref-btn-solid">
-                    <span>⚡ Order Joki</span>
-                </a>
+                <!-- Right: Action Pills (like Log in / Sign up) -->
+                <div class="ref-header-right">
+                    <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="ref-btn-outline">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                        </svg>
+                        <span>Discord</span>
+                    </a>
+                    <a href="joki.html" class="ref-btn-solid">
+                        <span>⚡ Order Joki</span>
+                    </a>
+                </div>
             </div>
         </header>
     </div>
@@ -2215,7 +2255,7 @@
 
             const updateHeader = () => {
                 const scrollY = window.scrollY || window.pageYOffset;
-                const triggerPoint = holder.offsetTop || 35;
+                const triggerPoint = Math.max(25, (holder.offsetTop || 0) + 10);
 
                 if (scrollY > triggerPoint) {
                     if (!isScrolled) {
