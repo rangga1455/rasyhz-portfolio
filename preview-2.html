@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>[PREVIEW 2] Sleek Cyber Spotlight - LXVOID COMMUNITY</title>
-    <meta name="description" content="Pratinjau Desain Opsi 2: Sleek Cyber Spotlight & Quick Hub LXVOID COMMUNITY.">
+    <title>[PREVIEW 2] Cyber Portal - LXVOID COMMUNITY</title>
+    <meta name="description" content="Pratinjau Desain Opsi 2: Sleek Cyber Portal Showcase & Dual Split Hub LXVOID COMMUNITY.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -14,7 +14,7 @@
     <style>
         /* ================= PREVIEW SWITCHER BAR ================= */
         .preview-top-bar {
-            background: linear-gradient(90deg, #0d0e14, #181424, #0d0e14);
+            background: linear-gradient(90deg, #090a10, #140e22, #090a10);
             border-bottom: 1px solid rgba(168, 85, 247, 0.35);
             padding: 10px 16px;
             display: flex;
@@ -95,257 +95,430 @@
             border-color: #ff5252;
         }
 
-        /* ================= CONCEPT 2: SLEEK CYBER SPOTLIGHT ================= */
-        .cyber-spotlight-section {
+        /* ================= CONCEPT 2: CYBER PORTAL SHOWCASE ================= */
+        .cyber-portal-wrapper {
             max-width: 1140px;
-            margin: 20px auto 30px;
+            margin: 22px auto 26px;
             padding: 0 16px;
         }
 
-        /* Quick Access Horizontal Pills */
-        .quick-pills-bar {
+        /* Quick Segmented Category Tabs */
+        .portal-category-tabs {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            margin-bottom: 14px;
             overflow-x: auto;
-            padding: 4px 2px 14px;
-            margin-bottom: 18px;
             scrollbar-width: none;
-            -ms-overflow-style: none;
+            padding-bottom: 2px;
         }
 
-        .quick-pills-bar::-webkit-scrollbar {
+        .portal-category-tabs::-webkit-scrollbar {
             display: none;
         }
 
-        .quick-pill {
+        .portal-tab-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #c5c7dc;
-            padding: 8px 16px;
-            border-radius: 30px;
+            color: #b5b7cb;
+            padding: 8px 18px;
+            border-radius: 20px;
             font-size: 0.82rem;
-            font-weight: 700;
-            text-decoration: none;
+            font-weight: 800;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            white-space: nowrap;
+            gap: 7px;
             transition: all 0.2s ease;
-            flex-shrink: 0;
+            white-space: nowrap;
         }
 
-        .quick-pill:hover,
-        .quick-pill.active-pill {
-            background: rgba(168, 85, 247, 0.15);
-            border-color: rgba(168, 85, 247, 0.5);
+        .portal-tab-btn:hover {
             color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.1);
         }
 
-        .pill-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #00adb5;
+        .portal-tab-btn.active-tab {
+            background: linear-gradient(90deg, rgba(0, 173, 181, 0.2), rgba(168, 85, 247, 0.2));
+            border-color: #a855f7;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(168, 85, 247, 0.4);
         }
 
-        .quick-pill:hover .pill-dot,
-        .quick-pill.active-pill .pill-dot {
-            background: #c084fc;
-            box-shadow: 0 0 8px #c084fc;
-        }
-
-        /* Dual Spotlight Grid */
-        .spotlight-dual-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .spotlight-banner {
+        /* Cyber Hero Banner Card */
+        .cyber-banner-box {
             position: relative;
-            background: linear-gradient(145deg, #13141f 0%, #171827 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(135deg, #0d0f18 0%, #131222 50%, #1a162b 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 26px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 240px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.15);
+            min-height: 350px;
         }
 
-        .spotlight-banner:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
-        }
-
-        .spotlight-banner.banner-presets:hover {
-            border-color: rgba(0, 173, 181, 0.5);
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 173, 181, 0.15);
-        }
-
-        .spotlight-banner.banner-gaming:hover {
-            border-color: rgba(168, 85, 247, 0.5);
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(168, 85, 247, 0.15);
-        }
-
-        /* Decorative Radial Glow */
-        .banner-glow-orb {
+        /* Ambient Glowing Orbs */
+        .cyber-orb {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             pointer-events: none;
-            opacity: 0.18;
-            filter: blur(50px);
+            opacity: 0.22;
+            filter: blur(60px);
         }
 
-        .cyan-orb {
-            top: -50px;
-            right: -50px;
+        .orb-left {
+            top: -60px;
+            left: -60px;
             background: #00adb5;
         }
 
-        .purple-orb {
-            top: -50px;
-            right: -50px;
+        .orb-right {
+            bottom: -60px;
+            right: -60px;
             background: #a855f7;
         }
 
-        .banner-inner {
+        .cyber-slides-track {
             position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            width: 100%;
+            min-height: 350px;
         }
 
-        .banner-top-badge {
+        .cyber-slide-item {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 38px 46px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+            z-index: 1;
+        }
+
+        .cyber-slide-item.active-slide {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cyber-content-wrap {
+            max-width: 560px;
+            z-index: 3;
+            position: relative;
+        }
+
+        .cyber-badge {
             display: inline-flex;
             align-items: center;
             gap: 7px;
             font-size: 0.72rem;
             font-weight: 800;
-            color: #00adb5;
             letter-spacing: 0.8px;
             text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: rgba(0, 173, 181, 0.12);
+            color: #00adb5;
+            border-left: 3px solid #00adb5;
             margin-bottom: 12px;
         }
 
-        .banner-top-badge.badge-purple {
+        .cyber-badge.badge-purple {
+            background: rgba(168, 85, 247, 0.12);
             color: #c084fc;
+            border-left-color: #a855f7;
         }
 
-        .live-pulse-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #00adb5;
-            box-shadow: 0 0 8px #00adb5;
-            animation: pulseGlow 2s infinite;
+        .cyber-badge.badge-gold {
+            background: rgba(255, 215, 0, 0.12);
+            color: #ffd700;
+            border-left-color: #ffd700;
         }
 
-        .live-pulse-dot.dot-purple {
-            background: #a855f7;
-            box-shadow: 0 0 8px #a855f7;
-        }
-
-        @keyframes pulseGlow {
-            0% { opacity: 0.6; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.15); }
-            100% { opacity: 0.6; transform: scale(0.9); }
-        }
-
-        .banner-inner h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
+        .cyber-title {
+            font-size: 2.3rem;
+            font-weight: 900;
             color: #ffffff;
             margin: 0 0 10px;
-            line-height: 1.3;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
         }
 
-        .banner-inner p {
-            font-size: 0.88rem;
-            color: #9ea1b8;
-            line-height: 1.5;
-            margin: 0 0 22px;
+        .cyber-desc {
+            font-size: 0.95rem;
+            color: #adb0ca;
+            line-height: 1.6;
+            margin: 0 0 24px;
         }
 
-        /* Banner Buttons */
-        .banner-actions {
+        .cyber-actions-row {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-top: auto;
             flex-wrap: wrap;
         }
 
-        .btn-banner-primary {
+        .btn-cyber-main {
             background: #00adb5;
-            color: #0a0b10;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 0.84rem;
+            color: #08090d;
             font-weight: 800;
+            font-size: 0.88rem;
+            padding: 11px 22px;
+            border-radius: 10px;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(0, 173, 181, 0.4);
         }
 
-        .btn-banner-primary:hover {
+        .btn-cyber-main:hover {
             background: #00c7d1;
-            box-shadow: 0 0 16px rgba(0, 173, 181, 0.45);
             transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(0, 173, 181, 0.6);
         }
 
-        .btn-banner-primary.btn-purple {
+        .btn-cyber-main.btn-purple {
             background: #a855f7;
             color: #ffffff;
+            box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
         }
 
-        .btn-banner-primary.btn-purple:hover {
+        .btn-cyber-main.btn-purple:hover {
             background: #b66bff;
-            box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+            box-shadow: 0 6px 22px rgba(168, 85, 247, 0.6);
         }
 
-        .btn-banner-secondary {
-            background: rgba(255, 255, 255, 0.06);
+        .btn-cyber-alt {
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #d1d3e8;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.84rem;
+            color: #d0d2e8;
             font-weight: 700;
+            font-size: 0.88rem;
+            padding: 11px 18px;
+            border-radius: 10px;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
         }
 
-        .btn-banner-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
+        .btn-cyber-alt:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
             border-color: rgba(255, 255, 255, 0.25);
         }
 
-        .banner-stat-chip {
-            font-size: 0.78rem;
-            color: #8c8fa6;
-            font-weight: 700;
+        /* Right Artwork Container */
+        .cyber-art-box {
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .cyber-art-halo {
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(0, 173, 181, 0.1) 60%, transparent 80%);
+            border: 1px dashed rgba(168, 85, 247, 0.3);
+            pointer-events: none;
+            animation: haloRotate 20s linear infinite;
+        }
+
+        @keyframes haloRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cyber-art-img {
+            max-width: 320px;
+            max-height: 310px;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.8));
+            position: relative;
+            z-index: 3;
+            transition: transform 0.35s ease;
+        }
+
+        .cyber-banner-box:hover .cyber-art-img {
+            transform: scale(1.05) translateY(-3px);
+        }
+
+        /* Bottom Status & Dots */
+        .cyber-bottom-bar {
+            position: absolute;
+            bottom: 16px;
+            left: 46px;
+            right: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .cyber-dots-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cyber-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .cyber-dot.active {
+            width: 26px;
+            border-radius: 10px;
+            background: #a855f7;
+            box-shadow: 0 0 10px #a855f7;
+        }
+
+        .cyber-arrow-pills {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cyber-arrow-pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .cyber-arrow-pill:hover {
+            background: #a855f7;
+            border-color: #a855f7;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+        }
+
+        /* ================= LOWER HUB: DUAL SPLIT CARDS & LIVE STATUS ================= */
+        .cyber-split-section {
+            max-width: 1140px;
+            margin: 0 auto 30px;
+            padding: 0 16px;
+        }
+
+        .split-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-bottom: 16px;
+        }
+
+        .split-card {
+            background: linear-gradient(145deg, #12141f 0%, #161726 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .split-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .split-card.split-cyan:hover {
+            border-color: rgba(0, 173, 181, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 173, 181, 0.15);
+        }
+
+        .split-card.split-purple:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+
+        .split-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .split-card-badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #00adb5;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .split-card-badge.badge-purple {
+            color: #c084fc;
+        }
+
+        .split-card-icon {
+            font-size: 1.5rem;
+        }
+
+        .split-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 8px;
+        }
+
+        .split-card p {
+            font-size: 0.86rem;
+            color: #9ea1b8;
+            line-height: 1.5;
+            margin: 0 0 18px;
+        }
+
+        .split-card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: #00adb5;
+            transition: transform 0.2s ease;
+        }
+
+        .split-card.split-purple .split-card-action {
+            color: #c084fc;
+        }
+
+        .split-card:hover .split-card-action {
+            transform: translateX(4px);
         }
 
         /* Modern Status Bar */
-        .modern-status-bar {
-            background: rgba(18, 19, 28, 0.7);
+        .portal-status-bar {
+            background: rgba(16, 18, 28, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
@@ -357,34 +530,61 @@
             color: #9ea1b8;
         }
 
-        .status-indicator-dot {
+        .status-dot-pulse {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background: #00e676;
             box-shadow: 0 0 10px #00e676;
             flex-shrink: 0;
+            animation: pulseGlow 2s infinite;
         }
 
-        .modern-status-bar strong {
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .portal-status-bar strong {
             color: #ffffff;
         }
 
         /* Mobile Optimization */
         @media (max-width: 860px) {
-            .spotlight-dual-grid {
+            .cyber-slide-item {
+                padding: 24px 18px 46px;
+                flex-direction: column-reverse;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .cyber-title {
+                font-size: 1.6rem;
+            }
+            .cyber-desc {
+                font-size: 0.85rem;
+                margin-bottom: 16px;
+            }
+            .cyber-art-box {
+                width: 100%;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+            }
+            .cyber-art-img {
+                max-width: 170px;
+                max-height: 170px;
+            }
+            .cyber-bottom-bar {
+                left: 18px;
+                right: 18px;
+                bottom: 12px;
+            }
+            .split-cards-grid {
                 grid-template-columns: 1fr;
                 gap: 14px;
             }
-            .spotlight-banner {
-                padding: 22px 20px;
-                min-height: auto;
-            }
-            .banner-inner h3 {
-                font-size: 1.25rem;
-            }
-            .modern-status-bar {
-                font-size: 0.78rem;
+            .portal-status-bar {
+                font-size: 0.76rem;
                 padding: 10px 14px;
             }
         }
@@ -396,11 +596,11 @@
     <div class="preview-top-bar">
         <div class="preview-info-tag">
             <span class="preview-badge-pill">OPSI 2</span>
-            <span>Sleek Cyber Spotlight (Modern & Compact)</span>
+            <span>Cyber Portal (Segmented Tabs + Dual Split Hub)</span>
         </div>
         <div class="preview-nav-btns">
-            <a href="preview-1.html" class="preview-btn">Opsi 1 (Glass Modern)</a>
-            <a href="preview-2.html" class="preview-btn active">Opsi 2 (Cyber Spotlight)</a>
+            <a href="preview-1.html" class="preview-btn">Opsi 1 (Cosmic Showcase)</a>
+            <a href="preview-2.html" class="preview-btn active">Opsi 2 (Cyber Portal)</a>
             <a href="index.html" class="preview-btn btn-exit">← Kembali ke Web Asli</a>
         </div>
     </div>
@@ -448,6 +648,100 @@
             </div>
         </section>
 
+        <!-- ================= CONCEPT 2: CYBER PORTAL SHOWCASE ================= -->
+        <section class="cyber-portal-wrapper">
+            <!-- Segmented Category Tabs -->
+            <div class="portal-category-tabs">
+                <button type="button" class="portal-tab-btn active-tab" onclick="jumpToTab(0)">
+                    <span>🗺️ Joki Genshin</span>
+                </button>
+                <button type="button" class="portal-tab-btn" onclick="jumpToTab(1)">
+                    <span>⚡ Presets XML</span>
+                </button>
+                <button type="button" class="portal-tab-btn" onclick="jumpToTab(2)">
+                    <span>🏆 Turnamen FF</span>
+                </button>
+                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="portal-tab-btn">
+                    <span>💬 Discord (1.5K+) ↗</span>
+                </a>
+            </div>
+
+            <!-- Cyber Hero Banner Card -->
+            <div class="cyber-banner-box" id="cyberBannerBox">
+                <div class="cyber-orb orb-left"></div>
+                <div class="cyber-orb orb-right"></div>
+
+                <div class="cyber-slides-track">
+                    <!-- Slide 1: Layla / Genshin Services -->
+                    <div class="cyber-slide-item active-slide" data-tab="0">
+                        <div class="cyber-content-wrap">
+                            <span class="cyber-badge">✨ OPEN JOKI • 100% MANUAL</span>
+                            <h2 class="cyber-title">Layla & Joki Genshin Impact</h2>
+                            <p class="cyber-desc">Layanan explore map Teyvat per daerah, oculus hunting, quest dunia, hingga Abyss 36★ aman, cepat, dan terpercaya.</p>
+                            <div class="cyber-actions-row">
+                                <a href="joki.html" class="btn-cyber-main">Pesan Joki Sekarang →</a>
+                                <a href="joki.html" class="btn-cyber-alt">Daftar Harga</a>
+                            </div>
+                        </div>
+                        <div class="cyber-art-box">
+                            <div class="cyber-art-halo"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Layla_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Layla Genshin Services" class="cyber-art-img" loading="eager">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Raiden Shogun / Presets AMV -->
+                    <div class="cyber-slide-item" data-tab="1">
+                        <div class="cyber-content-wrap">
+                            <span class="cyber-badge badge-purple">⚡ PRESETS & ASET • 60 FPS</span>
+                            <h2 class="cyber-title">Alight Motion XML & CapCut</h2>
+                            <p class="cyber-desc">Download puluhan template preset AMV beat sync, coloring CC aesthetic, dan template CapCut Velocity siap pakai secara instan.</p>
+                            <div class="cyber-actions-row">
+                                <a href="presets.html" class="btn-cyber-main btn-purple">Download Presets →</a>
+                                <a href="presets.html" class="btn-cyber-alt">35+ XML Gratis</a>
+                            </div>
+                        </div>
+                        <div class="cyber-art-box">
+                            <div class="cyber-art-halo"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a3/Character_Raiden_Shogun_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Raiden Shogun Editing" class="cyber-art-img" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Furina / Esports Free Fire -->
+                    <div class="cyber-slide-item" data-tab="2">
+                        <div class="cyber-content-wrap">
+                            <span class="cyber-badge badge-gold">🏆 ESPORTS & GUILD • BOOYAH</span>
+                            <h2 class="cyber-title">History & Turnamen Free Fire</h2>
+                            <p class="cyber-desc">Dokumentasi match scrim, rekap Booyah turnamen, sertifikat juara, dan open member guild resmi LXVOID Community.</p>
+                            <div class="cyber-actions-row">
+                                <a href="history-ff.html" class="btn-cyber-main" style="background:#ffd700;color:#0b0c10;">Rekap Turnamen →</a>
+                                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="btn-cyber-alt">Gabung Guild ↗</a>
+                            </div>
+                        </div>
+                        <div class="cyber-art-box">
+                            <div class="cyber-art-halo"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Furina_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Furina Guild Esports" class="cyber-art-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Bar -->
+                <div class="cyber-bottom-bar">
+                    <div class="cyber-dots-wrap">
+                        <span class="cyber-dot active" onclick="jumpToTab(0)"></span>
+                        <span class="cyber-dot" onclick="jumpToTab(1)"></span>
+                        <span class="cyber-dot" onclick="jumpToTab(2)"></span>
+                    </div>
+                    <div class="cyber-arrow-pills">
+                        <button class="cyber-arrow-pill" onclick="slideStep(-1)" aria-label="Slide sebelumnya">‹</button>
+                        <button class="cyber-arrow-pill" onclick="slideStep(1)" aria-label="Slide selanjutnya">›</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ================= STATS & ACHIEVEMENTS COUNTER ================= -->
         <section class="stats-section">
             <div class="stats-grid">
@@ -486,72 +780,40 @@
             </div>
         </section>
 
-        <!-- ================= CONCEPT 2: SLEEK CYBER SPOTLIGHT ================= -->
-        <section class="cyber-spotlight-section">
-            <!-- Quick Nav Horizontal Filter Pills -->
-            <div class="quick-pills-bar">
-                <a href="presets.html" class="quick-pill active-pill">
-                    <span class="pill-dot"></span>
-                    <span>⚡ Presets XML</span>
+        <!-- ================= LOWER HUB: DUAL SPLIT CARDS & LIVE STATUS ================= -->
+        <section class="cyber-split-section">
+            <div class="split-cards-grid">
+                <!-- Card A: Creative Lab -->
+                <a href="presets.html" class="split-card split-cyan">
+                    <div>
+                        <div class="split-card-header">
+                            <span class="split-card-badge">CREATIVE & EDITING</span>
+                            <span class="split-card-icon">⚡</span>
+                        </div>
+                        <h3>Koleksi Presets & Template</h3>
+                        <p>Akses cepat ke template Alight Motion XML 60 FPS, CapCut Velocity, sound effect beat sync, dan project files gratis siap pakai.</p>
+                    </div>
+                    <span class="split-card-action">Buka Katalog Presets →</span>
                 </a>
-                <a href="joki.html" class="quick-pill">
-                    <span class="pill-dot"></span>
-                    <span>🗺️ Joki Genshin</span>
-                </a>
-                <a href="history-ff.html" class="quick-pill">
-                    <span class="pill-dot"></span>
-                    <span>🏆 Turnamen FF</span>
-                </a>
-                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="quick-pill">
-                    <span class="pill-dot"></span>
-                    <span>💬 Discord (1.5K+)</span>
-                </a>
-                <a href="links.html" class="quick-pill">
-                    <span>🔗 Lynk.id ↗</span>
+
+                <!-- Card B: Gaming Services -->
+                <a href="joki.html" class="split-card split-purple">
+                    <div>
+                        <div class="split-card-header">
+                            <span class="split-card-badge badge-purple">GAMING SERVICES & GUILD</span>
+                            <span class="split-card-icon">🗺️</span>
+                        </div>
+                        <h3>Joki Genshin & Guild Free Fire</h3>
+                        <p>Pesan jasa explore Teyvat per wilayah, oculus hunting, Spiral Abyss, serta dokumentasi juara turnamen resmi guild LXVOID.</p>
+                    </div>
+                    <span class="split-card-action">Pilih Layanan & Map →</span>
                 </a>
             </div>
 
-            <!-- Dual Split Modern Banners -->
-            <div class="spotlight-dual-grid">
-                <!-- Banner 1: Creative & Presets -->
-                <div class="spotlight-banner banner-presets">
-                    <div class="banner-glow-orb cyan-orb"></div>
-                    <div class="banner-inner">
-                        <div class="banner-top-badge">
-                            <span class="live-pulse-dot"></span>
-                            <span>CREATIVE & EDITING</span>
-                        </div>
-                        <h3>Template & Presets Alight Motion 60 FPS</h3>
-                        <p>Unduh puluhan preset XML AMV beat sync, coloring CC aesthetic, dan template CapCut Velocity siap pakai secara instan.</p>
-                        <div class="banner-actions">
-                            <a href="presets.html" class="btn-banner-primary">Download Presets Sekarang →</a>
-                            <span class="banner-stat-chip">35+ XML Gratis</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Banner 2: Gaming & Joki -->
-                <div class="spotlight-banner banner-gaming">
-                    <div class="banner-glow-orb purple-orb"></div>
-                    <div class="banner-inner">
-                        <div class="banner-top-badge badge-purple">
-                            <span class="live-pulse-dot dot-purple"></span>
-                            <span>GAMING SERVICES & GUILD</span>
-                        </div>
-                        <h3>Joki Genshin Impact & Esports Free Fire</h3>
-                        <p>Jasa explore Teyvat 100% manual anti-banned serta jejak rekap juara turnamen guild resmi LXVOID.</p>
-                        <div class="banner-actions">
-                            <a href="joki.html" class="btn-banner-primary btn-purple">Pesan Joki Genshin →</a>
-                            <a href="history-ff.html" class="btn-banner-secondary">Prestasi FF ↗</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modern Live Status Ticker Bar -->
-            <div class="modern-status-bar">
-                <span class="status-indicator-dot"></span>
-                <span class="status-text"><strong>Status Layanan:</strong> Semua download preset & joki Genshin aktif normal • Server Discord online</span>
+            <!-- Live Status Bar -->
+            <div class="portal-status-bar">
+                <span class="status-dot-pulse"></span>
+                <span><strong>Status Layanan:</strong> Semua download preset & joki Genshin aktif normal • Server Discord online</span>
             </div>
         </section>
 
@@ -657,6 +919,69 @@
             });
         }
 
+        // ================= CYBER PORTAL TAB & SLIDE CONTROLLER =================
+        let cyberIndex = 0;
+        const cyberSlides = document.querySelectorAll('.cyber-slide-item');
+        const tabBtns = document.querySelectorAll('.portal-tab-btn');
+        const cyberDots = document.querySelectorAll('.cyber-dot');
+        let cyberTimer;
+
+        function renderCyberSlide(idx) {
+            if (!cyberSlides.length) return;
+            if (idx < 0) cyberIndex = cyberSlides.length - 1;
+            else if (idx >= cyberSlides.length) cyberIndex = 0;
+            else cyberIndex = idx;
+
+            cyberSlides.forEach((s, i) => {
+                s.classList.toggle('active-slide', i === cyberIndex);
+            });
+            tabBtns.forEach((b, i) => {
+                if (i < 3) b.classList.toggle('active-tab', i === cyberIndex);
+            });
+            cyberDots.forEach((d, i) => {
+                d.classList.toggle('active', i === cyberIndex);
+            });
+        }
+
+        function jumpToTab(idx) {
+            restartCyberTimer();
+            renderCyberSlide(idx);
+        }
+
+        function slideStep(dir) {
+            restartCyberTimer();
+            renderCyberSlide(cyberIndex + dir);
+        }
+
+        function restartCyberTimer() {
+            clearInterval(cyberTimer);
+            cyberTimer = setInterval(() => {
+                renderCyberSlide(cyberIndex + 1);
+            }, 6000);
+        }
+
+        // Touch Swipe
+        let cyberTouchStart = 0;
+        let cyberTouchEnd = 0;
+        const bannerBox = document.getElementById('cyberBannerBox');
+        if (bannerBox) {
+            bannerBox.addEventListener('touchstart', e => {
+                cyberTouchStart = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            bannerBox.addEventListener('touchend', e => {
+                cyberTouchEnd = e.changedTouches[0].screenX;
+                const diff = cyberTouchEnd - cyberTouchStart;
+                if (Math.abs(diff) > 40) {
+                    if (diff < 0) slideStep(1);
+                    else slideStep(-1);
+                }
+            }, { passive: true });
+
+            bannerBox.addEventListener('mouseenter', () => clearInterval(cyberTimer));
+            bannerBox.addEventListener('mouseleave', () => restartCyberTimer());
+        }
+
         // Stats counter animation
         function initStatsCounter() {
             const statsSection = document.querySelector('.stats-section');
@@ -752,6 +1077,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
             handleVisitorCounter();
+            restartCyberTimer();
         });
     </script>
     <script defer src="site-features.js"></script>

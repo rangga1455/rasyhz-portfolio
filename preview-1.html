@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>[PREVIEW 1] Minimal Glass Modern - LXVOID COMMUNITY</title>
-    <meta name="description" content="Pratinjau Desain Opsi 1: Minimal Glass Modern Layout untuk LXVOID COMMUNITY.">
+    <title>[PREVIEW 1] Cosmic Showcase - LXVOID COMMUNITY</title>
+    <meta name="description" content="Pratinjau Desain Opsi 1: Cosmic Celestial Showcase Hero Banner & Clean Hub LXVOID COMMUNITY.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -14,7 +14,7 @@
     <style>
         /* ================= PREVIEW SWITCHER BAR ================= */
         .preview-top-bar {
-            background: linear-gradient(90deg, #0d0e14, #141522, #0d0e14);
+            background: linear-gradient(90deg, #0b0d14, #121526, #0b0d14);
             border-bottom: 1px solid rgba(0, 173, 181, 0.35);
             padding: 10px 16px;
             display: flex;
@@ -95,19 +95,276 @@
             border-color: #ff5252;
         }
 
-        /* ================= CONCEPT 1: MINIMAL GLASS MODERN ================= */
-        .minimal-hub-section {
+        /* ================= HERO SHOWCASE CAROUSEL (INSPIRED BY REFERENCE) ================= */
+        .showcase-carousel-wrapper {
             max-width: 1140px;
-            margin: 20px auto 30px;
+            margin: 22px auto 26px;
+            padding: 0 16px;
+            position: relative;
+        }
+
+        .showcase-container {
+            position: relative;
+            width: 100%;
+            border-radius: 26px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0e1224 0%, #131830 50%, #1a1e38 100%);
+            border: 1px solid rgba(138, 180, 248, 0.25);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), 0 0 35px rgba(88, 101, 242, 0.12);
+            min-height: 340px;
+        }
+
+        /* Starry Particle Background Effect */
+        .showcase-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+                              radial-gradient(rgba(138, 180, 248, 0.2) 1.5px, transparent 1.5px);
+            background-size: 40px 40px, 80px 80px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* Slides Track */
+        .showcase-slides {
+            position: relative;
+            width: 100%;
+            min-height: 340px;
+        }
+
+        .showcase-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 48px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .showcase-slide.active-slide {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Left Content */
+        .slide-content-left {
+            max-width: 580px;
+            z-index: 3;
+            position: relative;
+        }
+
+        .slide-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 20px;
+            background: rgba(0, 173, 181, 0.15);
+            color: #00adb5;
+            border: 1px solid rgba(0, 173, 181, 0.35);
+            margin-bottom: 14px;
+        }
+
+        .slide-badge-pill.pill-purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border-color: rgba(168, 85, 247, 0.35);
+        }
+
+        .slide-badge-pill.pill-gold {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border-color: rgba(255, 215, 0, 0.35);
+        }
+
+        .slide-title {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 12px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-desc {
+            font-size: 0.98rem;
+            color: #cbd1ea;
+            line-height: 1.6;
+            margin: 0 0 24px;
+            max-width: 520px;
+        }
+
+        .slide-btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #00adb5;
+            color: #0b0c10;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 18px rgba(0, 173, 181, 0.4);
+        }
+
+        .slide-btn-cta:hover {
+            background: #00c7d1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 173, 181, 0.6);
+        }
+
+        .slide-btn-cta.btn-cta-purple {
+            background: #a855f7;
+            color: #ffffff;
+            box-shadow: 0 4px 18px rgba(168, 85, 247, 0.4);
+        }
+
+        .slide-btn-cta.btn-cta-purple:hover {
+            background: #b66bff;
+            box-shadow: 0 6px 24px rgba(168, 85, 247, 0.6);
+        }
+
+        .slide-btn-cta.btn-cta-gold {
+            background: #ffd700;
+            color: #0b0c10;
+            box-shadow: 0 4px 18px rgba(255, 215, 0, 0.4);
+        }
+
+        .slide-btn-cta.btn-cta-gold:hover {
+            background: #ffe033;
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Right Character Artwork */
+        .slide-art-right {
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .slide-art-glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(138, 180, 248, 0.25) 0%, rgba(0, 173, 181, 0.1) 50%, transparent 70%);
+            filter: blur(30px);
+            pointer-events: none;
+        }
+
+        .slide-art-glow.purple-glow {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(138, 75, 255, 0.12) 50%, transparent 70%);
+        }
+
+        .slide-art-img {
+            max-width: 320px;
+            max-height: 310px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 3;
+        }
+
+        .showcase-container:hover .slide-art-img {
+            transform: scale(1.04) translateY(-4px);
+        }
+
+        /* Left/Right Carousel Nav Arrows */
+        .showcase-arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(18, 22, 38, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .showcase-arrow-btn:hover {
+            background: #00adb5;
+            color: #0b0c10;
+            border-color: #00adb5;
+            box-shadow: 0 0 15px rgba(0, 173, 181, 0.5);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .arrow-prev {
+            left: 2px;
+        }
+
+        .arrow-next {
+            right: 2px;
+        }
+
+        /* Bottom Pagination Dashes (Directly like reference!) */
+        .showcase-pagination {
+            position: absolute;
+            bottom: 18px;
+            left: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .pagination-dash {
+            width: 24px;
+            height: 5px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-dash.active {
+            width: 42px;
+            background: #00adb5;
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.6);
+        }
+
+        /* ================= LOWER HUB: CLEAN 3-CARD GLASS GRID ================= */
+        .lower-hub-section {
+            max-width: 1140px;
+            margin: 0 auto 30px;
             padding: 0 16px;
         }
 
-        .hub-header {
+        .lower-hub-header {
             text-align: center;
-            margin-bottom: 26px;
+            margin-bottom: 22px;
         }
 
-        .hub-pill {
+        .lower-hub-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -119,31 +376,27 @@
             font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .hub-title {
-            font-size: 1.85rem;
+        .lower-hub-title {
+            font-size: 1.75rem;
             font-weight: 800;
             color: #ffffff;
-            margin: 0 0 8px;
-            letter-spacing: -0.5px;
+            margin: 0 0 6px;
         }
 
-        .hub-subtitle {
-            font-size: 0.92rem;
+        .lower-hub-desc {
+            font-size: 0.9rem;
             color: #9da0b5;
-            max-width: 580px;
             margin: 0 auto;
-            line-height: 1.5;
         }
 
-        /* 3-Column Clean Glass Grid */
         .glass-grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .glass-card {
@@ -163,51 +416,29 @@
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: transparent;
-            transition: background 0.3s ease;
-        }
-
         .glass-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
         }
 
-        /* Card Accents */
         .glass-card.card-cyan:hover {
             border-color: rgba(0, 173, 181, 0.5);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 173, 181, 0.15);
-        }
-        .glass-card.card-cyan:hover::before {
-            background: linear-gradient(90deg, transparent, #00adb5, transparent);
         }
 
         .glass-card.card-purple:hover {
             border-color: rgba(168, 85, 247, 0.5);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(168, 85, 247, 0.15);
         }
-        .glass-card.card-purple:hover::before {
-            background: linear-gradient(90deg, transparent, #a855f7, transparent);
-        }
 
         .glass-card.card-gold:hover {
             border-color: rgba(255, 215, 0, 0.5);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.15);
         }
-        .glass-card.card-gold:hover::before {
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
 
-        /* Card Header Elements */
         .glass-icon-circle {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 14px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -215,7 +446,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .glass-mini-tag {
@@ -237,7 +468,7 @@
         }
 
         .glass-card h3 {
-            font-size: 1.18rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: #ffffff;
             margin: 0 0 8px;
@@ -245,19 +476,18 @@
         }
 
         .glass-card p {
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             color: #a0a0b6;
             line-height: 1.5;
-            margin: 0 0 20px;
+            margin: 0 0 18px;
         }
 
-        /* Card Footer Elements */
         .glass-card-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 14px;
+            padding-top: 12px;
             margin-top: auto;
         }
 
@@ -274,7 +504,7 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            transition: transform 0.2s ease, color 0.2s ease;
+            transition: transform 0.2s ease;
         }
 
         .glass-card.card-purple .glass-arrow-btn {
@@ -333,7 +563,6 @@
             font-size: 0.82rem;
             color: #9fa0b5;
             margin: 0;
-            line-height: 1.4;
         }
 
         .btn-discord-mini {
@@ -348,28 +577,51 @@
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
         .btn-discord-mini:hover {
             background: #4752c4;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
             transform: translateY(-2px);
         }
 
         /* Mobile Optimization */
         @media (max-width: 860px) {
+            .showcase-slide {
+                padding: 26px 20px 50px;
+                flex-direction: column-reverse;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .slide-title {
+                font-size: 1.65rem;
+            }
+            .slide-desc {
+                font-size: 0.86rem;
+                margin-bottom: 18px;
+            }
+            .slide-art-right {
+                width: 100%;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+            }
+            .slide-art-img {
+                max-width: 180px;
+                max-height: 180px;
+            }
+            .showcase-arrow-btn {
+                display: none; /* Swipe & pagination on mobile */
+            }
+            .showcase-pagination {
+                left: 20px;
+                bottom: 14px;
+            }
             .glass-grid-3 {
                 grid-template-columns: 1fr;
                 gap: 14px;
             }
-            .hub-title {
-                font-size: 1.55rem;
-            }
             .minimal-discord-bar {
                 flex-direction: column;
                 align-items: stretch;
-                text-align: left;
             }
             .btn-discord-mini {
                 justify-content: center;
@@ -383,11 +635,11 @@
     <div class="preview-top-bar">
         <div class="preview-info-tag">
             <span class="preview-badge-pill">OPSI 1</span>
-            <span>Minimal Glass Modern (Simpel & Elegan)</span>
+            <span>Cosmic Celestial Showcase (Sesuai Referensi Banner)</span>
         </div>
         <div class="preview-nav-btns">
-            <a href="preview-1.html" class="preview-btn active">Opsi 1 (Glass Modern)</a>
-            <a href="preview-2.html" class="preview-btn">Opsi 2 (Cyber Spotlight)</a>
+            <a href="preview-1.html" class="preview-btn active">Opsi 1 (Cosmic Showcase)</a>
+            <a href="preview-2.html" class="preview-btn">Opsi 2 (Cyber Portal)</a>
             <a href="index.html" class="preview-btn btn-exit">← Kembali ke Web Asli</a>
         </div>
     </div>
@@ -435,6 +687,71 @@
             </div>
         </section>
 
+        <!-- ================= HERO SHOWCASE CAROUSEL (INSPIRED BY REFERENCE) ================= -->
+        <section class="showcase-carousel-wrapper">
+            <!-- Arrow Prev -->
+            <button class="showcase-arrow-btn arrow-prev" onclick="changeSlide(-1)" aria-label="Previous Slide">‹</button>
+
+            <div class="showcase-container" id="showcaseBox">
+                <div class="showcase-slides">
+                    <!-- Slide 1: Layla / Genshin Services (Exact Reference Tribute) -->
+                    <div class="showcase-slide active-slide" data-index="0">
+                        <div class="slide-content-left">
+                            <span class="slide-badge-pill">✨ GENSHIN IMPACT • 100% MANUAL</span>
+                            <h2 class="slide-title">Layla & Joki Teyvat</h2>
+                            <p class="slide-desc">Layanan explore map Teyvat per daerah, oculus hunting, quest panjang dunia, hingga Spiral Abyss 36★ amanah dan anti-banned.</p>
+                            <a href="joki.html" class="slide-btn-cta">Pesan Joki Sekarang →</a>
+                        </div>
+                        <div class="slide-art-right">
+                            <div class="slide-art-glow"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Layla_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Layla Genshin Impact" class="slide-art-img" loading="eager">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Raiden Shogun / Creative Presets -->
+                    <div class="showcase-slide" data-index="1">
+                        <div class="slide-content-left">
+                            <span class="slide-badge-pill pill-purple">⚡ PRESETS & PROJECT FILES • 60 FPS</span>
+                            <h2 class="slide-title">Alight Motion XML & CapCut</h2>
+                            <p class="slide-desc">Download puluhan template preset AMV beat sync, coloring CC aesthetic, dan template CapCut Velocity gratis siap pakai.</p>
+                            <a href="presets.html" class="slide-btn-cta btn-cta-purple">Unduh Presets Gratis →</a>
+                        </div>
+                        <div class="slide-art-right">
+                            <div class="slide-art-glow purple-glow"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/a/a3/Character_Raiden_Shogun_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Raiden Shogun AMV" class="slide-art-img" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Furina / Esports & Guild Free Fire -->
+                    <div class="showcase-slide" data-index="2">
+                        <div class="slide-content-left">
+                            <span class="slide-badge-pill pill-gold">🏆 LXVOID GUILD • COMPETITIVE GAMING</span>
+                            <h2 class="slide-title">History & Turnamen Free Fire</h2>
+                            <p class="slide-desc">Dokumentasi match scrim, rekap Booyah turnamen, sertifikat juara, dan open member guild resmi LXVOID Community.</p>
+                            <a href="history-ff.html" class="slide-btn-cta btn-cta-gold">Lihat Rekap Turnamen →</a>
+                        </div>
+                        <div class="slide-art-right">
+                            <div class="slide-art-glow"></div>
+                            <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/gensin-impact/images/9/94/Character_Furina_Full_Wish.png/revision/latest&w=800&output=webp&q=85"
+                                 alt="Furina Guild Community" class="slide-art-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination Dashes (Directly like reference!) -->
+                <div class="showcase-pagination">
+                    <span class="pagination-dash active" onclick="goToSlide(0)"></span>
+                    <span class="pagination-dash" onclick="goToSlide(1)"></span>
+                    <span class="pagination-dash" onclick="goToSlide(2)"></span>
+                </div>
+            </div>
+
+            <!-- Arrow Next -->
+            <button class="showcase-arrow-btn arrow-next" onclick="changeSlide(1)" aria-label="Next Slide">›</button>
+        </section>
+
         <!-- ================= STATS & ACHIEVEMENTS COUNTER ================= -->
         <section class="stats-section">
             <div class="stats-grid">
@@ -473,12 +790,12 @@
             </div>
         </section>
 
-        <!-- ================= CONCEPT 1: MINIMAL GLASS MODERN ================= -->
-        <section class="minimal-hub-section">
-            <div class="hub-header">
-                <span class="hub-pill">⚡ EKOSISTEM LXVOID</span>
-                <h2 class="hub-title">Layanan & Konten Pilihan</h2>
-                <p class="hub-subtitle">Pilih menu di bawah untuk langsung menuju layanan atau koleksi yang kamu butuhkan.</p>
+        <!-- ================= LOWER HUB: CLEAN 3-CARD GLASS GRID ================= -->
+        <section class="lower-hub-section">
+            <div class="lower-hub-header">
+                <span class="lower-hub-pill">⚡ EKOSISTEM LXVOID</span>
+                <h2 class="lower-hub-title">Akses Cepat Layanan</h2>
+                <p class="lower-hub-desc">Pilih menu di bawah untuk langsung menuju layanan atau direktori lengkap.</p>
             </div>
 
             <div class="glass-grid-3">
@@ -644,6 +961,69 @@
             });
         }
 
+        // ================= SHOWCASE CAROUSEL ENGINE =================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.showcase-slide');
+        const dashes = document.querySelectorAll('.pagination-dash');
+        let autoSlideTimer;
+
+        function showSlide(index) {
+            if (!slides.length) return;
+            if (index < 0) currentSlide = slides.length - 1;
+            else if (index >= slides.length) currentSlide = 0;
+            else currentSlide = index;
+
+            slides.forEach((s, i) => {
+                s.classList.toggle('active-slide', i === currentSlide);
+            });
+            dashes.forEach((d, i) => {
+                d.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function changeSlide(direction) {
+            resetAutoSlide();
+            showSlide(currentSlide + direction);
+        }
+
+        function goToSlide(index) {
+            resetAutoSlide();
+            showSlide(index);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 6000);
+        }
+
+        // Touch Swipe on mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const showcaseBox = document.getElementById('showcaseBox');
+        if (showcaseBox) {
+            showcaseBox.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            showcaseBox.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            showcaseBox.addEventListener('mouseenter', () => clearInterval(autoSlideTimer));
+            showcaseBox.addEventListener('mouseleave', () => resetAutoSlide());
+        }
+
+        function handleSwipe() {
+            const diff = touchEndX - touchStartX;
+            if (Math.abs(diff) > 40) {
+                if (diff < 0) changeSlide(1); // Swipe Left -> Next
+                else changeSlide(-1);         // Swipe Right -> Prev
+            }
+        }
+
         // Stats counter animation
         function initStatsCounter() {
             const statsSection = document.querySelector('.stats-section');
@@ -739,6 +1119,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
             handleVisitorCounter();
+            resetAutoSlide();
         });
     </script>
     <script defer src="site-features.js"></script>
