@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>[PREVIEW OPSI 1] Bento Grid Spotlight - LXVOID COMMUNITY</title>
-    <meta name="description" content="Pratinjau Desain Opsi 1: Bento Grid Community & Services Spotlight LXVOID COMMUNITY.">
+    <title>[PREVIEW 1] Minimal Glass Modern - LXVOID COMMUNITY</title>
+    <meta name="description" content="Pratinjau Desain Opsi 1: Minimal Glass Modern Layout untuk LXVOID COMMUNITY.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#121212">
     <meta name="color-scheme" content="dark">
@@ -14,8 +14,8 @@
     <style>
         /* ================= PREVIEW SWITCHER BAR ================= */
         .preview-top-bar {
-            background: linear-gradient(90deg, #10121a, #1a1528, #10121a);
-            border-bottom: 1px solid rgba(0, 173, 181, 0.4);
+            background: linear-gradient(90deg, #0d0e14, #141522, #0d0e14);
+            border-bottom: 1px solid rgba(0, 173, 181, 0.35);
             padding: 10px 16px;
             display: flex;
             align-items: center;
@@ -40,7 +40,7 @@
         .preview-badge-pill {
             background: #00adb5;
             color: #0b0c10;
-            padding: 2px 8px;
+            padding: 3px 8px;
             border-radius: 4px;
             font-size: 0.72rem;
             font-weight: 800;
@@ -95,197 +95,284 @@
             border-color: #ff5252;
         }
 
-        /* ================= BENTO GRID SPOTLIGHT STYLES ================= */
-        .bento-section {
-            padding: 30px 16px 20px;
+        /* ================= CONCEPT 1: MINIMAL GLASS MODERN ================= */
+        .minimal-hub-section {
             max-width: 1140px;
-            margin: 0 auto;
+            margin: 32px auto 20px;
+            padding: 0 16px;
         }
 
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 18px;
+        .hub-header {
+            text-align: center;
+            margin-bottom: 28px;
         }
 
-        .bento-card {
-            background: #14151f;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 22px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bento-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(0, 173, 181, 0.5);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 173, 181, 0.15);
-        }
-
-        /* Span 2 Columns for Hero Card */
-        .bento-card-main {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #171827 0%, #13141f 60%, #1a162b 100%);
-            border: 1px solid rgba(138, 75, 255, 0.3);
-            position: relative;
-        }
-
-        .bento-card-main::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, rgba(0, 173, 181, 0.18) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .bento-card-wide {
-            grid-column: span 3;
-            background: linear-gradient(90deg, #131522 0%, #151624 50%, #191629 100%);
-            border: 1px solid rgba(0, 173, 181, 0.3);
-        }
-
-        .bento-badge {
+        .hub-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: rgba(0, 173, 181, 0.12);
+            background: rgba(0, 173, 181, 0.1);
             color: #00adb5;
             border: 1px solid rgba(0, 173, 181, 0.3);
-            margin-bottom: 14px;
-            width: fit-content;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
         }
 
-        .bento-badge.purple-badge {
-            background: rgba(168, 85, 247, 0.15);
-            color: #c084fc;
-            border-color: rgba(168, 85, 247, 0.35);
+        .hub-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 8px;
+            letter-spacing: -0.5px;
         }
 
-        .bento-badge.gold-badge {
-            background: rgba(255, 215, 0, 0.12);
-            color: #ffd700;
-            border-color: rgba(255, 215, 0, 0.3);
+        .hub-subtitle {
+            font-size: 0.92rem;
+            color: #9da0b5;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.5;
         }
 
-        .bento-badge.green-badge {
-            background: rgba(0, 230, 118, 0.12);
-            color: #00e676;
-            border-color: rgba(0, 230, 118, 0.3);
+        /* 3-Column Clean Glass Grid */
+        .glass-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
         }
 
-        .bento-header-group {
+        .glass-card {
+            background: rgba(22, 24, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
             display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 12px;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .bento-icon-box {
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Card Accents */
+        .glass-card.card-cyan:hover {
+            border-color: rgba(0, 173, 181, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 173, 181, 0.15);
+        }
+        .glass-card.card-cyan:hover::before {
+            background: linear-gradient(90deg, transparent, #00adb5, transparent);
+        }
+
+        .glass-card.card-purple:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(168, 85, 247, 0.15);
+        }
+        .glass-card.card-purple:hover::before {
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
+        }
+
+        .glass-card.card-gold:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.15);
+        }
+        .glass-card.card-gold:hover::before {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        /* Card Header Elements */
+        .glass-icon-circle {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 14px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
         }
 
-        .bento-card-main .bento-logo-img {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: 2px solid #00adb5;
-            box-shadow: 0 0 15px rgba(0, 173, 181, 0.4);
-            animation: bentoPulse 3s infinite alternate ease-in-out;
+        .glass-mini-tag {
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: #00adb5;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 6px;
         }
 
-        @keyframes bentoPulse {
-            0% { box-shadow: 0 0 10px rgba(0, 173, 181, 0.3); }
-            100% { box-shadow: 0 0 22px rgba(168, 85, 247, 0.7); }
+        .glass-mini-tag.tag-purple {
+            color: #c084fc;
         }
 
-        .bento-card h3 {
-            font-size: 1.15rem;
+        .glass-mini-tag.tag-gold {
+            color: #ffd700;
+        }
+
+        .glass-card h3 {
+            font-size: 1.18rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 6px;
+            margin: 0 0 8px;
             line-height: 1.3;
         }
 
-        .bento-card p {
+        .glass-card p {
             font-size: 0.86rem;
-            color: #a0a0b8;
+            color: #a0a0b6;
             line-height: 1.5;
-            margin-bottom: 16px;
+            margin: 0 0 20px;
         }
 
-        .bento-chips-wrap {
+        /* Card Footer Elements */
+        .glass-card-footer {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 16px;
-        }
-
-        .bento-chip {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 4px 9px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            color: #d0d0e0;
-            font-weight: 600;
-        }
-
-        .bento-action-link {
-            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #00adb5;
-            font-size: 0.82rem;
-            font-weight: 800;
-            transition: transform 0.2s ease, color 0.2s ease;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 14px;
             margin-top: auto;
         }
 
-        .bento-card:hover .bento-action-link {
-            color: #00e5ff;
+        .glass-stat-text {
+            font-size: 0.78rem;
+            color: #7b7f96;
+            font-weight: 600;
+        }
+
+        .glass-arrow-btn {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #00adb5;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .glass-card.card-purple .glass-arrow-btn {
+            color: #c084fc;
+        }
+
+        .glass-card.card-gold .glass-arrow-btn {
+            color: #ffd700;
+        }
+
+        .glass-card:hover .glass-arrow-btn {
             transform: translateX(4px);
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .bento-grid {
+        /* Minimal Discord Bar */
+        .minimal-discord-bar {
+            background: linear-gradient(90deg, rgba(25, 27, 43, 0.7), rgba(30, 25, 48, 0.7));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .discord-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .discord-bar-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(88, 101, 242, 0.15);
+            border: 1px solid rgba(88, 101, 242, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .discord-bar-left h4 {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 3px;
+        }
+
+        .discord-bar-left p {
+            font-size: 0.82rem;
+            color: #9fa0b5;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .btn-discord-mini {
+            background: #5865f2;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-discord-mini:hover {
+            background: #4752c4;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 860px) {
+            .glass-grid-3 {
                 grid-template-columns: 1fr;
+                gap: 14px;
             }
-            .bento-card-main,
-            .bento-card-wide {
-                grid-column: span 1;
+            .hub-title {
+                font-size: 1.55rem;
             }
-            .preview-top-bar {
+            .minimal-discord-bar {
                 flex-direction: column;
                 align-items: stretch;
+                text-align: left;
             }
-            .preview-nav-btns {
-                justify-content: flex-start;
+            .btn-discord-mini {
+                justify-content: center;
             }
         }
     </style>
@@ -295,150 +382,47 @@
     <!-- Top Preview Navigator -->
     <div class="preview-top-bar">
         <div class="preview-info-tag">
-            <span class="preview-badge-pill">PREVIEW OPSI 1</span>
-            <span>Bento Grid: Community & Services Spotlight</span>
+            <span class="preview-badge-pill">OPSI 1</span>
+            <span>Minimal Glass Modern (Simpel & Elegan)</span>
         </div>
         <div class="preview-nav-btns">
-            <a href="preview-1.html" class="preview-btn active">Opsi 1 (Bento Grid)</a>
-            <a href="preview-2.html" class="preview-btn">Opsi 2 (Legacy Journey)</a>
-            <a href="index.html" class="preview-btn btn-exit">← Kembali ke Home Asli</a>
+            <a href="preview-1.html" class="preview-btn active">Opsi 1 (Glass Modern)</a>
+            <a href="preview-2.html" class="preview-btn">Opsi 2 (Cyber Spotlight)</a>
+            <a href="index.html" class="preview-btn btn-exit">← Kembali ke Web Asli</a>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">Teks disalin ke clipboard!</div>
+    <!-- Background Decoration -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
 
-    <!-- ================= NAVBAR ================= -->
-    <header class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="assets/logo.png" alt="LXVOID Logo" class="nav-logo-badge">
-            <h1 class="logo">LXVOID COMMUNITY</h1>
-        </a>
-        <nav>
-            <a href="index.html" class="nav-highlight">Home</a>
-            <a href="preview-1.html" style="color:#00adb5; font-weight:700;">★ Bento Spotlight</a>
-            <a href="presets.html">Presets</a>
-            <a href="joki.html">Joki Genshin</a>
-            <a href="history-ff.html">History FF</a>
-            <a href="links.html">Links</a>
-        </nav>
+    <header class="hero">
+        <div class="profile-container">
+            <div class="avatar-wrapper">
+                <img src="assets/profile.jpg" alt="Logo LXVOID COMMUNITY" class="profile-img" width="130" height="130">
+                <div class="status-indicator" title="Status: Online & Menerima Joki"></div>
+            </div>
+            <h1 class="brand-title">LXVOID COMMUNITY</h1>
+            <p class="tagline">Official Hub of Rasyhz • Creative Video Editor • Genshin Impact Services • Free Fire Guild</p>
+
+            <div class="hero-actions">
+                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                    </svg>
+                    <span>Gabung Discord</span>
+                </a>
+                <a href="links.html" class="btn-secondary">
+                    <span>Semua Link Sosial</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
     </header>
 
     <main>
-        <!-- Quick Copy Bar -->
-        <section class="quick-copy-bar">
-            <div class="quick-copy-chip" onclick="copyText('085397460252', 'Nomor WhatsApp disalin!')" title="Klik untuk salin Nomor WhatsApp">
-                <span class="chip-icon">📱</span>
-                <span class="chip-text">WA: <strong>0853-9746-0252</strong></span>
-                <span class="chip-copy-icon">📋</span>
-            </div>
-            <div class="quick-copy-chip" onclick="copyText('1234567890', 'UID Free Fire disalin!')" title="Klik untuk salin UID">
-                <span class="chip-icon">🎮</span>
-                <span class="chip-text">UID: <strong>1234567890</strong></span>
-                <span class="chip-copy-icon">📋</span>
-            </div>
-            <div class="quick-copy-chip" onclick="copyText('rasyhze', 'Discord Tag disalin!')" title="Klik untuk salin Discord Tag">
-                <span class="chip-icon">💬</span>
-                <span class="chip-text">Discord: <strong>rasyhze</strong></span>
-                <span class="chip-copy-icon">📋</span>
-            </div>
-            <div class="quick-copy-chip" onclick="copyText('wjwhaha5@gmail.com', 'Email disalin!')" title="Klik untuk salin Email">
-                <span class="chip-icon">✉️</span>
-                <span class="chip-text">Email: <strong>wjwhaha5@gmail.com</strong></span>
-                <span class="chip-copy-icon">📋</span>
-            </div>
-        </section>
-
-        <!-- ================= BENTO GRID SPOTLIGHT (PENGGANTI VIDEO) ================= -->
-        <section class="bento-section">
-            <div class="section-title-wrap">
-                <h2>Community & Services Spotlight</h2>
-                <p class="section-desc">Pusat informasi divisi resmi, layanan unggulan, dan ekosistem kreatif LXVOID COMMUNITY.</p>
-            </div>
-
-            <div class="bento-grid">
-                <!-- Card 1 (Span 2): TEAM LXVOID Free Fire Highlight -->
-                <a href="history-ff.html" class="bento-card bento-card-main">
-                    <div>
-                        <div class="bento-badge purple-badge">👑 DIVISI RESMI ESPORTS • SINCE 2021</div>
-                        <div class="bento-header-group">
-                            <img src="assets/logo.png" alt="LXVOID Logo" class="bento-logo-img">
-                            <div>
-                                <h3>TEAM LXVOID Free Fire</h3>
-                                <p style="margin-bottom:8px;">Fast Tournament, Guild War, dan pembinaan squad kompetitif Free Fire Indonesia.</p>
-                            </div>
-                        </div>
-                        <div class="bento-chips-wrap">
-                            <span class="bento-chip">🏆 50+ Match Booyah</span>
-                            <span class="bento-chip">⚡ Rank Master & Grandmaster</span>
-                            <span class="bento-chip">👥 Open Recruitment Guild</span>
-                            <span class="bento-chip">⚔️ Scrim & Turnamen</span>
-                        </div>
-                    </div>
-                    <span class="bento-action-link">Buka Galeri History & Prestasi FF →</span>
-                </a>
-
-                <!-- Card 2: Joki Genshin Impact -->
-                <a href="joki.html" class="bento-card">
-                    <div>
-                        <div class="bento-badge green-badge">✨ 100% MANUAL NO BOT</div>
-                        <div class="bento-header-group">
-                            <div class="bento-icon-box" style="background:rgba(0,173,181,0.1); border-color:rgba(0,173,181,0.3);">🗺️</div>
-                            <div>
-                                <h3>Joki Genshin</h3>
-                                <p>Explore 100% map Teyvat, Oculus hunting, Quest panjang, dan Abyss 36★ bergaransi aman.</p>
-                            </div>
-                        </div>
-                        <div class="bento-chips-wrap">
-                            <span class="bento-chip">Mondstadt s/d Snezhnaya</span>
-                            <span class="bento-chip">Mulai Rp 15.000</span>
-                        </div>
-                    </div>
-                    <span class="bento-action-link">Cek Paket & Promo Joki →</span>
-                </a>
-
-                <!-- Card 3: Presets & Project Files -->
-                <a href="presets.html" class="bento-card">
-                    <div>
-                        <div class="bento-badge gold-badge">📦 DOWNLOAD ASET GRATIS</div>
-                        <div class="bento-header-group">
-                            <div class="bento-icon-box" style="background:rgba(255,215,0,0.1); border-color:rgba(255,215,0,0.3);">⚡</div>
-                            <div>
-                                <h3>Presets AMV</h3>
-                                <p>Download Alight Motion XML 60FPS, template CapCut Velocity, dan project AE gratis.</p>
-                            </div>
-                        </div>
-                        <div class="bento-chips-wrap">
-                            <span class="bento-chip">Alight Motion XML</span>
-                            <span class="bento-chip">CapCut Velocity</span>
-                        </div>
-                    </div>
-                    <span class="bento-action-link">Download Preset Gratis →</span>
-                </a>
-
-                <!-- Card 4 (Wide): Lo-Fi Audio Lounge Live BGM -->
-                <div class="bento-card bento-card-wide" style="cursor:default;">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
-                        <div>
-                            <div class="bento-badge">🎧 NON-STOP BGM LOUNGE</div>
-                            <h3>LXVOID Aesthetic Chill Beats 🎵</h3>
-                            <p style="margin-bottom:8px; max-width:650px;">
-                                Musik Lo-Fi santai & playlist custom Owner otomatis diputar di latar belakang. Tetap menyala mulus tanpa jeda saat Anda menjelajahi halaman web.
-                            </p>
-                        </div>
-                        <div class="bento-chips-wrap" style="margin-top:8px;">
-                            <span class="bento-chip">📻 10+ Lagu Trending Lo-Fi</span>
-                            <span class="bento-chip">✨ Custom Song Playlist</span>
-                            <span class="bento-chip">📱 Mobile Compact Mini Player</span>
-                        </div>
-                    </div>
-                    <span style="color:#00adb5; font-size:0.8rem; font-weight:700; margin-top:8px;">
-                        💡 Ketuk ikon piringan hitam 🎵 di pojok kiri bawah untuk mengontrol pemutar lagu!
-                    </span>
-                </div>
-            </div>
-        </section>
-
         <!-- ================= STATS & ACHIEVEMENTS COUNTER ================= -->
         <section class="stats-section">
             <div class="stats-grid">
@@ -477,87 +461,102 @@
             </div>
         </section>
 
-        <!-- ================= JELAJAHI KONTEN & LAYANAN ================= -->
-        <section class="gallery-section explore-section">
-            <div class="section-title-wrap">
-                <h2>Jelajahi Konten & Layanan</h2>
-                <p class="section-desc">Akses cepat ke koleksi preset gratis dan layanan jasa edit video profesional.</p>
+        <!-- ================= CONCEPT 1: MINIMAL GLASS MODERN ================= -->
+        <section class="minimal-hub-section">
+            <div class="hub-header">
+                <span class="hub-pill">⚡ EKOSISTEM LXVOID</span>
+                <h2 class="hub-title">Layanan & Konten Pilihan</h2>
+                <p class="hub-subtitle">Pilih menu di bawah untuk langsung menuju layanan atau koleksi yang kamu butuhkan.</p>
             </div>
 
-            <div class="feature-preview-grid">
-                <!-- Card 1: Presets & Project Files -->
-                <a href="presets.html" class="feature-preview-card">
-                    <div class="feature-preview-badge">📦 DOWNLOAD ASET GRATIS</div>
-                    <div class="feature-preview-content">
-                        <div class="feature-preview-icon">⚡</div>
-                        <h3>Presets & Project Files</h3>
-                        <p>Download Alight Motion XML 60FPS, template CapCut Velocity, dan After Effects Project (.aep) lengkap dengan preview beat.</p>
-                        <div class="feature-preview-tags">
-                            <span>Alight Motion XML</span>
-                            <span>CapCut Velocity</span>
-                            <span>After Effects</span>
-                        </div>
+            <div class="glass-grid-3">
+                <!-- Card 1: Presets & Template -->
+                <a href="presets.html" class="glass-card card-cyan">
+                    <div class="glass-card-top">
+                        <div class="glass-icon-circle">⚡</div>
+                        <span class="glass-mini-tag">DOWNLOAD GRATIS</span>
+                        <h3>Presets & Editing</h3>
+                        <p>Koleksi Alight Motion XML 60FPS, template CapCut Velocity, dan aset video gratis siap pakai.</p>
                     </div>
-                    <div class="feature-preview-action">
-                        <span class="btn-preview-link">Buka Halaman Presets →</span>
+                    <div class="glass-card-footer">
+                        <span class="glass-stat-text">35+ File Tersedia</span>
+                        <span class="glass-arrow-btn">Buka Presets →</span>
                     </div>
                 </a>
 
                 <!-- Card 2: Joki Genshin Impact -->
-                <a href="joki.html" class="feature-preview-card popular-preview">
-                    <div class="feature-preview-badge">✨ OPEN JOKI • 100% MANUAL</div>
-                    <div class="feature-preview-content">
-                        <div class="feature-preview-icon">🗺️</div>
+                <a href="joki.html" class="glass-card card-purple">
+                    <div class="glass-card-top">
+                        <div class="glass-icon-circle">🗺️</div>
+                        <span class="glass-mini-tag tag-purple">100% MANUAL & AMAN</span>
                         <h3>Joki Genshin Impact</h3>
-                        <p>Jasa explore 100% map Teyvat per daerah, oculus hunting, buka teleport, world quest panjang, hingga Abyss 36★. Aman & amanah.</p>
-                        <div class="feature-preview-tags">
-                            <span>Mondstadt s/d Snezhnaya (v7.2)</span>
-                            <span>Explore 100% & Oculus</span>
-                            <span>Mulai Rp 15.000</span>
-                        </div>
+                        <p>Layanan explore map Teyvat per daerah, oculus hunting, quest dunia panjang, hingga Abyss 36★.</p>
                     </div>
-                    <div class="feature-preview-action">
-                        <span class="btn-preview-link btn-preview-primary">Pilih Map & Cek Harga →</span>
+                    <div class="glass-card-footer">
+                        <span class="glass-stat-text">Mulai Rp 15.000</span>
+                        <span class="glass-arrow-btn">Cek Layanan →</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: History & Turnamen FF -->
+                <a href="history-ff.html" class="glass-card card-gold">
+                    <div class="glass-card-top">
+                        <div class="glass-icon-circle">🏆</div>
+                        <span class="glass-mini-tag tag-gold">OFFICIAL GUILD</span>
+                        <h3>History Turnamen FF</h3>
+                        <p>Dokumentasi match scrim, rekap booyah turnamen, sertifikat juara, dan roster guild LXVOID.</p>
+                    </div>
+                    <div class="glass-card-footer">
+                        <span class="glass-stat-text">50+ Match Juara</span>
+                        <span class="glass-arrow-btn">Lihat Prestasi →</span>
                     </div>
                 </a>
             </div>
+
+            <!-- Minimalist Discord Bar -->
+            <div class="minimal-discord-bar">
+                <div class="discord-bar-left">
+                    <div class="discord-bar-icon">💬</div>
+                    <div>
+                        <h4>Komunitas Discord LXVOID</h4>
+                        <p>Tempat mabar, diskusi editing, sharing preset, dan nongkrong bareng 1.500+ member aktif.</p>
+                    </div>
+                </div>
+                <div class="discord-bar-right">
+                    <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="btn-discord-mini">
+                        Gabung Discord ↗
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <!-- ================= 4. CONNECT & COMMUNITY ================= -->
+        <!-- ================= CONNECT & COMMUNITY ================= -->
         <section class="social-section">
             <h2>Connect & Community</h2>
             <p class="social-desc">Ikuti akun resmi LXVOID COMMUNITY atau buka direktori tautan lengkap.</p>
 
             <div class="social-links-container">
-                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer"
-                    class="social-btn discord-btn">
+                <a href="https://discord.gg/upGJeEGKWk" target="_blank" rel="noopener noreferrer" class="social-btn discord-btn">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
                     </svg>
                     <span>Discord</span>
                 </a>
-                <a href="https://www.instagram.com/rasyhz1455" target="_blank" rel="noopener noreferrer"
-                    class="social-btn instagram-btn">
+                <a href="https://www.instagram.com/rasyhz1455" target="_blank" rel="noopener noreferrer" class="social-btn instagram-btn">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                     <span>Instagram</span>
                 </a>
-                <a href="https://www.tiktok.com/@rasyhze" target="_blank" rel="noopener noreferrer"
-                    class="social-btn tiktok-btn">
+                <a href="https://www.tiktok.com/@rasyhze" target="_blank" rel="noopener noreferrer" class="social-btn tiktok-btn">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
                     </svg>
                     <span>TikTok</span>
                 </a>
-                <a href="https://youtube.com/@rasyhze" target="_blank" rel="noopener noreferrer"
-                    class="social-btn youtube-btn">
+                <a href="https://youtube.com/@rasyhze" target="_blank" rel="noopener noreferrer" class="social-btn youtube-btn">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                     </svg>
                     <span>YouTube</span>
                 </a>
@@ -578,7 +577,7 @@
                 <span>Total Kunjungan: <strong class="visitor-count-text">1.281</strong> kali</span>
             </div>
             <div class="footer-links">
-                <a href="index.html">Home</a>
+                <a href="preview-1.html">Home</a>
                 <a href="presets.html">Presets</a>
                 <a href="joki.html">Joki Genshin</a>
                 <a href="history-ff.html">History FF</a>
@@ -589,7 +588,7 @@
 
     <!-- ================= ANDROID MOBILE BOTTOM NAVIGATION ================= -->
     <nav class="mobile-bottom-nav">
-        <a href="index.html" class="nav-item active">
+        <a href="preview-1.html" class="nav-item active">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </svg>
@@ -622,18 +621,7 @@
     </nav>
 
     <script>
-        let toastTimer;
-        function copyText(text, message) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                clearTimeout(toastTimer);
-                toast.innerText = message || 'Disalin ke clipboard!';
-                toast.classList.add('show');
-                toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
-            });
-        }
-
-        // ================= STATS COUNTER ANIMATION =================
+        // Stats counter animation
         function initStatsCounter() {
             const statsSection = document.querySelector('.stats-section');
             if (!statsSection) return;
@@ -668,70 +656,11 @@
             observer.observe(statsSection);
         }
 
-        // ================= VISITOR COUNTER (FIREBASE) =================
-        async function handleVisitorCounter() {
-            const projectId = 'ff-ft-1c86d';
-            const baseUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
-            const docPath = `projects/${projectId}/databases/(default)/documents/site_stats/visitors`;
-            const sessionKey = 'rasyhz_visited_session';
-            const hasVisited = sessionStorage.getItem(sessionKey);
-            let count = 1281;
-
-            try {
-                if (!hasVisited) {
-                    const res = await fetch(`${baseUrl}:commit`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            writes: [{
-                                transform: {
-                                    document: docPath,
-                                    fieldTransforms: [{
-                                        fieldPath: 'count',
-                                        increment: { integerValue: '1' }
-                                    }]
-                                }
-                            }]
-                        })
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        const val = data.writeResults?.[0]?.transformResults?.[0]?.integerValue;
-                        if (val) {
-                            count = parseInt(val, 10);
-                            sessionStorage.setItem(sessionKey, 'true');
-                        }
-                    }
-                } else {
-                    const res = await fetch(`${baseUrl}/site_stats/visitors`);
-                    if (res.ok) {
-                        const data = await res.json();
-                        const val = data.fields?.count?.integerValue;
-                        if (val) count = parseInt(val, 10);
-                    }
-                }
-            } catch (err) {
-                console.warn('Visitor counter offline fallback:', err);
-            }
-
-            const formatted = Number(count).toLocaleString('id-ID');
-            document.querySelectorAll('.visitor-count-text').forEach(el => {
-                el.textContent = formatted;
-            });
-            const statEl = document.querySelector('.visitor-stat-number');
-            if (statEl) {
-                statEl.setAttribute('data-target', count);
-                statEl.textContent = formatted;
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
-            handleVisitorCounter();
         });
     </script>
     <script defer src="site-features.js"></script>
 </body>
 
 </html>
-
