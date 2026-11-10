@@ -327,10 +327,29 @@
             width: 100%;
             border-radius: 26px;
             overflow: hidden;
-            background: linear-gradient(135deg, #0e1224 0%, #131830 50%, #1a1e38 100%);
+            background: #0d1222;
             border: 1px solid rgba(138, 180, 248, 0.25);
             box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), 0 0 35px rgba(88, 101, 242, 0.12);
             min-height: 340px;
+            transition: border-color 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        /* Dynamic Container Glows matching each active character theme */
+        .showcase-container[data-theme="0"] {
+            border-color: rgba(245, 208, 134, 0.4);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(35, 65, 120, 0.4), 0 0 18px rgba(245, 208, 134, 0.25);
+        }
+        .showcase-container[data-theme="1"] {
+            border-color: rgba(255, 69, 0, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 69, 0, 0.35);
+        }
+        .showcase-container[data-theme="2"] {
+            border-color: rgba(255, 215, 0, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.25);
+        }
+        .showcase-container[data-theme="3"] {
+            border-color: rgba(168, 85, 247, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 85, 247, 0.3);
         }
 
         .showcase-container::before {
@@ -343,6 +362,7 @@
             background-position: 0 0, 20px 20px;
             opacity: 0.35;
             pointer-events: none;
+            z-index: 2;
         }
 
         .showcase-slides {
@@ -362,6 +382,35 @@
             visibility: hidden;
             transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
             z-index: 1;
+        }
+
+        /* BESPOKE CHARACTER BACKGROUNDS FOR EACH SLIDE */
+        /* Slide 0: Violet Evergarden (Royal Prussian Blue & Golden Amber Sunlight) */
+        .showcase-slide[data-index="0"] {
+            background: radial-gradient(circle at 82% 48%, rgba(245, 208, 134, 0.28) 0%, rgba(27, 50, 92, 0.4) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(184, 59, 72, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #0b1324 0%, #132242 40%, #1e2544 70%, #2f211d 100%);
+        }
+
+        /* Slide 1: Hu Tao (Smoldering Crimson Pyro Flames & Charcoal Obsidian) */
+        .showcase-slide[data-index="1"] {
+            background: radial-gradient(circle at 82% 48%, rgba(255, 69, 0, 0.32) 0%, rgba(180, 20, 20, 0.25) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(255, 152, 0, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #180809 0%, #2a0b10 40%, #3e1117 70%, #200607 100%);
+        }
+
+        /* Slide 2: History FF / LXVOID Guild (Prestigious Cyber Gold & Titanium Black) */
+        .showcase-slide[data-index="2"] {
+            background: radial-gradient(circle at 82% 48%, rgba(255, 215, 0, 0.28) 0%, rgba(200, 140, 0, 0.18) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 173, 181, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #121008 0%, #221b0b 40%, #34280c 70%, #141720 100%);
+        }
+
+        /* Slide 3: AM XML & CapCut (Electro Violet Lightning & Deep Nebula) */
+        .showcase-slide[data-index="3"] {
+            background: radial-gradient(circle at 82% 48%, rgba(168, 85, 247, 0.3) 0%, rgba(110, 40, 200, 0.2) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(138, 75, 255, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #11081d 0%, #200f36 40%, #321354 70%, #170a29 100%);
         }
 
         .showcase-slide.active-slide {
@@ -397,6 +446,12 @@
             background: rgba(168, 85, 247, 0.15);
             color: #c084fc;
             border-color: rgba(168, 85, 247, 0.35);
+        }
+
+        .slide-badge-pill.pill-royal-gold {
+            background: rgba(245, 208, 134, 0.16);
+            color: #f7d488;
+            border-color: rgba(245, 208, 134, 0.45);
         }
 
         .slide-badge-pill.pill-red {
@@ -472,6 +527,18 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.6);
         }
 
+        .slide-btn-cta.btn-cta-royal {
+            background: linear-gradient(135deg, #1d3557, #2a5298);
+            color: #ffffff;
+            border: 1px solid rgba(245, 208, 134, 0.45);
+            box-shadow: 0 4px 18px rgba(42, 82, 152, 0.5), 0 0 12px rgba(245, 208, 134, 0.2);
+        }
+
+        .slide-btn-cta.btn-cta-royal:hover {
+            background: linear-gradient(135deg, #24426d, #3566bd);
+            box-shadow: 0 6px 24px rgba(42, 82, 152, 0.7), 0 0 16px rgba(245, 208, 134, 0.35);
+        }
+
         .slide-btn-cta.btn-cta-red {
             background: #ff5722;
             color: #ffffff;
@@ -509,24 +576,40 @@
 
         .slide-art-glow {
             position: absolute;
-            width: 280px;
-            height: 280px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(138, 180, 248, 0.25) 0%, rgba(0, 173, 181, 0.1) 50%, transparent 70%);
-            filter: blur(30px);
+            filter: blur(35px);
             pointer-events: none;
         }
 
+        .slide-art-glow.gold-sun-glow {
+            width: 330px;
+            height: 330px;
+            background: radial-gradient(circle, rgba(245, 208, 134, 0.45) 0%, rgba(42, 82, 152, 0.35) 45%, transparent 70%);
+            filter: blur(38px);
+        }
+
         .slide-art-glow.purple-glow {
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(138, 75, 255, 0.12) 50%, transparent 70%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(138, 75, 255, 0.2) 45%, transparent 70%);
+            filter: blur(38px);
         }
 
         .slide-art-glow.red-glow {
-            background: radial-gradient(circle, rgba(255, 87, 34, 0.3) 0%, rgba(255, 152, 0, 0.12) 50%, transparent 70%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255, 69, 0, 0.45) 0%, rgba(255, 152, 0, 0.25) 45%, transparent 70%);
+            filter: blur(38px);
         }
 
         .slide-art-glow.gold-glow {
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 170, 0, 0.12) 50%, transparent 70%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 170, 0, 0.2) 45%, transparent 70%);
+            filter: blur(38px);
         }
 
         .slide-art-img {
@@ -537,6 +620,8 @@
             transition: transform 0.4s ease;
             position: relative;
             z-index: 3;
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
         .showcase-container:hover .slide-art-img {
@@ -603,6 +688,23 @@
             width: 42px;
             background: #00adb5;
             box-shadow: 0 0 10px rgba(0, 173, 181, 0.6);
+        }
+
+        .showcase-container[data-theme="0"] .pagination-dash.active {
+            background: #f5d086;
+            box-shadow: 0 0 12px rgba(245, 208, 134, 0.7);
+        }
+        .showcase-container[data-theme="1"] .pagination-dash.active {
+            background: #ff5722;
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.7);
+        }
+        .showcase-container[data-theme="2"] .pagination-dash.active {
+            background: #ffd700;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+        }
+        .showcase-container[data-theme="3"] .pagination-dash.active {
+            background: #c084fc;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
         }
 
         /* ================= LOWER HUB: CLEAN 3-CARD GLASS GRID ================= */
@@ -967,18 +1069,18 @@
             <!-- Arrow Prev -->
             <button class="showcase-arrow-btn arrow-prev" onclick="changeSlide(-1)" aria-label="Previous Slide">‹</button>
 
-            <div class="showcase-container" id="showcaseBox">
+            <div class="showcase-container" id="showcaseBox" data-theme="0">
                 <div class="showcase-slides">
                     <!-- Slide 1: Welcome / Violet Evergarden -->
                     <div class="showcase-slide active-slide" data-index="0">
                         <div class="slide-content-left">
-                            <span class="slide-badge-pill">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
+                            <span class="slide-badge-pill pill-royal-gold">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
                             <h2 class="slide-title">Selamat Datang di LXVOID</h2>
                             <p class="slide-desc">Komunitas gaming, jasa joki Genshin Impact terpercaya, dan ekosistem video editing kreatif oleh Rasyhz.</p>
-                            <a href="#ekosistem" class="slide-btn-cta">Jelajahi Sekarang →</a>
+                            <a href="#ekosistem" class="slide-btn-cta btn-cta-royal">Jelajahi Sekarang →</a>
                         </div>
                         <div class="slide-art-right">
-                            <div class="slide-art-glow"></div>
+                            <div class="slide-art-glow gold-sun-glow"></div>
                             <img src="assets/violet-welcome.png"
                                  alt="Violet Evergarden - Welcome LXVOID" class="slide-art-img" loading="eager">
                         </div>
@@ -1270,6 +1372,10 @@
             dashes.forEach((d, i) => {
                 d.classList.toggle('active', i === currentSlide);
             });
+            const showcaseBox = document.getElementById('showcaseBox');
+            if (showcaseBox) {
+                showcaseBox.setAttribute('data-theme', currentSlide);
+            }
         }
 
         function changeSlide(direction) {
@@ -1410,6 +1516,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
             handleVisitorCounter();
+            showSlide(0);
             resetAutoSlide();
         });
     </script>

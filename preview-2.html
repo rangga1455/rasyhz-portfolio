@@ -357,22 +357,58 @@
             background: rgba(168, 85, 247, 0.1);
         }
 
-        .portal-tab-btn.active-tab {
-            background: linear-gradient(90deg, rgba(0, 173, 181, 0.2), rgba(168, 85, 247, 0.2));
+        .portal-tab-btn:nth-child(1).active-tab {
+            background: linear-gradient(90deg, rgba(245, 208, 134, 0.25), rgba(42, 82, 152, 0.3));
+            border-color: #f5d086;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(245, 208, 134, 0.45);
+        }
+        .portal-tab-btn:nth-child(2).active-tab {
+            background: linear-gradient(90deg, rgba(255, 69, 0, 0.25), rgba(255, 152, 0, 0.25));
+            border-color: #ff5722;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(255, 87, 34, 0.45);
+        }
+        .portal-tab-btn:nth-child(3).active-tab {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.25), rgba(245, 158, 11, 0.25));
+            border-color: #ffd700;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(255, 215, 0, 0.45);
+        }
+        .portal-tab-btn:nth-child(4).active-tab {
+            background: linear-gradient(90deg, rgba(168, 85, 247, 0.25), rgba(138, 75, 255, 0.25));
             border-color: #a855f7;
             color: #ffffff;
-            box-shadow: 0 0 14px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 14px rgba(168, 85, 247, 0.45);
         }
 
         /* Cyber Hero Banner Card */
         .cyber-banner-box {
             position: relative;
-            background: linear-gradient(135deg, #0d0f18 0%, #131222 50%, #1a162b 100%);
+            background: #0d0f18;
             border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 26px;
             overflow: hidden;
             box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.15);
             min-height: 350px;
+            transition: border-color 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .cyber-banner-box[data-theme="0"] {
+            border: 1px solid rgba(245, 208, 134, 0.4);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(35, 65, 120, 0.4), 0 0 18px rgba(245, 208, 134, 0.25);
+        }
+        .cyber-banner-box[data-theme="1"] {
+            border: 1px solid rgba(255, 69, 0, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 69, 0, 0.35);
+        }
+        .cyber-banner-box[data-theme="2"] {
+            border: 1px solid rgba(255, 215, 0, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.25);
+        }
+        .cyber-banner-box[data-theme="3"] {
+            border: 1px solid rgba(168, 85, 247, 0.45);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 85, 247, 0.3);
         }
 
         .cyber-orb {
@@ -383,6 +419,7 @@
             pointer-events: none;
             opacity: 0.22;
             filter: blur(60px);
+            z-index: 2;
         }
 
         .orb-left {
@@ -414,6 +451,28 @@
             visibility: hidden;
             transition: opacity 0.45s ease, visibility 0.45s ease;
             z-index: 1;
+        }
+
+        /* BESPOKE CHARACTER BACKGROUNDS FOR EACH CYBER SLIDE */
+        .cyber-slide-item[data-tab="0"] {
+            background: radial-gradient(circle at 82% 48%, rgba(245, 208, 134, 0.28) 0%, rgba(27, 50, 92, 0.4) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(184, 59, 72, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #0b1324 0%, #132242 40%, #1e2544 70%, #2f211d 100%);
+        }
+        .cyber-slide-item[data-tab="1"] {
+            background: radial-gradient(circle at 82% 48%, rgba(255, 69, 0, 0.32) 0%, rgba(180, 20, 20, 0.25) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(255, 152, 0, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #180809 0%, #2a0b10 40%, #3e1117 70%, #200607 100%);
+        }
+        .cyber-slide-item[data-tab="2"] {
+            background: radial-gradient(circle at 82% 48%, rgba(255, 215, 0, 0.28) 0%, rgba(200, 140, 0, 0.18) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 173, 181, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #121008 0%, #221b0b 40%, #34280c 70%, #141720 100%);
+        }
+        .cyber-slide-item[data-tab="3"] {
+            background: radial-gradient(circle at 82% 48%, rgba(168, 85, 247, 0.3) 0%, rgba(110, 40, 200, 0.2) 45%, transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(138, 75, 255, 0.15) 0%, transparent 50%),
+                        linear-gradient(135deg, #11081d 0%, #200f36 40%, #321354 70%, #170a29 100%);
         }
 
         .cyber-slide-item.active-slide {
@@ -572,6 +631,8 @@
             position: relative;
             z-index: 3;
             transition: transform 0.35s ease;
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
         .cyber-banner-box:hover .cyber-art-img {
@@ -609,6 +670,23 @@
             border-radius: 10px;
             background: #a855f7;
             box-shadow: 0 0 10px #a855f7;
+        }
+
+        .cyber-banner-box[data-theme="0"] .cyber-dot.active {
+            background: #f5d086;
+            box-shadow: 0 0 10px rgba(245, 208, 134, 0.7);
+        }
+        .cyber-banner-box[data-theme="1"] .cyber-dot.active {
+            background: #ff5722;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.7);
+        }
+        .cyber-banner-box[data-theme="2"] .cyber-dot.active {
+            background: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        .cyber-banner-box[data-theme="3"] .cyber-dot.active {
+            background: #c084fc;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
         }
 
         .cyber-arrow-pills {
@@ -911,7 +989,7 @@
             </div>
 
             <!-- Cyber Hero Banner Card -->
-            <div class="cyber-banner-box" id="cyberBannerBox">
+            <div class="cyber-banner-box" id="cyberBannerBox" data-theme="0">
                 <div class="cyber-orb orb-left"></div>
                 <div class="cyber-orb orb-right"></div>
 
@@ -919,16 +997,16 @@
                     <!-- Slide 1: Welcome / Violet Evergarden -->
                     <div class="cyber-slide-item active-slide" data-tab="0">
                         <div class="cyber-content-wrap">
-                            <span class="cyber-badge">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
+                            <span class="cyber-badge" style="background:rgba(245,208,134,0.18);color:#f5d086;border-left-color:#f5d086;">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
                             <h2 class="cyber-title">Selamat Datang di LXVOID</h2>
                             <p class="cyber-desc">Komunitas gaming, jasa joki Genshin Impact terpercaya, dan ekosistem video editing kreatif oleh Rasyhz.</p>
                             <div class="cyber-actions-row">
-                                <a href="#layanan" class="btn-cyber-main">Jelajahi Hub →</a>
-                                <a href="owner.html" class="btn-cyber-alt">Profil Owner</a>
+                                <a href="#layanan" class="btn-cyber-main" style="background:linear-gradient(135deg, #1d3557, #2a5298);color:#ffffff;border:1px solid rgba(245,208,134,0.45);box-shadow:0 0 16px rgba(42,82,152,0.6);">Jelajahi Hub →</a>
+                                <a href="owner.html" class="btn-cyber-alt" style="border-color:rgba(245,208,134,0.3);color:#f5d086;">Profil Owner</a>
                             </div>
                         </div>
                         <div class="cyber-art-box">
-                            <div class="cyber-art-halo"></div>
+                            <div class="cyber-art-halo" style="background:radial-gradient(circle, rgba(245,208,134,0.4) 0%, rgba(27,50,92,0.3) 50%, transparent 75%);border-color:rgba(245,208,134,0.35);"></div>
                             <img src="assets/violet-welcome.png"
                                  alt="Violet Evergarden - Welcome LXVOID" class="cyber-art-img" loading="eager">
                         </div>
@@ -1204,6 +1282,10 @@
             cyberDots.forEach((d, i) => {
                 d.classList.toggle('active', i === cyberIndex);
             });
+            const bannerBox = document.getElementById('cyberBannerBox');
+            if (bannerBox) {
+                bannerBox.setAttribute('data-theme', cyberIndex);
+            }
         }
 
         function jumpToTab(idx) {
@@ -1340,6 +1422,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initStatsCounter();
             handleVisitorCounter();
+            renderCyberSlide(0);
             restartCyberTimer();
         });
     </script>
