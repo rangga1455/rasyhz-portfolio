@@ -719,28 +719,37 @@
         .cyber-arrow-pills {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3px 6px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
         }
 
         .cyber-arrow-pill {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
+            background: transparent;
+            border: none;
+            color: #9ea1b8;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.1rem;
             transition: all 0.2s ease;
+            padding: 0;
         }
 
         .cyber-arrow-pill:hover {
-            background: #a855f7;
-            border-color: #a855f7;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        .cyber-arrow-pill:active {
+            transform: scale(0.94);
         }
 
         /* ================= LOWER HUB: DUAL SPLIT CARDS & LIVE STATUS ================= */
@@ -1123,8 +1132,16 @@
                         <span class="cyber-dot" onclick="jumpToTab(3)"></span>
                     </div>
                     <div class="cyber-arrow-pills">
-                        <button class="cyber-arrow-pill" onclick="slideStep(-1)" aria-label="Slide sebelumnya">‹</button>
-                        <button class="cyber-arrow-pill" onclick="slideStep(1)" aria-label="Slide selanjutnya">›</button>
+                        <button type="button" class="cyber-arrow-pill" onclick="slideStep(-1)" aria-label="Slide sebelumnya">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="cyber-arrow-pill" onclick="slideStep(1)" aria-label="Slide selanjutnya">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
