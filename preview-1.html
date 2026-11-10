@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+        }
         /* ================= PREVIEW SWITCHER BAR ================= */
         .preview-top-bar {
             background: linear-gradient(90deg, #0b0d14, #121526, #0b0d14);
@@ -1098,269 +1106,535 @@
         /* Mobile Optimization (Android & Responsive Phones) */
         @media (max-width: 860px) {
             body {
+                max-width: 420px !important;
+                margin: 0 auto !important;
                 padding-bottom: 74px !important;
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
             }
 
             /* Preview Top Bar on Mobile */
             .preview-top-bar {
-                padding: 6px 12px;
-                gap: 6px;
+                padding: 6px 10px;
+                gap: 5px;
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+                flex-direction: column;
+                align-items: flex-start;
             }
             .preview-info-tag {
-                font-size: 0.72rem;
-            }
-            .preview-badge-pill {
-                font-size: 0.65rem;
-                padding: 2px 6px;
+                font-size: 0.7rem;
+                white-space: normal;
+                width: 100%;
             }
             .preview-nav-btns {
-                gap: 5px;
-                flex-wrap: nowrap;
+                width: 100%;
                 overflow-x: auto;
                 scrollbar-width: none;
+                gap: 5px;
+                flex-wrap: nowrap;
             }
             .preview-nav-btns::-webkit-scrollbar {
                 display: none;
             }
+            .preview-badge-pill {
+                font-size: 0.62rem;
+                padding: 2px 6px;
+            }
             .preview-btn {
-                padding: 4px 9px;
-                font-size: 0.72rem;
+                padding: 4px 8px;
+                font-size: 0.7rem;
                 white-space: nowrap;
             }
 
             /* Site Header on Mobile */
             .site-header-holder {
-                height: 54px;
-                margin: 6px auto 4px;
-                padding: 0 12px;
+                height: 50px;
+                margin: 4px auto 6px;
+                padding: 0 10px;
             }
             .modern-reference-header {
-                border-radius: 14px;
-                padding: 8px 12px;
+                border-radius: 18px;
+                padding: 6px 12px;
+                background: rgba(11, 15, 26, 0.88) !important;
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.09);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-sizing: border-box;
+                width: 100%;
+            }
+            .ref-header-left {
+                display: flex;
+                align-items: center;
+                gap: 6px;
             }
             .ref-brand-logo {
-                width: 32px;
-                height: 32px;
+                width: 30px;
+                height: 30px;
             }
             .ref-brand-name {
-                font-size: 1.05rem;
+                font-size: 0.98rem;
+                font-weight: 800;
+                letter-spacing: 0.5px;
             }
             .modern-reference-header.header-scrolled {
                 top: 6px;
-                width: calc(100% - 24px);
-                padding: 7px 12px;
-                border-radius: 14px;
+                width: calc(100% - 20px);
+                padding: 6px 12px;
+                border-radius: 18px;
             }
             .ref-header-center {
-                display: none; /* Links in Android Bottom Bar */
-            }
-            .ref-btn-outline {
                 display: none;
             }
+            .ref-header-right {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                flex-shrink: 0;
+            }
+            .ref-btn-outline {
+                display: inline-flex !important;
+                align-items: center;
+                gap: 4px;
+                padding: 4px 8px !important;
+                font-size: 0.67rem !important;
+                font-weight: 700;
+                border-radius: 14px !important;
+                border: 1px solid rgba(255, 255, 255, 0.18) !important;
+                color: #e2e8f0 !important;
+                background: rgba(255, 255, 255, 0.06) !important;
+                white-space: nowrap;
+            }
+            .ref-btn-outline svg {
+                width: 12px;
+                height: 12px;
+            }
             .ref-btn-solid {
-                padding: 6px 14px;
-                font-size: 0.76rem;
-                border-radius: 20px;
+                display: inline-flex !important;
+                align-items: center;
+                gap: 3px;
+                padding: 4px 10px !important;
+                font-size: 0.67rem !important;
+                font-weight: 700;
+                border-radius: 14px !important;
+                white-space: nowrap;
+                background: linear-gradient(135deg, #7c3aed, #9333ea) !important;
+            }
+            .ref-btn-solid svg {
+                width: 12px;
+                height: 12px;
             }
 
             /* Quick Ticker Chips */
             .modern-quick-bar {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding: 4px 12px;
-                margin: 4px auto 14px;
-                scrollbar-width: none;
-            }
-            .modern-quick-bar::-webkit-scrollbar {
-                display: none;
-            }
-            .modern-chip {
-                flex-shrink: 0;
-                padding: 5px 11px;
-                font-size: 0.74rem;
+                display: none !important;
             }
 
-            /* Hero Banner Box: Sleek 310px Side-by-Side (Sesuai Referensi Layla) */
+            /* Hero Banner Box: Sized to 295px with Pop-Out Character & Clean Genshin-Style Layout */
             .showcase-carousel-wrapper {
-                margin: 8px auto 20px;
-                padding: 0 12px;
+                margin: 4px auto 14px;
+                padding: 0 10px;
                 overflow: visible;
             }
             .showcase-container {
-                height: 310px;
-                min-height: 310px;
-                max-height: 310px;
+                height: 295px;
+                min-height: 295px;
+                max-height: 295px;
                 border-radius: 22px;
                 overflow: visible;
+                position: relative;
             }
             .showcase-slides {
                 height: 100%;
-                min-height: 310px;
+                min-height: 295px;
                 overflow: visible;
             }
             .showcase-slide {
                 height: 100%;
-                padding: 24px 18px;
+                padding: 20px 14px 14px 16px;
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
                 border-radius: 22px;
                 overflow: visible;
                 box-sizing: border-box;
+                position: relative;
             }
 
-            /* Left Content (Text, Badge, Title, CTA) */
+            /* Atmospheric Backgrounds */
+            .showcase-slide[data-index="0"] {
+                background: radial-gradient(circle at 86% 36%, rgba(135, 185, 255, 0.38) 0%, rgba(40, 70, 135, 0.45) 45%, transparent 72%),
+                            radial-gradient(circle at 10% 88%, rgba(95, 140, 225, 0.22) 0%, transparent 48%),
+                            linear-gradient(135deg, #0d162d 0%, #182a52 45%, #101c3a 80%, #0a1124 100%) !important;
+                border: 1px solid rgba(140, 185, 255, 0.25) !important;
+                box-shadow: 0 12px 32px rgba(4, 8, 20, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+            }
+            .showcase-slide[data-index="1"] {
+                background: radial-gradient(circle at 86% 36%, rgba(255, 85, 35, 0.38) 0%, rgba(165, 25, 25, 0.42) 45%, transparent 72%),
+                            radial-gradient(circle at 10% 88%, rgba(255, 130, 0, 0.22) 0%, transparent 48%),
+                            linear-gradient(135deg, #1e0608 0%, #340c13 45%, #22070b 80%, #130305 100%) !important;
+                border: 1px solid rgba(255, 95, 50, 0.26) !important;
+                box-shadow: 0 12px 32px rgba(22, 4, 7, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            }
+            .showcase-slide[data-index="2"] {
+                background: radial-gradient(circle at 86% 36%, rgba(0, 210, 225, 0.35) 0%, rgba(15, 65, 115, 0.42) 45%, transparent 72%),
+                            radial-gradient(circle at 10% 88%, rgba(0, 173, 181, 0.22) 0%, transparent 48%),
+                            linear-gradient(135deg, #050f17 0%, #0c1f2f 45%, #081621 80%, #03090e 100%) !important;
+                border: 1px solid rgba(0, 210, 225, 0.26) !important;
+                box-shadow: 0 12px 32px rgba(3, 11, 16, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            }
+            .showcase-slide[data-index="3"] {
+                background: radial-gradient(circle at 86% 36%, rgba(185, 110, 255, 0.38) 0%, rgba(95, 35, 165, 0.42) 45%, transparent 72%),
+                            radial-gradient(circle at 10% 88%, rgba(145, 60, 240, 0.22) 0%, transparent 48%),
+                            linear-gradient(135deg, #130621 0%, #250b40 45%, #17072a 80%, #0d0318 100%) !important;
+                border: 1px solid rgba(185, 110, 255, 0.26) !important;
+                box-shadow: 0 12px 32px rgba(15, 4, 26, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            }
+
+            /* Left Content */
             .slide-content-left {
-                width: 58%;
-                max-width: 58%;
-                z-index: 5;
+                width: 52%;
+                max-width: 52%;
+                z-index: 6;
                 position: relative;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
+                padding-right: 4px;
             }
             .slide-badge-pill {
-                font-size: 0.66rem;
-                letter-spacing: 0.5px;
-                margin-bottom: 6px;
-                gap: 4px;
+                font-size: 0.62rem;
+                font-weight: 800;
+                letter-spacing: 0.8px;
+                margin-bottom: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
             }
-            .slide-title {
-                font-size: 1.25rem;
+            .showcase-title {
+                font-size: 1.15rem;
                 font-weight: 900;
-                line-height: 1.2;
+                line-height: 1.22;
                 margin: 0 0 6px;
+                color: #ffffff;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
             }
             .slide-desc {
-                font-size: 0.74rem;
-                line-height: 1.4;
+                font-size: 0.72rem;
+                line-height: 1.42;
                 margin: 0 0 12px;
+                color: #c4d0ec;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
-                color: #a4a7bf;
                 min-height: auto;
             }
+            .slide-actions {
+                gap: 6px;
+                margin-bottom: 6px;
+            }
             .slide-btn-cta {
-                padding: 7px 15px;
-                font-size: 0.76rem;
-                border-radius: 18px;
+                height: 32px;
+                padding: 0 14px;
+                font-size: 0.74rem;
+                font-weight: 800;
+                border-radius: 16px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            }
+            .btn-outline-glass {
+                display: none;
             }
 
-            /* Right Side Character: Grounded firmly to bottom: 0, Head pops out ~35px at top */
+            /* Right Character Box */
             .slide-art-right {
                 position: absolute;
-                right: 4px;
+                right: 0;
                 bottom: 0;
-                width: 46%;
+                width: 50%;
                 height: 100%;
                 display: flex;
                 align-items: flex-end;
-                justify-content: center;
+                justify-content: flex-end;
                 z-index: 4;
                 overflow: visible;
                 pointer-events: none;
                 margin-bottom: 0;
             }
 
-            /* Violet Evergarden on Mobile */
+            /* Violet Evergarden on Slide 0 */
             .showcase-slide[data-index="0"] .slide-art-right {
+                position: absolute;
+                right: -36px;
+                bottom: 0;
+                width: 52%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                overflow: visible;
+                z-index: 4;
+                margin-bottom: 0;
+                pointer-events: none;
+            }
+            .showcase-slide[data-index="0"] .slide-art-img {
+                height: 317px;
+                max-height: none;
+                max-width: none;
+                width: auto;
+                object-fit: contain;
+                object-position: bottom right;
+                display: block;
+                transform: translateY(0);
+                filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 24px rgba(135, 185, 255, 0.32));
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 16%, black 42%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, transparent 16%, black 42%, black 100%);
+            }
+            .showcase-slide[data-index="0"] .slide-art-glow {
+                width: 260px;
+                height: 260px;
+                bottom: 15px;
+                right: -10px;
+                left: auto;
+                transform: none;
+                filter: blur(40px);
+                background: radial-gradient(circle, rgba(135, 185, 255, 0.4) 0%, rgba(35, 60, 115, 0.3) 50%, transparent 75%);
+            }
+
+            /* Slide 1: Hu Tao */
+            .showcase-slide[data-index="1"] .slide-art-right {
+                position: absolute;
+                right: -24px;
+                bottom: 0;
+                width: 52%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                overflow: visible;
+                z-index: 4;
+                margin-bottom: 0;
+                pointer-events: none;
+            }
+            .showcase-slide[data-index="1"] .slide-art-img {
+                height: 315px;
+                max-height: none;
+                max-width: none;
+                width: auto;
+                object-fit: contain;
+                object-position: bottom right;
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
+            }
+            .showcase-slide[data-index="1"] .slide-art-glow {
+                width: 250px;
+                height: 250px;
+                bottom: 15px;
+                right: -10px;
+                left: auto;
+                transform: none;
+                filter: blur(40px);
+            }
+
+            /* Slide 2: History FF Logo */
+            .showcase-slide[data-index="2"] .slide-art-right {
                 position: absolute;
                 right: 0;
                 bottom: 0;
                 width: 48%;
                 height: 100%;
                 display: flex;
-                align-items: flex-end;
+                align-items: center;
                 justify-content: center;
-                overflow: visible;
                 z-index: 4;
-                margin-bottom: 0;
             }
-            .showcase-slide[data-index="0"] .slide-art-img {
-                height: 345px;
-                max-height: none;
-                max-width: none;
-                width: auto;
+            .showcase-slide[data-index="2"] .slide-art-img {
+                width: 135px !important;
+                height: 135px !important;
+                max-width: 135px !important;
+                max-height: 135px !important;
                 object-fit: contain;
-                object-position: bottom center;
-                display: block;
-                transform: translateY(0);
-                filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 16px rgba(245, 208, 134, 0.25));
+                margin-bottom: 24px;
+                margin-right: 14px;
             }
-            .showcase-slide[data-index="0"] .slide-art-glow.gold-sun-glow {
-                width: 260px;
-                height: 260px;
-                bottom: 10px;
-                left: 50%;
-                top: auto;
-                transform: translateX(-50%);
+            .showcase-slide[data-index="2"] .slide-art-glow {
+                width: 220px;
+                height: 220px;
+                bottom: 30px;
+                right: 0;
+                left: auto;
+                transform: none;
                 filter: blur(36px);
             }
 
-            /* Slide 1: Hu Tao on Mobile */
-            .showcase-slide[data-index="1"] .slide-art-img {
-                height: 310px;
+            /* Slide 3: Raiden Shogun */
+            .showcase-slide[data-index="3"] .slide-art-right {
+                position: absolute;
+                right: -24px;
+                bottom: 0;
+                width: 52%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                overflow: visible;
+                z-index: 4;
+                margin-bottom: 0;
+                pointer-events: none;
+            }
+            .showcase-slide[data-index="3"] .slide-art-img {
+                height: 315px;
                 max-height: none;
                 max-width: none;
                 width: auto;
                 object-fit: contain;
-                object-position: bottom center;
+                object-position: bottom right;
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, transparent 14%, black 38%, black 100%);
             }
-            .showcase-slide[data-index="1"] .slide-art-glow.red-glow {
+            .showcase-slide[data-index="3"] .slide-art-glow {
                 width: 250px;
                 height: 250px;
-                bottom: 10px;
-                left: 50%;
-                top: auto;
-                transform: translateX(-50%);
-                filter: blur(34px);
+                bottom: 15px;
+                right: -10px;
+                left: auto;
+                transform: none;
+                filter: blur(40px);
             }
 
-            /* Slide 2: History FF Logo on Mobile */
-            .showcase-slide[data-index="2"] .slide-art-img {
-                width: 140px !important;
-                height: 140px !important;
-                max-width: 140px !important;
-                max-height: 140px !important;
-                object-fit: contain;
-                margin-bottom: 45px;
+            /* Slide Indicators & Minimal Arrow Capsule */
+            .showcase-bottom-bar {
+                left: 16px;
+                right: auto;
+                bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                z-index: 25 !important;
+                pointer-events: auto;
             }
-
-            /* Slide 3: Raiden Shogun on Mobile */
-            .showcase-slide[data-index="3"] .slide-art-img {
-                height: 310px;
-                max-height: none;
-                max-width: none;
-                width: auto;
-                object-fit: contain;
-                object-position: bottom center;
+            .showcase-dots, .showcase-arrow-capsule {
+                pointer-events: auto;
             }
-
-            /* Arrows & Pagination */
-            .showcase-arrow-btn {
-                display: none;
-            }
-            .showcase-pagination {
-                left: 18px;
-                bottom: 10px;
+            .showcase-dots {
+                display: flex;
+                align-items: center;
                 gap: 5px;
-                z-index: 10;
+            }
+            .showcase-dot {
+                width: 8px;
+                height: 3.5px;
+                border-radius: 2px;
+                background: rgba(255, 255, 255, 0.32);
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .showcase-dot.active {
+                width: 22px;
+                height: 3.5px;
+                border-radius: 2px;
+                background: #ffffff;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            }
+            .showcase-arrow-capsule {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                background: rgba(8, 12, 22, 0.72);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                padding: 2px 5px;
+                border-radius: 14px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+            }
+            .showcase-arrow-btn {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: transparent;
+                border: none;
+                color: #e2e8f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.68rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+            .showcase-arrow-btn svg {
+                width: 12px;
+                height: 12px;
+            }
+            .showcase-arrow-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+                color: #ffffff;
+                transform: scale(0.92);
+            }
+
+            
+            /* Pagination Dashes on Mobile (Clean Genshin Dash Pills) */
+            .showcase-pagination {
+                bottom: 12px !important;
+                left: 16px !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                z-index: 25 !important;
             }
             .pagination-dash {
-                width: 16px;
-                height: 4px;
+                width: 8px !important;
+                height: 3.5px !important;
+                border-radius: 2px !important;
+                background: rgba(255, 255, 255, 0.32) !important;
+                transition: all 0.3s ease !important;
             }
             .pagination-dash.active {
-                width: 28px;
+                width: 22px !important;
+                height: 3.5px !important;
+                background: #ffffff !important;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+            }
+            .showcase-arrow-btn {
+                width: 28px !important;
+                height: 28px !important;
+                background: rgba(8, 12, 22, 0.75) !important;
+                border: 1px solid rgba(255, 255, 255, 0.16) !important;
+                z-index: 30 !important;
+            }
+            .arrow-prev {
+                left: -6px !important;
+            }
+            .arrow-next {
+                right: -6px !important;
+            }
+
+/* Floating Docks on Mobile */
+            .modern-audio-dock,
+            .floating-music-dock {
+                bottom: 68px !important;
+                left: 12px !important;
+                z-index: 900 !important;
+                max-width: calc(100% - 24px) !important;
+            }
+            .preview-floating-pill {
+                bottom: 68px !important;
+                right: 12px !important;
+                z-index: 900 !important;
             }
 
             /* Stats Section on Mobile */
             .stats-section {
-                margin: 20px auto 26px !important;
+                margin: 22px auto 26px !important;
                 padding: 0 12px !important;
             }
             .stats-grid {
@@ -1544,9 +1818,9 @@
                     <!-- Slide 1: Welcome / Violet Evergarden -->
                     <div class="showcase-slide active-slide" data-index="0">
                         <div class="slide-content-left">
-                            <span class="slide-badge-pill pill-royal-gold">✨ OFFICIAL COMMUNITY & CREATIVE HUB</span>
+                            <span class="slide-badge-pill pill-royal-gold">✨ LXVOID COMMUNITY</span>
                             <h2 class="slide-title">Selamat Datang di LXVOID</h2>
-                            <p class="slide-desc">Komunitas gaming, jasa joki Genshin Impact terpercaya, dan ekosistem video editing kreatif oleh Rasyhz.</p>
+                            <p class="slide-desc">Komunitas gaming, jasa joki Genshin, & video editing kreatif.</p>
                             <a href="#ekosistem" class="slide-btn-cta btn-cta-royal">Jelajahi Sekarang →</a>
                         </div>
                         <div class="slide-art-right">
@@ -1576,7 +1850,7 @@
                         <div class="slide-content-left">
                             <span class="slide-badge-pill pill-cyan">🏆 LXVOID GUILD • COMPETITIVE GAMING</span>
                             <h2 class="slide-title">History & Turnamen Free Fire</h2>
-                            <p class="slide-desc">Dokumentasi match scrim, rekap Booyah turnamen, sertifikat juara, dan open member guild resmi LXVOID Community.</p>
+                            <p class="slide-desc">Dokumentasi match scrim, rekap Booyah turnamen, & open member guild resmi.</p>
                             <a href="history-ff.html" class="slide-btn-cta btn-cta-cyan">Lihat Rekap Turnamen →</a>
                         </div>
                         <div class="slide-art-right">
