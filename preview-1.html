@@ -120,58 +120,39 @@
             gap: 10px;
         }
 
-        .ref-user-pill {
+        .ref-brand-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 6px 14px;
-            border-radius: 24px;
-            color: #ffffff;
+            gap: 10px;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 700;
             transition: all 0.2s ease;
         }
 
-        .ref-user-pill:hover {
-            background: rgba(0, 173, 181, 0.15);
-            border-color: rgba(0, 173, 181, 0.4);
-            transform: translateY(-1px);
+        .ref-brand-link:hover .ref-brand-logo {
+            transform: scale(1.06);
+            box-shadow: 0 0 14px rgba(0, 173, 181, 0.55);
         }
 
-        .ref-avatar-img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #00adb5;
+        .ref-brand-link:hover .ref-brand-name {
+            color: #00adb5;
         }
 
-        .ref-plus-btn {
+        .ref-brand-logo {
             width: 36px;
             height: 36px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #00adb5;
-            font-size: 1.25rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(0, 173, 181, 0.45);
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.25);
+            transition: all 0.25s ease;
         }
 
-        .ref-plus-btn:hover {
-            background: #00adb5;
-            color: #0b0c10;
-            border-color: #00adb5;
-            box-shadow: 0 0 12px rgba(0, 173, 181, 0.5);
-            transform: rotate(90deg);
+        .ref-brand-name {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
         }
 
         /* Header Center: Nav Links with Reference Indicator */
@@ -1081,13 +1062,12 @@
 
     <!-- ================= MODERN REFERENCE HEADER (SESUAI REFERENSI LAYLA) ================= -->
     <header class="modern-reference-header">
-        <!-- Left: Profile Badge + Plus Action Button -->
+        <!-- Left: Logo LXVOID + Brand Title -->
         <div class="ref-header-left">
-            <a href="owner.html" class="ref-user-pill" title="Profil Owner">
-                <img src="assets/logo.png" alt="LXVOID" class="ref-avatar-img">
-                <span>LXVOID</span>
+            <a href="preview-1.html" class="ref-brand-link" title="LXVOID">
+                <img src="assets/logo.png" alt="LXVOID Logo" class="ref-brand-logo">
+                <span class="ref-brand-name">LXVOID</span>
             </a>
-            <button type="button" class="ref-plus-btn" onclick="copyText('085397460252', 'Nomor WhatsApp Admin disalin!')" title="Klik Cepat: Salin WhatsApp Admin">+</button>
         </div>
 
         <!-- Center: Nav Links with Reference Underline Indicator -->

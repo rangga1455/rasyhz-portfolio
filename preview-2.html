@@ -113,65 +113,46 @@
             z-index: 99;
         }
 
-        /* Left side: Avatar Circle + Plus Button + Title */
+        /* Left side: Logo LXVOID + Brand Title */
         .cyber-header-left {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .cyber-user-icon-btn {
+        .cyber-brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .cyber-brand-link:hover .cyber-brand-logo {
+            transform: scale(1.06);
+            box-shadow: 0 0 14px rgba(0, 173, 181, 0.55);
+        }
+
+        .cyber-brand-link:hover .cyber-brand-name {
+            color: #00adb5;
+        }
+
+        .cyber-brand-logo {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            color: #c084fc;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.05rem;
-            transition: all 0.2s ease;
+            object-fit: cover;
+            border: 1.5px solid rgba(0, 173, 181, 0.45);
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.25);
+            transition: all 0.25s ease;
         }
 
-        .cyber-user-icon-btn:hover {
-            background: #a855f7;
+        .cyber-brand-name {
+            font-size: 1.15rem;
+            font-weight: 900;
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
-            transform: translateY(-1px);
-        }
-
-        .cyber-plus-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            font-size: 1.25rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .cyber-plus-btn:hover {
-            background: #a855f7;
-            color: #ffffff;
-            border-color: #a855f7;
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
-            transform: rotate(90deg);
-        }
-
-        .cyber-brand-text {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.8px;
-            margin-left: 4px;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
         }
 
         /* Center Nav Links */
@@ -992,11 +973,12 @@
 
     <!-- ================= CYBER REFERENCE HEADER (SESUAI REFERENSI LAYLA) ================= -->
     <header class="cyber-reference-header">
-        <!-- Left: User Profile Icon + Plus Action Button + Brand -->
+        <!-- Left: Logo LXVOID + Brand Title -->
         <div class="cyber-header-left">
-            <a href="owner.html" class="cyber-user-icon-btn" title="Owner Profile">👤</a>
-            <button type="button" class="cyber-plus-btn" onclick="copyText('085397460252', 'Nomor WhatsApp Admin disalin!')" title="Klik Cepat: Salin WhatsApp Admin">+</button>
-            <span class="cyber-brand-text">LXVOID</span>
+            <a href="preview-2.html" class="cyber-brand-link" title="LXVOID">
+                <img src="assets/logo.png" alt="LXVOID Logo" class="cyber-brand-logo">
+                <span class="cyber-brand-name">LXVOID</span>
+            </a>
         </div>
 
         <!-- Center: Navigation Links with Reference Bottom Active Line -->
