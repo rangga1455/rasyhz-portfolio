@@ -297,16 +297,18 @@
         /* ================= CONCEPT 2: CYBER PORTAL SHOWCASE ================= */
         .cyber-portal-wrapper {
             max-width: 1140px;
-            margin: 14px auto 26px;
+            margin: 24px auto 26px;
             padding: 0 16px;
         }
 
         /* Quick Segmented Category Tabs */
         .portal-category-tabs {
+            position: relative;
+            z-index: 20;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 28px;
             overflow-x: auto;
             scrollbar-width: none;
             padding-bottom: 2px;
@@ -373,7 +375,7 @@
             background: #0d0f18;
             border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 26px;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.55);
             transition: border-color 0.5s ease, box-shadow 0.5s ease;
         }
@@ -393,6 +395,15 @@
         .cyber-banner-box[data-theme="3"] {
             border: 1px solid rgba(168, 85, 247, 0.35);
             box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.55), 0 0 28px rgba(168, 85, 247, 0.25);
+        }
+
+        .cyber-orb-wrapper {
+            position: absolute;
+            inset: 0;
+            border-radius: 26px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2;
         }
 
         .cyber-orb {
@@ -423,6 +434,7 @@
             width: 100%;
             height: 100%;
             min-height: 370px;
+            overflow: visible;
         }
 
         .cyber-slide-item {
@@ -430,6 +442,7 @@
             inset: 0;
             width: 100%;
             height: 100%;
+            border-radius: 26px;
             box-sizing: border-box;
             display: flex;
             align-items: center;
@@ -631,11 +644,27 @@
             transform: scale(1.05) translateY(-3px);
         }
 
-        /* Character-themed ambient drop-shadows: smooth, clean & luminous */
+        /* Violet Evergarden 3D Pop-out Effect (Extends above banner box) */
+        .cyber-slide-item[data-tab="0"] .cyber-art-box {
+            position: relative;
+            overflow: visible;
+            z-index: 10;
+        }
+
         .cyber-slide-item[data-tab="0"] .cyber-art-img {
-            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 18px rgba(245, 208, 134, 0.25));
-            -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
+            max-width: 360px;
+            max-height: 415px;
+            height: 410px;
+            width: auto;
+            transform: translateY(-48px) translateX(6px);
+            filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 22px rgba(245, 208, 134, 0.3));
+            -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 98%);
+            mask-image: linear-gradient(to bottom, black 82%, transparent 98%);
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .cyber-banner-box:hover .cyber-slide-item[data-tab="0"] .cyber-art-img {
+            transform: translateY(-52px) translateX(6px) scale(1.02);
         }
         .cyber-slide-item[data-tab="1"] .cyber-art-img {
             filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 20px rgba(255, 69, 0, 0.3));
@@ -937,6 +966,12 @@
                 max-width: 160px;
                 max-height: 155px;
             }
+            .cyber-slide-item[data-tab="0"] .cyber-art-img {
+                max-width: 195px;
+                max-height: 195px;
+                height: 190px;
+                transform: translateY(-22px);
+            }
             .cyber-bottom-bar {
                 left: 18px;
                 right: 18px;
@@ -1028,8 +1063,10 @@
 
             <!-- Cyber Hero Banner Card -->
             <div class="cyber-banner-box" id="cyberBannerBox" data-theme="0">
-                <div class="cyber-orb orb-left"></div>
-                <div class="cyber-orb orb-right"></div>
+                <div class="cyber-orb-wrapper">
+                    <div class="cyber-orb orb-left"></div>
+                    <div class="cyber-orb orb-right"></div>
+                </div>
 
                 <div class="cyber-slides-track">
                     <!-- Slide 1: Welcome / Violet Evergarden -->
