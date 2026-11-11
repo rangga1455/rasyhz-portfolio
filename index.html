@@ -1400,6 +1400,297 @@
                 font-size: 1.35rem !important;
             }
         }
+
+        /* ================= SEJARAH & EVOLUSI KOMUNITAS LXVOID ================= */
+        .lxvoid-history-section {
+            max-width: 1280px;
+            margin: 0 auto 48px;
+            padding: 0 16px;
+            position: relative;
+        }
+
+        .history-section-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .history-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 215, 0, 0.12);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            margin-bottom: 10px;
+        }
+
+        .history-section-title {
+            font-size: 2.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .history-section-desc {
+            font-size: 1.02rem;
+            color: #9da0b5;
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.55;
+        }
+
+        .history-timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Central Track Line */
+        .timeline-track-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: linear-gradient(180deg, #2ecc71 0%, #c084fc 35%, #ffd700 70%, #00adb5 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 12px rgba(0, 173, 181, 0.35);
+        }
+
+        .timeline-milestone {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 38px;
+            width: 100%;
+        }
+
+        .timeline-milestone:last-child {
+            margin-bottom: 0;
+        }
+
+        .milestone-left {
+            justify-content: flex-start;
+        }
+
+        .milestone-right {
+            justify-content: flex-end;
+        }
+
+        /* Milestone Card */
+        .milestone-card {
+            width: calc(50% - 44px);
+            background: linear-gradient(145deg, rgba(18, 22, 38, 0.78), rgba(13, 16, 29, 0.78));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px 22px;
+            position: relative;
+            transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .milestone-card-highlight {
+            border-color: rgba(0, 173, 181, 0.4);
+            box-shadow: 0 8px 30px rgba(0, 173, 181, 0.12);
+        }
+
+        .milestone-card-highlight:hover {
+            border-color: #00adb5;
+            box-shadow: 0 14px 40px rgba(0, 173, 181, 0.25);
+        }
+
+        /* Milestone Dots */
+        .milestone-dot-wrap {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .milestone-dot {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #141726;
+            border: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
+            transition: transform 0.2s ease;
+        }
+
+        .milestone-card:hover ~ .milestone-dot-wrap .milestone-dot,
+        .timeline-milestone:hover .milestone-dot {
+            transform: scale(1.15);
+        }
+
+        .dot-minecraft {
+            border-color: #2ecc71;
+            box-shadow: 0 0 14px rgba(46, 204, 113, 0.45);
+        }
+
+        .dot-gt {
+            border-color: #c084fc;
+            box-shadow: 0 0 14px rgba(192, 132, 252, 0.45);
+        }
+
+        .dot-competitive {
+            border-color: #ffd700;
+            box-shadow: 0 0 14px rgba(255, 215, 0, 0.45);
+        }
+
+        .dot-present {
+            border-color: #00adb5;
+            box-shadow: 0 0 16px rgba(0, 173, 181, 0.6);
+        }
+
+        /* Header in card */
+        .milestone-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .milestone-era-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .tag-minecraft {
+            background: rgba(46, 204, 113, 0.12);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.35);
+        }
+
+        .tag-gt {
+            background: rgba(192, 132, 252, 0.12);
+            color: #c084fc;
+            border: 1px solid rgba(192, 132, 252, 0.35);
+        }
+
+        .tag-competitive {
+            background: rgba(255, 215, 0, 0.12);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.35);
+        }
+
+        .tag-present {
+            background: rgba(0, 173, 181, 0.15);
+            color: #00adb5;
+            border: 1px solid rgba(0, 173, 181, 0.4);
+        }
+
+        .milestone-year {
+            font-size: 0.74rem;
+            color: #83879f;
+            font-weight: 700;
+        }
+
+        .milestone-title {
+            font-size: 1.22rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 10px;
+            line-height: 1.35;
+        }
+
+        .milestone-desc {
+            font-size: 0.9rem;
+            color: #a2a5be;
+            line-height: 1.58;
+            margin: 0 0 16px;
+        }
+
+        .milestone-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .milestone-tags span {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            color: #9295ad;
+            font-weight: 600;
+        }
+
+        /* Mobile Timeline Styling */
+        @media (max-width: 860px) {
+            .lxvoid-history-section {
+                margin: 0 auto 32px !important;
+                padding: 0 12px !important;
+            }
+            .history-section-title {
+                font-size: 1.55rem !important;
+            }
+            .history-section-desc {
+                font-size: 0.88rem !important;
+            }
+            .history-timeline-container {
+                padding: 10px 0 !important;
+            }
+            .timeline-track-line {
+                left: 20px !important;
+                transform: none !important;
+            }
+            .timeline-milestone {
+                justify-content: flex-start !important;
+                margin-bottom: 24px !important;
+            }
+            .milestone-dot-wrap {
+                left: 20px !important;
+                transform: translateX(-50%) !important;
+            }
+            .milestone-dot {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 1.05rem !important;
+            }
+            .milestone-card {
+                width: calc(100% - 48px) !important;
+                margin-left: 48px !important;
+                padding: 18px 16px !important;
+                border-radius: 16px !important;
+            }
+            .milestone-title {
+                font-size: 1.1rem !important;
+            }
+            .milestone-desc {
+                font-size: 0.84rem !important;
+                margin-bottom: 12px !important;
+            }
+        }
+
 /* ================= SOCIAL SECTION OVERRIDE ================= */
         .social-section {
             max-width: 1280px !important;
@@ -2309,7 +2600,117 @@
             </div>
         </section>
 
-        <!-- ================= LIVE TESTIMONIAL PREVIEWS ================= -->
+                <!-- ================= SEJARAH & EVOLUSI KOMUNITAS LXVOID ================= -->
+        <section class="lxvoid-history-section" id="sejarah">
+            <div class="history-section-header">
+                <span class="history-badge-pill">📜 COMMUNITY LORE • SEJAK 2021</span>
+                <h2 class="history-section-title">Perjalanan & Sejarah LXVOID</h2>
+                <p class="history-section-desc">Dari perkumpulan guild kecil di server Minecraft hingga berkembang menjadi ekosistem multi-gaming dan komunitas kreatif terpercaya.</p>
+            </div>
+
+            <div class="history-timeline-container">
+                <div class="timeline-track-line"></div>
+
+                <!-- Milestone 1: Minecraft Venity -->
+                <div class="timeline-milestone milestone-left">
+                    <div class="milestone-dot-wrap">
+                        <div class="milestone-dot dot-minecraft" title="Minecraft Venity">
+                            <span>⛏️</span>
+                        </div>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="milestone-header">
+                            <span class="milestone-era-tag tag-minecraft">ORIGIN • MINECRAFT VENITY</span>
+                            <span class="milestone-year">Awal Mula</span>
+                        </div>
+                        <h3 class="milestone-title">Lahir Sebagai Guild di Server Minecraft Venity</h3>
+                        <p class="milestone-desc">
+                            LXVOID mengawali perjalanannya dari guild persahabatan di server Minecraft <strong>Venity</strong>. Berawal dari sekelompok player yang rutin mabar survival, membangun megabase bersama, dan saling membantu dalam event server, fondasi solidaritas dan kebersamaan LXVOID pun resmi terbentuk.
+                        </p>
+                        <div class="milestone-tags">
+                            <span>Minecraft Server Venity</span>
+                            <span>Survival Base</span>
+                            <span>Founding Era</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 2: Guardian Tales -->
+                <div class="timeline-milestone milestone-right">
+                    <div class="milestone-dot-wrap">
+                        <div class="milestone-dot dot-gt" title="Guardian Tales">
+                            <span>⚔️</span>
+                        </div>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="milestone-header">
+                            <span class="milestone-era-tag tag-gt">MOBILE RPG • GUARDIAN TALES</span>
+                            <span class="milestone-year">Ekspansi Game</span>
+                        </div>
+                        <h3 class="milestone-title">Membuka Cabang Guild Guardian Tales</h3>
+                        <p class="milestone-desc">
+                            Kekompakan member berlanjut ke platform mobile. LXVOID membentuk guild resmi di game <strong>Guardian Tales</strong>, aktif dalam koordinasi Guild Raid mingguan, sharing build karakter & relic, dan menembus jajaran top guild aktif berkat koordinasi Discord yang rapi.
+                        </p>
+                        <div class="milestone-tags">
+                            <span>Guardian Tales Guild</span>
+                            <span>Guild Raid Strategy</span>
+                            <span>Mobile RPG Community</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 3: Free Fire & Mobile Legends -->
+                <div class="timeline-milestone milestone-left">
+                    <div class="milestone-dot-wrap">
+                        <div class="milestone-dot dot-competitive" title="Free Fire & MLBB">
+                            <span>🔥</span>
+                        </div>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="milestone-header">
+                            <span class="milestone-era-tag tag-competitive">COMPETITIVE • FF & MLBB</span>
+                            <span class="milestone-year">Era Kompetitif</span>
+                        </div>
+                        <h3 class="milestone-title">Divisi Kompetitif Free Fire & Mobile Legends</h3>
+                        <p class="milestone-desc">
+                            Merambah ranah esports mobile dengan mendirikan skuad kompetitif <strong>TEAM LXVOID Free Fire</strong> (terjun di scrim turnamen, fast tourney, & guild war) serta divisi <strong>Mobile Legends: Bang Bang</strong> untuk turnamen lokal dan push rank mabar bareng member.
+                        </p>
+                        <div class="milestone-tags">
+                            <span>TEAM LXVOID FF</span>
+                            <span>50+ Rekap Match</span>
+                            <span>MLBB Mabar Squad</span>
+                            <span>Guild War</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 4: Modern Era & Hub Terpadu -->
+                <div class="timeline-milestone milestone-right">
+                    <div class="milestone-dot-wrap">
+                        <div class="milestone-dot dot-present" title="Ekosistem LXVOID">
+                            <span>✨</span>
+                        </div>
+                    </div>
+                    <div class="milestone-card milestone-card-highlight">
+                        <div class="milestone-header">
+                            <span class="milestone-era-tag tag-present">MASA KINI • HUB TERPADU</span>
+                            <span class="milestone-year">2026 & Seterusnya</span>
+                        </div>
+                        <h3 class="milestone-title">Ekosistem Joki Genshin, Kreator & Multi-Gaming</h3>
+                        <p class="milestone-desc">
+                            Hari ini, LXVOID telah berevolusi menjadi hub resmi komunitas gaming modern: menghadirkan jasa joki Genshin Impact 100% manual dan amanah, dokumentasi rekap match transparan, komunitas Discord 1.500+ member, serta pusat kreasi video editing & presets.
+                        </p>
+                        <div class="milestone-tags">
+                            <span>Joki Genshin Impact</span>
+                            <span>1.500+ Member Discord</span>
+                            <span>Official Hub & Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- ================= LIVE TESTIMONIAL PREVIEWS ================= -->
         <section class="testi-highlight-section">
             <div class="bento-testi-header">
                 <span class="bento-testi-pill">⭐ ULASAN PELANGGAN</span>
