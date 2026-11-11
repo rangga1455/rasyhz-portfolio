@@ -2833,7 +2833,7 @@
         }
 
 
-        // Option 1: Cyber Beam & Staggered Reveal Animation for Community History Timeline
+        // Bidirectional Cyber Beam & Milestone Reveal (muncul pas dilihat, reset pas keluar layar)
         function initTimelineAnimation() {
             const section = document.querySelector('.lxvoid-history-section');
             const milestones = document.querySelectorAll('.timeline-milestone');
@@ -2846,28 +2846,36 @@
                 return;
             }
 
-            const observer = new IntersectionObserver((entries) => {
+            // 1. Observer untuk Garis Beam Vertikal
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // 1. Activate vertical cyber beam
                         section.classList.add('timeline-revealed');
-
-                        // 2. Staggered reveal for milestones
-                        milestones.forEach((m, idx) => {
-                            setTimeout(() => {
-                                m.classList.add('milestone-revealed');
-                            }, 180 + (idx * 260));
-                        });
-
-                        observer.unobserve(entry.target);
+                    } else {
+                        section.classList.remove('timeline-revealed');
                     }
                 });
             }, {
-                threshold: 0.12,
+                threshold: 0.05,
+                rootMargin: '0px 0px -40px 0px'
+            });
+            sectionObserver.observe(section);
+
+            // 2. Observer untuk Tiap Kartu Milestone (masuk & keluar layar)
+            const milestoneObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('milestone-revealed');
+                    } else {
+                        entry.target.classList.remove('milestone-revealed');
+                    }
+                });
+            }, {
+                threshold: 0.15,
                 rootMargin: '0px 0px -40px 0px'
             });
 
-            observer.observe(section);
+            milestones.forEach(m => milestoneObserver.observe(m));
         }
 
         document.addEventListener('DOMContentLoaded', () => {
