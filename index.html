@@ -2123,6 +2123,17 @@
             }
 
 }
+        /* Print & Full Screenshot Support */
+        @media print {
+            .timeline-track-fill {
+                transform: scaleY(1) !important;
+            }
+            .milestone-card,
+            .milestone-dot {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -2833,22 +2844,50 @@
         }
 
 
-        // Bidirectional Cyber Beam & Milestone Reveal (muncul pas dilihat, reset pas keluar layar)
+        // Bidirectional Cyber Beam & Milestone Reveal + Screenshot Capture Mode Support
         function initTimelineAnimation() {
             const section = document.querySelector('.lxvoid-history-section');
             const milestones = document.querySelectorAll('.timeline-milestone');
             if (!section || !milestones.length) return;
 
-            // Progressive enhancement fallback if IntersectionObserver not supported
-            if (!('IntersectionObserver' in window)) {
+            let forceRevealed = false;
+
+            // Global helper to reveal all elements for full page screenshot / PDF
+            function revealAll() {
+                forceRevealed = true;
                 section.classList.add('timeline-revealed');
                 milestones.forEach(m => m.classList.add('milestone-revealed'));
+            }
+            window.revealAll = revealAll;
+            window.revealAllTimeline = revealAll;
+
+            // Check if #screenshot or ?screenshot is in URL
+            if (window.location.hash === '#screenshot' || window.location.search.includes('screenshot')) {
+                revealAll();
+                return;
+            }
+
+            // Keyboard shortcut (Ctrl+Shift+S) or hashchange to unlock screenshot mode instantly
+            window.addEventListener('hashchange', () => {
+                if (window.location.hash === '#screenshot') revealAll();
+            });
+            window.addEventListener('beforeprint', revealAll);
+            window.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') {
+                    revealAll();
+                }
+            });
+
+            // Progressive enhancement fallback if IntersectionObserver not supported
+            if (!('IntersectionObserver' in window)) {
+                revealAll();
                 return;
             }
 
             // 1. Observer untuk Garis Beam Vertikal
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    if (forceRevealed) return;
                     if (entry.isIntersecting) {
                         section.classList.add('timeline-revealed');
                     } else {
@@ -2864,6 +2903,7 @@
             // 2. Observer untuk Tiap Kartu Milestone (masuk & keluar layar)
             const milestoneObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    if (forceRevealed) return;
                     if (entry.isIntersecting) {
                         entry.target.classList.add('milestone-revealed');
                     } else {
